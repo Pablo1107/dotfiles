@@ -1,0 +1,74 @@
+[options]
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Misc Ohsnap 9
+scrollback_lines = 10000
+search_wrap = true
+icon_name = terminal
+#geometry = 1280x720
+geometry = 640x480
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+#browser = xdg-open
+
+# set size hints for the window
+#size_hints = false
+
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
+# emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+# Fray/pjhalsli1 color theme
+[colors]
+#background     = #151515
+background		= rgba(63, 63, 63, 0.8)
+foreground      = #ffffff
+foreground_bold = #ffffff
+cursor          = #ffffff
+highlight		= #2f2f2f
+
+# black
+color0  = #252525
+color8  = #252525
+
+# red
+color1  = #f8f8f8
+color9  = #f8f8f8
+
+# green
+color2  = #0084FF
+color10 = #0084FF
+
+# yellow
+color3  = #f7f7f7
+color11 = #f7f7f7
+
+# blue
+color4  = #0060bB
+color12 = #0060bB
+
+# magenta
+color5  = #0084FF
+color13 = #0084FF
+
+# cyan
+color6  = #e2e2e2
+color14 = #e2e2e2
+
+# white
+color7  = #ffffff
+color15 = #ffffff
