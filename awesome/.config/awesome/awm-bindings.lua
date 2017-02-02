@@ -12,7 +12,7 @@ globalkeys = awful.util.table.join(
     awful.key({},"XF86Calculator", function () awful.util.spawn('galculator')    end),
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() awful.util.spawn("scrot") end),
+    -- awful.key({ altkey }, "p", function() awful.util.spawn("scrot") end),
 
     -- Tag browsing
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
@@ -218,24 +218,38 @@ globalkeys = awful.util.table.join(
     --Screen locker
     --awful.key({ modkey, "Shift", "Control"   }, "l", function () awful.util.spawn('i3lock -i "/home/sergio/Imágenes/Wallpapers/GIMP/Arch_blue.png" -d -I 5 -e -c 333333')    end),
     --awful.key({ modkey, "Shift", "Control"   }, "l", function () awful.util.spawn('i3lock-wrapper -d -I 5 -e') end),
-    awful.key({ modkey, }, "p", function () awful.util.spawn('/home/sergio/.bin/lock-screen' ) end),
+    -- awful.key({ modkey, }, "p", function () awful.util.spawn('/home/sergio/.bin/lock-screen' ) end),
 
     -- Menubar
     awful.key({ modkey }, "a", function() menubar.show() end),
-    awful.key({ modkey }, "r", function() awful.util.spawn('gmrun',false) end)
+    awful.key({ modkey }, "r", function() awful.util.spawn('gmrun',false) end),
+
 
     -- Prompt
-    --awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
-    -- awful.key(
-    --     { modkey }, "z" },
+    -- awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end)
+    -- awful.key({ modkey }, "z" ,
     --         function ()
     --           awful.prompt.run({ prompt = "Run Lua code: " },
     --           mypromptbox[mouse.screen].widget,
     --           awful.util.eval, nil,
     --           awful.util.getdir("cache") .. "/history_eval")
     --         end
-    --     
     -- )
+
+    -- Prompt
+    -- awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    --           {description = "run prompt", group = "launcher"}),
+
+    awful.key({ modkey }, "z",
+              function ()
+                  awful.prompt.run {
+                    prompt       = "Run Lua code: ",
+                    textbox      = awful.screen.focused().mypromptbox.widget,
+                    exe_callback = awful.util.eval,
+                    history_path = awful.util.get_cache_dir() .. "/history_eval"
+                  }
+              end,
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 
