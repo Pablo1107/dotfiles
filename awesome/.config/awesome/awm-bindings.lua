@@ -3,7 +3,7 @@ local mpdwidget = mpd
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-	awful.key({ modkey } , "d" , function () awful.util.spawn('rofi -show run')    end),
+	awful.key({ modkey } , "r" , function () awful.util.spawn('rofi -show run')    end),
 	-- Terminals
     --awful.key({ altkey } , "Return" , function () awful.util.spawn('urxvtc')    end),
     --awful.key({ modkey, "Shift" } , "e" , function () awful.util.spawn('pcmanfm')    end),
