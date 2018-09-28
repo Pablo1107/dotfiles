@@ -2,7 +2,7 @@
 	path = awesome/.config/awesome/lain
 	url = https://github.com/lcpz/lain
 [submodule "awesome/.config/awesome/awesome-scratch"]
-	path = awesome/.config/awesome/awesome-scratch
+	path = awesome/.config/awesome/scratch
 	url = https://github.com/proteansec/awesome-scratch
 [submodule "awesome/.config/awesome/vicious"]
 	path = awesome/.config/awesome/vicious
