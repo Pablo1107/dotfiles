@@ -70,7 +70,8 @@ local mytextcalendar = wibox.widget.textclock(markup("#FFFFFF", space3 .. "%d %b
 local calendar_icon = wibox.widget.imagebox(beautiful.calendar)
 local calbg = wibox.container.background(mytextcalendar, beautiful.bg_focus, shape.rectangle)
 local calendarwidget = wibox.container.margin(calbg, 0, 0, 5, 5)
-lain.widgets.calendar.attach(calendarwidget, { notification_preset = { fg = "#FFFFFF", bg = beautiful.bg_normal, position = "bottom_right", font = "Monospace 10" } })
+--lain.widget.cal {
+--    attach_to = (calendarwidget, { notification_preset = { fg = "#FFFFFF", bg = beautiful.bg_normal, position = "bottom_right", font = "Monospace 10" } })
 
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
@@ -101,7 +102,7 @@ local next_icon = wibox.widget.imagebox(beautiful.nex)
 local stop_icon = wibox.widget.imagebox(beautiful.stop)
 local pause_icon = wibox.widget.imagebox(beautiful.pause)
 local play_pause_icon = wibox.widget.imagebox(beautiful.play)
-mpd = lain.widgets.mpd({
+mpd = lain.widget.mpd({
     music_dir = "/home/pablo1107/Musica",
     settings = function ()
         if mpd_now.state == "play" then
@@ -152,21 +153,23 @@ function ()
 end)))
 
 -- Battery
---[[
-local bat = lain.widgets.bat({
+
+local bat = lain.widget.bat({
     settings = function()
-        bat_header = " Bat "
-        bat_p      = bat_now.perc .. " "
+        bat_header = " BAT: "
+        bat_p      = bat_now.perc .. " % "
         if bat_now.ac_status == 1 then
             bat_p = bat_p .. "Plugged "
         end
         widget:set_markup(markup(blue, bat_header) .. bat_p)
     end
 })
---]]
+local batbg = wibox.container.background(bat.widget, beautiful.bg_focus, shape.rectangle)
+local batwidget = wibox.container.margin(batbg, 0, 0, 5, 5)
+
 
 -- ALSA volume bar
-local volume = lain.widgets.alsabar({
+local volume = lain.widget.alsabar({
     notifications = { font = "Monospace", font_size = 10 },
     --togglechannel = "IEC958,3",
     width = 75, height = 2, border_width = 0,
@@ -177,6 +180,28 @@ local volume = lain.widgets.alsabar({
     },
 })
 
+volume.bar:buttons(awful.util.table.join(
+    awful.button({}, 1, function() -- left click
+        awful.spawn(string.format("%s -e alsamixer", terminal))
+    end),
+    awful.button({}, 2, function() -- middle click
+        os.execute(string.format("%s set %s 100%%", volume.cmd, volume.channel))
+        volume.update()
+    end),
+    awful.button({}, 3, function() -- right click
+        os.execute(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
+        volume.update()
+    end),
+    awful.button({}, 4, function() -- scroll up
+        os.execute(string.format("%s set %s 1%%+", volume.cmd, volume.channel))
+        volume.update()
+    end),
+    awful.button({}, 5, function() -- scroll down
+        os.execute(string.format("%s set %s 1%%-", volume.cmd, volume.channel))
+        volume.update()
+    end)
+))
+
 local volumebg = wibox.container.background(volume.bar, beautiful.bg_focus, shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, 0, 0, 5, 5)
 volumebg.shape_border_width = 7
@@ -184,31 +209,31 @@ volumebg.shape_border_color = beautiful.bg_focus
 
 -- MEM
 local memicon = wibox.widget.imagebox(beautiful.mem)
-local memwid = lain.widgets.mem({
+local mem = lain.widget.mem({
     settings = function()
         -- widget:set_text(" " .. mem_now.used .. "MB ")
         widget:set_markup(markup.font("Tamsyn 1", " ") .. mem_now.used .. " MB " .. markup.font("Tamsyn 2", " "))
     end
 })
-local membg = wibox.container.background(memwid, beautiful.bg_focus, shape.rectangle)
+local membg = wibox.container.background(mem.widget, beautiful.bg_focus, shape.rectangle)
 local memwidget = wibox.container.margin(membg, 0, 0, 5, 5)
 
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(beautiful.cpu)
-local cpuwid = lain.widgets.cpu({
+local cpu = lain.widget.cpu({
     settings = function()
         -- widget:set_text(" " .. cpu_now.usage .. "% ")
         widget:set_markup(markup.font("Tamsyn 1", " ") .. cpu_now.usage .. " % " .. markup.font("Tamsyn 2", " "))
     end
 })
-local cpubg = wibox.container.background(cpuwid, beautiful.bg_focus, shape.rectangle)
+local cpubg = wibox.container.background(cpu.widget, beautiful.bg_focus, shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 0, 0, 5, 5)
 
 -- Net
 local netdown_icon = wibox.widget.imagebox(beautiful.net_down)
 local netup_icon = wibox.widget.imagebox(beautiful.net_up)
-local net = lain.widgets.net({
+local net = lain.widget.net({
     settings = function()
         widget:set_markup(markup.font("Tamsyn 1", " ") .. net_now.received .. " - "
                           .. net_now.sent .. markup.font("Tamsyn 2", " "))
@@ -222,7 +247,7 @@ local systraywidget = wibox.widget.systray()
 local systray       = wibox.container.margin(systraywidget, 0, 0, 5, 5)
 
 -- Weather
-local myweather = lain.widgets.weather({
+local myweather = lain.widget.weather({
     city_id = 2643743, -- placeholder (London)
     notification_preset = { font = "Monospace 9", position = "bottom_right" },
 })
@@ -342,7 +367,6 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             --mail,
-            --bat,
             -- spr_right,
             musicwidget,
             bar,
@@ -383,6 +407,7 @@ awful.screen.connect_for_each_screen(function(s)
             memwidget,
             cpuicon,
             cpuwidget,
+            batwidget,
             -- bottom_bar,
             -- calendar_icon,
             -- calendarwidget,
