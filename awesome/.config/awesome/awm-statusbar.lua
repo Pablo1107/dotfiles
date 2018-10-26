@@ -38,21 +38,24 @@ pacwidget = wibox.widget.textbox()
 
 pacwidget_t = awful.tooltip({ objects = { pacwidget},})
 
-vicious.register(pacwidget, vicious.widgets.pkg,
-                function(widget,args)
-                    local io = { popen = io.popen }
-                    local s = io.popen("pacman -Qu")
-                    local str = ''
+awful.spawn.easy_async("checkupdates", function(stdout, stderr, reason, exit_code)
+    naughty.notify { text = stdout }
+    vicious.register(pacwidget, vicious.widgets.pkg,
+        function(widget,args)
+            local s = stdout
+            local str = ''
+            local i = 0
 
-                    for line in s:lines() do
-                        str = str .. line .. "\n"
-                    end
-                    pacwidget_t:set_text(str)
-                    s:close()
-                    return "ᗧ: " .. args[1] .. " act. pendientes "
-                end, 1800, "Arch")
+            for line in string.gmatch(s,'[^\r\n]+') do
+                str = str .. line .. "\n"
+                i = i + 1
+            end
+            pacwidget_t:set_text(str)
+            return "ᗧ: " .. i .. " act. pendientes "
+        end, 1800, "Arch")
 
-                --'1800' means check every 30 minutes
+        --'1800' means check every 30 minutes
+end)
 
 -- {{{ Wibar
 local markup = lain.util.markup
