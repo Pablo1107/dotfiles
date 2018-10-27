@@ -205,6 +205,19 @@ local cpuwid = lain.widgets.cpu({
 local cpubg = wibox.container.background(cpuwid, beautiful.bg_focus, shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 0, 0, 5, 5)
 
+-- Coretemp
+-- local tempicon = wibox.widget.imagebox(beautiful.widget_temp)
+local tempico = wibox.widget.textbox('<span font="Tamsyn 7">ł</span>')
+local tempicobg = wibox.container.background(tempico, beautiful.bg_focus, shape.rectangle)
+local tempicon = wibox.container.margin(tempicobg, 0, 0, 5, 5)
+local tempwid = lain.widgets.temp({
+    settings = function()
+        widget:set_text(" " .. coretemp_now .. "°C ")
+    end
+})
+local tempbg = wibox.container.background(tempwid, beautiful.bg_focus, shape.rectangle)
+local tempwidget = wibox.container.margin(tempbg, 0, 0, 5, 5)
+
 -- Net
 local netdown_icon = wibox.widget.imagebox(beautiful.net_down)
 local netup_icon = wibox.widget.imagebox(beautiful.net_up)
@@ -383,6 +396,8 @@ awful.screen.connect_for_each_screen(function(s)
             memwidget,
             cpuicon,
             cpuwidget,
+            tempicon,
+            tempwidget,
             -- bottom_bar,
             -- calendar_icon,
             -- calendarwidget,
