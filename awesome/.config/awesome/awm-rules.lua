@@ -17,8 +17,8 @@ awful.rules.rules = {
     properties = { floating = true } },
     { rule = { name = "alsamixer" },
     properties = { floating = true } },
-    --{ rule = { name = "Preferencias de Firefox" },
-    --properties = { floating = true } },
+    { rule = { name = "Preferencias de Firefox" },
+    properties = { floating = true } },
     { rule = { class = "Pcmanfm" },
     properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -32,15 +32,20 @@ awful.rules.rules = {
     { rule = { class = "Viewnior" },
     properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = "Firefox" },
+    { rule_any = { class = { "Firefox" } },
     properties = { tag = tags[1][1], opacity = 1, maximized = false, floating = false} },
     -- Set subl3 to always map on tags number 2 of screen 1
     { rule_any = { class = { "Subl", "NetBeans IDE 8.2" }, name = { "Starting NetBeans IDE" } },
     properties = { tag = tags[1][2], opacity = 1, maximized = false, floating = false } },
-    -- Set rhythmbox to always map on tags number 2 of screen 1
+    -- Set rhythmbox to always map on tags number 4 of screen 1
     { rule = { class = "Rhythmbox" },
     properties = { tag = tags[1][4] } },
     { rule = { class = "Nautilus" },
     properties = { tag = tags[1][5] } },
+    -- Set Steam to always map on tags number 6 of screen 1
+    { rule_any = { class = { "Steam", "Lutris" } },
+    properties = { tag = tags[1][6], opacity = 1, maximized = false, floating = false } },
+    { rule_any = { class = { "Wine" } },
+    properties = { tag = tags[1][6], opacity = 1, maximized = false, floating = true} },
 }
 -- }}}
