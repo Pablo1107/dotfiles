@@ -12,7 +12,7 @@ globalkeys = awful.util.table.join(
     awful.key({},"XF86Calculator", function () awful.util.spawn('galculator')    end),
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() awful.util.spawn("scrot") end),
+    awful.key({ }, "Print", function() awful.util.spawn("xfce4-screenshooter") end),
 
     -- Tag browsing
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
@@ -105,6 +105,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "f", function () awful.util.spawn("nautilus") end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
