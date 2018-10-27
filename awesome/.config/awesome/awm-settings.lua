@@ -11,6 +11,7 @@ beautiful.init(theme_dir .. "/theme.lua")
 naughty_on = true
 
 -- common
+kblayout   = "latam"
 modkey     = "Mod4"
 altkey     = "Mod1"
 --terminal   = "urxvtc -e tmux" or "xterm"
@@ -21,12 +22,14 @@ editor_cmd = terminal .. " -e " .. editor
 config_file=awful.util.getdir("config") .. "/rc.lua"
  
 function edit(file)
-	awful.util.spawn("subl3 " .. file)
+	awful.util.spawn("subl " .. file)
 end
+
+run_once("setxkbmap -layout " .. kblayout)
 
 -- user defined
 browser    = "luakit"
-gui_editor = "subl3"
+gui_editor = "subl"
 graphics   = "gimp"
 --iptraf     = terminal .. " -g 180x54-20+34 -e sudo iptraf-ng -i all "
 musicplr   = "termite -e ncmpcpp"
