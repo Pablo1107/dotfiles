@@ -8,7 +8,7 @@ theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/holo"
 -- beautiful init
 beautiful.init(theme_dir .. "/theme.lua")
 
-naughty_on = true
+naughty_on = false
 
 -- common
 kblayout   = "latam"

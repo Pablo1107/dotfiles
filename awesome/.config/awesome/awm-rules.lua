@@ -9,8 +9,9 @@ awful.rules.rules = {
     raise = true,
     keys = clientkeys,
     buttons = clientbuttons,
-    size_hints_honor = false },
-    callback = awful.client.setslave},
+    size_hints_honor = false,
+    screen = awful.screen.focused },
+    callback = awful.client.setslave },
     { rule_any = { class = { "Xfce4-panel", "Xfdesktop" } },
     properties = { focus = false, raise = false, border_width = 0 } },
     { rule = { class = "MPlayer" },
@@ -39,7 +40,7 @@ awful.rules.rules = {
     properties = { tag = tags[1][2], opacity = 1, maximized = false, floating = false } },
     -- Set rhythmbox to always map on tags number 4 of screen 1
     { rule = { class = "Rhythmbox" },
-    properties = { tag = tags[1][4] } },
+    properties = { tag = tags.names[4] } },
     { rule = { class = "Nautilus" },
     properties = { tag = tags[1][5] } },
     -- Set Steam to always map on tags number 6 of screen 1
