@@ -36,10 +36,12 @@ awful.rules.rules = {
     { rule_any = { class = { "Firefox" } },
     properties = { tag = tags[1][1], opacity = 1, maximized = false, floating = false} },
     -- Set subl3 to always map on tags number 2 of screen 1
-    { rule_any = { class = { "Subl", "NetBeans IDE 8.2" }, name = { "Starting NetBeans IDE" } },
+    { rule_any = { class = { "Subl", "NetBeans IDE 8.2", "kdenlive" }, name = { "Starting NetBeans IDE" } },
     properties = { tag = tags[1][2], opacity = 1, maximized = false, floating = false } },
     -- Set rhythmbox to always map on tags number 4 of screen 1
     { rule = { class = "Rhythmbox" },
+    properties = { tag = tags.names[4] } },
+    { rule = { name = "feh [1 of 1] - /tmp/mpdcover.png" },
     properties = { tag = tags.names[4] } },
     { rule = { class = "Nautilus" },
     properties = { tag = tags[1][5] } },
