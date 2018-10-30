@@ -8,6 +8,7 @@ tags = {
 }
 for s = 1, screen.count() do
 	tags[s] = awful.tag(tags.names, s, tags.layout)
+	awful.tag.find_by_name(awful.screen.focused(), tags.names[4]).master_width_factor = 0.74;
 	-- tags[s] = awful.tag(tags.names, s, layouts[1])
 end
 -- }}}
