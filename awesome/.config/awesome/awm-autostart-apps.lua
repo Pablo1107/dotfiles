@@ -10,6 +10,7 @@ end
 
 --run_once("urxvtd -f -q -o")
 run_once("compton -b")
+run_once("mpd")
 --run_once("xsetroot -name 'Openzone Black Slim' left_ptr")
 --run_once("conky")
 --run_once("pcmanfm -d &")
