@@ -27,6 +27,7 @@ awful.rules.rules = {
             "copyq"
         },
         class = {
+            "Xfce4-screenshooter",
             "MPlayer",
             "Pcmanfm",
             "pinentry",
