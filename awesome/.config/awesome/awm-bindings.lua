@@ -13,6 +13,8 @@ globalkeys = awful.util.table.join(
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
     awful.key({ }, "Print", function() awful.util.spawn("xfce4-screenshooter") end),
+    awful.key({ altkey }, "Print", function() awful.util.spawn("xfce4-screenshooter -fc") end),
+    awful.key({ "Control" }, "Print", function() awful.util.spawn("xfce4-screenshooter -rc") end),
 
     -- Tag browsing
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
@@ -255,7 +257,7 @@ globalkeys = awful.util.table.join(
 
 
 clientkeys = awful.util.table.join(
-    -- awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
