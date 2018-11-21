@@ -10,7 +10,7 @@ local theme                                     = {}
 
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/themes/holo/icons"
-theme.wallpaper                                 = os.getenv("HOME") .. "/Background/currentbg"
+theme.wallpaper                                 = os.getenv("HOME") .. "/Backgrounds/currentbg"
 
 theme.useless_gap                               = 20
 theme.master_width_factor						= 0.6
