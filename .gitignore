@@ -1,3 +1,7 @@
 xfce4/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
 mpd/.config/mpd/**
 !/mpd/.config/mpd/mpd.conf
+firefox/.mozilla/**
+!/firefox/.mozilla/firefox/chrome/**
+!/firefox/.mozilla/firefox/startpages/**
+!/firefox/.mozilla/firefox/profiles.ini
