@@ -37,7 +37,8 @@ awful.rules.rules = {
         name = {
             "Event Tester",  -- xev.
             "alsamixer",
-            "Java"
+            "Java",
+            "Mezclar carpeta"
         },
         role = {
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
@@ -66,7 +67,8 @@ awful.rules.rules = {
             "kdenlive"
         },
         name = {
-            "Starting NetBeans IDE"
+            "Starting NetBeans IDE",
+            "Starting Apache NetBeans IDE"
         }
     }, properties = { tag = tags[1][2], } },
     -- Set rhythmbox to always map on tags number 4 of screen 1

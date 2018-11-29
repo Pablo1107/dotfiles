@@ -219,10 +219,8 @@ globalkeys = awful.util.table.join(
     --awful.key({ modkey }, "z", function () awful.util.spawn("thunar") end),
 
     --Screen locker
-    --awful.key({ modkey, "Shift", "Control"   }, "l", function () awful.util.spawn('i3lock -i "/home/sergio/Imágenes/Wallpapers/GIMP/Arch_blue.png" -d -I 5 -e -c 333333')    end),
-    --awful.key({ modkey, "Shift", "Control"   }, "l", function () awful.util.spawn('i3lock-wrapper -d -I 5 -e') end),
-    -- awful.key({ modkey, }, "p", function () awful.util.spawn('/home/sergio/.bin/lock-screen' ) end),
-
+    -- awful.key({ modkey }, "l", function () awful.util.spawn('/home/pablo1107/scripts/lock') end),
+    awful.key({ "Control", "Shift" }, "l", function () awful.util.spawn('betterlockscreen -l blur -t "%A, %m %b %Y" ') end),
     -- Menubar
     awful.key({ modkey }, "a", function() menubar.show() end),
     awful.key({ modkey }, "r", function() awful.util.spawn('gmrun',false) end),
