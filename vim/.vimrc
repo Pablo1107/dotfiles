@@ -1,3 +1,65 @@
+"" Vundle Stuff
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+"Plugin 'ervandew/supertab'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+Plugin 'posva/vim-vue'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
 " The default vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
@@ -87,8 +149,11 @@ endif
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
   " Revert with ":syntax off".
-  syntax on
-
+  if exists("syntax_on")
+    syntax reset
+  else
+    syntax on
+  endif
   " I like highlighting strings inside C comments.
   " Revert with ":unlet c_comment_strings".
   let c_comment_strings=1
@@ -155,3 +220,239 @@ runtime! archlinux.vim
 
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
+
+"" Auto-reload .vimrc on save
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup vimrc     " Source vim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call OpaqueBackground()
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif " has autocmd
+
+"" Theme
+set termguicolors
+function! OpaqueBackground() abort
+  hi Cursor guibg=NONE
+  hi Normal guibg=NONE
+  hi NonText guibg=NONE
+  hi Visual guibg=NONE
+  hi Linenr guibg=NONE
+  hi Directory guibg=NONE
+  hi IncSearch guibg=NONE
+  hi SpecialKey guibg=NONE
+  hi Titled guibg=NONE
+  hi ErrorMsg guibg=NONE
+  hi ModeMsg guibg=NONE
+  hi Question guibg=NONE
+  hi StatusLine guibg=NONE
+  hi StatusLineNC guibg=NONE
+  hi VertSplit guibg=NONE
+  hi DiffAdd guibg=NONE
+  hi DiffChange guibg=NONE
+  hi DiffDelete guibg=NONE
+  hi DiffText guibg=NONE
+  hi Comment guibg=NONE guifg=LightGrey
+  hi Constant guibg=NONE
+  hi String guibg=NONE
+  hi Character guibg=NONE
+  hi Number guibg=NONE
+  hi Boolean guibg=NONE
+  hi Float guibg=NONE
+  hi Identifier guibg=NONE
+  hi Function guibg=NONE
+  hi Statement guibg=NONE
+  hi Conditional guibg=NONE
+  hi Repeat guibg=NONE
+  hi Label guibg=NONE
+  hi Operator guibg=NONE
+  hi Keyword guibg=NONE
+  hi Exception guibg=NONE
+  hi PreProc guibg=NONE
+  hi Include guibg=NONE
+  hi Type guibg=NONE
+  hi StorageClass guibg=NONE
+  hi Structure guibg=NONE
+  hi Typedef guibg=NONE
+  hi Special guibg=NONE
+  hi SpecialChar guibg=NONE
+  hi Tag guibg=NONE
+  hi Delimiter guibg=NONE
+  hi SpecialComment guibg=NONE
+  hi Debug guibg=NONE
+  hi Underlined guibg=NONE
+  hi Title guibg=NONE
+  hi Cursor guibg=NONE
+  hi Normal guibg=NONE
+  hi NonText guibg=NONE
+  hi Visual guibg=NONE
+  hi Linenr guibg=NONE
+  hi Directory guibg=NONE
+  hi IncSearch guibg=NONE
+  hi SpecialKey guibg=NONE
+  hi Titled guibg=NONE
+  hi ErrorMsg guibg=NONE
+  hi ModeMsg guibg=NONE
+  hi Question guibg=NONE
+  hi StatusLine guibg=NONE
+  hi StatusLineNC guibg=NONE
+  hi VertSplit guibg=NONE
+  hi DiffAdd guibg=NONE
+  hi DiffChange guibg=NONE
+  hi DiffDelete guibg=NONE
+  hi DiffText guibg=NONE
+  hi Comment guibg=NONE
+  hi Constant guibg=NONE
+  hi String guibg=NONE
+  hi Character guibg=NONE
+  hi Number guibg=NONE
+  hi Boolean guibg=NONE
+  hi Float guibg=NONE
+  hi Identifier guibg=NONE
+  hi Function guibg=NONE
+  hi Statement guibg=NONE
+  hi Conditional guibg=NONE
+  hi Repeat guibg=NONE
+  hi Label guibg=NONE
+  hi Operator guibg=NONE
+  hi Keyword guibg=NONE
+  hi Exception guibg=NONE
+  hi PreProc guibg=NONE
+  hi Include guibg=NONE
+  hi Type guibg=NONE
+  hi StorageClass guibg=NONE
+  hi Structure guibg=NONE
+  hi Typedef guibg=NONE
+  hi Special guibg=NONE
+  hi SpecialChar guibg=NONE
+  hi Tag guibg=NONE
+  hi Delimiter guibg=NONE
+  hi SpecialComment guibg=NONE
+  hi Debug guibg=NONE
+  hi Underlined guibg=NONE
+  hi Title guibg=NONE
+  hi Ignore guibg=NONE
+  hi Error guibg=NONE
+  hi Todo guibg=NONE
+  hi htmlH2 guibg=NONE
+  hi Pmenu guifg=fg guibg=#002B36
+  hi StatusLine cterm=NONE guifg=fg
+endfunction
+autocmd ColorScheme * call OpaqueBackground()
+colorscheme freshcut
+"colorscheme base16-default-dark
+"
+"" Make 81 character distinct
+hi ColorColumn guibg=#00A8C6
+call matchadd('ColorColumn', '\%81v', 100)
+
+"" Status Line
+set laststatus=2
+"set statusline=
+"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %Y
+"set statusline=
+"set statusline+=\ %f
+"set statusline+=\ %m
+"set statusline+=\ \|%#keyword#\ %F\ \|
+"set statusline+=%=
+
+set statusline=
+set statusline+=%2*\ %l
+set statusline+=\ %*
+set statusline+=%1*\ 
+set statusline+=%3*\ ৰ\  
+set statusline+=%1*\ %f\ %*
+set statusline+=%1*\ %m
+set statusline+=%3*\ %F
+set statusline+=%=
+set statusline+=%1*Line:
+set statusline+=%3*\ %l,%c\ 
+set statusline+=%3*%-4.(%V%)
+set statusline+=%1*FileType: 
+set statusline+=%3*\ %Y\ 
+
+hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
+hi User2 guifg=#000000 guibg=#959ca6
+hi User3 guifg=#00A8C6 guibg=#131920
+
+"" fzf plugin
+set rtp+=~/.fzf
+nnoremap <C-P> :FZF <Enter>
+
+"" Templates
+augroup templates
+" Bash Scripts
+  autocmd BufNewFile *.sh call SetBashTemplate()
+  function SetBashTemplate() 
+	  0r ~/.vim/templates/skeleton.sh
+	  normal!j
+  endfunction
+" HTML
+  autocmd BufNewFile *.html call SetHTMLTemplate()
+  function SetHTMLTemplate() 
+	  0r ~/.vim/templates/skeleton.html
+  endfunction
+augroup END
+
+"" netrw file manager
+" remove banner
+let g:netrw_banner = 0
+" open file in previous window
+let g:netrw_browse_split = 4
+" window size to 25%
+let g:netrw_winsize = 25
+let g:netrw_liststyle = 3
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let &l:statusline='%{getline(line("w$")+1)}'
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
+nnoremap <S-F> :call ToggleVExplorer()<CR>
+hi netrwDir guifg=#00A8C6
+
+" General Mapping
+inoremap {<CR> {<CR>}<Esc>ko
+map <C-L> <C-^>
+map <F7> mzgg=G`z
+" Mapping for HTML
+autocmd BufRead,BufNewFile *.blade.php set filetype=html
+"autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+"autocmd FileType html inoremap ;i <em></em><Esc>FeT>
+"autocmd FileType html inoremap ;a <a href=""></a><Esc>F"i
+"autocmd FileType html inoremap <div><CR> <div><CR></div><Esc>ko
+"autocmd FileType html inoremap <form><CR> <form><CR></form><Esc>ko
+"autocmd FileType html inoremap <input><CR> <input type="text" name="" placeholder=""><++></input><++><Esc>F"i
+autocmd FileType html iabbrev </ </<C-X><C-O>
+autocmd FileType html inoremap <lt>/ </<C-x><C-o><Esc>==gi
+
+"" Tab Sizing
+set listchars=tab:►-,eol:¬,trail:●
+" On pressing tab, insert 2 spaces
+set expandtab
+" show existing tab with 2 spaces width
+set tabstop=2
+set softtabstop=2
+" when indenting with '>', use 2 spaces width
+set shiftwidth=2
+
+"" Mkdir when creating a file
+augroup Mkdir
+  autocmd!
+  autocmd BufWritePre *
+    \ if !isdirectory(expand("<afile>:p:h")) |
+        \ call mkdir(expand("<afile>:p:h"), "p") |
+    \ endif
+augroup END
