@@ -28,7 +28,7 @@ end
 run_once("setxkbmap -layout " .. kblayout)
 
 -- user defined
-browser    = "luakit"
+browser    = "firefox"
 gui_editor = "subl"
 graphics   = "gimp"
 --iptraf     = terminal .. " -g 180x54-20+34 -e sudo iptraf-ng -i all "

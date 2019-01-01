@@ -38,7 +38,8 @@ awful.rules.rules = {
             "Event Tester",  -- xev.
             "alsamixer",
             "Java",
-            "Mezclar carpeta"
+            "Mezclar carpeta",
+            "New File" -- NetBeans new class window
         },
         role = {
             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
@@ -46,6 +47,13 @@ awful.rules.rules = {
             "Organizer" -- Firefox Downloads Window
         }
       }, properties = { floating = true } },
+
+    -- Fullscreen clients
+    { rule_any = {
+        class = {
+            "Wine"
+        },
+      }, properties = { fullscreen = true } },
 
     { rule_any = { class = { "Xfce4-panel", "Xfdesktop" } },
     properties = { focus = false, raise = false, border_width = 0 } },

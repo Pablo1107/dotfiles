@@ -28,7 +28,7 @@ separators = lain.util.separators
 
 -- Textclock
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-mytextclock = awful.widget.textclock(" %a %d %b  %H:%M")
+mytextclock = wibox.widget.textclock(" %a %d %b  %H:%M")
 
 -- calendar
 -- lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
@@ -62,19 +62,20 @@ local markup = lain.util.markup
 local blue   = "#80CCE6"
 local space3 = markup.font("Tamsyn 3", " ")
 
--- -- Clock
+-- -- Clock and Calendar
 local mytextclock = wibox.widget.textclock(markup("#b5beca", space3 .. "%A %d %b %y ł %T   " .. markup.font("Tamsyn 4", " ")), 1)
 -- local clock_icon = wibox.widget.imagebox(beautiful.clock)
 -- local clockbg = wibox.container.background(mytextclock, beautiful.bg_focus, shape.rectangle)
 -- local clockwidget = wibox.container.margin(clockbg, 0, 3, 5, 5)
 
--- Calendar
-local mytextcalendar = wibox.widget.textclock(markup("#FFFFFF", space3 .. "%d %b " .. markup.font("Tamsyn 5", " ")))
-local calendar_icon = wibox.widget.imagebox(beautiful.calendar)
-local calbg = wibox.container.background(mytextcalendar, beautiful.bg_focus, shape.rectangle)
-local calendarwidget = wibox.container.margin(calbg, 0, 0, 5, 5)
---lain.widget.cal {
---    attach_to = (calendarwidget, { notification_preset = { fg = "#FFFFFF", bg = beautiful.bg_normal, position = "bottom_right", font = "Monospace 10" } })
+-- local mytextcalendar = wibox.widget.textclock(markup("#FFFFFF", space3 .. "%d %b " .. markup.font("Tamsyn 5", " ")))
+-- local calendar_icon = wibox.widget.imagebox(beautiful.calendar)
+-- local calbg = wibox.container.background(mytextcalendar, beautiful.bg_focus, shape.rectangle)
+-- local calendarwidget = wibox.container.margin(calbg, 0, 0, 5, 5)
+local cal = lain.widget.cal {
+   attach_to = { mytextclock },
+   notification_preset = { fg = "#FFFFFF", bg = beautiful.notification_bg, position = "top_middle", font = "Monospace 10" }
+}
 
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
@@ -172,7 +173,7 @@ local batwidget = wibox.container.margin(batbg, 0, 0, 5, 5)
 
 
 -- ALSA volume bar
-local volume = lain.widget.alsabar({
+volume = lain.widget.alsabar({
     notifications = { font = "Monospace", font_size = 10 },
     --togglechannel = "IEC958,3",
     width = 75, height = 2, border_width = 0,
@@ -267,6 +268,25 @@ local myweather = lain.widget.weather({
     city_id = 2643743, -- placeholder (London)
     notification_preset = { font = "Monospace 9", position = "bottom_right" },
 })
+
+function round(num, numDecimalPlaces)
+  local mult = 10^(numDecimalPlaces or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
+-- shows used (percentage) and remaining space in home partition
+local fsroothome = lain.widget.fs({
+    settings  = function()
+        widget:set_text(" : " ..  fs_now["/home"].percentage .. "% (" ..
+        round(fs_now["/home"].free, 2) .. " " .. fs_now["/home"].units .. " left)")
+    end,
+    notification_preset = { font = "Monospace 9", position = "bottom_left" }
+
+})
+local fsrhbg = wibox.container.background(fsroothome.widget, beautiful.bg_focus, shape.rectangle)
+local fsrhwidget = wibox.container.margin(fsrhbg, 5, 0, 5, 5)
+
+-- output example: "/home: 37% (239.4 Gb left)"
 
 -- Separators
 local first = wibox.widget.textbox('<span font="Tamsyn 7"> </span>')
@@ -408,10 +428,14 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mybottomwibox:setup {
         layout = wibox.layout.align.horizontal,
-        nil,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            fsrhwidget,
+        },
         nil, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            calendarwidget,
             pacwidget,
             -- spr_bottom_right,
             systray,

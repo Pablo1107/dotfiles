@@ -3,18 +3,18 @@ local mpdwidget = mpd
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-	awful.key({ modkey } , "r" , function () awful.util.spawn('rofi -show run')    end),
+	awful.key({ modkey } , "r" , function () awful.spawn('rofi -show run')    end),
 	-- Terminals
-    --awful.key({ altkey } , "Return" , function () awful.util.spawn('urxvtc')    end),
-    --awful.key({ modkey, "Shift" } , "e" , function () awful.util.spawn('pcmanfm')    end),
-    --awful.key({ modkey } , "e" , function () awful.util.spawn('urxvtc -bg "#272727" -depth 24 -e ranger')    end),
-    --awful.key({ modkey } , "e" , function () awful.util.spawn('urxvtc -e ranger')    end),
-    awful.key({},"XF86Calculator", function () awful.util.spawn('galculator')    end),
+    --awful.key({ altkey } , "Return" , function () awful.spawn('urxvtc')    end),
+    --awful.key({ modkey, "Shift" } , "e" , function () awful.spawn('pcmanfm')    end),
+    --awful.key({ modkey } , "e" , function () awful.spawn('urxvtc -bg "#272727" -depth 24 -e ranger')    end),
+    --awful.key({ modkey } , "e" , function () awful.spawn('urxvtc -e ranger')    end),
+    awful.key({},"XF86Calculator", function () awful.spawn('galculator')    end),
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ }, "Print", function() awful.util.spawn("xfce4-screenshooter") end),
-    awful.key({ altkey }, "Print", function() awful.util.spawn("xfce4-screenshooter -fc") end),
-    awful.key({ "Control" }, "Print", function() awful.util.spawn("xfce4-screenshooter -rc") end),
+    awful.key({ }, "Print", function() awful.spawn("xfce4-screenshooter") end),
+    awful.key({ altkey }, "Print", function() awful.spawn("xfce4-screenshooter -fc") end),
+    awful.key({ "Control" }, "Print", function() awful.spawn("xfce4-screenshooter -rc") end),
 
     -- Tag browsing
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
@@ -106,8 +106,8 @@ globalkeys = awful.util.table.join(
     end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey,           }, "f", function () awful.util.spawn("nautilus") end),
+    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
+    awful.key({ modkey,           }, "f", function () awful.spawn("nautilus") end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
@@ -119,95 +119,114 @@ globalkeys = awful.util.table.join(
     --awful.key({ altkey,           }, "h",      function () fswidget.show(7) end),
 
     --Volume
+
     awful.key({ }, "XF86AudioRaiseVolume", function ()
-        --awful.util.spawn("amixer set Master 5%+",false) 
-        --awful.util.spawn(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel),false)
-        --awful.util.spawn("amixer set Master 1%+")
-        awful.util.spawn("amixer -D pulse set Master 2%+")
-        -- volumewidget.update()
+        --awful.spawn("amixer set Master 5%+",false) 
+        --awful.spawn(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel),false)
+        --awful.spawn("amixer set Master 1%+")
+        -- awful.spawn("amixer -D pulse set Master 2%+")
+        awful.spawn.easy_async_with_shell("amixer -D pulse set Master 2%+ | tail -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1", function(stdout, stderr, reason, exit_code)
+            volnotify(stdout)
+            volume.update()
+        end)
     end),
     awful.key({ }, "XF86AudioLowerVolume", function ()
-        --awful.util.spawn("amixer set Master 5%-",false) 
-        -- awful.util.spawn(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel),false)
-        --awful.util.spawn("amixer set Master 1%-")
-        awful.util.spawn("amixer -D pulse set Master 2%-")
-        -- volumewidget.update()
+        --awful.spawn("amixer set Master 5%-",false) 
+        -- awful.spawn(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel),false)
+        --awful.spawn("amixer set Master 1%-")
+        -- awful.spawn("amixer -D pulse set Master 2%-")
+        awful.spawn.easy_async_with_shell("amixer -D pulse set Master 2%- | tail -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1", function(stdout, stderr, reason, exit_code)
+            volnotify(stdout)
+            volume.update()
+        end)
     end),
     awful.key({ }, "XF86AudioMute", function ()
-        --awful.util.spawn("amixer sset Master toggle",false) 
-        -- awful.util.spawn(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel),false)
-        --awful.util.spawn("amixer set Master toggle")
-        awful.util.spawn("amixer -D pulse set Master toggle")
-        -- volumewidget.update()
+        --awful.spawn("amixer sset Master toggle",false) 
+        -- awful.spawn(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel),false)
+        --awful.spawn("amixer set Master toggle")
+        -- awful.spawn_with_shell("vol=$() && echo \"naughty.notify({ text = 'Volume' })\" | awesome-client", false)
+        awful.spawn.easy_async_with_shell("amixer -D pulse set Master toggle | tail -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1", function(stdout, stderr, reason, exit_code)
+            volnotify(stdout)
+            volume.update()
+        end)
+        
     end),
+
+
 
     ---- ALSA volume control
     --awful.key({ altkey }, "Up",
         --function ()
-            --awful.util.spawn(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel))
+            --awful.spawn(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel))
             --volumewidget.update()
         --end),
     --awful.key({ altkey }, "Down",
         --function ()
-            --awful.util.spawn(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel))
+            --awful.spawn(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel))
             --volumewidget.update()
         --end),
     --awful.key({ altkey }, "m",
         --function ()
-            --awful.util.spawn(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel))
-            ----awful.util.spawn(string.format("amixer set %s toggle", volumewidget.channel))
+            --awful.spawn(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel))
+            ----awful.spawn(string.format("amixer set %s toggle", volumewidget.channel))
             --volumewidget.update()
         --end),
     --awful.key({ altkey, "Control" }, "m",
         --function ()
-            --awful.util.spawn(string.format("amixer -c %s set %s 100%%", volumewidget.card, volumewidget.channel))
+            --awful.spawn(string.format("amixer -c %s set %s 100%%", volumewidget.card, volumewidget.channel))
             --volumewidget.update()
         --end),
 
         --Brillo
         awful.key({ }, "XF86MonBrightnessDown", function ()
-            awful.util.spawn("xbacklight -dec 5",false) 
+            -- awful.spawn("xbacklight -dec 5",false) 
+            awful.spawn.easy_async_with_shell("xbacklight -dec 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
+                brightnotify(stdout)
+            end)
         end),
         awful.key({ }, "XF86MonBrightnessUp", function ()
-            awful.util.spawn("xbacklight -inc 5",false) 
+            -- awful.spawn("xbacklight -inc 5",false) 
+            awful.spawn.easy_async_with_shell("xbacklight -inc 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
+                brightnotify(stdout)
+            end)
         end),
          
         -- MPD control
         awful.key({ }, "XF86AudioNext", function ()
-            awful.util.spawn_with_shell("mpc next",false) 
+            awful.spawn.with_shell("mpc next",false) 
             mpdwidget.update()
         end),
         awful.key({ }, "XF86AudioPrev", function ()
-            awful.util.spawn_with_shell("mpc prev",false) 
+            awful.spawn.with_shell("mpc prev",false) 
             mpdwidget.update()
         end),
         awful.key({ }, "XF86AudioPlay", function ()
-            awful.util.spawn_with_shell("mpc toggle",false) 
+            awful.spawn.with_shell("mpc toggle",false) 
             mpdwidget.update()
         end),
         awful.key({ }, "XF86AudioStop", function ()
-            awful.util.spawn_with_shell("mpc stop",false) 
+            awful.spawn.with_shell("mpc stop",false) 
             mpdwidget.update()
         end),
 
     --awful.key({ altkey, "Control" }, "Up",
         --function ()
-            --awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
+            --awful.spawn.with_shell("mpc toggle || ncmpc toggle || pms toggle")
             --mpdwidget.update()
         --end),
     --awful.key({ altkey, "Control" }, "Down",
         --function ()
-            --awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
+            --awful.spawn.with_shell("mpc stop || ncmpc stop || pms stop")
             --mpdwidget.update()
         --end),
     --awful.key({ altkey, "Control" }, "Left",
         --function ()
-            --awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
+            --awful.spawn.with_shell("mpc prev || ncmpc prev || pms prev")
             --mpdwidget.update()
         --end),
     --awful.key({ altkey, "Control" }, "Right",
         --function ()
-            --awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
+            --awful.spawn.with_shell("mpc next || ncmpc next || pms next")
             --mpdwidget.update()
         --end),
 
@@ -215,15 +234,15 @@ globalkeys = awful.util.table.join(
     --awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
 
     -- User programs
-    awful.key({ modkey }, "q", function () awful.util.spawn(browser) end),
-    --awful.key({ modkey }, "z", function () awful.util.spawn("thunar") end),
+    awful.key({ modkey }, "q", function () awful.spawn(browser) end),
+    --awful.key({ modkey }, "z", function () awful.spawn("thunar") end),
 
     --Screen locker
-    -- awful.key({ modkey }, "l", function () awful.util.spawn('/home/pablo1107/scripts/lock') end),
-    awful.key({ "Control", "Shift" }, "l", function () awful.util.spawn('betterlockscreen -l blur -t "%A, %m %b %Y" ') end),
+    -- awful.key({ modkey }, "l", function () awful.spawn('/home/pablo1107/scripts/lock') end),
+    awful.key({ "Control", "Shift" }, "l", function () awful.spawn('betterlockscreen -l blur -t "%A, %m %b %Y" ') end),
     -- Menubar
     awful.key({ modkey }, "a", function() menubar.show() end),
-    awful.key({ modkey }, "r", function() awful.util.spawn('gmrun',false) end),
+    awful.key({ modkey }, "r", function() awful.spawn('gmrun',false) end),
 
 
     -- Prompt
@@ -282,17 +301,17 @@ for i = 1, 9 do
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
-                        local screen = mouse.screen
-                        local tag = awful.tag.gettags(screen)[i]
+                        local screen = awful.screen.focused()
+                        local tag = screen.tags[i]
                         if tag then
-                           awful.tag.viewonly(tag)
+                           tag:view_only()
                         end
                   end),
         -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
-                      local screen = mouse.screen
-                      local tag = awful.tag.gettags(screen)[i]
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[i]
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
