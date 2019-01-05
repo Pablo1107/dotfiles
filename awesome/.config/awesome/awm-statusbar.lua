@@ -171,6 +171,15 @@ local bat = lain.widget.bat({
 local batbg = wibox.container.background(bat.widget, beautiful.bg_focus, shape.rectangle)
 local batwidget = wibox.container.margin(batbg, 0, 0, 5, 5)
 
+awful.spawn.easy_async_with_shell(
+  "upower -i /org/freedesktop/UPower/devices/battery_BAT0 | " ..
+  "awk '/present/ { print $2 }' | tr -d ' \t\n\r'",
+  function(stdout, stderr, reason, exit_code)
+    if string.find(stdout, "no") then
+      batwidget.visible = false
+    end
+  end
+)
 
 -- ALSA volume bar
 volume = lain.widget.alsabar({
