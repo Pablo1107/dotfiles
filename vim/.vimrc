@@ -362,7 +362,7 @@ set statusline+=%1*\
 set statusline+=%3*\ ৰ\  
 set statusline+=%1*\ %f\ %*
 set statusline+=%1*\ %m
-set statusline+=%3*\ %F
+"set statusline+=%3*\ %F
 set statusline+=%=
 set statusline+=%1*Line:
 set statusline+=%3*\ %l,%c\ 
