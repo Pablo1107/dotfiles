@@ -16,7 +16,8 @@ theme.useless_gap                               = 20
 theme.master_width_factor						= 0.6
 
 -- theme.font                                      = "Roboto Bold 10"
-theme.font 										= "SFNS Display 10"
+theme.font 										= "SF Pro Display 11"
+theme.notification_font 						= "SF Pro Display 11"
 theme.taglist_font                              = "FontAwesome 9"
 -- theme.taglist_font                              = "Roboto Condensed Regular 8"
 
@@ -26,6 +27,7 @@ theme.bg_focus                                  = "#303030"
 theme.bg_normal                                 = "#24242400"
 theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#006B8E"
+theme.notification_bg							= "#002B36CC"
 theme.border_width                              = 3
 theme.border_normal                             = "#252525"
 theme.border_focus                              = "#0099CC"
@@ -37,6 +39,7 @@ theme.bg_systray								= theme.bg_focus
 
 theme.menu_height                               = 20
 theme.menu_width                                = 160
+theme.menu_bg_normal							= "#002B3688"
 
 theme.awesome_icon                              = theme.icon_dir .. "/awesome_icon.png"
 theme.awesome_icon_white                        = theme.icon_dir .. "/awesome_icon_white.png"
