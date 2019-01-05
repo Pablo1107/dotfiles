@@ -173,7 +173,7 @@ local batwidget = wibox.container.margin(batbg, 0, 0, 5, 5)
 
 awful.spawn.easy_async_with_shell(
   "upower -i /org/freedesktop/UPower/devices/battery_BAT0 | " ..
-  "awk '/present/ { print $2 }' | tr -d ' \t\n\r'",
+  "awk '/power supply/ { print $3 }' | tr -d ' \t\n\r'",
   function(stdout, stderr, reason, exit_code)
     if string.find(stdout, "no") then
       batwidget.visible = false
@@ -284,16 +284,16 @@ function round(num, numDecimalPlaces)
 end
 
 -- shows used (percentage) and remaining space in home partition
-local fsroothome = lain.widget.fs({
-    settings  = function()
-        widget:set_text(" : " ..  fs_now["/home"].percentage .. "% (" ..
-        round(fs_now["/home"].free, 2) .. " " .. fs_now["/home"].units .. " left)")
-    end,
-    notification_preset = { font = "Monospace 9", position = "bottom_left" }
-
-})
-local fsrhbg = wibox.container.background(fsroothome.widget, beautiful.bg_focus, shape.rectangle)
-local fsrhwidget = wibox.container.margin(fsrhbg, 5, 0, 5, 5)
+--local fsroothome = lain.widget.fs({
+--    settings  = function()
+--        widget:set_text(" : " ..  fs_now["/home"].percentage .. "% (" ..
+--        round(fs_now["/home"].free, 2) .. " " .. fs_now["/home"].units .. " left)")
+--    end,
+--    notification_preset = { font = "Monospace 9", position = "bottom_left" }
+--
+--})
+--local fsrhbg = wibox.container.background(fsroothome.widget, beautiful.bg_focus, shape.rectangle)
+--local fsrhwidget = wibox.container.margin(fsrhbg, 5, 0, 5, 5)
 
 -- output example: "/home: 37% (239.4 Gb left)"
 
