@@ -40,7 +40,9 @@ pacwidget_t = awful.tooltip({ objects = { pacwidget},})
 
 awful.spawn.easy_async("checkupdates", function(stdout, stderr, reason, exit_code)
     naughty.notify { text = stdout }
-    vicious.register(pacwidget, vicious.widgets.pkg,
+    vicious.register(
+        pacwidget,
+        vicious.widgets.pkg,
         function(widget,args)
             local s = stdout
             local str = ''
