@@ -364,9 +364,12 @@ set statusline+=%1*\ %f\ %*
 set statusline+=%1*\ %m
 "set statusline+=%3*\ %F
 set statusline+=%=
+set statusline+=%1*Tab:
+set statusline+=%3*\ %{&tabstop}\ 
+set statusline+=%3*%-3.(%V%)
 set statusline+=%1*Line:
 set statusline+=%3*\ %l,%c\ 
-set statusline+=%3*%-4.(%V%)
+set statusline+=%3*%-3.(%V%)
 set statusline+=%1*FileType: 
 set statusline+=%3*\ %Y\ 
 
@@ -444,9 +447,19 @@ set listchars=tab:►-,eol:¬,trail:●
 set expandtab
 " show existing tab with 2 spaces width
 set tabstop=2
-set softtabstop=2
+set softtabstop=0
 " when indenting with '>', use 2 spaces width
-set shiftwidth=2
+set shiftwidth=0
+"let &shiftwidth=&tabstop
+
+func! SetTabSize(size)
+  let &tabstop=a:size
+endfunc
+
+autocmd FileType html call SetTabSize(2) 
+autocmd FileType css call SetTabSize(2) 
+autocmd FileType javascript call SetTabSize(2) 
+autocmd FileType php call SetTabSize(4) 
 
 "" Mkdir when creating a file
 augroup Mkdir
