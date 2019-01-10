@@ -152,11 +152,24 @@ function ()
     awful.spawn.with_shell("mpc stop || ncmpc stop || pms stop")
     mpd.update()
 end)))
-play_pause_icon:buttons(awful.util.table.join(awful.button({}, 1,
+play_pause_icon:buttons(awful.util.table.join(
+
+awful.button({}, 1,
 function ()
     awful.spawn.with_shell("mpc toggle || ncmpc toggle || pms toggle")
     mpd.update()
-end)))
+end),
+
+awful.button({ "Shift" }, 1,
+function ()
+    naughty.notify({ text = "Fading music..." })
+    awful.spawn.easy_async("mpc-fade",
+    function(stdout, stderr, reason, exit_code)
+        mpd.update()
+    end)
+end)
+
+))
 
 -- Battery
 
