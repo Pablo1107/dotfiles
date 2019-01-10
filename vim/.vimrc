@@ -460,6 +460,7 @@ autocmd FileType html call SetTabSize(2)
 autocmd FileType css call SetTabSize(2) 
 autocmd FileType javascript call SetTabSize(2) 
 autocmd FileType php call SetTabSize(4) 
+autocmd FileType lua call SetTabSize(4) 
 
 "" Mkdir when creating a file
 augroup Mkdir
