@@ -204,6 +204,13 @@ globalkeys = awful.util.table.join(
             awful.spawn.with_shell("mpc toggle",false) 
             mpdwidget.update()
         end),
+        -- MPD toggle with volume fading
+        awful.key({ "Shift" }, "XF86AudioPlay", function()
+            awful.spawn.easy_async("mpc-fade",
+            function(stdout, stderr, reason, exit_code)
+                mpdwidget.update()
+            end)
+        end),
         awful.key({ }, "XF86AudioStop", function ()
             awful.spawn.with_shell("mpc stop",false) 
             mpdwidget.update()
