@@ -43,6 +43,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'posva/vim-vue'
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -233,7 +234,7 @@ endif " has autocmd
 set termguicolors
 function! OpaqueBackground() abort
   hi Cursor guibg=NONE
-  hi Normal guibg=NONE
+  hi Normal guibg=#002b36
   hi NonText guibg=NONE
   hi Visual guibg=NONE
   hi Linenr guibg=NONE
@@ -281,80 +282,30 @@ function! OpaqueBackground() abort
   hi Debug guibg=NONE
   hi Underlined guibg=NONE
   hi Title guibg=NONE
-  hi Cursor guibg=NONE
-  hi Normal guibg=NONE
-  hi NonText guibg=NONE
-  hi Visual guibg=NONE
-  hi Linenr guibg=NONE
-  hi Directory guibg=NONE
-  hi IncSearch guibg=NONE
-  hi SpecialKey guibg=NONE
-  hi Titled guibg=NONE
-  hi ErrorMsg guibg=NONE
-  hi ModeMsg guibg=NONE
-  hi Question guibg=NONE
-  hi StatusLine guibg=NONE
-  hi StatusLineNC guibg=NONE
-  hi VertSplit guibg=NONE
-  hi DiffAdd guibg=NONE
-  hi DiffChange guibg=NONE
-  hi DiffDelete guibg=NONE
-  hi DiffText guibg=NONE
-  hi Comment guibg=NONE
-  hi Constant guibg=NONE
-  hi String guibg=NONE
-  hi Character guibg=NONE
-  hi Number guibg=NONE
-  hi Boolean guibg=NONE
-  hi Float guibg=NONE
-  hi Identifier guibg=NONE
-  hi Function guibg=NONE
-  hi Statement guibg=NONE
-  hi Conditional guibg=NONE
-  hi Repeat guibg=NONE
-  hi Label guibg=NONE
-  hi Operator guibg=NONE
-  hi Keyword guibg=NONE
-  hi Exception guibg=NONE
-  hi PreProc guibg=NONE
-  hi Include guibg=NONE
-  hi Type guibg=NONE
-  hi StorageClass guibg=NONE
-  hi Structure guibg=NONE
-  hi Typedef guibg=NONE
-  hi Special guibg=NONE
-  hi SpecialChar guibg=NONE
-  hi Tag guibg=NONE
-  hi Delimiter guibg=NONE
-  hi SpecialComment guibg=NONE
-  hi Debug guibg=NONE
-  hi Underlined guibg=NONE
-  hi Title guibg=NONE
   hi Ignore guibg=NONE
   hi Error guibg=NONE
   hi Todo guibg=NONE
   hi htmlH2 guibg=NONE
   hi Pmenu guifg=fg guibg=#002B36
   hi StatusLine cterm=NONE guifg=fg
+  
+  "" Status Line colors
+  hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
+  hi User2 guifg=#000000 guibg=#959ca6
+  hi User3 guifg=#00A8C6 guibg=#131920
+  
+
+  "" Make 81 character distinct
+  hi ColorColumn guibg=#00A8C6
+  call matchadd('ColorColumn', '\%81v', 100)
 endfunction
 autocmd ColorScheme * call OpaqueBackground()
+"source ~/.vim/colors/freshcut.vim
 colorscheme freshcut
 "colorscheme base16-default-dark
-"
-"" Make 81 character distinct
-hi ColorColumn guibg=#00A8C6
-call matchadd('ColorColumn', '\%81v', 100)
 
 "" Status Line
 set laststatus=2
-"set statusline=
-"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %Y
-"set statusline=
-"set statusline+=\ %f
-"set statusline+=\ %m
-"set statusline+=\ \|%#keyword#\ %F\ \|
-"set statusline+=%=
-
 set statusline=
 set statusline+=%2*\ %l
 set statusline+=\ %*
@@ -372,10 +323,6 @@ set statusline+=%3*\ %l,%c\
 set statusline+=%3*%-3.(%V%)
 set statusline+=%1*FileType: 
 set statusline+=%3*\ %Y\ 
-
-hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
-hi User2 guifg=#000000 guibg=#959ca6
-hi User3 guifg=#00A8C6 guibg=#131920
 
 "" fzf plugin
 set rtp+=~/.fzf
