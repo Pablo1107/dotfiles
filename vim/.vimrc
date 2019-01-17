@@ -234,7 +234,8 @@ endif " has autocmd
 set termguicolors
 function! OpaqueBackground() abort
   hi Cursor guibg=NONE
-  hi Normal guibg=#002b36
+"  hi Normal guibg=#002b36
+  hi Normal guibg=NONE
   hi NonText guibg=NONE
   hi Visual guibg=NONE
   hi Linenr guibg=NONE
@@ -417,4 +418,10 @@ augroup Mkdir
     \ if !isdirectory(expand("<afile>:p:h")) |
         \ call mkdir(expand("<afile>:p:h"), "p") |
     \ endif
+augroup END
+
+"" autocmd when saving different files
+" .Xresources
+augroup SaveFileAnd
+  autocmd BufWritePost .Xresources !xrdb -merge ~/.Xresources
 augroup END
