@@ -234,7 +234,6 @@ endif " has autocmd
 set termguicolors
 function! OpaqueBackground() abort
   hi Cursor guibg=NONE
-"  hi Normal guibg=#002b36
   hi Normal guibg=NONE
   hi NonText guibg=NONE
   hi Visual guibg=NONE
@@ -374,11 +373,14 @@ endfunction
 nnoremap <S-F> :call ToggleVExplorer()<CR>
 hi netrwDir guifg=#00A8C6
 
+"" Mapping
+
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
 map <C-L> <C-^>
 map <F7> mzgg=G`z
-map <F8> :Goyo<Enter>
+map <F8> :set notermguicolors <bar> Goyo <bar> set termguicolors<Enter>
+  
 " Mapping for HTML
 autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
