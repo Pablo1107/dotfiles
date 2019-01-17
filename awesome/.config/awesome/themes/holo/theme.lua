@@ -28,6 +28,7 @@ theme.bg_normal                                 = "#24242400"
 theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#006B8E"
 theme.notification_bg							= "#002B36CC"
+theme.tooltip_bg    							= "#002B36CC"
 theme.border_width                              = 3
 theme.border_normal                             = "#252525"
 theme.border_focus                              = "#0099CC"

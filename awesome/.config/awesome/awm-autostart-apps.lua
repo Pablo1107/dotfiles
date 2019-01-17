@@ -9,6 +9,7 @@ function run_once(cmd)
 end
 
 --run_once("urxvtd -f -q -o")
+run_once("xbacklight -set 50")
 run_once("compton -b")
 run_once("mpd")
 run_once("xfce4-clipman")
