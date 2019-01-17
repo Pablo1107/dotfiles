@@ -377,6 +377,7 @@ hi netrwDir guifg=#00A8C6
 inoremap {<CR> {<CR>}<Esc>ko
 map <C-L> <C-^>
 map <F7> mzgg=G`z
+map <F8> :Goyo<Enter>
 " Mapping for HTML
 autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
