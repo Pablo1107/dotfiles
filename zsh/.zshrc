@@ -161,5 +161,5 @@ alias test=vendor/bin/phpunit
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f -H'
 export FZF_GIT_ADD_COMMAND='git ls-files -m -o --exclude-standard'
-#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_COMMAND="$FZF_GIT_ADD_COMMAND"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#export FZF_CTRL_T_COMMAND="$FZF_GIT_ADD_COMMAND"
