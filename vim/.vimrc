@@ -33,6 +33,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'epilande/vim-react-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -44,6 +45,8 @@ let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'posva/vim-vue'
 Plugin 'junegunn/goyo.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -377,7 +380,7 @@ hi netrwDir guifg=#00A8C6
 
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
-map <C-L> <C-^>
+nmap Ñ <C-^>
 map <F7> mzgg=G`z
 map <F8> :set notermguicolors <bar> Goyo <bar> set termguicolors<Enter>
   
@@ -427,3 +430,10 @@ augroup END
 augroup SaveFileAnd
   autocmd BufWritePost .Xresources !xrdb -merge ~/.Xresources
 augroup END
+
+"" Splits
+set splitbelow splitright
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
