@@ -480,3 +480,4 @@ nnoremap <f8> :delete<cr>
 
 " Personal Configuration
 sp
+set hlsearch
