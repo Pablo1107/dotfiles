@@ -179,65 +179,44 @@ globalkeys = awful.util.table.join(
             --volumewidget.update()
         --end),
 
-        --Brillo
-        awful.key({ }, "XF86MonBrightnessDown", function ()
-            -- awful.spawn("xbacklight -dec 5",false) 
-            awful.spawn.easy_async_with_shell("xbacklight -dec 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
-                brightnotify(stdout)
-            end)
-        end),
-        awful.key({ }, "XF86MonBrightnessUp", function ()
-            -- awful.spawn("xbacklight -inc 5",false) 
-            awful.spawn.easy_async_with_shell("xbacklight -inc 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
-                brightnotify(stdout)
-            end)
-        end),
-         
-        -- MPD control
-        awful.key({ }, "XF86AudioNext", function ()
-            awful.spawn.with_shell("mpc next",false) 
+    -- Brightness
+    awful.key({ }, "XF86MonBrightnessDown", function ()
+        -- awful.spawn("xbacklight -dec 5",false) 
+        awful.spawn.easy_async_with_shell("xbacklight -dec 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
+            brightnotify(stdout)
+        end)
+    end),
+    awful.key({ }, "XF86MonBrightnessUp", function ()
+        -- awful.spawn("xbacklight -inc 5",false) 
+        awful.spawn.easy_async_with_shell("xbacklight -inc 5; xbacklight -get | cut -d '.' -f 1", function(stdout, stderr, reason, exit_code)
+            brightnotify(stdout)
+        end)
+    end),
+     
+    -- MPD control
+    awful.key({ }, "XF86AudioNext", function ()
+        awful.spawn.with_shell("mpc next",false) 
+        mpdwidget.update()
+    end),
+    awful.key({ }, "XF86AudioPrev", function ()
+        awful.spawn.with_shell("mpc prev",false) 
+        mpdwidget.update()
+    end),
+    awful.key({ }, "XF86AudioPlay", function ()
+        awful.spawn.with_shell("mpc toggle",false) 
+        mpdwidget.update()
+    end),
+    -- MPD toggle with volume fading
+    awful.key({ "Shift" }, "XF86AudioPlay", function()
+        awful.spawn.easy_async("mpc-fade",
+        function(stdout, stderr, reason, exit_code)
             mpdwidget.update()
-        end),
-        awful.key({ }, "XF86AudioPrev", function ()
-            awful.spawn.with_shell("mpc prev",false) 
-            mpdwidget.update()
-        end),
-        awful.key({ }, "XF86AudioPlay", function ()
-            awful.spawn.with_shell("mpc toggle",false) 
-            mpdwidget.update()
-        end),
-        -- MPD toggle with volume fading
-        awful.key({ "Shift" }, "XF86AudioPlay", function()
-            awful.spawn.easy_async("mpc-fade",
-            function(stdout, stderr, reason, exit_code)
-                mpdwidget.update()
-            end)
-        end),
-        awful.key({ }, "XF86AudioStop", function ()
-            awful.spawn.with_shell("mpc stop",false) 
-            mpdwidget.update()
-        end),
-
-    --awful.key({ altkey, "Control" }, "Up",
-        --function ()
-            --awful.spawn.with_shell("mpc toggle || ncmpc toggle || pms toggle")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Down",
-        --function ()
-            --awful.spawn.with_shell("mpc stop || ncmpc stop || pms stop")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Left",
-        --function ()
-            --awful.spawn.with_shell("mpc prev || ncmpc prev || pms prev")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Right",
-        --function ()
-            --awful.spawn.with_shell("mpc next || ncmpc next || pms next")
-            --mpdwidget.update()
-        --end),
+        end)
+    end),
+    awful.key({ }, "XF86AudioStop", function ()
+        awful.spawn.with_shell("mpc stop",false) 
+        mpdwidget.update()
+    end),
 
     -- Copy to clipboard
     --awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
