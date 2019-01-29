@@ -7,3 +7,4 @@ firefox/.mozilla/**
 !/firefox/.mozilla/firefox/chrome/**
 !/firefox/.mozilla/firefox/startpages/**
 !/firefox/.mozilla/firefox/profiles.ini
+vifm/.config/vifm/vifminfo

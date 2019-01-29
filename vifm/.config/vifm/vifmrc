@@ -237,8 +237,12 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ gpicview %c,
         \ {View in shotwell}
         \ shotwell,
+"fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"         \ convert -identify %f -verbose /dev/null
+
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-         \ convert -identify %f -verbose /dev/null
+         "\ img %c %px %py %pw %ph
+         \ ~/.config/vifm/scripts/imgt %px %py %pw %ph %c
 
 " OpenRaster
 filextype *.ora
