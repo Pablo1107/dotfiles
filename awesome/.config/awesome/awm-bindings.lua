@@ -4,6 +4,7 @@ local mpdwidget = mpd
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
 	awful.key({ modkey } , "r" , function () awful.spawn('rofi -show run')    end),
+	awful.key({ altkey } , "Tab" , function () awful.spawn('rofi -show window')    end),
 	-- Terminals
     --awful.key({ altkey } , "Return" , function () awful.spawn('urxvtc')    end),
     --awful.key({ modkey, "Shift" } , "e" , function () awful.spawn('pcmanfm')    end),
