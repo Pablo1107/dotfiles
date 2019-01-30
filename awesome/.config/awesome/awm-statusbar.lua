@@ -299,16 +299,18 @@ function round(num, numDecimalPlaces)
 end
 
 -- shows used (percentage) and remaining space in home partition
---local fsroothome = lain.widget.fs({
---    settings  = function()
---        widget:set_text(" : " ..  fs_now["/home"].percentage .. "% (" ..
---        round(fs_now["/home"].free, 2) .. " " .. fs_now["/home"].units .. " left)")
---    end,
---    notification_preset = { font = "Monospace 9", position = "bottom_left" }
---
---})
---local fsrhbg = wibox.container.background(fsroothome.widget, beautiful.bg_focus, shape.rectangle)
---local fsrhwidget = wibox.container.margin(fsrhbg, 5, 0, 5, 5)
+local fsroothome = lain.widget.fs({
+    settings  = function()
+        --widget:set_text(" : " ..  fs_now["/home"].percentage .. "%  ")
+        widget:set_markup(markup.font("Tamsyn 1", " ") .. " : " .. fs_now["/home"].percentage .. " % " .. markup.font("Tamsyn 2", " "))
+        -- .. "% (" ..
+        -- round(fs_now["/home"].free, 2) .. " " .. fs_now["/home"].units .. " left)")
+    end,
+    notification_preset = { font = "Monospace 9", position = "bottom_right" }
+
+})
+local fsrhbg = wibox.container.background(fsroothome.widget, beautiful.bg_focus, shape.rectangle)
+local fsrhwidget = wibox.container.margin(fsrhbg, 0, 0, 5, 5)
 
 -- output example: "/home: 37% (239.4 Gb left)"
 
@@ -454,7 +456,6 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
-            fsrhwidget,
         },
         nil, -- Middle widget
         { -- Right widgets
@@ -466,13 +467,15 @@ awful.screen.connect_for_each_screen(function(s)
             netdown_icon,
             networkwidget,
             netup_icon,
-            -- bottom_bar,
+            bottom_bar,
+            fsrhwidget,
             memicon,
             memwidget,
             cpuicon,
             cpuwidget,
             tempicon,
             tempwidget,
+            bottom_bar,
             batwidget,
             -- bottom_bar,
             -- calendar_icon,
