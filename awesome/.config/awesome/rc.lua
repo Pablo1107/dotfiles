@@ -34,12 +34,15 @@ require 'awm-tags'
 --    { "quit", awesome.quit, freedesktop.utils.lookup_icon({ icon = 'application-exit' }) }
 -- }
 
+require 'awm-exit-screen'
+
 myawesomemenu = {
    { "manual", terminal .. " -e 'man awesome'" },
    { "edit config", "subl3 " .. config_file},
    { "edit theme", "subl3 " .. theme_dir .. "/theme.lua" },
    { "restart", awesome.restart },
-   { "quit", function () awesome.quit() end }
+   --{ "quit", function () awesome.quit() end }
+   { "quit", function () exit_screen_show() end }
 }
 
 --table.insert(menu_items, { "awesome", myawesomemenu, beautiful.awesome_icon })
