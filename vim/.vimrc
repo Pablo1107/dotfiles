@@ -32,6 +32,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+Plugin 'adriaanzon/vim-emmet-ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'epilande/vim-react-snippets'
 
@@ -437,3 +438,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" Fix for Browser-Sync
+set backupcopy=yes
