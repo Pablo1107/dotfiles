@@ -1310,134 +1310,176 @@ browser[type="content"] {
 }
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* 
-Original layout by /u/Herkt https://www.reddit.com/r/FirefoxCSS/comments/7eazix/my_attempt_at_a_oneline_interface/ 
-Use with compact density
-*/
-
-:root:-moz-lwtheme-brighttext {                                      /* minor color changes to the default dark theme */
-  --color-overflow: #222;                                            /* >> button color */
-  --chrome-background-color: #111 !important;                        /* tab strip background & inactive tabs */
-  --chrome-secondary-background-color: #222 !important;              /* nav bar & active tab */
-  --chrome-color: #ccc !important;                                   /* url & tab text, close tab & new tab buttons */
-  background-color: #444 !important;                                 /* top border of out of focus window */
+/* Custom Code */
+/*TABS*/
+#tabbrowser-tabs .tabbrowser-tab .tab-close-button {
+  /*display:none !important;*/
+  opacity: 0.3;
 }
 
-:root:-moz-lwtheme-darktext {                                        /* minor changes to the default light theme */
-  --color-overflow: #ddd;                                            /* >> button color */
-  --chrome-background-color: #ccc !important;                        /* tab strip background & inactive tabs */
+.tabbrowser-tab {
+  height: 49px!important;
+}
+
+.tab-icon-image {
+  /* )height: 36px !important;
+  width: 36px !important; */
+  filter: drop-shadow(1px 1px 1px #A9A9A9);
+  border-radius: 50%;
+}
+
+#TabsToolbar {
+  opacity: 0;
+  transition: all ease-in-out 350ms !important;
+}
+
+.toolbar-items {
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+#navigator-toolbox:hover #TabsToolbar{
+  opacity: 1;
+}
+
+.tabbrowser-tab::before,
+.tabbrowser-tab::after,
+.tab-line,
+.titlebar-buttonbox-container,
+.titlebar-spacer{
+  display: none !important;
+}
+
+/*.tab-background {
+  background-color: transparent !important;
+}
+
+.tab-icon-image {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)'><filter id='svgMask'><feGaussianBlur stdDeviation='1' /></filter></svg>#svgMask");
+  opacity: 0.3!important
+}
+
+.tab-icon-image:hover {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)'><filter id='svgMask'><feGaussianBlur stdDeviation='0.3' /></filter></svg>#svgMask");
+  filter: drop-shadow(1px 1px 1px #A9A9A9);
+  opacity: 1!important
+} */
+
+/*BORDERS*/
+
+*,
+.titlebar-placeholder {
+  border: 0 !important;
 }
 
 :root {
-  --tabs-border: transparent !important;                             /* active tab left & right borders - not working in 58?*/
-  --toolbox-border-bottom-color: transparent !important;             /* 1px line under background tabs */
-  --chrome-nav-bar-controls-border-color: transparent !important;    /* border around url bar */
+  --tabs-border: transparent !important;
 }
 
-/* Move Tab-bar beside Nav-bar */
-#TabsToolbar {      
-  margin-bottom: -3px !important;                /* not needed anymore? */
-  margin-top: 4px !important;                   /*  */
-  margin-left: 56vw !important;
-  margin-right: -34px !important;
-}
-
-#nav-bar {      
-  margin-bottom: -1px !important;               /* remove navbar bottom 1px border */
-  margin-top: -35px !important;
-  margin-right: 44vw !important; 
-  border-top: none !important;
-}   
-
-/* Remove padding above tabbar in compact mode */
-#main-window[sizemode="normal"] > #titlebar {
-  -moz-appearance: initial !important;
-}
-
-
-/* Back & Forward buttons */  
-#back-button > .toolbarbutton-icon,
-#forward-button > .toolbarbutton-icon {
-  transform: scale(0.9, 0.9) !important;
-  margin-left: -2px !important;
-  margin-right: -2px !important; 
-}
-
-/* Move hamburger menu to the left */
-#PanelUI-button,
-#customization-panel-container,
-#customization-panelWrapper .panel-arrow { 
-  -moz-box-ordinal-group: 0 !important;
-  margin-right: -6px !important;
-}
-
-#appMenu-popup {
-  margin-right: -258px !important;
-}
-
-#appMenu-popup .panel-arrow {
-  margin-right: 248px !important;
-}
-
-/* More tools... button */
-#nav-bar-overflow-button { 
-  transform: scale(0.9, 0.9) !important;
-  fill: var(--color-overflow) !important;
-}  
-
-/* Remove empty space before first tab
-Delete this rule if you need a space to drag the window*/
-#TabsToolbar .titlebar-placeholder[type="pre-tabs"]{
-    display: none !important;
-}
-
-/* Remove border between tabs
-Delete this rule if you want separators between background tabs */
 .tabbrowser-tab::after, .tabbrowser-tab::before {
   border-left: none !important;
-} 
+}
 
-/* Border between background tabs */
-.tabbrowser-tab::after, .tabbrowser-tab::before {
-  color: grey !important; 
-  opacity: .2 !important; 
- }
+#urlbar, .searchbar-textbox {
+  border: none !important;
+  box-shadow: none !important;
+}
 
-/* New tab button color */
-#new-tab-button, .tabs-newtab-button {
-  fill: var(--chrome-color) !important;
-  } 
+#nav-bar {
+  margin-top: 0px !important;
+  border-top: 0px !important;
+  box-shadow: none !important;
+}
 
-/* tab line - adjust color & size, default #0a84ff 2px */
-.tab-line {
-  background-color: #0a84ff !important;
-  height: 0px !important;
-  }
+/*NAVBAR*/
+:root:not([customizing]) #nav-bar toolbarbutton {
+  opacity: 0 !important;
+  transform: scale(.85, .85) !important;
+  pointer-events: none !important;
+  transition: all 350ms ease-in-out !important;
+}
 
+:root:not([customizing]) :hover > #nav-bar toolbarbutton,
+:root:not([customizing]) #navigator-toolbox:focus-within #nav-bar toolbarbutton,
+:root:not([customizing]) :hover > #titlebar toolbarbutton {
+  transform: scale(1, 1) !important;
+  opacity:0.4 !important;
+  margin-left:0 !important;
+  pointer-events: auto !important;
+}
 
-/* Hide various elements */
-/* Menu */
-#appMenu-fxa-container,                    /* Sign in to Sync */
-#appMenu-fxa-container+toolbarseparator,
-/* #appMenuRestoreLastSession, */
-#appMenu-zoom-controls,
-#appMenu-zoom-controls+toolbarseparator,
-#appMenu-edit-controls,
-#appMenu-edit-controls+toolbarseparator,
-#appMenu-library-button,
-#appMenu-customize-button,
-#appMenu-customize-button+toolbarseparator,
-#appMenu-open-file-button,
-#appMenu-save-file-button,
-#appMenu-find-button,
-#appMenu-more-button,
+#urlbar {
+  opacity: 0 !important;
+  transition: all 350ms ease-in-out !important;
+}
 
-/* URL Bar */
-#pageActionButton,
-#pocket-button-box,
-ar-button,
-.autocomplete-history-dropmarker,
-#identity-icon-labels
-{
+#urlbar:hover {
+  opacity: 0.8 !important
+}
+
+#urlbar[focused="true"] {
+  opacity: 1 !important
+}
+
+#urlbar {
+  background: transparent !important;
+  border: none !important;
+}
+
+#urlbar {
+  font-size: 12pt !important;
+}
+
+#nav-bar {
+  height: 40px !important;
+  padding-left: 70px !important;
+  padding-right: 70px !important;
+}
+
+@media(max-width: 768px){
+  #urlbar {
     display: none !important;
+  }  
+}
+
+/* Navbar below urlbar */
+#main-window:not([chromehidden*="toolbar"]) #navigator-toolbox {
+  padding-bottom: 0px !important;
+  transition: all 350ms ease-in-out !important;
+}
+
+#main-window:not([chromehidden*="toolbar"]) #navigator-toolbox:hover{
+  padding-bottom: 50px !important;
+}
+
+#TabsToolbar {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+}
+
+#tabbrowser-tabs {
+  width: 100vw !important;
+}
+
+.private-browsing-indicator {
+  display: none !important;
+}
+
+#nav-bar:before {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  content: "";
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+  background-image: url("chrome://browser/skin/private-browsing.svg");
+}
+
+:root:not([privatebrowsingmode=temporary]) #nav-bar:before {
+  display: none !important;
 }

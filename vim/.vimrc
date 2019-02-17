@@ -31,6 +31,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'ervandew/supertab'
 
 " Track the engine.
+Plugin 'adriaanzon/vim-emmet-ultisnips'
 Plugin 'SirVer/ultisnips'
 Plugin 'adriaanzon/vim-emmet-ultisnips'
 Plugin 'honza/vim-snippets'
@@ -48,6 +49,7 @@ Plugin 'posva/vim-vue'
 Plugin 'junegunn/goyo.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+"Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -328,7 +330,8 @@ set statusline+=%3*%-3.(%V%)
 set statusline+=%1*FileType: 
 set statusline+=%3*\ %Y\ 
 
-"" fzf plugin
+"" Plugins Configuration
+" fzf plugin
 set rtp+=~/.fzf
 nnoremap <C-P> :FZF <Enter>
 
