@@ -2,68 +2,49 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+  Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+  " Plugins
+  Plugin 'SirVer/ultisnips' " Snippets Manager
+  Plugin 'adriaanzon/vim-emmet-ultisnips'
+  Plugin 'honza/vim-snippets' " A general collection of snippets
+  Plugin 'epilande/vim-react-snippets'
+  Plugin 'posva/vim-vue' " VueJS syntax
+  Plugin 'junegunn/goyo.vim' " Zen focus
+  Plugin 'pangloss/vim-javascript' " Extended VueJS syntax
+  Plugin 'mxw/vim-jsx' " JSX syntax
 
-"Plugin 'ervandew/supertab'
+  " Configuration
 
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-Plugin 'adriaanzon/vim-emmet-ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'epilande/vim-react-snippets'
+  " UltiSnips {{{
+  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
+  " }}}
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-Plugin 'posva/vim-vue'
-Plugin 'junegunn/goyo.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-"Plugin 'mattn/emmet-vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+  call vundle#end()            " required
+  filetype plugin indent on    " required
+  " Brief help {{{
+  " To ignore plugin indent changes, instead use:
+  "filetype plugin on
+  "
+  " :PluginList       - lists configured plugins
+  " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+  " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+  " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+  "
+  " see :h vundle for more details or wiki for FAQ
+  " Put your non-Plugin stuff after this line
+  " }}}
+endif
 "" }}}
 
 "" Default vimrc file config {{{
@@ -406,7 +387,7 @@ set statusline+=%1*FileType:
 set statusline+=%3*\ %Y\ 
 "" }}}
 
-"" Plugins Configuration {{{
+"" External Plugins Configuration {{{
 " fzf plugin
 set rtp+=~/.fzf
 nnoremap <C-P> :FZF <Enter>
