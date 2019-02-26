@@ -1,4 +1,4 @@
-"" Vundle Stuff
+"" Vundle Stuff {{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -31,7 +31,6 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'ervandew/supertab'
 
 " Track the engine.
-Plugin 'adriaanzon/vim-emmet-ultisnips'
 Plugin 'SirVer/ultisnips'
 Plugin 'adriaanzon/vim-emmet-ultisnips'
 Plugin 'honza/vim-snippets'
@@ -65,7 +64,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+"" }}}
 
+"" Default vimrc file config {{{
 
 " The default vimrc file.
 "
@@ -227,18 +228,85 @@ runtime! archlinux.vim
 
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
+"" }}}
 
-"" Auto-reload .vimrc on save
+"" Vim Settings {{{
+" Auto-reload .vimrc on save {{{
 if has ('autocmd') " Remain compatible with earlier versions
  augroup vimrc     " Source vim configuration upon save
-    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call OpaqueBackground()
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif " has autocmd
+" }}}
 
-"" Theme
+" Mkdir when creating a file {{{
+augroup Mkdir
+  autocmd!
+  autocmd BufWritePre *
+    \ if !isdirectory(expand("<afile>:p:h")) |
+        \ call mkdir(expand("<afile>:p:h"), "p") |
+    \ endif
+augroup END
+" }}}
+
+" autocmd when saving different files {{{
+" .Xresources
+augroup SaveFileAnd
+  autocmd BufWritePost .Xresources !xrdb -merge ~/.Xresources
+augroup END
+" }}}
+
+" Fix for Browser-Sync
+set backupcopy=yes
+"" }}}
+
+"" Folds {{{
+" Set a nicer foldtext function
+set foldtext=MyFoldText()
+function! MyFoldText()
+  let line = getline(v:foldstart)
+  if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
+    let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
+    let linenum = v:foldstart + 1
+    while linenum < v:foldend
+      let line = getline( linenum )
+      let comment_content = substitute( line, '^\([ \t\/\*]*\)\(.*\)$', '\2', 'g' )
+      if comment_content != ''
+        break
+      endif
+      let linenum = linenum + 1
+    endwhile
+    let sub = initial . ' ' . comment_content
+  else
+    let sub = line
+    let startbrace = substitute( line, '^.*{[ \t]*$', '{', 'g')
+    if startbrace == '{'
+      let line = getline(v:foldend)
+      let endbrace = substitute( line, '^[ \t]*}\(.*\)$', '}', 'g')
+      if endbrace == '}'
+        let sub = sub.substitute( line, '^[ \t]*}\(.*\)$', '...}\1', 'g')
+      endif
+    endif
+  endif
+  let n = v:foldend - v:foldstart + 1
+  let info = " " . n . " lines"
+  let sub = sub . "                                                                                                                  "
+  let num_w = getwinvar( 0, '&number' ) * getwinvar( 0, '&numberwidth' )
+  let fold_w = getwinvar( 0, '&foldcolumn' )
+  let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
+  return sub . info
+endfunction
+
+nnoremap <Tab> za
+autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType vim setlocal foldlevel=0
+"" }}}
+
+"" Theme {{{
 set termguicolors
-function! OpaqueBackground() abort
+function! CustomStyle() abort " {{{
+  " Transparent bg everything! {{{
   hi Cursor guibg=NONE
   hi Normal guibg=NONE
   hi NonText guibg=NONE
@@ -294,23 +362,30 @@ function! OpaqueBackground() abort
   hi htmlH2 guibg=NONE
   hi Pmenu guifg=fg guibg=#002B36
   hi StatusLine cterm=NONE guifg=fg
+  " }}}
   
-  "" Status Line colors
+  " Status Line colors {{{
   hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
   hi User2 guifg=#000000 guibg=#959ca6
   hi User3 guifg=#00A8C6 guibg=#131920
-  
+  " }}} 
 
-  "" Make 81 character distinct
+  " Make 81 character distinct
   hi ColorColumn guibg=#00A8C6
   call matchadd('ColorColumn', '\%81v', 100)
-endfunction
-autocmd ColorScheme * call OpaqueBackground()
+
+  " Folds Styling
+  highlight FoldColumn  gui=bold    guifg=grey65     guibg=#035C9D
+  highlight Folded      gui=italic  guifg=#03A1C1      guibg=#035C9D
+  "highlight LineNr      gui=NONE    guifg=grey60     guibg=Grey90
+endfunction " }}}
+autocmd ColorScheme * call CustomStyle()
 "source ~/.vim/colors/freshcut.vim
 colorscheme freshcut
 "colorscheme base16-default-dark
+"" }}}
 
-"" Status Line
+"" Status Line {{{
 set laststatus=2
 set statusline=
 set statusline+=%2*\ %l
@@ -329,13 +404,15 @@ set statusline+=%3*\ %l,%c\
 set statusline+=%3*%-3.(%V%)
 set statusline+=%1*FileType: 
 set statusline+=%3*\ %Y\ 
+"" }}}
 
-"" Plugins Configuration
+"" Plugins Configuration {{{
 " fzf plugin
 set rtp+=~/.fzf
 nnoremap <C-P> :FZF <Enter>
+"" }}}
 
-"" Templates
+"" Templates {{{
 augroup templates
 " Bash Scripts
   autocmd BufNewFile *.sh call SetBashTemplate()
@@ -349,8 +426,9 @@ augroup templates
 	  0r ~/.vim/templates/skeleton.html
   endfunction
 augroup END
+"" }}}
 
-"" netrw file manager
+"" netrw file manager {{{
 " remove banner
 let g:netrw_banner = 0
 " open file in previous window
@@ -379,8 +457,9 @@ function! ToggleVExplorer()
 endfunction
 nnoremap <S-F> :call ToggleVExplorer()<CR>
 hi netrwDir guifg=#00A8C6
+"" }}}
 
-"" Mapping
+"" Mapping {{{
 
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
@@ -398,8 +477,9 @@ autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <input><CR> <input type="text" name="" placeholder=""><++></input><++><Esc>F"i
 autocmd FileType html iabbrev </ </<C-X><C-O>
 autocmd FileType html inoremap <lt>/ </<C-x><C-o><Esc>==gi
+"" }}}
 
-"" Tab Sizing
+"" Tab Sizing {{{
 set listchars=tab:►-,eol:¬,trail:●
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -419,28 +499,12 @@ autocmd FileType css call SetTabSize(2)
 autocmd FileType javascript call SetTabSize(2) 
 autocmd FileType php call SetTabSize(4) 
 autocmd FileType lua call SetTabSize(4) 
+"" }}}
 
-"" Mkdir when creating a file
-augroup Mkdir
-  autocmd!
-  autocmd BufWritePre *
-    \ if !isdirectory(expand("<afile>:p:h")) |
-        \ call mkdir(expand("<afile>:p:h"), "p") |
-    \ endif
-augroup END
-
-"" autocmd when saving different files
-" .Xresources
-augroup SaveFileAnd
-  autocmd BufWritePost .Xresources !xrdb -merge ~/.Xresources
-augroup END
-
-"" Splits
+"" Splits {{{
 set splitbelow splitright
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" Fix for Browser-Sync
-set backupcopy=yes
+"" }}}
