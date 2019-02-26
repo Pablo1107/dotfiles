@@ -310,7 +310,7 @@ function! CustomStyle() abort " {{{
   hi Cursor guibg=NONE
   hi Normal guibg=NONE
   hi NonText guibg=NONE
-  hi Visual guibg=NONE
+  hi Visual guibg=#035C9D
   hi Linenr guibg=NONE
   hi Directory guibg=NONE
   hi IncSearch guibg=NONE
