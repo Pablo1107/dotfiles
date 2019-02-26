@@ -264,7 +264,7 @@ set backupcopy=yes
 "" Folds {{{
 " Set a nicer foldtext function
 set foldtext=MyFoldText()
-function! MyFoldText()
+function! MyFoldText() " {{{
   let line = getline(v:foldstart)
   if match( line, '^[ \t]*\(\/\*\|\/\/\)[*/\\]*[ \t]*$' ) == 0
     let initial = substitute( line, '^\([ \t]\)*\(\/\*\|\/\/\)\(.*\)', '\1\2', '' )
@@ -296,7 +296,7 @@ function! MyFoldText()
   let fold_w = getwinvar( 0, '&foldcolumn' )
   let sub = strpart( sub, 0, winwidth(0) - strlen( info ) - num_w - fold_w - 1 )
   return sub . info
-endfunction
+endfunction " }}}
 
 nnoremap <Tab> za
 autocmd FileType vim setlocal foldmethod=marker
