@@ -1,3 +1,13 @@
+
+"        ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
+"        ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
+"        ██║   ██║██║██╔████╔██║██████╔╝██║     
+"        ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
+"      ██╗╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
+"      ╚═╝ ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+"           Author: Pablo Andres Dealbera
+"           Year: 2019
+
 "" Vundle Stuff {{{
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -17,6 +27,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'junegunn/goyo.vim' " Zen focus
   Plugin 'pangloss/vim-javascript' " Extended VueJS syntax
   Plugin 'mxw/vim-jsx' " JSX syntax
+  Plugin 'roman/golden-ratio' " Makes current split bigger
 
   " Configuration
 
@@ -349,6 +360,8 @@ function! CustomStyle() abort " {{{
   hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
   hi User2 guifg=#000000 guibg=#959ca6
   hi User3 guifg=#00A8C6 guibg=#131920
+  hi StatusLineNC guifg=#00A8C6 guibg=#131920
+  hi VertSplit guifg=#00A8C6 guibg=#131920
   " }}} 
 
   " Make 81 character distinct
