@@ -430,26 +430,25 @@ let g:netrw_browse_split = 4
 " window size to 25%
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 3
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let &l:statusline='%{getline(line("w$")+1)}'
-      let t:expl_buf_num = bufnr("%")
-  endif
+
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
 endfunction
-nnoremap <S-F> :call ToggleVExplorer()<CR>
+nnoremap <S-F> :call ToggleNetrw()<CR>
 hi netrwDir guifg=#00A8C6
 "" }}}
 
