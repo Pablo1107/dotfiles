@@ -28,6 +28,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'pangloss/vim-javascript' " Extended VueJS syntax
   Plugin 'mxw/vim-jsx' " JSX syntax
   Plugin 'roman/golden-ratio' " Makes current split bigger
+  Plugin 'junegunn/fzf.vim'
 
   " Configuration
 
@@ -404,6 +405,8 @@ set statusline+=%3*\ %Y\
 " fzf plugin
 set rtp+=~/.fzf
 nnoremap <C-P> :FZF <Enter>
+execute "set <M-p>=\ep"
+nnoremap <M-p> :Ag <Enter>
 "" }}}
 
 "" Templates {{{
