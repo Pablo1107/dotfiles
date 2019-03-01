@@ -29,6 +29,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'mxw/vim-jsx' " JSX syntax
   Plugin 'roman/golden-ratio' " Makes current split bigger
   Plugin 'junegunn/fzf.vim'
+  Plugin 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
 
   " Configuration
 
@@ -226,7 +227,7 @@ runtime! archlinux.vim
 "" Vim Settings {{{
 " Auto-reload .vimrc on save {{{
 if has ('autocmd') " Remain compatible with earlier versions
- augroup vimrc     " Source vim configuration upon save
+  augroup vimrc     " Source vim configuration upon save
     autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
@@ -246,7 +247,11 @@ augroup END
 " autocmd when saving different files {{{
 " .Xresources
 augroup SaveFileAnd
-  autocmd BufWritePost .Xresources !xrdb -merge ~/.Xresources
+  autocmd BufWritePost .Xresources silent exec "!xrdb -merge ~/.Xresources" | echom ".Xresources merged"
+  autocmd BufWritePost .tmux.conf
+    \ if exists('$TMUX') |
+        \ silent exec "!tmux source-file ~/.tmux.conf" | echom "Tmux config file re-sourced" |
+    \ endif
 augroup END
 " }}}
 
