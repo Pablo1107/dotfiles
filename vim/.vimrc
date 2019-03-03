@@ -504,8 +504,14 @@ autocmd FileType lua call SetTabSize(4)
 
 "" Splits {{{
 set splitbelow splitright
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+"map <C-h> <C-w>h
+"map <C-j> <C-w>j
+"map <C-k> <C-w>k
+"map <C-l> <C-w>l
+"let g:tmux_navigator_no_mappings = 1
+"
+"nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d width"<cr>:redraw!<cr>
+"nnoremap <silent> <C-j> :TmuxNavigateDown<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d height"<cr>:redraw!<cr>
+"nnoremap <silent> <C-k> :TmuxNavigateUp<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d height"<cr>:redraw!<cr>
+"nnoremap <silent> <C-l> :TmuxNavigateRight<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d width"<cr>:redraw!<cr>
 "" }}}
