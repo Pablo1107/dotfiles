@@ -225,35 +225,34 @@ runtime! archlinux.vim
 "" }}}
 
 "" Vim Settings {{{
-" Auto-reload .vimrc on save {{{
 if has ('autocmd') " Remain compatible with earlier versions
+  " Auto-reload .vimrc on save {{{
   augroup vimrc     " Source vim configuration upon save
     autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
+  " }}}
+
+  " Mkdir when creating a file {{{
+  augroup Mkdir
+    autocmd!
+    autocmd BufWritePre *
+      \ if !isdirectory(expand("<afile>:p:h")) |
+          \ call mkdir(expand("<afile>:p:h"), "p") |
+      \ endif
+  augroup END
+  " }}}
+
+  " autocmd when saving different files {{{
+  augroup SaveFileAnd
+    autocmd BufWritePost .Xresources silent exec "!xrdb -merge ~/.Xresources" | echom ".Xresources merged"
+    autocmd BufWritePost .tmux.conf
+      \ if exists('$TMUX') |
+          \ silent exec "!tmux source-file ~/.tmux.conf" | echom "Tmux config file re-sourced" |
+      \ endif
+  augroup END
+  " }}}
 endif " has autocmd
-" }}}
-
-" Mkdir when creating a file {{{
-augroup Mkdir
-  autocmd!
-  autocmd BufWritePre *
-    \ if !isdirectory(expand("<afile>:p:h")) |
-        \ call mkdir(expand("<afile>:p:h"), "p") |
-    \ endif
-augroup END
-" }}}
-
-" autocmd when saving different files {{{
-" .Xresources
-augroup SaveFileAnd
-  autocmd BufWritePost .Xresources silent exec "!xrdb -merge ~/.Xresources" | echom ".Xresources merged"
-  autocmd BufWritePost .tmux.conf
-    \ if exists('$TMUX') |
-        \ silent exec "!tmux source-file ~/.tmux.conf" | echom "Tmux config file re-sourced" |
-    \ endif
-augroup END
-" }}}
 
 " Fix for Browser-Sync
 set backupcopy=yes
@@ -410,7 +409,9 @@ set statusline+=%3*\ %Y\
 " fzf plugin
 set rtp+=~/.fzf
 nnoremap <C-P> :FZF <Enter>
-execute "set <M-p>=\ep"
+if !has('nvim')
+  execute "set <M-p>=\ep"
+endif
 nnoremap <M-p> :Ag <Enter>
 "" }}}
 
@@ -418,13 +419,13 @@ nnoremap <M-p> :Ag <Enter>
 augroup templates
 " Bash Scripts
   autocmd BufNewFile *.sh call SetBashTemplate()
-  function SetBashTemplate() 
+  function! SetBashTemplate() 
 	  0r ~/.vim/templates/skeleton.sh
 	  normal!j
   endfunction
 " HTML
   autocmd BufNewFile *.html call SetHTMLTemplate()
-  function SetHTMLTemplate() 
+  function! SetHTMLTemplate() 
 	  0r ~/.vim/templates/skeleton.html
   endfunction
 augroup END
@@ -504,14 +505,10 @@ autocmd FileType lua call SetTabSize(4)
 
 "" Splits {{{
 set splitbelow splitright
-"map <C-h> <C-w>h
-"map <C-j> <C-w>j
-"map <C-k> <C-w>k
-"map <C-l> <C-w>l
-"let g:tmux_navigator_no_mappings = 1
-"
-"nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d width"<cr>:redraw!<cr>
-"nnoremap <silent> <C-j> :TmuxNavigateDown<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d height"<cr>:redraw!<cr>
-"nnoremap <silent> <C-k> :TmuxNavigateUp<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d height"<cr>:redraw!<cr>
-"nnoremap <silent> <C-l> :TmuxNavigateRight<cr>:silent exec "!~/.tmux/scripts/resize-golden-ratio.sh -d width"<cr>:redraw!<cr>
+if match(&rtp, 'vim-tmux-navigator') == -1
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
+endif
 "" }}}
