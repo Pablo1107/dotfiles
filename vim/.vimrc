@@ -225,6 +225,11 @@ runtime! archlinux.vim
 "" }}}
 
 "" Vim Settings {{{
+if &term =~# '^screen'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 if has ('autocmd') " Remain compatible with earlier versions
   " Auto-reload .vimrc on save {{{
   augroup vimrc     " Source vim configuration upon save
@@ -382,6 +387,10 @@ autocmd ColorScheme * call CustomStyle()
 "source ~/.vim/colors/freshcut.vim
 colorscheme freshcut
 "colorscheme base16-default-dark
+
+" Terminal Colors
+let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
+hi Terminal guibg=#002B36
 "" }}}
 
 "" Status Line {{{
@@ -488,6 +497,9 @@ autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <input><CR> <input type="text" name="" placeholder=""><++></input><++><Esc>F"i
 autocmd FileType html iabbrev </ </<C-X><C-O>
 autocmd FileType html inoremap <lt>/ </<C-x><C-o><Esc>==gi
+
+" Mapping for Terminal
+tnoremap <Esc> <C-W>N
 "" }}}
 
 "" Tab Sizing {{{
@@ -520,4 +532,11 @@ if match(&rtp, 'vim-tmux-navigator') == -1
   map <C-k> <C-w>k
   map <C-l> <C-w>l
 endif
+if match(&rtp, 'vim-tmux-navigator') != -1
+  tnoremap <silent> <C-h> <C-W>:TmuxNavigateLeft<CR>
+  tnoremap <silent> <C-j> <C-W>:TmuxNavigateDown<CR>
+  tnoremap <silent> <C-k> <C-W>:TmuxNavigateUp<CR>
+  tnoremap <silent> <C-l> <C-W>:TmuxNavigateRight<CR>
+endif
 "" }}}
+
