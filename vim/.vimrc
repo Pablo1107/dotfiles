@@ -467,7 +467,16 @@ hi netrwDir guifg=#00A8C6
 inoremap {<CR> {<CR>}<Esc>ko
 nmap Ñ <C-^>
 map <F7> mzgg=G`z
-map <F8> :set notermguicolors <bar> Goyo <bar> set termguicolors<Enter>
+map <F8> :call EnterGoyo()<CR>
+func! EnterGoyo()
+  echo "hola"
+  set notermguicolors
+  execute "normal \<Plug>(golden_ratio_toggle)"
+  hi StatusLineNC NONE
+  hi VertSplit NONE
+  Goyo
+  set termguicolors
+endfunc
   
 " Mapping for HTML
 autocmd BufRead,BufNewFile *.blade.php set filetype=html
