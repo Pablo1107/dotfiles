@@ -303,6 +303,8 @@ endfunction " }}}
 nnoremap <Tab> za
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType vim setlocal foldlevel=0
+autocmd FileType tmux setlocal foldmethod=marker
+autocmd FileType tmux setlocal foldlevel=0
 "" }}}
 
 "" Theme {{{
