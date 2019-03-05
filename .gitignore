@@ -11,3 +11,4 @@ vifm/.config/vifm/vifminfo
 vim/.vim/.netrwhist
 vim/.vim/bundle/**
 !vim/.vim/bundle/Vundle.vim
+vim/.vim/undo-dir/**
