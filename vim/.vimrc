@@ -477,9 +477,9 @@ hi netrwDir guifg=#00A8C6
 
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
-nmap Ñ <C-^>
-map <F7> mzgg=G`z
-map <F8> :call EnterGoyo()<CR>
+nnoremap Ñ <C-^>
+noremap <F7> mzgg=G`z
+noremap <silent> <F8> :silent call EnterGoyo()<CR>
 func! EnterGoyo()
   echo "hola"
   set notermguicolors
