@@ -261,6 +261,11 @@ endif " has autocmd
 
 " Fix for Browser-Sync
 set backupcopy=yes
+" Undo after closing Vim
+set undodir=~/.vim/undo-dir
+set undofile
+"asdas
+"asdasd
 "" }}}
 
 "" Folds {{{
