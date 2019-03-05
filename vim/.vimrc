@@ -233,7 +233,7 @@ endif
 if has ('autocmd') " Remain compatible with earlier versions
   " Auto-reload .vimrc on save {{{
   augroup vimrc     " Source vim configuration upon save
-    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
+    autocmd! BufWritePost $MYVIMRC,$OGVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
   " }}}
