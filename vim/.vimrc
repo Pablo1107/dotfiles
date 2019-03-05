@@ -502,7 +502,11 @@ autocmd FileType html iabbrev </ </<C-X><C-O>
 autocmd FileType html inoremap <lt>/ </<C-x><C-o><Esc>==gi
 
 " Mapping for Terminal
-tnoremap <Esc> <C-W>N
+if !has('nvim')
+  tnoremap <Esc> <C-W>N
+else
+  tnoremap <Esc> <C-\><C-n>
+endif
 "" }}}
 
 "" Tab Sizing {{{
