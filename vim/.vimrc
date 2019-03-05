@@ -382,15 +382,15 @@ function! CustomStyle() abort " {{{
   highlight FoldColumn  gui=bold    guifg=grey65     guibg=#035C9D
   highlight Folded      gui=italic  guifg=#03A1C1      guibg=#035C9D
   "highlight LineNr      gui=NONE    guifg=grey60     guibg=Grey90
+
+  " Terminal Colors
+  let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
+  hi Terminal guibg=#002B36
 endfunction " }}}
 autocmd ColorScheme * call CustomStyle()
 "source ~/.vim/colors/freshcut.vim
 colorscheme freshcut
 "colorscheme base16-default-dark
-
-" Terminal Colors
-let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
-hi Terminal guibg=#002B36
 "" }}}
 
 "" Status Line {{{
@@ -540,3 +540,22 @@ if match(&rtp, 'vim-tmux-navigator') != -1
 endif
 "" }}}
 
+nnoremap <C-W>O :call MaximizeToggle()<CR>
+nnoremap <C-W>o :call MaximizeToggle()<CR>
+nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
+
+function! MaximizeToggle()
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
+endfunction
