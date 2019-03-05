@@ -369,10 +369,11 @@ function! CustomStyle() abort " {{{
   " }}}
   
   " Status Line colors {{{
-  hi User1 guifg=#FFFFFF guibg=#191f26 gui=BOLD
+  hi User1 guifg=#FFFFFF guibg=#191f26
   hi User2 guifg=#000000 guibg=#959ca6
   hi User3 guifg=#00A8C6 guibg=#131920
-  hi StatusLineNC guifg=#00A8C6 guibg=#131920
+  hi StatusLine gui=NONE guifg=#FFFFFF guibg=NONE
+  hi StatusLineNC gui=reverse guifg=#00A8C6 guibg=#131920
   hi VertSplit guifg=#00A8C6 guibg=#131920
   " }}} 
 
