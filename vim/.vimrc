@@ -261,7 +261,11 @@ endif " has autocmd
 
 " Fix for Browser-Sync
 set backupcopy=yes
+
 " Undo after closing Vim
+if !isdirectory($HOME."/.vim/undo-dir")
+  call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
 set undodir=~/.vim/undo-dir
 set undofile
 "asdas
