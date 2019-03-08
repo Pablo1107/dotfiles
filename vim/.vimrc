@@ -30,6 +30,9 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'roman/golden-ratio' " Makes current split bigger
   Plugin 'junegunn/fzf.vim'
   Plugin 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
+  Plugin 'tomtom/tcomment_vim'
+  Plugin 'vimwiki/vimwiki'
+  Plugin 'suan/vim-instant-markdown' " Live preview vimwiki notes
 
   " Configuration
 
