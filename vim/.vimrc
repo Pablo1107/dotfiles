@@ -526,6 +526,9 @@ autocmd FileType html inoremap <lt>/ </<C-x><C-o><Esc>==gi
 " Mapping for Terminal
 if !has('nvim')
   tnoremap <Esc> <C-W>N
+  tnoremap <Esc><Esc> <C-W>N
+  set timeout timeoutlen=1000  " Default
+  set ttimeout ttimeoutlen=100  " Set by defaults.vim
 else
   tnoremap <Esc> <C-\><C-n>
 endif
