@@ -46,6 +46,16 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   let g:UltiSnipsEditSplit="vertical"
   " }}}
 
+  " VimWiki {{{
+    let g:vimwiki_global_ext = 0
+    let g:vimwiki_table_mappings = 0
+    let g:vimwiki_list = [{'path': '~/vimwiki/',
+                       \ 'syntax': 'markdown', 'ext': '.md'}]
+    let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+  " }}}
+  "
+  let g:instant_markdown_autostart = 0
+
   call vundle#end()            " required
   filetype plugin indent on    " required
   " Brief help {{{
