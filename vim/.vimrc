@@ -392,7 +392,8 @@ function! CustomStyle() abort " {{{
   
   " Status Line colors {{{
   hi User1 guifg=#FFFFFF guibg=#191f26
-  hi User2 guifg=#000000 guibg=#959ca6
+  hi User2 guifg=#000000 guibg=#00A8C6
+  hi User4 guibg=#191f26 guifg=#00A8C6
   hi User3 guifg=#00A8C6 guibg=#131920
   hi StatusLine gui=NONE guifg=#FFFFFF guibg=NONE
   hi StatusLineNC gui=reverse guifg=#00A8C6 guibg=#131920
@@ -422,21 +423,22 @@ colorscheme freshcut
 set laststatus=2
 set statusline=
 set statusline+=%2*\ %l
+set statusline+=%2*\ %4*
 set statusline+=\ %*
-set statusline+=%1*\ 
-set statusline+=%3*\ ৰ\  
-set statusline+=%1*\ %f\ %*
+set statusline+=%<
+set statusline+=%3*\ ৰ
+set statusline+=\ %1*\ %f\ %*
 set statusline+=%1*\ %m
-"set statusline+=%3*\ %F
 set statusline+=%=
-set statusline+=%1*Tab:
-set statusline+=%3*\ %{&tabstop}\ 
-set statusline+=%3*%-3.(%V%)
-set statusline+=%1*Line:
-set statusline+=%3*\ %l,%c\ 
-set statusline+=%3*%-3.(%V%)
-set statusline+=%1*FileType: 
-set statusline+=%3*\ %Y\ 
+set statusline+=%4*
+set statusline+=%2*\ Tab:
+set statusline+=%2*\ %{&tabstop}
+set statusline+=%2*\ %-3.(%)
+set statusline+=%2*Column:
+set statusline+=%2*\ %c
+set statusline+=%2*\ %-3.(%)
+set statusline+=%2*FileType:
+set statusline+=%2*\ %Y\ %*
 "" }}}
 
 "" External Plugins Configuration {{{
