@@ -33,6 +33,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'tomtom/tcomment_vim'
   Plugin 'vimwiki/vimwiki'
   Plugin 'suan/vim-instant-markdown' " Live preview vimwiki notes
+  Plugin 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
 
   " Configuration
 
@@ -44,6 +45,9 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
 
   " If you want :UltiSnipsEdit to split your window.
   let g:UltiSnipsEditSplit="vertical"
+
+  " Load HTML snippets on JSX files
+  autocmd FileType javascript.jsx UltiSnipsAddFiletypes html
   " }}}
 
   " VimWiki {{{
