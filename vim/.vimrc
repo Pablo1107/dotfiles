@@ -342,7 +342,7 @@ function! CustomStyle() abort " {{{
   hi NonText guibg=NONE
   hi Visual guibg=#035C9D
   hi Linenr guibg=NONE
-  hi Directory guibg=NONE
+  hi Directory guibg=NONE guifg=#035C9D
   hi IncSearch guibg=NONE
   hi SpecialKey guibg=NONE
   hi Titled guibg=NONE
@@ -504,6 +504,7 @@ hi netrwDir guifg=#00A8C6
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
 nnoremap Ñ <C-^>
+set pastetoggle=<F2>
 noremap <F7> mzgg=G`z
 noremap <silent> <F8> :silent call EnterGoyo()<CR>
 func! EnterGoyo()
