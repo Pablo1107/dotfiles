@@ -506,6 +506,7 @@ hi netrwDir guifg=#00A8C6
 " General Mapping
 inoremap {<CR> {<CR>}<Esc>ko
 nnoremap Ñ <C-^>
+nnoremap <C-\> <C-^>
 set pastetoggle=<F2>
 noremap <F7> mzgg=G`z
 noremap <silent> <F8> :silent call EnterGoyo()<CR>
