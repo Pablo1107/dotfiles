@@ -34,6 +34,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   Plugin 'vimwiki/vimwiki'
   Plugin 'suan/vim-instant-markdown' " Live preview vimwiki notes
   Plugin 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
+  Plugin 'ludovicchabant/vim-gutentags' " manages your tag files
 
   " Configuration
 
