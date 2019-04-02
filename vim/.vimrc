@@ -32,6 +32,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Plug 'suan/vim-instant-markdown' " Live preview vimwiki notes
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
   Plug 'ludovicchabant/vim-gutentags' " manages your tag files
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
 
   call plug#end()
 
@@ -59,6 +60,10 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " }}}
   "
   let g:instant_markdown_autostart = 0
+
+  if !has('nvim')
+    execute "set <M-p>=\ep"
+  endif
 
 endif
 "" }}}
@@ -430,16 +435,6 @@ set statusline+=%2*FileType:
 set statusline+=%2*\ %Y\ %*
 "" }}}
 
-"" External Plugins Configuration {{{
-" fzf plugin
-set rtp+=~/.fzf
-nnoremap <C-P> :FZF <Enter>
-if !has('nvim')
-  execute "set <M-p>=\ep"
-endif
-nnoremap <M-p> :Ag <Enter>
-"" }}}
-
 "" Templates {{{
 augroup templates
 " Bash Scripts
@@ -494,6 +489,8 @@ inoremap {<CR> {<CR>}<Esc>ko
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 nnoremap <Leader><Leader> za
+nnoremap <C-P> :FZF <Enter>
+nnoremap <M-p> :Ag <Enter>
 set pastetoggle=<F2>
 map <F3> "+y
 noremap <F7> mzgg=G`z
