@@ -327,7 +327,6 @@ function! MyFoldText() " {{{
   return sub . info
 endfunction " }}}
 
-nnoremap <Tab> za
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType vim setlocal foldlevel=0
 autocmd FileType tmux setlocal foldmethod=marker
@@ -498,16 +497,18 @@ function! ToggleNetrw()
         silent Lexplore
     endif
 endfunction
-nnoremap <S-F> :call ToggleNetrw()<CR>
 hi netrwDir guifg=#00A8C6
 "" }}}
 
 "" Mapping {{{
 
 " General Mapping
+let mapleader = ","
+
 inoremap {<CR> {<CR>}<Esc>ko
-nnoremap Ñ <C-^>
-nnoremap <C-\> <C-^>
+nnoremap <Leader>p <C-^>
+nnoremap <Leader>f :call ToggleNetrw()<CR>
+nnoremap <Leader><Leader> za
 set pastetoggle=<F2>
 noremap <F7> mzgg=G`z
 noremap <silent> <F8> :silent call EnterGoyo()<CR>
