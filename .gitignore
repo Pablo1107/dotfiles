@@ -9,6 +9,5 @@ firefox/.mozilla/**
 !/firefox/.mozilla/firefox/profiles.ini
 vifm/.config/vifm/vifminfo
 vim/.vim/.netrwhist
-vim/.vim/bundle/**
-!vim/.vim/bundle/Vundle.vim
+vim/.vim/plugged
 vim/.vim/undo-dir/**

@@ -8,33 +8,32 @@
 "           Author: Pablo Andres Dealbera
 "           Year: 2019
 
-"" Vundle Stuff {{{
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-
-  Plugin 'VundleVim/Vundle.vim'
+"" vim-plug Stuff {{{
+if filereadable(expand('~/.vim/autoload/plug.vim'))
+  " Specify a directory for plugins
+  " - For Neovim: ~/.local/share/nvim/plugged
+  " - Avoid using standard Vim directory names like 'plugin'
+  call plug#begin('~/.vim/plugged')
 
   " Plugins
-  Plugin 'SirVer/ultisnips' " Snippets Manager
-  Plugin 'adriaanzon/vim-emmet-ultisnips'
-  Plugin 'honza/vim-snippets' " A general collection of snippets
-  Plugin 'epilande/vim-react-snippets'
-  Plugin 'posva/vim-vue' " VueJS syntax
-  Plugin 'junegunn/goyo.vim' " Zen focus
-  Plugin 'pangloss/vim-javascript' " Extended VueJS syntax
-  Plugin 'mxw/vim-jsx' " JSX syntax
-  Plugin 'roman/golden-ratio' " Makes current split bigger
-  Plugin 'junegunn/fzf.vim'
-  Plugin 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
-  Plugin 'tomtom/tcomment_vim'
-  Plugin 'vimwiki/vimwiki'
-  Plugin 'suan/vim-instant-markdown' " Live preview vimwiki notes
-  Plugin 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
-  Plugin 'ludovicchabant/vim-gutentags' " manages your tag files
+  Plug 'SirVer/ultisnips' " Snippets Manager
+  Plug 'adriaanzon/vim-emmet-ultisnips'
+  Plug 'honza/vim-snippets' " A general collection of snippets
+  Plug 'epilande/vim-react-snippets'
+  Plug 'posva/vim-vue', { 'for': 'vue' } " VueJS syntax
+  Plug 'junegunn/goyo.vim' " Zen focus
+  " Plug 'pangloss/vim-javascript' " Extended VueJS syntax
+  Plug 'mxw/vim-jsx', { 'for': 'javascript' } " JSX syntax
+  Plug 'roman/golden-ratio' " Makes current split bigger
+  Plug 'junegunn/fzf.vim'
+  Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
+  Plug 'tomtom/tcomment_vim'
+  " Plug 'vimwiki/vimwiki'
+  " Plug 'suan/vim-instant-markdown' " Live preview vimwiki notes
+  Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
+  Plug 'ludovicchabant/vim-gutentags' " manages your tag files
+
+  call plug#end()
 
   " Configuration
 
@@ -61,20 +60,6 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
   "
   let g:instant_markdown_autostart = 0
 
-  call vundle#end()            " required
-  filetype plugin indent on    " required
-  " Brief help {{{
-  " To ignore plugin indent changes, instead use:
-  "filetype plugin on
-  "
-  " :PluginList       - lists configured plugins
-  " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-  " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-  " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-  "
-  " see :h vundle for more details or wiki for FAQ
-  " Put your non-Plugin stuff after this line
-  " }}}
 endif
 "" }}}
 
