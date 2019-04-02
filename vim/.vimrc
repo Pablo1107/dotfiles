@@ -510,6 +510,7 @@ nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 nnoremap <Leader><Leader> za
 set pastetoggle=<F2>
+map <F3> "+y
 noremap <F7> mzgg=G`z
 noremap <silent> <F8> :silent call EnterGoyo()<CR>
 func! EnterGoyo()
