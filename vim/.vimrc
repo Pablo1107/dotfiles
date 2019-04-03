@@ -33,6 +33,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
   Plug 'ludovicchabant/vim-gutentags' " manages your tag files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
+  Plug 'tpope/vim-fugitive'
+
 
   call plug#end()
 
@@ -431,7 +433,10 @@ set statusline+=%2*\ %4*
 set statusline+=\ %1*\ %f\ %*
 set statusline+=%1*\ %m
 set statusline+=%=
-set statusline+=%5*
+set statusline+=%6*
+set statusline+=%2*\ 
+set statusline+=\ %{fugitive#head()}
+set statusline+=%7*\ 
 set statusline+=%3*\ %-1.(%)
 set statusline+=%3*Tab:\ %{&tabstop}
 set statusline+=%3*\ %-1.(%)
