@@ -385,10 +385,14 @@ function! CustomStyle() abort " {{{
   " }}}
   
   " Status Line colors {{{
-  hi User1 guifg=#FFFFFF guibg=#191f26
-  hi User2 guifg=#000000 guibg=#00A8C6
-  hi User4 guibg=#191f26 guifg=#00A8C6
-  hi User3 guifg=#00A8C6 guibg=#131920
+  hi User1 guifg=#FFFFFF guibg=#191f26 " Normal text
+  hi User2 guifg=#000000 guibg=#00A8C6 " Accent section
+  hi User3 guifg=#00A8C6 guibg=#131920 " Non-accent section
+
+  hi User4 guibg=#191f26 guifg=#00A8C6 " Accent arrow to normal background
+  hi User6 guibg=#131920  guifg=#00A8C6 " Accent arrow to non-accent background
+  hi User5 guifg=#131920 guibg=#191f26 " Normal arrow to accent background
+  hi User7 guifg=#131920 guibg=#00A8C6  " Non-accent arrow to accent background
   hi StatusLine gui=NONE guifg=#FFFFFF guibg=NONE
   hi StatusLineNC gui=reverse guifg=#00A8C6 guibg=#131920
   hi VertSplit guifg=#00A8C6 guibg=#131920
@@ -417,21 +421,21 @@ colorscheme freshcut
 set laststatus=2
 set statusline=
 set statusline+=%2*\ %l
-set statusline+=%2*\ %4*
+set statusline+=%2*\ %6*
+set statusline+=%3*\ %c
+set statusline+=%3*\ %7*
 set statusline+=\ %*
 set statusline+=%<
-set statusline+=%3*\ ৰ
+set statusline+=%2*ৰ
+set statusline+=%2*\ %4*
 set statusline+=\ %1*\ %f\ %*
 set statusline+=%1*\ %m
 set statusline+=%=
-set statusline+=%4*
-set statusline+=%2*\ Tab:
-set statusline+=%2*\ %{&tabstop}
-set statusline+=%2*\ %-3.(%)
-set statusline+=%2*Column:
-set statusline+=%2*\ %c
-set statusline+=%2*\ %-3.(%)
-set statusline+=%2*FileType:
+set statusline+=%5*
+set statusline+=%3*\ %-1.(%)
+set statusline+=%3*Tab:\ %{&tabstop}
+set statusline+=%3*\ %-1.(%)
+set statusline+=%6*
 set statusline+=%2*\ %Y\ %*
 "" }}}
 
