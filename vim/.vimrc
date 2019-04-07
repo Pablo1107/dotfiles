@@ -33,7 +33,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
   Plug 'ludovicchabant/vim-gutentags' " manages your tag files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
+  Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
+  Plug 'neomake/neomake'
 
 
   call plug#end()
@@ -391,10 +393,11 @@ function! CustomStyle() abort " {{{
   hi User2 guifg=#000000 guibg=#00A8C6 " Accent section
   hi User3 guifg=#00A8C6 guibg=#131920 " Non-accent section
 
-  hi User4 guibg=#191f26 guifg=#00A8C6 " Accent arrow to normal background
-  hi User6 guibg=#131920  guifg=#00A8C6 " Accent arrow to non-accent background
+  hi User4 guifg=#00A8C6 guibg=#191f26 " Accent arrow to normal background
+  hi User6 guifg=#00A8C6 guibg=#131920 " Accent arrow to non-accent background
   hi User5 guifg=#131920 guibg=#191f26 " Normal arrow to accent background
   hi User7 guifg=#131920 guibg=#00A8C6  " Non-accent arrow to accent background
+  hi User8 guifg=#131920 guibg=#191f26  " Non-accent arrow to normal background
   hi StatusLine gui=NONE guifg=#FFFFFF guibg=NONE
   hi StatusLineNC gui=reverse guifg=#00A8C6 guibg=#131920
   hi VertSplit guifg=#00A8C6 guibg=#131920
@@ -406,8 +409,8 @@ function! CustomStyle() abort " {{{
 
   " Folds Styling
   highlight FoldColumn  gui=bold    guifg=grey65     guibg=#035C9D
-  highlight Folded      gui=italic  guifg=#03A1C1      guibg=#035C9D
-  "highlight LineNr      gui=NONE    guifg=grey60     guibg=Grey90
+  highlight Folded      gui=italic  guifg=#03A1C1    guibg=#035C9D
+  "highlight LineNr     gui=NONE    guifg=grey60     guibg=Grey90
 
   " Terminal Colors
   let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
@@ -421,27 +424,52 @@ colorscheme freshcut
 
 "" Status Line {{{
 set laststatus=2
-set statusline=
-set statusline+=%2*\ %l
-set statusline+=%2*\ %6*
-set statusline+=%3*\ %c
-set statusline+=%3*\ %7*
-set statusline+=\ %*
-set statusline+=%<
-set statusline+=%2*ৰ
-set statusline+=%2*\ %4*
-set statusline+=\ %1*\ %f\ %*
-set statusline+=%1*\ %m
-set statusline+=%=
-set statusline+=%6*
-set statusline+=%2*\ 
-set statusline+=\ %{fugitive#head()}
-set statusline+=%7*\ 
-set statusline+=%3*\ %-1.(%)
-set statusline+=%3*Tab:\ %{&tabstop}
-set statusline+=%3*\ %-1.(%)
-set statusline+=%6*
-set statusline+=%2*\ %Y\ %*
+
+func! FocusStatusline()
+  let l:focus=''
+  let l:focus.='%2*\ %l'
+  let l:focus.='%2*\ %6*'
+  let l:focus.='%3*\ %c'
+  let l:focus.='%3*\ %7*'
+  let l:focus.='\ %*'
+  let l:focus.='%<'
+  let l:focus.='%2*ৰ'
+  let l:focus.='%2*\ %4*'
+  let l:focus.='\ %1*\ %f\ %*'
+  let l:focus.='%1*\ %m'
+  let l:focus.='%='
+
+  if strlen(fugitive#head())
+    let l:focus.='%6*'
+    let l:focus.='%2*\ '
+    let l:focus.='\ %{fugitive#head()}'
+    let l:focus.='%7*\ '
+  else
+    let l:focus.='%8*\ '
+  endif
+
+  let l:focus.='%3*\ %-1.(%)'
+  let l:focus.='%3*Tab:\ %{&tabstop}'
+  let l:focus.='%3*\ %-1.(%)'
+  let l:focus.='%6*'
+  let l:focus.='%2*\ %Y\ %*'
+  execute 'setlocal statusline='.l:focus
+endfunc
+
+func! BlurStatusline()
+  let l:blur=''
+  let l:blur.='%3*\ %-3.(%)'
+  let l:blur.='\ %1*\ %f\ %*'
+  let l:blur.='%1*\ %m'
+  let l:blur.='%='
+  execute 'setlocal statusline='.l:blur
+endfunc
+
+if has('statusline')
+  autocmd BufEnter,FocusGained,VimEnter,WinEnter * call FocusStatusline()
+  autocmd FocusLost,WinLeave * call BlurStatusline()
+endif
+
 "" }}}
 
 "" Templates {{{
