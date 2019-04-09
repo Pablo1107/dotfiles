@@ -36,6 +36,26 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'neomake/neomake'
+  " prettier {{{
+  Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] } " }}}
 
 
   call plug#end()
@@ -62,8 +82,59 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
                        \ 'syntax': 'markdown', 'ext': '.md'}]
     let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
   " }}}
-  "
+  
   let g:instant_markdown_autostart = 0
+
+  " Prettier {{{
+  " max line length that prettier will wrap on
+  " Prettier default: 80
+  " let g:prettier#config#print_width = 80
+
+  " number of spaces per indentation level
+  " Prettier default: 2
+  " let g:prettier#config#tab_width = 2
+
+  " use tabs over spaces
+  " Prettier default: false
+  " let g:prettier#config#use_tabs = 'false'
+
+  " print semicolons
+  " Prettier default: true
+  let g:prettier#config#semi = 'false'
+
+  " single quotes over double quotes
+  " Prettier default: false
+  let g:prettier#config#single_quote = 'true'
+
+  " print spaces between brackets
+  " Prettier default: true
+  " let g:prettier#config#bracket_spacing = 'true'
+
+  " put > on the last line instead of new line
+  " Prettier default: false
+  " let g:prettier#config#jsx_bracket_same_line = 'true'
+
+  " avoid|always
+  " Prettier default: avoid
+  " let g:prettier#config#arrow_parens = 'always'
+
+  " none|es5|all
+  " Prettier default: none
+  let g:prettier#config#trailing_comma = 'all'
+
+  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
+  " Prettier default: babylon
+  " let g:prettier#config#parser = 'flow'
+
+  " cli-override|file-override|prefer-file
+  " let g:prettier#config#config_precedence = 'prefer-file'
+
+  " always|never|preserve
+  " let g:prettier#config#prose_wrap = 'preserve'
+
+  " css|strict|ignore
+  " let g:prettier#config#html_whitespace_sensitivity = 'css'
+  " }}}
 
   if !has('nvim')
     execute "set <M-p>=\ep"
@@ -415,6 +486,9 @@ function! CustomStyle() abort " {{{
   " Terminal Colors
   let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
   hi Terminal guibg=#002B36
+
+  " Neomake
+  hi SignColumn guifg=#03A1C1 guibg=NONE
 endfunction " }}}
 autocmd ColorScheme * call CustomStyle()
 "source ~/.vim/colors/freshcut.vim
@@ -526,6 +600,7 @@ inoremap {<CR> {<CR>}<Esc>ko
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 nnoremap <Leader><Leader> za
+nmap <Leader>y <Plug>(Prettier)
 nnoremap <C-P> :FZF <Enter>
 nnoremap <M-p> :Ag <Enter>
 set pastetoggle=<F2>
