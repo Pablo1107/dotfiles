@@ -25,7 +25,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Plug 'pangloss/vim-javascript' " Extended VueJS syntax
   Plug 'mxw/vim-jsx', { 'for': 'javascript' } " JSX syntax
   Plug 'roman/golden-ratio' " Makes current split bigger
-  Plug 'junegunn/fzf.vim'
   Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
   Plug 'tomtom/tcomment_vim'
   " Plug 'vimwiki/vimwiki'
@@ -33,6 +32,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
   Plug 'ludovicchabant/vim-gutentags' " manages your tag files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
+  Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'neomake/neomake'
@@ -136,9 +136,17 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " let g:prettier#config#html_whitespace_sensitivity = 'css'
   " }}}
 
+  " Neomake {{{
+    call neomake#configure#automake('nw', 750)
+  " }}}
+
   if !has('nvim')
     execute "set <M-p>=\ep"
   endif
+
+  " fzf customization {{{
+  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  " }
 
 endif
 "" }}}
@@ -601,6 +609,8 @@ nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 nnoremap <Leader><Leader> za
 nmap <Leader>y <Plug>(Prettier)
+nmap <Leader>l :Neomake eslint<CR>
+nmap <Leader>L :NeomakeClean<CR>
 nnoremap <C-P> :FZF <Enter>
 nnoremap <M-p> :Ag <Enter>
 set pastetoggle=<F2>
