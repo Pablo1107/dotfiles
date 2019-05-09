@@ -22,7 +22,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'epilande/vim-react-snippets'
   Plug 'posva/vim-vue', { 'for': 'vue' } " VueJS syntax
   Plug 'junegunn/goyo.vim' " Zen focus
-  " Plug 'pangloss/vim-javascript' " Extended VueJS syntax
+  Plug 'pangloss/vim-javascript' " Improved Javascript indentation and syntax support
   Plug 'mxw/vim-jsx', { 'for': 'javascript' } " JSX syntax
   Plug 'roman/golden-ratio' " Makes current split bigger
   Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
@@ -55,8 +55,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     \ 'python',
     \ 'ruby',
     \ 'html',
-    \ 'swift' ] } " }}}
-
+    \ 'swift' ] }
+  " }}}
+  Plug 'Pablo1107/codi.vim'
 
   call plug#end()
 
@@ -140,6 +141,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     call neomake#configure#automake('nw', 750)
   " }}}
 
+  " fzf {{{
+  augroup fzf
+    autocmd!
+    autocmd FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+    autocmd FileType fzf tnoremap <buffer> <esc> <c-c>
+  augroup END
+  " }}}
+
   if !has('nvim')
     execute "set <M-p>=\ep"
   endif
@@ -151,22 +161,9 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 endif
 "" }}}
 
+" }}}
+
 "" Default vimrc file config {{{
-
-" The default vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2017 Jun 13
-"
-" This is loaded if no vimrc file was found.
-" Except when Vim is run with "-u NONE" or "-C".
-" Individual settings can be reverted with ":set option&".
-" Other commands can be reverted as mentioned below.
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
 
 " Bail out if something that ran earlier, e.g. a system wide vimrc, does not
 " want Vim to use these default values.
@@ -174,28 +171,8 @@ if exists('skip_defaults_vim')
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-" Avoid side effects when it was already reset.
-if &compatible
-  set nocompatible
-endif
-
-" When the +eval feature is missing, the set command above will be skipped.
-" Use a trick to reset compatible only when the +eval feature is missing.
-silent! while 0
-  set nocompatible
-silent! endwhile
-
-" Allow backspacing over everything in insert mode.
-set backspace=indent,eol,start
-
 set history=200		" keep 200 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set wildmenu		" display completion matches in a status line
 
-set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
 " Line numbering
@@ -208,15 +185,6 @@ set display=truncate
 " Show a few lines of context around the cursor.  Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
-
-" Do incremental searching when it's possible to timeout.
-if has('reltime')
-  set incsearch
-endif
-
-" Do not recognize octal numbers for Ctrl-A and Ctrl-X, most users find it
-" confusing.
-set nrformats-=octal
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries.
 if has('win32')
@@ -324,8 +292,10 @@ endif
 if has ('autocmd') " Remain compatible with earlier versions
   " Auto-reload .vimrc on save {{{
   augroup vimrc     " Source vim configuration upon save
-    autocmd! BufWritePost $MYVIMRC,$OGVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
-    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw | call CustomStyle()
+    autocmd BufWritePost $OGVIMRC source % | echom "Reloaded " . $OGVIMRC | redraw | call CustomStyle()
+    autocmd BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
   " }}}
 
@@ -341,6 +311,7 @@ if has ('autocmd') " Remain compatible with earlier versions
 
   " autocmd when saving different files {{{
   augroup SaveFileAnd
+    autocmd!
     autocmd BufWritePost .Xresources silent exec "!xrdb -merge ~/.Xresources" | echom ".Xresources merged"
     autocmd BufWritePost .tmux.conf
       \ if exists('$TMUX') |
@@ -359,8 +330,6 @@ if !isdirectory($HOME."/.vim/undo-dir")
 endif
 set undodir=~/.vim/undo-dir
 set undofile
-"asdas
-"asdasd
 "" }}}
 
 "" Folds {{{
@@ -498,7 +467,10 @@ function! CustomStyle() abort " {{{
   " Neomake
   hi SignColumn guifg=#03A1C1 guibg=NONE
 endfunction " }}}
-autocmd ColorScheme * call CustomStyle()
+augroup Colors
+  autocmd!
+  autocmd ColorScheme * call CustomStyle()
+augroup END
 "source ~/.vim/colors/freshcut.vim
 colorscheme freshcut
 "colorscheme base16-default-dark
