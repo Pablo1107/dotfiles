@@ -539,6 +539,11 @@ augroup templates
   function! SetHTMLTemplate() 
 	  0r ~/.vim/templates/skeleton.html
   endfunction
+" React/Styled-Components file
+  autocmd BufNewFile */Styled/index.js call SetStyledTemplate()
+  function! SetStyledTemplate() 
+	  0r ~/.vim/templates/skeleton.styled
+  endfunction
 augroup END
 "" }}}
 
@@ -577,6 +582,10 @@ hi netrwDir guifg=#00A8C6
 let mapleader = ","
 
 inoremap {<CR> {<CR>}<Esc>ko
+nnoremap <Space>j <C-D>
+nnoremap <Space>k <C-U>
+" nnoremap <Leader>s :%s/\<<c-r><c-w>\>//g<left><left>
+nnoremap <Leader>s :call Styled()<CR>
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 nnoremap <Leader><Leader> za
@@ -597,6 +606,10 @@ func! EnterGoyo()
   hi VertSplit NONE
   Goyo
   set termguicolors
+endfunc
+
+func! Styled()
+  execute "edit " . expand("%:h") . "/components/Styled/index.js"
 endfunc
   
 " Mapping for HTML
