@@ -331,9 +331,29 @@ if has ('autocmd') " Remain compatible with earlier versions
       \ if exists('$TMUX') |
           \ silent exec "!tmux source-file ~/.tmux.conf" | echom "Tmux config file re-sourced" |
       \ endif
+    autocmd BufWritePre *.js,*.jsx,*.ts,*.php :%s/\s\+$//e
+  augroup END
+  " }}}
+
+  " autocmd when opening different files {{{
+  augroup OpenFileAnd
+    autocmd!
+    autocmd BufReadPost *.js,*.jsx,*.ts call map({
+          \ "'r": '\v<render> *(\=)? *\(\) *(\=\>)? *\{',
+          \ "'s": 'this.state.*=.*{',
+          \ }, { mark, pattern ->
+          \   setpos(
+          \     mark,
+          \     extend([expand("<abuf>"), 0],
+          \     searchpos(pattern, 'n'), 1)
+          \   )
+          \ })
   augroup END
   " }}}
 endif " has autocmd
+
+" Read files when change outside vim
+set autoread
 
 " Fix for Browser-Sync
 set backupcopy=yes
