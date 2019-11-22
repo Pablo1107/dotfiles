@@ -616,16 +616,16 @@ hi netrwDir guifg=#00A8C6
 let mapleader = ","
 
 inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
 nnoremap <Space>j <C-D>
 nnoremap <Space>k <C-U>
 " nnoremap <Leader>s :%s/\<<c-r><c-w>\>//g<left><left>
 nnoremap <Leader>s :call Styled()<CR>
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
+inoremap <expr> <Leader>f GlobalLineCompletion()
 nnoremap <Leader><Leader> za
 nmap <Leader>y <Plug>(Prettier)
-nmap <Leader>l :Neomake eslint<CR>
-nmap <Leader>L :NeomakeClean<CR>
 nnoremap <C-P> :FZF <Enter>
 nnoremap <M-p> :Ag <Enter>
 set pastetoggle=<F2>
@@ -642,10 +642,24 @@ func! EnterGoyo()
   set termguicolors
 endfunc
 
+func! GlobalLineCompletion()
+  execute fzf#vim#complete(fzf#wrap({
+    \ 'prefix': '^.*$',
+    \ 'source': 'rg -n ^ --color always',
+    \ 'options': '--ansi --delimiter : --nth 3..',
+    \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') } }))
+  return ''
+endfunc
+
 func! Styled()
   execute "edit " . expand("%:h") . "/components/Styled/index.js"
 endfunc
   
+func! NewComponent(name)
+  execute "edit " . expand("%:h") . "/components/" . a:name . "/index.js"
+endfunc
+
+command! -nargs=* NewComponent :call NewComponent(<q-args>)
 " Mapping for HTML
 autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
