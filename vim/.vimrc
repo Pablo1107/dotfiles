@@ -594,6 +594,7 @@ nnoremap <Space>k <C-U>
 nnoremap <Leader>s :call Styled()<CR>
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader><Leader> za
 nmap <Leader>y <Plug>(Prettier)
 nmap <Leader>l :Neomake eslint<CR>
