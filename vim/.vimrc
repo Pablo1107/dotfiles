@@ -494,6 +494,12 @@ function! CustomStyle() abort " {{{
   highlight Folded      gui=italic  guifg=#03A1C1    guibg=#035C9D
   "highlight LineNr     gui=NONE    guifg=grey60     guibg=Grey90
 
+  " Tabs Bar
+  highlight! link TabLineFill User5
+  highlight! link TabLine User3
+  highlight! link TabLineSel User2
+  highlight! link Title User2
+
   " Terminal Colors
   let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
   hi Terminal guibg=#002B36
@@ -624,6 +630,7 @@ nnoremap <Leader>s :call Styled()<CR>
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
 inoremap <expr> <Leader>f GlobalLineCompletion()
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader><Leader> za
 nmap <Leader>y <Plug>(Prettier)
 nnoremap <C-P> :FZF <Enter>
@@ -652,7 +659,9 @@ func! GlobalLineCompletion()
 endfunc
 
 func! Styled()
-  execute "edit " . expand("%:h") . "/components/Styled/index.js"
+  if &filetype == 'javascript.jsx'
+    execute "edit " . expand("%:h") . "/components/Styled/index.js"
+  endif
 endfunc
   
 func! NewComponent(name)
@@ -680,28 +689,6 @@ if !has('nvim')
 else
   tnoremap <Esc> <C-\><C-n>
 endif
-
-" Maximize Split {{{
-nnoremap <C-W>O :call MaximizeToggle()<CR>
-nnoremap <C-W>o :call MaximizeToggle()<CR>
-nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
-
-function! MaximizeToggle()
-  if exists("s:maximize_session")
-    exec "source " . s:maximize_session
-    call delete(s:maximize_session)
-    unlet s:maximize_session
-    let &hidden=s:maximize_hidden_save
-    unlet s:maximize_hidden_save
-  else
-    let s:maximize_hidden_save = &hidden
-    let s:maximize_session = tempname()
-    set hidden
-    exec "mksession! " . s:maximize_session
-    only
-  endif
-endfunction
-" }}}
 "" }}}
 
 "" Tab Sizing {{{
