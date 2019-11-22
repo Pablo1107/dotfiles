@@ -58,6 +58,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     \ 'swift' ] }
   " }}}
   Plug 'Pablo1107/codi.vim'
+  Plug 'rainglow/vim'
+  Plug 'tpope/vim-repeat'
 
   call plug#end()
 
@@ -117,11 +119,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   " avoid|always
   " Prettier default: avoid
-  " let g:prettier#config#arrow_parens = 'always'
+  let g:prettier#config#arrow_parens = 'always'
 
   " none|es5|all
   " Prettier default: none
-  let g:prettier#config#trailing_comma = 'all'
+  let g:prettier#config#trailing_comma = 'es5'
 
   " flow|babylon|typescript|css|less|scss|json|graphql|markdown
   " Prettier default: babylon
