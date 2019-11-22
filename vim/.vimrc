@@ -616,7 +616,9 @@ func! EnterGoyo()
 endfunc
 
 func! Styled()
-  execute "edit " . expand("%:h") . "/components/Styled/index.js"
+  if &filetype == 'javascript.jsx'
+    execute "edit " . expand("%:h") . "/components/Styled/index.js"
+  endif
 endfunc
   
 " Mapping for HTML
