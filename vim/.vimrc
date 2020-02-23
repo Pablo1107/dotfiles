@@ -58,6 +58,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     \ 'swift' ] }
   " }}}
   Plug 'Pablo1107/codi.vim'
+  Plug 'rainglow/vim'
+  Plug 'tpope/vim-repeat'
 
   call plug#end()
 
@@ -117,11 +119,11 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   " avoid|always
   " Prettier default: avoid
-  " let g:prettier#config#arrow_parens = 'always'
+  let g:prettier#config#arrow_parens = 'always'
 
   " none|es5|all
   " Prettier default: none
-  let g:prettier#config#trailing_comma = 'all'
+  let g:prettier#config#trailing_comma = 'es5'
 
   " flow|babylon|typescript|css|less|scss|json|graphql|markdown
   " Prettier default: babylon
@@ -142,6 +144,18 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " }}}
 
   " fzf {{{
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
+
+  let g:fzf_action = {
+    \ 'ctrl-q': function('s:build_quickfix_list'),
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
+
   augroup fzf
     autocmd!
     autocmd FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
@@ -317,6 +331,23 @@ if has ('autocmd') " Remain compatible with earlier versions
       \ if exists('$TMUX') |
           \ silent exec "!tmux source-file ~/.tmux.conf" | echom "Tmux config file re-sourced" |
       \ endif
+    autocmd BufWritePre *.js,*.jsx,*.ts,*.php :%s/\s\+$//e
+  augroup END
+  " }}}
+
+  " autocmd when opening different files {{{
+  augroup OpenFileAnd
+    autocmd!
+    autocmd BufReadPost *.js,*.jsx,*.ts call map({
+          \ "'r": '\v<render> *(\=)? *\(\) *(\=\>)? *\{',
+          \ "'s": 'this.state.*=.*{',
+          \ }, { mark, pattern ->
+          \   setpos(
+          \     mark,
+          \     extend([expand("<abuf>"), 0],
+          \     searchpos(pattern, 'n'), 1)
+          \   )
+          \ })
   augroup END
   " }}}
 
@@ -330,6 +361,9 @@ if has ('autocmd') " Remain compatible with earlier versions
   augroup END
   " }}}
 endif " has autocmd
+
+" Read files when change outside vim
+set autoread
 
 " Fix for Browser-Sync
 set backupcopy=yes
@@ -616,17 +650,17 @@ hi netrwDir guifg=#00A8C6
 let mapleader = ","
 
 inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
 nnoremap <Space>j <C-D>
 nnoremap <Space>k <C-U>
 " nnoremap <Leader>s :%s/\<<c-r><c-w>\>//g<left><left>
 nnoremap <Leader>s :call Styled()<CR>
 nnoremap <Leader>p <C-^>
 nnoremap <Leader>f :call ToggleNetrw()<CR>
+inoremap <expr> <Leader>f GlobalLineCompletion()
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader><Leader> za
 nmap <Leader>y <Plug>(Prettier)
-nmap <Leader>l :Neomake eslint<CR>
-nmap <Leader>L :NeomakeClean<CR>
 nnoremap <C-P> :FZF <Enter>
 nnoremap <M-p> :Ag <Enter>
 set pastetoggle=<F2>
@@ -643,12 +677,26 @@ func! EnterGoyo()
   set termguicolors
 endfunc
 
+func! GlobalLineCompletion()
+  execute fzf#vim#complete(fzf#wrap({
+    \ 'prefix': '^.*$',
+    \ 'source': 'rg -n ^ --color always',
+    \ 'options': '--ansi --delimiter : --nth 3..',
+    \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') } }))
+  return ''
+endfunc
+
 func! Styled()
   if &filetype == 'javascript.jsx'
     execute "edit " . expand("%:h") . "/components/Styled/index.js"
   endif
 endfunc
   
+func! NewComponent(name)
+  execute "edit " . expand("%:h") . "/components/" . a:name . "/index.js"
+endfunc
+
+command! -nargs=* NewComponent :call NewComponent(<q-args>)
 " Mapping for HTML
 autocmd BufRead,BufNewFile *.blade.php set filetype=html
 "autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
