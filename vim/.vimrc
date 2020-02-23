@@ -319,6 +319,16 @@ if has ('autocmd') " Remain compatible with earlier versions
       \ endif
   augroup END
   " }}}
+
+  " Terminal Settings {{{
+  augroup TerminalSettings
+    autocmd!
+    autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+    autocmd TermOpen * startinsert
+    autocmd BufEnter,BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+  augroup END
+  " }}}
 endif " has autocmd
 
 " Fix for Browser-Sync
@@ -467,7 +477,25 @@ function! CustomStyle() abort " {{{
   highlight! link Title User2
 
   " Terminal Colors
-  let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
+  if has('nvim')
+    let g:terminal_color_0  = '#1B2B34'
+    let g:terminal_color_1  = '#EC5f67'
+    let g:terminal_color_2  = '#99C794'
+    let g:terminal_color_3  = '#FAC863'
+    let g:terminal_color_4  = '#6699CC'
+    let g:terminal_color_5  = '#C594C5'
+    let g:terminal_color_6  = '#5FB3B3'
+    let g:terminal_color_7  = '#C0C5CE'
+    let g:terminal_color_8  = '#65737E'
+    let g:terminal_color_9  = '#EC5f67'
+    let g:terminal_color_10 = '#99C794'
+    let g:terminal_color_11 = '#FAC863'
+    let g:terminal_color_12 = '#6699CC'
+    let g:terminal_color_13 = '#C594C5'
+    let g:terminal_color_14 = '#5FB3B3'
+    let g:terminal_color_15 = '#D8DEE9'
+  endif
+  " let g:terminal_ansi_colors = ['#1B2B34', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#C0C5CE', '#65737E', '#EC5f67', '#99C794', '#FAC863', '#6699CC', '#C594C5', '#5FB3B3', '#D8DEE9'] 
   hi Terminal guibg=#002B36
 
   " Neomake
@@ -674,9 +702,10 @@ if match(&rtp, 'vim-tmux-navigator') == -1
   map <C-l> <C-w>l
 endif
 if match(&rtp, 'vim-tmux-navigator') != -1
-  tnoremap <silent> <C-h> <C-W>:TmuxNavigateLeft<CR>
-  tnoremap <silent> <C-j> <C-W>:TmuxNavigateDown<CR>
-  tnoremap <silent> <C-k> <C-W>:TmuxNavigateUp<CR>
-  tnoremap <silent> <C-l> <C-W>:TmuxNavigateRight<CR>
+  tnoremap <silent> <C-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+  tnoremap <silent> <C-j> <C-\><C-n>:TmuxNavigateDown<CR>
+  tnoremap <silent> <C-k> <C-\><C-n>:TmuxNavigateUp<CR>
+  tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<CR>
+  tnoremap <silent> <C-w> <C-\><C-n><C-w>
 endif
 "" }}}
