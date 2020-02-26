@@ -30,7 +30,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " Plug 'vimwiki/vimwiki'
   " Plug 'suan/vim-instant-markdown' " Live preview vimwiki notes
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
-  Plug 'ludovicchabant/vim-gutentags' " manages your tag files
+  " Plug 'ludovicchabant/vim-gutentags' " manages your tag files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-surround'
@@ -60,10 +60,27 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'Pablo1107/codi.vim'
   Plug 'rainglow/vim'
   Plug 'tpope/vim-repeat'
+  if has('nvim')
+    Plug 'neoclide/jsonc.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  endif
 
   call plug#end()
 
   " Configuration
+
+  " coc.nvim {{{
+  if match(&rtp, 'coc.nvim') != -1
+    let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ ]
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <silent><expr> <C-n>
+      \ pumvisible() ? "\<C-n>" :
+      \ coc#refresh()
+    nmap gd <Plug>(coc-definition)
+  endif
+  " }}}
 
   " UltiSnips {{{
   " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.

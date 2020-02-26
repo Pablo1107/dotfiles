@@ -1,0 +1,9 @@
+{
+  /* "suggest.autoTrigger": "trigger", */
+  "suggest.noselect": false,
+  "suggest.timeout": 500,
+  "suggest.snippetIndicator": " ►",
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "phpls.enable": false,
+}
