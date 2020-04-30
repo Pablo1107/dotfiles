@@ -33,7 +33,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'ludovicchabant/vim-gutentags' " manages your tag files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " A command-line fuzzy finder 
   Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-surround'
+  Plug 'machakann/vim-sandwich'
   Plug 'tpope/vim-fugitive'
   Plug 'neomake/neomake'
   " prettier {{{
@@ -59,11 +59,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " }}}
   Plug 'Pablo1107/codi.vim'
   Plug 'rainglow/vim'
-  Plug 'tpope/vim-repeat'
+  Plug 'vifm/vifm.vim'
+  Plug 'ap/vim-css-color'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
   call plug#end()
 
   " Configuration
+
+  runtime macros/sandwich/keymap/surround.vim
 
   " UltiSnips {{{
   " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -352,13 +356,15 @@ if has ('autocmd') " Remain compatible with earlier versions
   " }}}
 
   " Terminal Settings {{{
-  augroup TerminalSettings
-    autocmd!
-    autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-    autocmd TermOpen * startinsert
-    autocmd BufEnter,BufWinEnter,WinEnter term://* startinsert
-    autocmd BufLeave term://* stopinsert
-  augroup END
+  if has('nvim')
+    augroup TerminalSettings
+      autocmd!
+      autocmd TermOpen * setlocal listchars= nonumber norelativenumber
+      autocmd TermOpen * startinsert
+      autocmd BufEnter,BufWinEnter,WinEnter term://* startinsert
+      autocmd BufLeave term://* stopinsert
+    augroup END
+  endif
   " }}}
 endif " has autocmd
 
@@ -715,6 +721,8 @@ if !has('nvim')
   set timeout timeoutlen=1000  " Default
   set ttimeout ttimeoutlen=100  " Set by defaults.vim
 else
+  tnoremap <M-k> <Up>
+  tnoremap <M-j> <Down>
   tnoremap <Esc> <C-\><C-n>
 endif
 "" }}}
@@ -739,6 +747,7 @@ autocmd FileType css call SetTabSize(2)
 autocmd FileType javascript call SetTabSize(2) 
 autocmd FileType php call SetTabSize(4) 
 autocmd FileType lua call SetTabSize(4) 
+autocmd FileType java call SetTabSize(4) 
 "" }}}
 
 "" Splits {{{
