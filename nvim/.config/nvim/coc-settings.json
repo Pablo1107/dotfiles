@@ -1,9 +1,15 @@
 {
-  /* "suggest.autoTrigger": "trigger", */
+  /* "suggest.autoTrigger": "none", */
   "suggest.noselect": false,
+  /* "suggest.keepCompleteopt": true, */
   "suggest.timeout": 500,
   "suggest.snippetIndicator": " ►",
   "typescript.validate.enable": false,
   "javascript.validate.enable": false,
-  "phpls.enable": false,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": false,
+  "phpls.enable": true,
+  "phpls.validate.enable": false
 }

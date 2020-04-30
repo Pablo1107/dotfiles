@@ -73,12 +73,16 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   if match(&rtp, 'coc.nvim') != -1
     let g:coc_global_extensions = [
       \ 'coc-tsserver',
+      \ 'coc-phpls',
+      \ 'coc-prettier',
       \ ]
+    command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     inoremap <silent><expr> <C-n>
       \ pumvisible() ? "\<C-n>" :
       \ coc#refresh()
-    nmap gd <Plug>(coc-definition)
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gp <Plug>(coc-format)
   endif
   " }}}
 
