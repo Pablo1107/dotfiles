@@ -16,7 +16,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 else
   call plug#begin('~/.config/nvim/plugged')
 
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
   Plug 'tomtom/tcomment_vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
@@ -27,21 +27,32 @@ else
   Plug 'machakann/vim-sandwich'
   Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
   " Plug 'roman/golden-ratio' " Makes current split bigger
-  Plug 'lervag/vimtex'
-  Plug 'vimwiki/vimwiki'
-  Plug 'nathangrigg/vim-beancount'
-  Plug 'Pablo1107/codi.vim'
+  " Plug 'lervag/vimtex'
+  " Plug 'vimwiki/vimwiki'
+  " Plug 'nathangrigg/vim-beancount'
+  " Plug 'Pablo1107/codi.vim'
   Plug 'ap/vim-css-color'
   " coc.nvim
   Plug 'neoclide/jsonc.vim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'epilande/vim-react-snippets'
-  Plug 'tpope/vim-dispatch'
-  Plug 'ghifarit53/tokyonight.vim'
-  Plug 'Pablo1107/codi.vim'
-  Plug 'arecarn/vim-crunch'
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'SirVer/ultisnips'
+  " Plug 'honza/vim-snippets'
+  " Plug 'epilande/vim-react-snippets'
+  " Plug 'tpope/vim-dispatch'
+  Plug 'ghifarit53/tokyonight-vim'
+  " Plug 'folke/tokyonight.nvim'
+  " Plug 'Pablo1107/codi.vim'
+  " Plug 'arecarn/vim-crunch'
+
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
+  Plug 'RishabhRD/nvim-lsputils'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  " Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', { 'branch': 'main' }
+  " Plug 'prettier/vim-prettier', {
+  " \ 'do': 'yarn install',
+  " \ 'branch': 'release/0.x'
+  " \ }
 
   call plug#end()
 
@@ -110,13 +121,13 @@ if plugin_on
     let g:tex_conceal='abdmg'
   endif
 
-  if match(&rtp, 'coc.nvim') != -1
-    let g:coc_global_extensions = [
-    \ 'coc-tsserver',
-    \ 'coc-json',
-    \ 'coc-ultisnips',
-    \]
-  endif
+  " if match(&rtp, 'coc.nvim') != -1
+  "   let g:coc_global_extensions = [
+  "   \ 'coc-tsserver',
+  "   \ 'coc-json',
+  "   \ 'coc-ultisnips',
+  "   \]
+  " endif
 
   if match(&rtp, 'ultisnips') != -1
     " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -218,6 +229,7 @@ if has ('autocmd')
     autocmd!
     autocmd BufWritePost *.rasi silent exec "!rofi -show drun -theme desktop"
     autocmd BufWritePre *.js,*.jsx,*.ts,*.php :%s/\s\+$//e
+    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx lua vim.lsp.buf.formatting_sync(nil, 160)
   augroup END
 
   augroup OpenFileAnd
@@ -308,6 +320,53 @@ if plugin_on
     nnoremap <silent> gp <Plug>(coc-format)
   endif
 
+  if match(&rtp, 'nvim-lspconfig') != -1
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
+    " nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+    nnoremap <silent> ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+  endif
+
+  if match(&rtp, 'nvim-compe') != -1
+    let g:compe = {}
+    let g:compe.enabled = v:true
+    let g:compe.autocomplete = v:true
+    let g:compe.debug = v:false
+    let g:compe.min_length = 1
+    let g:compe.preselect = 'enable'
+    let g:compe.throttle_time = 80
+    let g:compe.source_timeout = 200
+    let g:compe.incomplete_delay = 400
+    let g:compe.max_abbr_width = 100
+    let g:compe.max_kind_width = 100
+    let g:compe.max_menu_width = 100
+    let g:compe.documentation = v:true
+
+    let g:compe.source = {}
+    let g:compe.source.path = v:true
+    let g:compe.source.buffer = v:true
+    let g:compe.source.nvim_lsp = v:true
+    let g:compe.source.nvim_lua = v:true
+    let g:compe.source.luasnip = v:false
+    let g:compe.source.vsnip = v:false
+    let g:compe.source.emoji = v:false
+    let g:compe.source.calc = v:false
+    let g:compe.source.tags = v:false
+    let g:compe.source.snippets_nvim = v:false
+    let g:compe.source.nvim_treesitter = v:false
+    set completeopt=menuone,noselect
+    inoremap <silent><expr> <CR> compe#confirm('<CR>')
+  endif
+
   if match(&rtp, 'vifm.vim') != -1
     nnoremap <Leader>f :let g:vifm_embed_split = 1\|vertical topleft 40Vifm\|let g:vifm_embed_split = 0<CR>
     nnoremap <Leader>F :Vifm<CR>
@@ -333,7 +392,6 @@ inoremap <C-U> <C-G>u<C-U>
 
 inoremap {<CR> {<CR>}<Esc>ko
 inoremap [<CR> [<CR>]<Esc>ko
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -420,4 +478,16 @@ function! FileTypeMappings()
 endfunction
 command! -nargs=* FileTypeMappings call FileTypeMappings()
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" luafile ~/.config/nvim/lua/lsp.lua
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+"   -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
+"   highlight = {
+"     enable = true,              -- false will disable the whole extension
+"     -- disable = { "c", "rust" },  -- list of language that will be disabled
+"   },
+" }
+" EOF
