@@ -1475,3 +1475,8 @@ spacer {
 
 /* Remove white border in sidebar */
 vbox#sidebar-box.chromeclass-extrachrome { border-style: none !important; } 
+
+/* fix for urlbar bottom */
+.panel-viewstack {
+  max-height: 1000px !important;
+}
