@@ -82,14 +82,16 @@ in {
     element-desktop
     gimp
     gnome3.nautilus
-    texlive.combined.scheme-full
-    anki
+    #texlive.combined.scheme-full
+    #anki
+    slack
 
     # Wayland
     xsettingsd
     waybar
     wl-clipboard
     qt5.qtwayland
+    xdg-utils
     
     # Python
     python.pkgs.pip
@@ -102,6 +104,7 @@ in {
     (yarn.override { nodejs = nodejs-12_x; })
     nodejs
     deno
+    nur.repos.crazazy.efm-langserver
 
     # Fonts
     hack-font
