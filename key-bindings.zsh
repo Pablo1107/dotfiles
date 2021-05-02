@@ -1,6 +1,5 @@
 bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
-bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
 
 # [Alt-j] [Alt-k]
 autoload -U up-line-or-beginning-search
