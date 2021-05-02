@@ -16,7 +16,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 else
   call plug#begin('~/.config/nvim/plugged')
 
-  " Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
   Plug 'tomtom/tcomment_vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
@@ -46,6 +46,7 @@ else
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
+  Plug 'RishabhRD/popfix'
   Plug 'RishabhRD/nvim-lsputils'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   " Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', { 'branch': 'main' }
@@ -229,7 +230,7 @@ if has ('autocmd')
     autocmd!
     autocmd BufWritePost *.rasi silent exec "!rofi -show drun -theme desktop"
     autocmd BufWritePre *.js,*.jsx,*.ts,*.php :%s/\s\+$//e
-    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx lua vim.lsp.buf.formatting_sync(nil, 160)
+    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.nix lua vim.lsp.buf.formatting_sync(nil, 160)
   augroup END
 
   augroup OpenFileAnd
@@ -398,6 +399,26 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 nnoremap sr :%s/\<<C-r><C-w>\>//g<Left><Left>
+noremap <silent><m-1> :tabn 1<cr>
+noremap <silent><m-2> :tabn 2<cr>
+noremap <silent><m-3> :tabn 3<cr>
+noremap <silent><m-4> :tabn 4<cr>
+noremap <silent><m-5> :tabn 5<cr>
+noremap <silent><m-6> :tabn 6<cr>
+noremap <silent><m-7> :tabn 7<cr>
+noremap <silent><m-8> :tabn 8<cr>
+noremap <silent><m-9> :tabn 9<cr>
+noremap <silent><m-0> :tabn 10<cr>
+inoremap <silent><m-1> <ESC>:tabn 1<cr>
+inoremap <silent><m-2> <ESC>:tabn 2<cr>
+inoremap <silent><m-3> <ESC>:tabn 3<cr>
+inoremap <silent><m-4> <ESC>:tabn 4<cr>
+inoremap <silent><m-5> <ESC>:tabn 5<cr>
+inoremap <silent><m-6> <ESC>:tabn 6<cr>
+inoremap <silent><m-7> <ESC>:tabn 7<cr>
+inoremap <silent><m-8> <ESC>:tabn 8<cr>
+inoremap <silent><m-9> <ESC>:tabn 9<cr>
+inoremap <silent><m-0> <ESC>:tabn 10<cr>
 
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
@@ -479,15 +500,15 @@ endfunction
 command! -nargs=* FileTypeMappings call FileTypeMappings()
 
 " command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" luafile ~/.config/nvim/lua/lsp.lua
+luafile ~/.config/nvim/lua/lsp.lua
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-"   -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
-"   highlight = {
-"     enable = true,              -- false will disable the whole extension
-"     -- disable = { "c", "rust" },  -- list of language that will be disabled
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "nix" },  -- list of language that will be disabled
+  },
+}
+EOF
