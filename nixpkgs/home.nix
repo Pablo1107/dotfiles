@@ -33,22 +33,41 @@ let
     LESSHISTFILE = "-";
     #GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
 
-    PATH = "$HOME/scripts:$HOME/.local/bin/:$PATH";
+    NPM_PACKAGES = "$HOME/.npm-packages";
+    PATH = "$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$PATH";
+    MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/tmux/scripts";
     MOZ_ENABLE_WAYLAND = 1;
     MOZ_DBUS_REMOTE = 1;
 
-    ROFI_FB_GENERIC_FO="xdg-open";
-    ROFI_FB_PREV_LOC_FILE="~/.local/share/rofi/rofi_fb_prevloc";
-    ROFI_FB_HISTORY_FILE="~/.local/share/rofi/rofi_fb_history ";
-    ROFI_FB_START_DIR="$HOME";
+    ROFI_FB_GENERIC_FO = "xdg-open";
+    ROFI_FB_PREV_LOC_FILE = "~/.local/share/rofi/rofi_fb_prevloc";
+    ROFI_FB_HISTORY_FILE = "~/.local/share/rofi/rofi_fb_history ";
+    ROFI_FB_START_DIR = "$HOME";
 
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
   };
 
-  keyBindings = builtins.readFile ~/dotfiles/zsh/key-bindings.zsh;
-in {
+  getDotfile = with builtins; ref: path:
+    let
+      localPath = ~/dotfiles + "/${ref}/${path}";
+    in
+      if pathExists localPath then
+        readFile localPath
+      else
+        let
+          dotfiles = fetchGit {
+            url = "https://github.com/Pablo1107/dotfiles";
+            name = "dotfiles-${ref}";
+            ref = ref;
+          };
+        in
+          readFile (dotfiles.outPath + "/${path}");
+
+  keyBindings = getDotfile "zsh" "key-bindings.zsh";
+in
+{
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -72,7 +91,8 @@ in {
     fd
     ag
     tmuxinator
-    xclip xsel
+    xclip
+    xsel
     grim
     slurp
     jq
@@ -92,10 +112,10 @@ in {
     wl-clipboard
     qt5.qtwayland
     xdg-utils
-    
+
     # Python
     python.pkgs.pip
-    (python38.withPackages(ps: with ps; [ tkinter setuptools pip wheel pynvim ]))
+    (python38.withPackages (ps: with ps; [ tkinter setuptools pip wheel pynvim ]))
 
     chromium
     awscli2
@@ -119,6 +139,9 @@ in {
 
     insomnia
     postman
+
+    # LSP
+    rnix-lsp
   ];
 
   # home.file.".config/vifm/colors/solarized-dark.vifm".text = builtins.readFile ~/dotfiles/vifm/colors/solarized-dark.vifm;
@@ -128,13 +151,13 @@ in {
     userDirs = {
       enable = true;
       desktop = "\$HOME/desktop";
-      documents="\$HOME/docs";
-      download="\$HOME/downloads";
-      music="\$HOME/music";
-      pictures="\$HOME/pictures";
-      videos="\$HOME/videos";
-      publicShare="\$HOME/desktop/public";
-      templates="\$HOME/desktop/templates";
+      documents = "\$HOME/docs";
+      download = "\$HOME/downloads";
+      music = "\$HOME/music";
+      pictures = "\$HOME/pictures";
+      videos = "\$HOME/videos";
+      publicShare = "\$HOME/desktop/public";
+      templates = "\$HOME/desktop/templates";
     };
   };
   qt = {
@@ -157,33 +180,33 @@ in {
         gtk-xft-hintstyle = "hintmedium";
       };
     in
-  {
-    enable = true;
-    theme = {
-      package = arc-theme;
-      name = "Arc-Dark";
-    };
-    iconTheme = {
-      name = "Adwaita";
-    };
-    font = {
-      name = "Sans 10";
-    };
-    gtk2.extraConfig = ''
-        gtk-cursor-theme-name="${extraConfig.gtk-cursor-theme-name}"
-        gtk-cursor-theme-size=${toString extraConfig.gtk-cursor-theme-size}
-        gtk-toolbar-style=${extraConfig.gtk-toolbar-style};
-        gtk-toolbar-icon-size=${extraConfig.gtk-toolbar-icon-size};
-        gtk-button-images=${toString extraConfig.gtk-button-images}
-        gtk-menu-images=${toString extraConfig.gtk-menu-images}
-        gtk-enable-event-sounds=${toString extraConfig.gtk-enable-event-sounds}
-        gtk-enable-input-feedback-sounds=${toString extraConfig.gtk-enable-input-feedback-sounds}
-        gtk-xft-antialias=${toString extraConfig.gtk-xft-antialias}
-        gtk-xft-hinting=${toString extraConfig.gtk-xft-hinting}
-        gtk-xft-hintstyle="${extraConfig.gtk-xft-hintstyle}"
-    '';
-    gtk3.extraConfig = extraConfig;
-  };
+      {
+        enable = true;
+        theme = {
+          package = arc-theme;
+          name = "Arc-Dark";
+        };
+        iconTheme = {
+          name = "Adwaita";
+        };
+        font = {
+          name = "Sans 10";
+        };
+        gtk2.extraConfig = ''
+          gtk-cursor-theme-name="${extraConfig.gtk-cursor-theme-name}"
+          gtk-cursor-theme-size=${toString extraConfig.gtk-cursor-theme-size}
+          gtk-toolbar-style=${extraConfig.gtk-toolbar-style};
+          gtk-toolbar-icon-size=${extraConfig.gtk-toolbar-icon-size};
+          gtk-button-images=${toString extraConfig.gtk-button-images}
+          gtk-menu-images=${toString extraConfig.gtk-menu-images}
+          gtk-enable-event-sounds=${toString extraConfig.gtk-enable-event-sounds}
+          gtk-enable-input-feedback-sounds=${toString extraConfig.gtk-enable-input-feedback-sounds}
+          gtk-xft-antialias=${toString extraConfig.gtk-xft-antialias}
+          gtk-xft-hinting=${toString extraConfig.gtk-xft-hinting}
+          gtk-xft-hintstyle="${extraConfig.gtk-xft-hintstyle}"
+        '';
+        gtk3.extraConfig = extraConfig;
+      };
   dconf = {
     enable = true;
     # settings = {
@@ -192,40 +215,41 @@ in {
     #   };
     # };
   };
-  pam.sessionVariables = sessionVariables;
   programs = {
     firefox = {
-        enable = true;
-        package = firefox-wayland;
-        profiles =
-          let
-            defaultSettings = {
-              "browser.aboutConfig.showWarning" = false;
-              "browser.startup.page" = 3;
-              "browser.tabs.insertAfterCurrent" = true;
-              "browser.tabs.tabMinWidth" = 200;
-              "browser.uidensity" = 1;
-              "devtools.theme" = "dark";
-              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-              "ui.systemUsesDarkTheme" = 1;
-            };
-          in
+      enable = true;
+      package = firefox-wayland;
+      profiles =
+        let
+          defaultSettings = {
+            "browser.aboutConfig.showWarning" = false;
+            "browser.startup.page" = 3;
+            "browser.tabs.insertAfterCurrent" = true;
+            "browser.tabs.tabMinWidth" = 200;
+            "browser.uidensity" = 1;
+            "devtools.theme" = "dark";
+            "gfx.webrender.all" = true;
+            "gfx.webrender.enabled" = true;
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "ui.systemUsesDarkTheme" = 1;
+          };
+        in
           {
             pablo = {
               id = 0;
               settings = defaultSettings;
-              userChrome = builtins.readFile ~/dotfiles/firefox/chrome/userChrome.css;
-              userContent = builtins.readFile ~/dotfiles/firefox/chrome/userContent.css;
+              userChrome = getDotfile "firefox" "chrome/userChrome.css";
+              userContent = getDotfile "firefox" "chrome/userContent.css";
             };
           };
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-          privacy-badger
-          multi-account-containers
-          https-everywhere
-          darkreader
-        ];
-      };
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        privacy-badger
+        multi-account-containers
+        https-everywhere
+        darkreader
+      ];
+    };
 
     git = {
       enable = true;
@@ -251,13 +275,6 @@ in {
         prompt pure
 
         eval "$(${pkgs.z-lua}/bin/z --init zsh)"
-
-        export PATH=$PATH:~/.local/bin
-
-        # npm
-        NPM_PACKAGES="$HOME/.npm-packages"
-        export PATH="$PATH:$NPM_PACKAGES/bin"
-        export MANPATH="''${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
       '';
 
       loginExtra = ''
@@ -272,12 +289,12 @@ in {
         . /etc/profile
       '';
 
-      sessionVariables = sessionVariables;
+      # sessionVariables = sessionVariables;
     };
 
     bash = {
       enable = true;
-      sessionVariables = sessionVariables;
+      # sessionVariables = sessionVariables;
       shellAliases = shellAliases;
     };
 
@@ -297,12 +314,12 @@ in {
     command-not-found.enable = true;
     tmux = {
       enable = true;
-      extraConfig = builtins.readFile ~/dotfiles/tmux/.tmux.conf;
+      extraConfig = getDotfile "tmux" ".tmux.conf";
     };
 
     rofi = {
       enable = true;
-      package =  nur.repos.metadark.rofi-wayland;
+      package = nur.repos.metadark.rofi-wayland;
       extraConfig = {
         modi = "run,ssh,drun";
         kb-row-up = "Up,Alt+k,Shift+Tab,Shift+ISO_Left_Tab";
