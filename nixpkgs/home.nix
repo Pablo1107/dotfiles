@@ -15,6 +15,7 @@ let
     mux = "tmuxinator";
     "," = "NIX_AUTO_RUN=1 ";
     pacman = "aura";
+    ssh = "TERM=xterm-256color ssh ";
   };
 
   sessionVariables = {
@@ -105,6 +106,8 @@ in
     #texlive.combined.scheme-full
     #anki
     slack
+    hledger
+    tealdeer
 
     # Wayland
     xsettingsd
@@ -315,6 +318,18 @@ in
     tmux = {
       enable = true;
       extraConfig = getDotfile "tmux" ".tmux.conf";
+    };
+    htop = {
+      enable = true;
+      hideThreads = true;
+      hideUserlandThreads = true;
+      showCpuUsage = true;
+      showProgramPath = false;
+      vimMode = true;
+      meters = {
+        left = [ "LeftCPUs2" "Memory" "Swap" ];
+        right = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
+      };
     };
 
     rofi = {
