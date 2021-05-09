@@ -185,9 +185,9 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
 #
     bindsym XF86MonBrightnessUp exec brillo -A 5 -q
     bindsym XF86MonBrightnessDown exec brillo -U 5 -q
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym Print exec wl-screenshot region
     bindsym Ctrl+Print exec wl-screenshot 
     bindsym Shift+Print exec wl-screenshot window
@@ -269,4 +269,4 @@ for_window [title="Firefox — Sharing Indicator"] {
   focus_follows_mouse no
 }
 
-no_focus [title="Firefox — Sharing Indicator"]
+# no_focus [title="Firefox — Sharing Indicator"]
