@@ -1,5 +1,6 @@
 bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
+bindkey -M vicmd "^[[3~" delete-char
 
 # [Alt-j] [Alt-k]
 autoload -U up-line-or-beginning-search
@@ -28,13 +29,7 @@ bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
-if [[ "''${terminfo[kdch1]}" != "" ]]; then
-  bindkey "''${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
-else
-  bindkey "^[[3~" delete-char
-  bindkey "^[3;5~" delete-char
-  bindkey "\e[3~" delete-char
-fi
+bindkey "^[[3~" delete-char
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
