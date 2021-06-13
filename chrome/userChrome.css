@@ -1300,6 +1300,8 @@ source: https://gist.github.com/Arty2/e6e61801531ec5ee1f9f
   --toolbar-bgimage: none !important;
   --base_color3: #4b4757 !important;
   --base_color4: #007CA6 !important;
+  --autocomplete-popup-highlight-background: var(--base_color4) !important;
+  --proton-tab-block-margin: 0 !important;
 }
 
 .titlebar-spacer[type="pre-tabs"] {
@@ -1479,4 +1481,9 @@ vbox#sidebar-box.chromeclass-extrachrome { border-style: none !important; }
 /* fix for urlbar bottom */
 .panel-viewstack {
   max-height: 1000px !important;
+}
+
+/* fix for tabs too high */
+#tabbrowser-tabs {
+  height: 30px;
 }
