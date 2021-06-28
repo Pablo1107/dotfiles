@@ -12,17 +12,11 @@ configuration {
 }
 
 * {
-	/* background-color:            #080808; */
-	/* text-color:                  #d3d7cf; */
-	/* selbg:                       #215d9c; */
-	/* actbg:                       #262626; */
-	/* urgbg:                       #e53935; */
-	/* winbg:			     #26c6da; */
-	background-color:            #25252D;
+  background-color:            rgba(0,0,0,0.7);
 	text-color:                  #FAFAFA;
   selbg:                       #FAFAFA;
   actbg:                       #007CA6;
-	urgbg:                       #e53935;
+	urgbg:                       #E53935;
 	winbg:			                 #FAFAFA;
   entrybg:                     #007CA6;
 
@@ -56,6 +50,9 @@ window {
 	width:		 22%;
 	orientation: horizontal;
 	children:	 [mainbox];
+  margin: 5px;
+	border:           1px solid;
+	border-color:	    @entrybg;
 }
 
 mainbox {
@@ -68,11 +65,6 @@ button { padding: 5px 2px; }
 button selected {
 	background-color: @active-background;
 	text-color:       @background-color;
-}
-
-inputbar {
-	padding: 5px;
-	spacing: 5px;
 }
 
 listview {
@@ -90,7 +82,7 @@ element-icon {
 
 entry {
 	expand:         false;
-  font: "Hack 8";
+  /* font: "Hack 8"; */
 	background-color: @entrybg;
 	text-color:       @normal-foreground;
 	vertical-align:   1;
