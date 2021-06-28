@@ -10,7 +10,9 @@ autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 bindkey '^[k' up-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[j' down-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
 bindkey '^[h' backward-char
 bindkey '^[l' forward-char
 
@@ -26,7 +28,9 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey ' ' magic-space                               # [Space] - do history expansion
 
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
+bindkey -a '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
+bindkey -a '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
 bindkey "^[[3~" delete-char
