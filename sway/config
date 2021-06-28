@@ -25,7 +25,8 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg "#000000" solid_color
+# output * bg "#000000" solid_color
+output * bg ~/pictures/abstract.jpg fill
 #
 # Example configuration:
 #
@@ -138,6 +139,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    bindsym $mod+Tab workspace back_and_forth
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -241,6 +243,7 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 # exec_always xsettingsd
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec_always killall .waybar-wrapped ; sleep 1 && waybar
 exec_always ~/.config/sway/import-gsettings
 # bar {
@@ -269,4 +272,13 @@ for_window [title="Firefox — Sharing Indicator"] {
   focus_follows_mouse no
 }
 
+# gaps
+# gaps outer 0
+gaps inner 4
+
 # no_focus [title="Firefox — Sharing Indicator"]
+
+for_window [app_id="org.gnome.Nautilus"] {
+  floating enable,
+  sticky enable,
+}
