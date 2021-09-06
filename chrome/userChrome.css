@@ -1487,3 +1487,22 @@ vbox#sidebar-box.chromeclass-extrachrome { border-style: none !important; }
 #tabbrowser-tabs {
   height: 30px;
 }
+
+.tab-background {
+  margin: 0 !important;
+}
+
+.tabbrowser-tab:not(:last-child) {
+  padding-right: 0 !important;
+}
+
+#scrollbutton-up,
+#scrollbutton-down {
+  padding: 0 !important;
+}
+
+#notification-popup {
+  position: fixed !important;
+  top: 35px !important;
+  right: 15px !important;
+}
