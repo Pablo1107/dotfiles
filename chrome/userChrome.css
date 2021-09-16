@@ -1302,6 +1302,7 @@ source: https://gist.github.com/Arty2/e6e61801531ec5ee1f9f
   --base_color4: #007CA6 !important;
   --autocomplete-popup-highlight-background: var(--base_color4) !important;
   --proton-tab-block-margin: 0 !important;
+  --tabbar-height: 36px !important;
 }
 
 .titlebar-spacer[type="pre-tabs"] {
@@ -1319,7 +1320,7 @@ html[sizemode="normal"] {
 /* bring the browser window to the top */
 html:not([inFullscreen]) #browser {
 	-moz-box-ordinal-group: 0 !important;
-	padding-top: 31px;
+	padding-top: calc(var(--tabbar-height) + 2px);
 }
 
 html[sizemode="normal"] #browser {
@@ -1485,24 +1486,18 @@ vbox#sidebar-box.chromeclass-extrachrome { border-style: none !important; }
 
 /* fix for tabs too high */
 #tabbrowser-tabs {
-  height: 30px;
+  height: var(--tabbar-height);
 }
 
 .tab-background {
-  margin: 0 !important;
+  margin: 3px 0 !important;
 }
 
 .tabbrowser-tab:not(:last-child) {
-  padding-right: 0 !important;
+  padding-right: 1px !important;
 }
 
 #scrollbutton-up,
 #scrollbutton-down {
   padding: 0 !important;
-}
-
-#notification-popup {
-  position: fixed !important;
-  top: 35px !important;
-  right: 15px !important;
 }
