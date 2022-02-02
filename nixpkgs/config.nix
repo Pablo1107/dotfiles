@@ -1,15 +1,17 @@
 {
   allowUnfree = true;
   packageOverrides = pkgs: {
-    nur = import (
-      builtins.fetchTarball {
-        # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
-        url = "https://github.com/nix-community/NUR/archive/5d143233e53065486c9a768c93bafbc61a1261e1.tar.gz";
-        # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
-        sha256 = "055vp8025w71qbcbj9djr6x8znl73d35pkf2v52j38zd2z6mb32w";
-      }
-    ) {
-      inherit pkgs;
-    };
+    nur = import
+      (
+        builtins.fetchTarball {
+          # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
+          url = "https://github.com/nix-community/NUR/archive/fc0758e2f8aa4dac7c4ab42860f07487b1dcadea.tar.gz";
+          # Get the hash by running `nix-prefetch-url --unpack <url>` on the above url
+          sha256 = "162z0yfw1hdw8700qns5k7b6klv0c190s0f66c7hgi9zhswz8d8s";
+        }
+      )
+      {
+        inherit pkgs;
+      };
   };
 }
