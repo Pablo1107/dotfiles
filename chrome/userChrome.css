@@ -1501,3 +1501,7 @@ vbox#sidebar-box.chromeclass-extrachrome { border-style: none !important; }
 #scrollbutton-down {
   padding: 0 !important;
 }
+
+#notification-popup {
+  margin-top: -190px !important;
+}
