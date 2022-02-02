@@ -16,6 +16,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term /bin/alacritty
+set $emacs emacsclient --create-frame --alternate-editor='emacs'
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -26,7 +27,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # output * bg "#000000" solid_color
-output * bg ~/pictures/abstract.jpg fill
+output * bg ~/pictures/purple_galaxy.png fill
 #
 # Example configuration:
 #
@@ -65,6 +66,11 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_layout us,latam
 }
 
+input "1266:2422:Chicony_Wireless_Device" {
+    xkb_options caps:swapescape
+    xkb_layout us,latam
+}
+
 input "2:14:ETPS/2_Elantech_Touchpad" {
     tap enabled
     natural_scroll enabled
@@ -77,6 +83,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $emacs
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -171,13 +178,13 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym $mod+f fullscreen
 
     # Make the current focus maximized
-    bindsym $mod+m exec ~/.config/sway/maximize.sh
+    # bindsym $mod+m exec ~/.config/sway/maximize.sh
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -190,9 +197,12 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     bindsym Print exec wl-screenshot region
+    bindsym Alt+Print exec wl-screenshot region --ocr
     bindsym Ctrl+Print exec wl-screenshot 
     bindsym Shift+Print exec wl-screenshot window
+    bindsym Ctrl+Shift+Print exec wl-screenshot qr
 
     # bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
     # bindsym Ctrl+Print exec grim - | wl-copy
@@ -207,11 +217,11 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+n move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+Ctrl+n scratchpad show
 #
 # Resizing containers:
 #
@@ -243,8 +253,10 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 # exec_always xsettingsd
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec eval $(gnome-keyring-daemon --start)
+exec export SSH_AUTH_SOCK
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec_always killall .waybar-wrapped ; sleep 1 && waybar
+exec_always ~/.config/waybar/waybar.sh
 exec_always ~/.config/sway/import-gsettings
 # bar {
 #     position top
@@ -265,12 +277,7 @@ include /etc/sway/*.conf
 
 default_border pixel 1
 
-for_window [title="Firefox — Sharing Indicator"] {
-  floating enable,
-  move window to position 300 -34,
-  sticky enable,
-  focus_follows_mouse no
-}
+for_window [title="Firefox — Sharing Indicator"] kill
 
 # gaps
 # gaps outer 0
@@ -282,3 +289,7 @@ for_window [app_id="org.gnome.Nautilus"] {
   floating enable,
   sticky enable,
 }
+
+# Default workspaces for common programs
+assign [class="^Firefox$"] 1
+assign [class="^Slack$"] 4
