@@ -17,13 +17,15 @@ else
   call plug#begin('~/.config/nvim/plugged')
 
   Plug 'sheerun/vim-polyglot'
-  Plug 'tomtom/tcomment_vim'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+  " Plug 'tomtom/tcomment_vim'
+  Plug 'terrortylor/nvim-comment'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+  " Plug 'junegunn/fzf'
+  " Plug 'junegunn/fzf.vim'
   Plug 'vifm/vifm.vim'
   Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
   Plug 'tpope/vim-fugitive'
-  " Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-unimpaired'
   Plug 'machakann/vim-sandwich'
   Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
   " Plug 'roman/golden-ratio' " Makes current split bigger
@@ -49,11 +51,25 @@ else
   Plug 'RishabhRD/popfix'
   Plug 'RishabhRD/nvim-lsputils'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'shaunsingh/solarized.nvim'
   " Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', { 'branch': 'main' }
   " Plug 'prettier/vim-prettier', {
   " \ 'do': 'yarn install',
   " \ 'branch': 'release/0.x'
   " \ }
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
+  Plug 'ray-x/lsp_signature.nvim'
+  Plug 'romgrk/nvim-treesitter-context'
+  Plug 'nvim-treesitter/playground'
+  Plug 'lervag/wiki.vim'
+  Plug 'sindrets/diffview.nvim'
+  Plug 'luukvbaal/stabilize.nvim'
+  Plug 'github/copilot.vim'
+  Plug 'nathangrigg/vim-beancount'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
 
   call plug#end()
 
@@ -100,6 +116,7 @@ autocmd FileType javascript call SetTabSize(2)
 autocmd FileType python call SetTabSize(4) 
 autocmd FileType php call SetTabSize(4) 
 autocmd FileType lua call SetTabSize(4) 
+autocmd FileType c call SetTabSize(4) 
 
 " Splits
 set splitright
@@ -114,6 +131,23 @@ if plugin_on
     \ 'ext': '.md' }]
   endif
   
+  if match(&rtp, 'wiki.vim') != -1
+    let g:wiki_root = '~/wiki'
+    let g:wiki_link_extension = '.md'
+    let g:wiki_filetypes = ['md']
+
+    let g:wiki_file_handler = 'WikiFileHandler'
+
+    function! WikiFileHandler(...) abort dict
+      if self.path =~# 'pdf$'
+        silent execute '!zathura' fnameescape(self.path) '&'
+        return 1
+      endif
+
+      return 0
+    endfunction
+  endif
+
   if match(&rtp, 'vimtex') != -1
     let g:tex_flavor='latex'
     let g:vimtex_view_method = 'zathura'
@@ -230,7 +264,7 @@ if has ('autocmd')
     autocmd!
     autocmd BufWritePost *.rasi silent exec "!rofi -show drun -theme desktop"
     autocmd BufWritePre *.js,*.jsx,*.ts,*.php :%s/\s\+$//e
-    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.nix lua vim.lsp.buf.formatting_sync(nil, 160)
+    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.nix lua vim.lsp.buf.formatting_seq_sync(nil, 160)
   augroup END
 
   augroup OpenFileAnd
@@ -254,11 +288,11 @@ if has ('autocmd')
     " endfunction
   augroup END
 
-  augroup FocusBuffer
-    autocmd!
-    autocmd WinEnter * ownsyntax
-    autocmd WinLeave * syntax region Dim start='' end='$$$end$$$'
-  augroup END
+  " augroup FocusBuffer
+  "   autocmd!
+  "   autocmd WinEnter * ownsyntax
+  "   autocmd WinLeave * syntax region Dim start='' end='$$$end$$$'
+  " augroup END
 
   augroup TerminalStuff
     autocmd!
@@ -304,6 +338,14 @@ if plugin_on
     nnoremap <M-p> :Ag <Enter>
     nnoremap <Leader>b :Buffers<CR>
     nnoremap <Leader>h :History<CR>
+  endif
+
+  if match(&rtp, 'telescope') != -1
+    nnoremap <C-P> <cmd>Telescope find_files<cr>
+    nnoremap <M-p> <cmd>Telescope live_grep<cr>
+    nnoremap <Leader>b <cmd>Telescope buffers<cr>
+    nnoremap <Leader>h <cmd>Telescope oldfiles<cr>
+    nnoremap <Leader>H <cmd>Telescope help_tags<cr>
   endif
 
   if match(&rtp, 'coc.nvim') != -1
@@ -392,23 +434,30 @@ map Q gq
 inoremap <C-U> <C-G>u<C-U>
 
 inoremap {<CR> {<CR>}<Esc>ko
+inoremap {<Space> {  }<Left><Left>
 inoremap [<CR> [<CR>]<Esc>ko
+inoremap [<Space> [  ]<Esc>hi
+inoremap (<CR> (<CR>)<Esc>ko
+inoremap (<Space> (  )<Esc>hi
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 nnoremap sr :%s/\<<C-r><C-w>\>//g<Left><Left>
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 10<cr>
+
+noremap <silent><C-w><C-w> :tabclose<cr>
+noremap <silent><C-t> :tabnew<cr>
+noremap <silent><m-1> :tabnext 1<cr>
+noremap <silent><m-2> :tabnext 2<cr>
+noremap <silent><m-3> :tabnext 3<cr>
+noremap <silent><m-4> :tabnext 4<cr>
+noremap <silent><m-5> :tabnext 5<cr>
+noremap <silent><m-6> :tabnext 6<cr>
+noremap <silent><m-7> :tabnext 7<cr>
+noremap <silent><m-8> :tabnext 8<cr>
+noremap <silent><m-9> :tabnext 9<cr>
+noremap <silent><m-0> :tabnext 10<cr>
 inoremap <silent><m-1> <ESC>:tabn 1<cr>
 inoremap <silent><m-2> <ESC>:tabn 2<cr>
 inoremap <silent><m-3> <ESC>:tabn 3<cr>
@@ -502,13 +551,4 @@ command! -nargs=* FileTypeMappings call FileTypeMappings()
 " command! -nargs=0 Prettier :CocCommand prettier.formatFile
 luafile ~/.config/nvim/lua/lsp.lua
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "nix" },  -- list of language that will be disabled
-  },
-}
-EOF
+" execute "normal :Copilot disable<cr>"
