@@ -1,0 +1,126 @@
+{
+    "layer": "top",
+    "modules-left": [
+      "sway/workspaces",
+      "sway/mode",
+      "sway/window"
+    ],
+    "modules-right": [
+      "network",
+      "custom/crypto",
+      "custom/weather",
+      "battery",
+      "temperature",
+      "backlight",
+      "pulseaudio",
+      "sway/language",
+      "tray",
+      "clock#date",
+      "clock#time"
+    ],
+    "custom/weather": {
+      "format": "{}",
+      "tooltip": true,
+      "interval": 3600,
+      "exec": "$XDG_CONFIG_HOME/waybar/waybar-wttr.py",
+      "return-type": "json"
+    },
+    "clock#date": {
+        "format": "{:%A %b %d}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "interval": 60
+    },
+    "clock#time": {
+        "format": "{:%H:%M:%S}",
+        "interval": 1
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "{icon} {capacity}%",
+        "format-plugged": "{capacity}% ",
+        "format-full": "",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": "{icon} {temperatureC}°C",
+      "format-icons": [
+          "", // Icon: temperature-empty
+          "", // Icon: temperature-quarter
+          "", // Icon: temperature-half
+          "", // Icon: temperature-three-quarters
+          ""  // Icon: temperature-full
+      ],
+      "tooltip": true
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": [""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{icon} {essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "format-icons": [
+          "󰤯", // Icon: F091F
+          "󰤟", // Icon: F091F
+          "󰤢", // Icon: F0922
+          "󰤥", // Icon: F0925 material-design-icons
+          "󰤨"  // Icon: F0928
+        ]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "Ⅰ",
+            "2": "Ⅱ",
+            "3": "Ⅲ",
+            "4": "Ⅳ",
+            "5": "Ⅴ",
+            "6": "Ⅵ",
+            "7": "Ⅶ",
+            "8": "Ⅷ",
+            "9": "Ⅸ",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/window": {
+      "rewrite": {
+         "(.*) — Mozilla Firefox": "🌎 $1",
+         "(.*) - vim": " $1",
+         "(.*) - zsh": " [$1]",
+         "Equivalent of 'xprop' to assign an application to a workspace : swaywm — Mozilla Firefox": "asd"
+      }
+    }
+}

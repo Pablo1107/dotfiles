@@ -1,0 +1,90 @@
+* {
+  background: none;
+  font-family: "Hack", "cryptocoins";
+}
+
+.modules-right > *:first-child > * {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+#tray menu,
+tooltip,
+.modules-right > * > * {
+  background-color: rgba(0,0,0,.7);
+  font-size: 14px;
+  padding: 5px 8px 5px 8px;
+  margin-top: 5px;
+}
+
+.modules-right > *:not(:last-child) > * {
+  margin-right: 1px;
+}
+
+.modules-right > *:last-child > * {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  margin-right: 5px;
+}
+
+#workspaces {
+  margin-left: 5px;
+}
+
+#workspaces button {
+  padding: 1px 5px 0 5px;
+  margin-top: 5px;
+  background-color: transparent;
+  color: #ffffff;
+  border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inherit;
+}
+
+#workspaces button.focused {
+  background-color: rgba(0,0,0,.7);
+  border-radius: 3px;
+}
+
+#workspaces button.urgent {
+  background-color: #eb4d4b;
+}
+
+#mode,
+window#waybar:not(.empty) #window {
+  padding: 1px 5px 0 5px;
+  margin-top: 5px;
+  margin-left: 1px;
+  color: #ffffff;
+  border-bottom: 3px solid transparent;
+  background-color: rgba(0,0,0,.7);
+  border-radius: 3px;
+}
+
+window#waybar #window {
+  margin-right: 1px;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#tray > *:not(:last-child) > * {
+  margin-right: 8px;
+}
