@@ -70,6 +70,9 @@ else
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'elkowar/yuck.vim'
+  Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 
   call plug#end()
 
