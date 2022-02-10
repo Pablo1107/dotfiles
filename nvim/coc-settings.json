@@ -1,0 +1,10 @@
+{
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": false,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/pablo/.nix-profile/bin/black",
+  "eslint.autoFixOnSave": true,
+  "coc.source.buffer.enable": true,
+  "coc.source.buffer.ignoreGitignore": false,
+  "coc.preferences.formatOnSaveFiletypes": ["python", "typescript"]
+}
