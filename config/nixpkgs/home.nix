@@ -54,17 +54,17 @@ let
     let
       localPath = ~/dotfiles + "/${ref}/${path}";
     in
-      if pathExists localPath then
-        readFile localPath
-      else
-        let
-          dotfiles = fetchGit {
-            url = "https://github.com/Pablo1107/dotfiles";
-            name = "dotfiles-${ref}";
-            ref = ref;
-          };
-        in
-          readFile (dotfiles.outPath + "/${path}");
+    if pathExists localPath then
+      readFile localPath
+    else
+      let
+        dotfiles = fetchGit {
+          url = "https://github.com/Pablo1107/dotfiles";
+          name = "dotfiles-${ref}";
+          ref = ref;
+        };
+      in
+      readFile (dotfiles.outPath + "/${path}");
 
   keyBindings = getDotfile "zsh" "key-bindings.zsh";
 in
@@ -183,33 +183,33 @@ in
         gtk-xft-hintstyle = "hintmedium";
       };
     in
-      {
-        enable = true;
-        theme = {
-          package = arc-theme;
-          name = "Arc-Dark";
-        };
-        iconTheme = {
-          name = "Adwaita";
-        };
-        font = {
-          name = "Sans 10";
-        };
-        gtk2.extraConfig = ''
-          gtk-cursor-theme-name="${extraConfig.gtk-cursor-theme-name}"
-          gtk-cursor-theme-size=${toString extraConfig.gtk-cursor-theme-size}
-          gtk-toolbar-style=${extraConfig.gtk-toolbar-style};
-          gtk-toolbar-icon-size=${extraConfig.gtk-toolbar-icon-size};
-          gtk-button-images=${toString extraConfig.gtk-button-images}
-          gtk-menu-images=${toString extraConfig.gtk-menu-images}
-          gtk-enable-event-sounds=${toString extraConfig.gtk-enable-event-sounds}
-          gtk-enable-input-feedback-sounds=${toString extraConfig.gtk-enable-input-feedback-sounds}
-          gtk-xft-antialias=${toString extraConfig.gtk-xft-antialias}
-          gtk-xft-hinting=${toString extraConfig.gtk-xft-hinting}
-          gtk-xft-hintstyle="${extraConfig.gtk-xft-hintstyle}"
-        '';
-        gtk3.extraConfig = extraConfig;
+    {
+      enable = true;
+      theme = {
+        package = arc-theme;
+        name = "Arc-Dark";
       };
+      iconTheme = {
+        name = "Adwaita";
+      };
+      font = {
+        name = "Sans 10";
+      };
+      gtk2.extraConfig = ''
+        gtk-cursor-theme-name="${extraConfig.gtk-cursor-theme-name}"
+        gtk-cursor-theme-size=${toString extraConfig.gtk-cursor-theme-size}
+        gtk-toolbar-style=${extraConfig.gtk-toolbar-style};
+        gtk-toolbar-icon-size=${extraConfig.gtk-toolbar-icon-size};
+        gtk-button-images=${toString extraConfig.gtk-button-images}
+        gtk-menu-images=${toString extraConfig.gtk-menu-images}
+        gtk-enable-event-sounds=${toString extraConfig.gtk-enable-event-sounds}
+        gtk-enable-input-feedback-sounds=${toString extraConfig.gtk-enable-input-feedback-sounds}
+        gtk-xft-antialias=${toString extraConfig.gtk-xft-antialias}
+        gtk-xft-hinting=${toString extraConfig.gtk-xft-hinting}
+        gtk-xft-hintstyle="${extraConfig.gtk-xft-hintstyle}"
+      '';
+      gtk3.extraConfig = extraConfig;
+    };
   dconf = {
     enable = true;
     # settings = {
@@ -237,14 +237,14 @@ in
             "ui.systemUsesDarkTheme" = 1;
           };
         in
-          {
-            pablo = {
-              id = 0;
-              settings = defaultSettings;
-              userChrome = getDotfile "firefox" "chrome/userChrome.css";
-              userContent = getDotfile "firefox" "chrome/userContent.css";
-            };
+        {
+          pablo = {
+            id = 0;
+            settings = defaultSettings;
+            userChrome = getDotfile "firefox" "chrome/userChrome.css";
+            userContent = getDotfile "firefox" "chrome/userContent.css";
           };
+        };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         privacy-badger
@@ -321,15 +321,40 @@ in
     };
     htop = {
       enable = true;
-      hideThreads = true;
-      hideUserlandThreads = true;
-      showCpuUsage = true;
-      showProgramPath = false;
-      vimMode = true;
-      meters = {
-        left = [ "LeftCPUs2" "Memory" "Swap" ];
-        right = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
-      };
+      settings = {
+        hideThreads = true;
+        hideUserlandThreads = true;
+        showCpuUsage = true;
+        showProgramPath = false;
+        vimMode = true;
+        fields = with config.lib.htop.fields; [
+          PID
+          USER
+          PRIORITY
+          NICE
+          M_SIZE
+          M_RESIDENT
+          M_SHARE
+          STATE
+          PERCENT_CPU
+          PERCENT_MEM
+          TIME
+          COMM
+        ];
+        highlight_base_name = 1;
+        highlight_megabytes = 1;
+        highlight_threads = 1;
+      } // (with config.lib.htop; leftMeters [
+        (bar "LeftCPUs2")
+        (bar "Memory")
+        (bar "Swap")
+      ]) // (with config.lib.htop; rightMeters [
+        (bar "RightCPUs2")
+        (text "Tasks")
+        (text "LoadAverage")
+        (text "Uptime")
+        (text "Systemd")
+      ]);
     };
 
     rofi = {
