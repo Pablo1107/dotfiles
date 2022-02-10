@@ -52,19 +52,9 @@ let
 
   getDotfile = with builtins; ref: path:
     let
-      localPath = ~/dotfiles + "/${ref}/${path}";
+      localPath = ../. + "/${ref}/${path}";
     in
-    if pathExists localPath then
-      readFile localPath
-    else
-      let
-        dotfiles = fetchGit {
-          url = "https://github.com/Pablo1107/dotfiles";
-          name = "dotfiles-${ref}";
-          ref = ref;
-        };
-      in
-      readFile (dotfiles.outPath + "/${path}");
+    readFile localPath;
 
   keyBindings = getDotfile "zsh" "key-bindings.zsh";
 in
@@ -359,7 +349,7 @@ in
 
     rofi = {
       enable = true;
-      package = nur.repos.metadark.rofi-wayland;
+      package = nur.repos.kira-bruneau.rofi-wayland;
       extraConfig = {
         modi = "run,ssh,drun";
         kb-row-up = "Up,Alt+k,Shift+Tab,Shift+ISO_Left_Tab";
