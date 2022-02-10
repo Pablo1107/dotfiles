@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+    # "custom/crypto": {
+    #   "format": "{}",
+    #   "interval": 600,
+    #   "return-type": "json",
+    #   "exec": "~/.config/waybar/modules/crypto/crypto.py",
+    #   "exec-if": "ping pro-api.coinmarketcap.com -c1"
+    # },
 
 import json
 import requests
