@@ -64,7 +64,7 @@ window#waybar:not(.empty) #window {
   border-radius: 3px;
 }
 
-window#waybar:not(.empty) #window {
+window#waybar #window {
   margin-right: 1px;
 }
 
