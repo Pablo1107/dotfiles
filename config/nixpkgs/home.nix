@@ -6,6 +6,7 @@ let
   shellAliases = {
     # Default aliases
     sudo = "sudo ";
+    ls = "ls --color=auto";
     la = "ls -lah --group-directories-first";
     df = "df -h";
     vim = "nvim";
@@ -35,9 +36,9 @@ let
     #GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
 
     NPM_PACKAGES = "$HOME/.npm-packages";
-    PATH = "$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$PATH";
+    PATH = "$HOME/dotfiles/bin:$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$PATH";
     MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
-    TMUX_SCRIPTS_DIR = "$HOME/dotfiles/tmux/scripts";
+    TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
     MOZ_ENABLE_WAYLAND = 1;
     MOZ_DBUS_REMOTE = 1;
 
@@ -71,6 +72,7 @@ in
   };
 
   home.packages = [
+    stow
     htop
     termite
     alacritty
@@ -123,6 +125,7 @@ in
     hack-font
     font-awesome
     dejavu_fonts
+    material-design-icons
 
     # AWS
     git-remote-codecommit
@@ -137,7 +140,8 @@ in
     rnix-lsp
   ];
 
-  # home.file.".config/vifm/colors/solarized-dark.vifm".text = builtins.readFile ~/dotfiles/vifm/colors/solarized-dark.vifm;
+  # vifm
+  home.file.".config/vifm/vifmrc".text = getDotfile "vifm" "vifmrc";
 
   fonts.fontconfig.enable = true;
   xdg = {
@@ -363,6 +367,7 @@ in
       };
     };
   };
+  home.file.".config/rofi/desktop.rasi".text = getDotfile "rofi" "desktop.rasi";
 
   xdg.mime.enable = true;
   xdg.mimeApps = {
