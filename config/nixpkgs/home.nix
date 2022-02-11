@@ -11,13 +11,23 @@ let
     df = "df -h";
     vim = "nvim";
     td = "date +%Y-%m-%d";
-    open = "setsid -f xdg-open";
+    # open = "setsid -f xdg-open";
     c = "clear";
     mux = "tmuxinator";
     "," = "NIX_AUTO_RUN=1 ";
     pacman = "aura";
     ssh = "TERM=xterm-256color ssh ";
   };
+
+  shellFunctions = ''
+    open() {
+      if [ -z $2 ]; then
+        [ -e $1 ] && setsid -f xdg-open $1 > /dev/null 2>&1
+      else
+        [ -e $2 ] && setsid -f $1 $2 > /dev/null 2>&1
+      fi
+    }
+  '';
 
   sessionVariables = {
     EDITOR = "nvim";
@@ -36,7 +46,7 @@ let
     #GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
 
     NPM_PACKAGES = "$HOME/.npm-packages";
-    PATH = "$HOME/dotfiles/bin:$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$PATH";
+    PATH = "$HOME/dotfiles/bin:$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$HOME/.emacs.d/bin:$PATH";
     MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
     MOZ_ENABLE_WAYLAND = 1;
@@ -49,6 +59,13 @@ let
 
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+
+    PKG_CONFIG_PATH = "$(pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
+
+    DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
+
+    LEDGER_FILE = "$HOME/ledger/all.journal";
+
   };
 
   getDotfile = with builtins; ref: path:
@@ -58,8 +75,79 @@ let
     readFile localPath;
 
   keyBindings = getDotfile "zsh" "key-bindings.zsh";
+
+  customFirefox = (
+    pkgs.firefox-wayland.override {
+      extraPrefs = ''
+        //  
+        var {classes:Cc,interfaces:Ci,utils:Cu} = Components;  
+              
+        /* set new tab page */  
+        try {  
+          Cu.import("resource:///modules/AboutNewTab.jsm");  
+          var newTabURL = "file:////home/pablo/index.html";  
+          AboutNewTab.newTabURL = newTabURL;  
+        } catch(e){Cu.reportError(e);} // report errors in the Browser Console
+      '';
+    }
+  ).overrideAttrs (
+    oldAttrs: {
+      buildCommand = oldAttrs.buildCommand + ''
+        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox/defaults/pref/autoconfig.js"
+      '';
+      mozillaCfg = writeText "mozilla.cfg" ''
+          '';
+    }
+  );
+  nixGL = (
+    import
+      (
+        pkgs.fetchFromGitHub {
+          owner = "guibou";
+          repo = "nixGL";
+          rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e";
+          sha256 = "02y38zmdplk7a9ihsxvnrzhhv7324mmf5g8hmxqizaid5k5ydpr3";
+        }
+      )
+      { }
+  ).nixGLIntel;
+
+  firefoxNixGL = makeDesktopItem {
+    name = "firefox-nixgl";
+    exec = "${nixGL}/bin/nixGLIntel ${customFirefox}/bin/firefox %U";
+    icon = "${customFirefox}/share/icons/hicolor/64x64/apps/firefox.png";
+    comment = "";
+    desktopName = "Firefox";
+    genericName = "Web Browser";
+    categories = "Network;WebBrowser;";
+    mimeType = "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
+  };
 in
 {
+  # programs.mbsync.enable = true;
+  # programs.mu.enable = true;
+  # accounts.email.accounts.primary = {
+  #   primary = true;
+  #   address = "dealberapablo07@gmail.com";
+  #   userName = "dealberapablo07@gmail.com";
+  #   imap.host = "imap.gmail.com";
+  #   smtp.host = "smtp.gmail.com";
+  #   mbsync = {
+  #     enable = true;
+  #     create = "maildir";
+  #   };
+  #   mu.enable = true;
+  #   realName = "Pablo Andres Dealbera";
+  #   signature = {
+  #     text = ''
+  #       Pablo Andres Dealbera
+  #       Web Developer
+  #     '';
+  #     showSignature = "append";
+  #   };
+  #   passwordCommand = "gpg2 -q --for-your-eyes-only --no-tty -d ~/email.gpg";
+  # };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -95,11 +183,27 @@ in
     element-desktop
     gimp
     gnome3.nautilus
+    gnome3.nautilus-python
+    gnome3.sushi
     #texlive.combined.scheme-full
     #anki
     slack
     hledger
+    haskellPackages.hledger_1_24_1
     tealdeer
+    qbittorrent
+    vlc
+    gnome3.file-roller
+    libreoffice
+    gnome3.eog
+    ffmpeg-full
+    geckodriver
+    chromedriver
+    gnumeric
+    go-chromecast
+    qt5.qttools
+    unixtools.arp
+    ripgrep
 
     # Wayland
     xsettingsd
@@ -107,25 +211,71 @@ in
     wl-clipboard
     qt5.qtwayland
     xdg-utils
+    nixGL
+    firefoxNixGL
+    imv
+    xfce.tumbler
+    gnome3.gnome-keyring
+    wayland-utils
+    # poppler-glib
+    # ffmpegthumbnailer
+    # freetype2
+    # libgsf
+    # totem
+    # mcomix
+
+
 
     # Python
     python.pkgs.pip
-    (python38.withPackages (ps: with ps; [ tkinter setuptools pip wheel pynvim ]))
+    (
+      python39.withPackages (
+        ps: with ps; [
+          tkinter
+          setuptools
+          wheel
+          pynvim
+          requests
+          selenium
+          jinja2
+          ply
+          pyaml
+          numpy
+          sympy
+          pygments
+          matplotlib
+          seaborn
+          pandas-datareader
+          requests-cache
+          plotly
+        ]
+      )
+    )
+
 
     chromium
     awscli2
 
     # Node
-    (yarn.override { nodejs = nodejs-12_x; })
-    nodejs
+    # (yarn.override { nodejs = nodejs-12_x; })
+    yarn
+    # (yarn.override { nodejs = nodejs-12_x; })
+    # nodejs
+    nodejs-14_x
     deno
     nur.repos.crazazy.efm-langserver
 
     # Fonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
     hack-font
     font-awesome
     dejavu_fonts
+    ibm-plex
+    symbola
     material-design-icons
+
 
     # AWS
     git-remote-codecommit
@@ -138,10 +288,36 @@ in
 
     # LSP
     rnix-lsp
+
+    # Rust
+    # rustup
+
+    docker-compose
+    zathura
+    tesseract
+    tdesktop
+    pandoc
+    # mongodb-compass
+
+    manpages
+    # clang
   ];
 
   # vifm
   home.file.".config/vifm/vifmrc".text = getDotfile "vifm" "vifmrc";
+
+  # home.file.".config/vifm/colors/solarized-dark.vifm".text = getDotfile "vifm" "colors/solarized-dark.vifm";
+  # home.file.".local/bin/wl-screenshot".source = writeScript "wl-screenshot" (getDotfile "scripts" "wl-screenshot");
+  # home.file.".local/bin/git-status".source = writeScript "git-status" (getDotfile "scripts" "git-status");
+  home.file.".local/bin/xterm".source = writeScript "xterm" ''
+    #!${pkgs.stdenv.shell}
+    ${alacritty}/bin/alacritty "$@"
+  '';
+  home.file.".local/share/fonts/cryptocoins.tff".source = fetchurl {
+    url = "https://raw.githubusercontent.com/AllienWorks/cryptocoins/master/webfont/cryptocoins.ttf";
+    sha256 = "18y3r25x5fb2nk7760dyk9w37kpsaqlh89ak4b1spwggwyq4in5n";
+  };
+
 
   fonts.fontconfig.enable = true;
   xdg = {
@@ -215,7 +391,7 @@ in
   programs = {
     firefox = {
       enable = true;
-      package = firefox-wayland;
+      package = customFirefox;
       profiles =
         let
           defaultSettings = {
@@ -252,10 +428,19 @@ in
       enable = true;
       userName = "Pablo Andres Dealbera";
       userEmail = "dealberapablo07@gmail.com";
+      aliases = {
+        fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add";
+      };
       extraConfig = {
+        push.followTags = true; # always push tags when "git push"
         credential = {
           helper = "store";
         };
+        # pager.show = "nvim -R -c '%sm/\\e.\\{-}m//ge' +1 -";
+        diff.tool = "nvimdiff";
+        difftool.nvimdiff.cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
+        # difftool.prompt = false;
+        url."ssh://git@github.com/".insteadOf = "https://github.com/";
       };
     };
 
@@ -265,13 +450,15 @@ in
       history.extended = true;
       history.size = 10000000;
       shellAliases = shellAliases;
+      autocd = true;
 
-      initExtra = keyBindings + ''
+      initExtra = keyBindings + shellFunctions + ''
         fpath+=${pure-prompt}/share/zsh/site-functions
-        autoload -U promptinit; promptinit
-        prompt pure
-
-        eval "$(${pkgs.z-lua}/bin/z --init zsh)"
+        autoload -U promptinit;
+        promptinit
+          prompt pure
+ 
+          eval "$(${pkgs.z-lua}/bin/z --init zsh)"
       '';
 
       loginExtra = ''
@@ -279,7 +466,7 @@ in
         setopt appendhistory
         setopt autocd
 
-        source /etc/profile.d/nix{,-daemon}.sh
+        source /etc/profile.d/nix-daemon.sh
       '';
 
       profileExtra = ''
@@ -295,7 +482,15 @@ in
       shellAliases = shellAliases;
     };
 
-    ssh.enable = true;
+    ssh = {
+      enable = true;
+      extraConfig = ''
+        Host github.com
+        Hostname ssh.github.com
+        Port 443
+      '';
+    };
+
     fzf = {
       enable = true;
       defaultCommand = "fd --type f --hidden --exclude .git";
@@ -346,8 +541,6 @@ in
         (bar "RightCPUs2")
         (text "Tasks")
         (text "LoadAverage")
-        (text "Uptime")
-        (text "Systemd")
       ]);
     };
 
@@ -369,19 +562,58 @@ in
   };
   home.file.".config/rofi/desktop.rasi".text = getDotfile "rofi" "desktop.rasi";
 
+  xdg.configFile."mimeapps.list".force = true;
+  xdg.dataFile."applications/mimeapps.list".force = true;
   xdg.mime.enable = true;
   xdg.mimeApps = {
     enable = true;
+    # query mime type from a file like this:
+    # xdg-mime query filetype your-file.extension
+    # also check out:
+    # https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
     defaultApplications = {
-      "inode/directory" = [ "nautilus.desktop" ];
+      "application/json" = [ "firefox.desktop" ];
+      "application/pdf" = [ "firefox.desktop" ];
+      "application/x-bittorrent" = [ "org.qbittorrent.qBittorrent.desktop" ];
+      "application/x-shellscript" = [ "nvim.desktop" ];
+      "application/x-xpinstall" = [ "firefox.desktop" ];
+      "application/xhtml+xml" = [ "firefox.desktop" ];
+      "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
+      "text/english" = [ "nvim.desktop" ];
       "text/html" = [ "firefox.desktop" ];
+      "text/plain" = [ "nvim.desktop" ];
+      "text/x-c" = [ "nvim.desktop" ];
+      "text/x-c++" = [ "nvim.desktop" ];
+      "text/x-c++hdr" = [ "nvim.desktop" ];
+      "text/x-c++src" = [ "nvim.desktop" ];
+      "text/x-chdr" = [ "nvim.desktop" ];
+      "text/x-csrc" = [ "nvim.desktop" ];
+      "text/x-java" = [ "nvim.desktop" ];
+      "text/x-makefile" = [ "nvim.desktop" ];
+      "text/x-moc" = [ "nvim.desktop" ];
+      "text/x-pascal" = [ "nvim.desktop" ];
+      "text/x-tcl" = [ "nvim.desktop" ];
+      "text/x-tex" = [ "emacs.desktop" ];
+      "text/xml" = [ "firefox.desktop" ];
+      "image/bmp" = [ "org.gnome.eog.desktop" ];
+      "image/g3fax" = [ "gimp.desktop" ];
+      "image/gif" = [ "org.gnome.eog.desktop" ];
+      "image/jpeg" = [ "org.gnome.eog.desktop" ];
+      "image/jpg" = [ "org.gnome.eog.desktop" ];
+      "image/pjpeg" = [ "org.gnome.eog.desktop" ];
+      "image/png" = [ "org.gnome.eog.desktop" ];
+      "image/svg+xml" = [ "org.gnome.eog.desktop" ];
+      "image/svg+xml-compressed" = [ "org.gnome.eog.desktop" ];
+      "image/tiff" = [ "org.gnome.eog.desktop" ];
+      "image/webp" = [ "firefox.desktop" ];
       "x-scheme-handler/about" = [ "firefox.desktop" ];
+      "x-scheme-handler/eclipse+command" = [ "dbeaver.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      "x-scheme-handler/magnet" = [ "org.qbittorrent.qBittorrent.desktop" ];
       "x-scheme-handler/postman" = [ "Postman.desktop" ];
       "x-scheme-handler/slack" = [ "slack.desktop" ];
-      "x-scheme-handler/eclipse+command" = [ "dbeaver.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
     };
   };
 
@@ -426,6 +658,8 @@ in
 
         icon_position = "left";
         max_icon_size = 32;
+
+        mouse_middle_lick = "do_action,close_current";
       };
 
       experimental = {
@@ -458,6 +692,52 @@ in
       };
     };
   };
+
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
+  # Fix tray.target not found
+  systemd.user.targets = {
+    tray = {
+      Unit = {
+        Description = "Tray";
+      };
+    };
+  };
+
+  systemd.user.services.emacs = {
+    Unit = {
+      Description = "Emacs text editor";
+      Documentation =
+        "info:emacs man:emacs(1) https://gnu.org/software/emacs/";
+
+      # Avoid killing the Emacs session, which may be full of
+      # unsaved buffers.
+      X-RestartIfChanged = false;
+    };
+
+    Service = {
+      Type = "notify";
+
+      # We wrap ExecStart in a login shell so Emacs starts with the user's
+      # environment, most importantly $PATH and $NIX_PROFILES. It may be
+      # worth investigating a more targeted approach for user services to
+      # import the user environment.
+      ExecStart = ''
+        ${pkgs.runtimeShell} -l -c "/usr/bin/emacs --fg-daemon";
+      '';
+
+      # Emacs will exit with status 15 after having received SIGTERM, which
+      # is the default "KillSignal" value systemd uses to stop services.
+      SuccessExitStatus = 15;
+
+      Restart = "on-failure";
+    };
+
+    Install = { WantedBy = [ "default.target" ]; };
+  };
+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
