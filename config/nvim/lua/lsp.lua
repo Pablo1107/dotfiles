@@ -263,6 +263,7 @@ telescope.setup{
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+    file_ignore_patterns = { "node_modules", ".git" },
   },
   pickers = {
     -- Default configuration for builtin pickers goes here:
