@@ -99,22 +99,10 @@ let
           '';
     }
   );
-  nixGL = (
-    import
-      (
-        pkgs.fetchFromGitHub {
-          owner = "guibou";
-          repo = "nixGL";
-          rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e";
-          sha256 = "02y38zmdplk7a9ihsxvnrzhhv7324mmf5g8hmxqizaid5k5ydpr3";
-        }
-      )
-      { }
-  ).nixGLIntel;
 
   firefoxNixGL = makeDesktopItem {
     name = "firefox-nixgl";
-    exec = "${nixGL}/bin/nixGLIntel ${customFirefox}/bin/firefox %U";
+    exec = "${nixgl.nixGLIntel}/bin/nixGLIntel ${customFirefox}/bin/firefox %U";
     icon = "${customFirefox}/share/icons/hicolor/64x64/apps/firefox.png";
     comment = "";
     desktopName = "Firefox";
@@ -188,7 +176,6 @@ in
     #texlive.combined.scheme-full
     #anki
     slack
-    hledger
     haskellPackages.hledger_1_24_1
     tealdeer
     qbittorrent
@@ -211,7 +198,7 @@ in
     wl-clipboard
     qt5.qtwayland
     xdg-utils
-    nixGL
+    nixgl.nixGLIntel
     firefoxNixGL
     imv
     xfce.tumbler
@@ -223,8 +210,6 @@ in
     # libgsf
     # totem
     # mcomix
-
-
 
     # Python
     python.pkgs.pip
