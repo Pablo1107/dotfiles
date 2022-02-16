@@ -7,6 +7,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    declarative-cachix.url = "github:jonascarpay/declarative-cachix";
   };
 
   outputs = inputs: {
@@ -17,10 +19,17 @@
         username = "pablo";
         stateVersion = "21.05";
         configuration = {
-          imports = [ ./config/nixpkgs/home.nix ];
+          imports = [
+            ./config/nixpkgs/home.nix
+            inputs.declarative-cachix.homeManagerModules.declarative-cachix
+          ];
           nixpkgs = {
             config = { allowUnfree = true; };
-            overlays = [ inputs.nur.overlay inputs.nixgl.overlay ];
+            overlays = [
+              inputs.nur.overlay
+              inputs.nixgl.overlay
+              inputs.emacs-overlay.overlay
+            ];
           };
         };
       };

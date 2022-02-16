@@ -286,6 +286,18 @@ in
 
     manpages
     # clang
+
+    hicolor-icon-theme
+    emacsGit-nox
+  ];
+
+  # nix
+  home.file.nixConf.text = ''
+    experimental-features = nix-command flakes
+  '';
+
+  caches.cachix = [
+    { name = "nix-community"; sha256 = "00lpx4znr4dd0cc4w4q8fl97bdp7q19z1d3p50hcfxy26jz5g21g"; }
   ];
 
   # vifm
@@ -710,7 +722,7 @@ in
       # worth investigating a more targeted approach for user services to
       # import the user environment.
       ExecStart = ''
-        ${pkgs.runtimeShell} -l -c "/usr/bin/emacs --fg-daemon";
+        ${pkgs.runtimeShell} -l -c "emacs --fg-daemon";
       '';
 
       # Emacs will exit with status 15 after having received SIGTERM, which
