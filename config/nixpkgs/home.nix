@@ -288,7 +288,7 @@ in
     # clang
 
     hicolor-icon-theme
-    emacsGit-nox
+    emacsPgtk
   ];
 
   # nix
