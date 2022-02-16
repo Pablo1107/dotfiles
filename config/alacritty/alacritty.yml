@@ -4,6 +4,8 @@ env:
   WINIT_X11_SCALE_FACTOR: "1.0"
 
 window:
+  opacity: 0.85
+
   dimensions:
     columns: 140
     lines: 38
@@ -16,7 +18,6 @@ scrolling:
   history: 100000
   multiplier: 3
 
-background_opacity: 0.85
 
 font:
   normal:
