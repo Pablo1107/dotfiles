@@ -13,36 +13,48 @@
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix }: {
-    homeConfigurations = {
-      pablo = home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        homeDirectory = "/home/pablo";
-        username = "pablo";
-        stateVersion = "21.05";
-        configuration = {
-          imports = [
-            ./config/nixpkgs/home.nix
-            declarative-cachix.homeManagerModules.declarative-cachix
-          ];
-          nixpkgs = {
-            config = { allowUnfree = true; };
-            overlays = [
-              nur.overlay
-              nixgl.overlay
-              emacs-overlay.overlay
+  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix }:
+    let
+      nixpkgsConfig = {
+        config = { allowUnfree = true; };
+        overlays = [
+          nur.overlay
+          nixgl.overlay
+          emacs-overlay.overlay
+        ];
+      };
+    in
+    {
+      homeConfigurations = {
+        pablo = home-manager.lib.homeManagerConfiguration {
+          system = "x86_64-linux";
+          homeDirectory = "/home/pablo";
+          username = "pablo";
+          stateVersion = "21.05";
+          configuration = {
+            imports = [
+              ./config/nixpkgs/home.nix
+              declarative-cachix.homeManagerModules.declarative-cachix
             ];
+            nixpkgs = nixpkgsConfig;
           };
         };
       };
+      darwinConfigurations.pablo = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./config/nix-darwin/configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.pablo = { pkgs, ... }: {
+              imports = [ ./config/nixpkgs/common.nix ];
+            };
+          }
+        ];
+        inputs = { inherit darwin nixpkgs; };
+      };
     };
-    darwinConfigurations.Pablos-MacBook-Air = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./config/nix-darwin/configuration.nix
-        home-manager.darwinModules.home-manager
-      ];
-      inputs = { inherit darwin nixpkgs; };
-    };
-  };
 }

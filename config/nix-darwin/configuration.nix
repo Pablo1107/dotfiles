@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 
+with pkgs;
+
 {
   fonts.enableFontDir = true;
   fonts.fonts = [
@@ -9,10 +11,6 @@
   users.users.pablo = {
     name = "pablo";
     home = "/Users/pablo";
-  };
-
-  home-manager.users.pablo = { pkgs, ... }: {
-    imports = [ ./config/nixpkgs/home.nix ];
   };
 
   # List packages installed in system profile. To search by name, run:
