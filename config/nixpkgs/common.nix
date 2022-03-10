@@ -27,8 +27,6 @@ let
     MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
 
-    PKG_CONFIG_PATH = "$(pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
-
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
   };
 
@@ -53,13 +51,14 @@ in
   };
 
   home.packages = [
+    neovim
     stow
     htop
     alacritty
     pure-prompt
     tree
     fd
-    ag
+    silver-searcher
     ripgrep
     tmuxinator
     jq
@@ -75,30 +74,30 @@ in
     ffmpeg-full
 
     # Python
-    #python.pkgs.pip
-    #(
-    #  python39.withPackages (
-    #    ps: with ps; [
-    #      tkinter
-    #      setuptools
-    #      wheel
-    #      pynvim
-    #      requests
-    #      selenium
-    #      jinja2
-    #      ply
-    #      pyaml
-    #      numpy
-    #      sympy
-    #      pygments
-    #      matplotlib
-    #      seaborn
-    #      pandas-datareader
-    #      requests-cache
-    #      plotly
-    #    ]
-    #  )
-    #)
+    python.pkgs.pip
+    (
+      python39.withPackages (
+        ps: with ps; [
+          tkinter
+          setuptools
+          wheel
+          pynvim
+          requests
+          selenium
+          jinja2
+          ply
+          pyaml
+          numpy
+          sympy
+          pygments
+          matplotlib
+          seaborn
+          pandas-datareader
+          requests-cache
+          plotly
+        ]
+      )
+    )
 
     awscli2
 
@@ -112,15 +111,15 @@ in
     nur.repos.crazazy.efm-langserver
 
     # Fonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    hack-font
-    font-awesome
-    dejavu_fonts
-    ibm-plex
-    symbola
-    material-design-icons
+    #noto-fonts
+    #noto-fonts-cjk
+    #noto-fonts-emoji
+    #hack-font
+    #font-awesome
+    #dejavu_fonts
+    #ibm-plex
+    #symbola
+    #material-design-icons
 
     # AWS
     git-remote-codecommit
@@ -138,7 +137,7 @@ in
     pandoc
     # mongodb-compass
 
-    manpages
+    man-pages
     # clang
 
     hicolor-icon-theme
@@ -147,6 +146,9 @@ in
 
   # nix
   home.file.nixConf.text = ''
+    build-users-group = nixbld
+    system = aarch64-darwin
+    extra-platforms = x86_64-darwin aarch64-darwin
     experimental-features = nix-command flakes
   '';
 
@@ -199,8 +201,6 @@ in
         setopt extendedglob
         setopt appendhistory
         setopt autocd
-
-        source /etc/profile.d/nix-daemon.sh
       '';
 
       profileExtra = ''

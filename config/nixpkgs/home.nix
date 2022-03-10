@@ -158,7 +158,7 @@ in
     tree
     brillo
     fd
-    ag
+    silver-searcher
     tmuxinator
     xclip
     xsel
@@ -284,7 +284,7 @@ in
     pandoc
     # mongodb-compass
 
-    manpages
+    man-pages
     # clang
 
     hicolor-icon-theme

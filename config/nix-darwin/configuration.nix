@@ -29,8 +29,15 @@ with pkgs;
   # nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
-  #programs.zsh.enable = true; # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
+
+  services.khd = {
+    enable = true;
+    khdConfig = ''
+      cmd - return : open -na /Applications/Alacritty.app;\
+    '';
+  };
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
