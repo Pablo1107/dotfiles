@@ -107,8 +107,19 @@ let
     comment = "";
     desktopName = "Firefox";
     genericName = "Web Browser";
-    categories = "Network;WebBrowser;";
-    mimeType = "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
+    mimeTypes = [
+      "text/html"
+      "text/xml"
+      "application/xhtml+xml"
+      "application/vnd.mozilla.xul+xml"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/ftp"
+    ];
   };
 in
 {
@@ -246,7 +257,8 @@ in
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
     # nodejs
-    nodejs-14_x
+    # nodejs-14_x
+    nodejs-12_x
     deno
     nur.repos.crazazy.efm-langserver
 
