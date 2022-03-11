@@ -53,7 +53,13 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.pablo = { pkgs, ... }: {
-              imports = [ ./config/nixpkgs/common.nix ];
+              imports = [
+                ./config/nixpkgs/common.nix
+              ];
+              home = {
+                username = "pablo";
+                homeDirectory = "/Users/pablo";
+              };
             };
           }
         ];
