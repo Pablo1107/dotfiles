@@ -11,9 +11,12 @@
     nixgl.url = "github:guibou/nixGL";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
+    nix-on-droid.url = "github:t184256/nix-on-droid";
+    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
+    nix-on-droid.inputs.home-manager.follows = "home-manager";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix }:
+  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid }:
     let
       nixpkgsConfig = {
         config = { allowUnfree = true; };
@@ -55,6 +58,30 @@
           }
         ];
         inputs = { inherit darwin nixpkgs; };
+      };
+      nixOnDroidConfigurations = {
+        sm-g950f = nix-on-droid.lib.nixOnDroidConfiguration {
+          config = ./config/nix-on-droid/config.nix;
+          system = "aarch64-linux";
+          extraModules = [
+            # import source out-of-tree modules like:
+            # flake.nixOnDroidModules.module
+            # home-manager.darwinModules.home-manager
+            # {
+            #   nixpkgs = nixpkgsConfig;
+            #   home-manager.useGlobalPkgs = true;
+            #   home-manager.useUserPackages = true;
+            #   home-manager.users.pablo = { pkgs, ... }: {
+            #     imports = [ ./config/nixpkgs/common.nix ];
+            #   };
+            # }
+          ];
+          extraSpecialArgs = {
+            # arguments to be available in every nix-on-droid module
+          };
+          # your own pkgs instance (see nix-on-droid.overlay for useful additions)
+          # pkgs = ...;
+        };
       };
     };
 }
