@@ -46,6 +46,7 @@ with pkgs;
       "zoom"
       "google-chrome"
       "insomnia"
+      "docker"
     ];
   };
 
