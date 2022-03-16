@@ -45,10 +45,8 @@ in
   home.sessionVariables = sessionVariables;
 
   home.packages = [
-    neovim
     stow
     htop
-    alacritty
     pure-prompt
     tree
     fd
