@@ -47,6 +47,7 @@ with pkgs;
       "google-chrome"
       "insomnia"
       "docker"
+      "spotify"
     ];
   };
 
