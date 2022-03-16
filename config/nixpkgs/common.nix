@@ -137,14 +137,6 @@ in
     #emacsPgtk
   ];
 
-  # nix
-  home.file.nixConf.text = ''
-    build-users-group = nixbld
-    system = aarch64-darwin
-    extra-platforms = x86_64-darwin aarch64-darwin
-    experimental-features = nix-command flakes
-  '';
-
   # vifm
   home.file.".config/vifm/vifmrc".text = getDotfile "vifm" "vifmrc";
 

@@ -5,6 +5,9 @@ with pkgs;
 {
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    build-users-group = nixbld
+    system = aarch64-darwin
+    extra-platforms = x86_64-darwin aarch64-darwin
   '';
 
   fonts.enableFontDir = true;
