@@ -121,6 +121,7 @@ in
 
     # LSP
     rnix-lsp
+    nodePackages.typescript-language-server
 
     # Rust
     # rustup
@@ -186,10 +187,6 @@ in
         setopt extendedglob
         setopt appendhistory
         setopt autocd
-      '';
-
-      profileExtra = ''
-        . /etc/profile
       '';
 
       # sessionVariables = sessionVariables;

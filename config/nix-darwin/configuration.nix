@@ -8,6 +8,7 @@ with pkgs;
     build-users-group = nixbld
     system = aarch64-darwin
     extra-platforms = x86_64-darwin aarch64-darwin
+    warn-dirty = false
   '';
 
   fonts.enableFontDir = true;
@@ -24,9 +25,7 @@ with pkgs;
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
     neovim
-    alacritty
   ];
-
 
   # Homebrew
   system.activationScripts.homebrew.text = ''
@@ -52,6 +51,8 @@ with pkgs;
       "insomnia"
       "docker"
       "spotify"
+      "alacritty"
+      "telegram"
     ];
   };
 
@@ -68,6 +69,7 @@ with pkgs;
   programs.zsh.loginShellInit = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
   '';
+  programs.zsh.promptInit = "";
   # programs.fish.enable = true;
 
   services.khd = {
