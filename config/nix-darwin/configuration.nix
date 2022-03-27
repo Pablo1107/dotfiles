@@ -53,6 +53,7 @@ with pkgs;
       "spotify"
       "alacritty"
       "telegram"
+      "whatsapp"
     ];
   };
 
