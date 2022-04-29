@@ -72,15 +72,14 @@
           extraModules = [
             # import source out-of-tree modules like:
             # flake.nixOnDroidModules.module
-            # home-manager.darwinModules.home-manager
-            # {
-            #   nixpkgs = nixpkgsConfig;
-            #   home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   home-manager.users.pablo = { pkgs, ... }: {
-            #     imports = [ ./config/nixpkgs/common.nix ];
-            #   };
-            # }
+            {
+              #nixpkgs = nixpkgsConfig;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.config = { pkgs, ... }: {
+                imports = [ ./config/nixpkgs/android.nix ];
+              };
+            }
           ];
           extraSpecialArgs = {
             # arguments to be available in every nix-on-droid module
