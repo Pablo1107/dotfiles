@@ -44,10 +44,17 @@ with pkgs;
     taps = [
       "homebrew/cask"
     ];
+    brews = [
+      "pkg-config"
+      "pixman"
+      "cairo"
+      "pango"
+    ];
     casks = [
       "firefox"
       "zoom"
       "google-chrome"
+      "chromium"
       "insomnia"
       "docker"
       "spotify"

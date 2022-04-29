@@ -101,7 +101,7 @@ in
     # nodejs
     nodejs-14_x
     deno
-    nur.repos.crazazy.efm-langserver
+    efm-langserver
 
     # Fonts
     #noto-fonts
