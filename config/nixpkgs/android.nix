@@ -28,6 +28,8 @@ let
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
 
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
+
+    LEDGER_FILE = "$HOME/ledger/all.journal";
   };
 
   getDotfile = with builtins; ref: path:
