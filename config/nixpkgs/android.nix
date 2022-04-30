@@ -71,7 +71,6 @@ in
     #texlive.combined.scheme-full
     #anki
     #slack
-    #haskellPackages.hledger_1_24_1
     hledger
     tealdeer
     ffmpeg-full

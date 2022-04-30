@@ -187,7 +187,7 @@ in
     #texlive.combined.scheme-full
     #anki
     slack
-    haskellPackages.hledger_1_24_1
+    hledger
     tealdeer
     qbittorrent
     vlc
@@ -276,6 +276,8 @@ in
 
     # AWS
     git-remote-codecommit
+    git-annex
+    git-annex-remote-googledrive
 
     # Databases
     dbeaver
