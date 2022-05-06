@@ -244,6 +244,7 @@ in
           pandas-datareader
           requests-cache
           plotly
+          svgwrite
         ]
       )
     )
@@ -257,10 +258,10 @@ in
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
     # nodejs
-    # nodejs-14_x
-    nodejs-12_x
+    nodejs-14_x
+    # nodejs-12_x
     deno
-    nur.repos.crazazy.efm-langserver
+    efm-langserver
 
     # Fonts
     noto-fonts
@@ -308,6 +309,7 @@ in
   # nix
   home.file.nixConf.text = ''
     experimental-features = nix-command flakes
+    tarball-ttl = 86400
   '';
 
   caches.cachix = [
