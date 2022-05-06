@@ -11,10 +11,13 @@ with pkgs;
     warn-dirty = false
   '';
 
-  fonts.enableFontDir = true;
-  fonts.fonts = [
-    hack-font
-  ];
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = [
+      hack-font
+    ];
+  };
 
   users.users.pablo = {
     name = "pablo";
