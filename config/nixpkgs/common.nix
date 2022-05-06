@@ -89,12 +89,13 @@ in
           pandas-datareader
           requests-cache
           plotly
+          cfn-lint
         ]
       )
     )
 
     awscli2
-    aws-sam-cli
+    # aws-sam-cli
 
     # Node
     # (yarn.override { nodejs = nodejs-12_x; })
