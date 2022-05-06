@@ -19,7 +19,10 @@
   outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid }:
     let
       nixpkgsConfig = {
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (pkg: true);
+        };
         overlays = [
           nur.overlay
           nixgl.overlay
