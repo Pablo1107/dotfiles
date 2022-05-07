@@ -225,7 +225,7 @@ in
     # Python
     python.pkgs.pip
     (
-      python39.withPackages (
+      python310.withPackages (
         ps: with ps; [
           tkinter
           setuptools
@@ -310,6 +310,7 @@ in
   home.file.nixConf.text = ''
     experimental-features = nix-command flakes
     tarball-ttl = 86400
+    warn-dirty = false
   '';
 
   caches.cachix = [
