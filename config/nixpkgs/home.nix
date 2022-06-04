@@ -66,6 +66,7 @@ let
 
     LEDGER_FILE = "$HOME/ledger/all.journal";
 
+    _JAVA_AWT_WM_NONREPARENTING = 1;
   };
 
   getDotfile = with builtins; ref: path:
