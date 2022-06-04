@@ -518,9 +518,9 @@ func! FocusStatusline()
   let l:focus.='%1*\ %m'
   let l:focus.='%='
 
-  if strlen(fugitive#head())
+  if strlen(FugitiveHead())
     let l:focus.='%2*\ '
-    let l:focus.='\ %{fugitive#head()}'
+    let l:focus.='\ %{FugitiveHead()}'
   endif
 
   let l:focus.='%3*\ %-1.(%)'
