@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+usage() { echo "Usage: $(basename $0) [start|stop|toggle]" 1>&2; exit 1; }
+
+subcommand=$1
+
+case "$subcommand" in
+    start)
+        sudo su -c 'echo 70 > /sys/class/power_supply/BAT0/charge_start_threshold'
+        sudo su -c 'echo 80 > /sys/class/power_supply/BAT0/charge_stop_threshold' 
+        ;;
+    stop)
+        sudo su -c 'echo 0 > /sys/class/power_supply/BAT0/charge_start_threshold'
+        sudo su -c 'echo 100 > /sys/class/power_supply/BAT0/charge_stop_threshold' 
+        ;;
+    *)
+        usage
+        ;;
+esac
