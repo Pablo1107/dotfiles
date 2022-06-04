@@ -246,6 +246,7 @@ in
           requests-cache
           plotly
           svgwrite
+          graphviz
         ]
       )
     )
@@ -312,6 +313,8 @@ in
     experimental-features = nix-command flakes
     tarball-ttl = 86400
     warn-dirty = false
+    keep-derivations = true
+    keep-outputs = true
   '';
 
   caches.cachix = [
@@ -459,6 +462,9 @@ in
       };
     };
 
+    direnv.enable = true;
+    direnv.nix-direnv.enable = true;
+
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -561,7 +567,6 @@ in
 
     rofi = {
       enable = true;
-      package = nur.repos.kira-bruneau.rofi-wayland;
       extraConfig = {
         modi = "run,ssh,drun";
         kb-row-up = "Up,Alt+k,Shift+Tab,Shift+ISO_Left_Tab";
