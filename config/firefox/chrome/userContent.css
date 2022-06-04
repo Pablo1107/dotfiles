@@ -3585,3 +3585,8 @@ body.colorBlind #netFilteringDialog > .panes > .details > div[data-status="2"],
     background-color: var(--tone-5)!important
   }
 }
+
+#viewerContainer > #viewer .page > .canvasWrapper > canvas {
+   filter: grayscale(100%);
+   filter: invert(100%);
+}
