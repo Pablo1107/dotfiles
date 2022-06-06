@@ -35,6 +35,8 @@ configuration {
   selected-active-background:  @actbg;
   active-background:           @selbg;
 
+  transparent-background:      rgba(0,0,0,0);
+
   line-margin:                 2;
   line-padding:                2;
   separator-style:             "none";
@@ -102,6 +104,11 @@ element normal.urgent {
 element normal.active {
   background-color: @active-background;
   text-color:       @active-foreground;
+}
+
+element-text selected.normal,
+element-icon selected.normal {
+  background-color: @transparent-background;
 }
 
 element selected.normal {
