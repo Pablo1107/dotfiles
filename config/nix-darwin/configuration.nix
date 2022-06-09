@@ -64,6 +64,7 @@ with pkgs;
       "alacritty"
       "telegram"
       "whatsapp"
+      "dbeaver-community"
     ];
   };
 
