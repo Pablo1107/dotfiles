@@ -58,9 +58,10 @@
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.sharedModules = personalModules;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [
-                ./config/nixpkgs/common.nix
+                ./config/nixpkgs/darwin-home.nix
               ];
               home = {
                 username = "pablo";
@@ -68,7 +69,7 @@
               };
             };
           }
-        ] ++ personalModules;
+        ];
         inputs = { inherit darwin nixpkgs; };
       };
       nixOnDroidConfigurations = {
@@ -82,6 +83,7 @@
               #nixpkgs = nixpkgsConfig;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.sharedModules = personalModules;
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./config/nixpkgs/android.nix ];
               };
