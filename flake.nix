@@ -44,6 +44,9 @@
             ];
             nixpkgs = nixpkgsConfig;
           };
+          extraModules = [
+            ./modules/emacs.nix
+          ];
         };
       };
       darwinConfigurations.pablo = darwin.lib.darwinSystem {
