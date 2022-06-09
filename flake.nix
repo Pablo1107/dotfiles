@@ -29,6 +29,8 @@
           emacs-overlay.overlay
         ];
       };
+
+      personalModules = map (n: "${./modules}/${n}") (builtins.attrNames (builtins.readDir ./modules));
     in
     {
       homeConfigurations = {
@@ -44,9 +46,7 @@
             ];
             nixpkgs = nixpkgsConfig;
           };
-          extraModules = [
-            ./modules/emacs.nix
-          ];
+          extraModules = personalModules;
         };
       };
       darwinConfigurations.pablo = darwin.lib.darwinSystem {
@@ -68,7 +68,7 @@
               };
             };
           }
-        ];
+        ] ++ personalModules;
         inputs = { inherit darwin nixpkgs; };
       };
       nixOnDroidConfigurations = {

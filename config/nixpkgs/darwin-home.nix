@@ -44,6 +44,13 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # personal modules
+  personal.fzf.enable = true;
+  personal.git.enable = true;
+  personal.nix.enable = true;
+  personal.ssh.enable = true;
+  personal.python.enable = true;
+
   home.sessionVariables = sessionVariables;
 
   home.packages = [
@@ -66,33 +73,6 @@ in
     hledger
     tealdeer
     ffmpeg-full
-
-    # Python
-    python.pkgs.pip
-    (
-      python39.withPackages (
-        ps: with ps; [
-          tkinter
-          setuptools
-          wheel
-          pynvim
-          requests
-          selenium
-          jinja2
-          ply
-          pyaml
-          numpy
-          sympy
-          pygments
-          matplotlib
-          seaborn
-          pandas-datareader
-          requests-cache
-          plotly
-          cfn-lint
-        ]
-      )
-    )
 
     awscli2
     # aws-sam-cli
@@ -138,37 +118,12 @@ in
     # clang
 
     hicolor-icon-theme
-    #emacsPgtk
   ];
 
   # vifm
   home.file.".config/vifm/vifmrc".text = getDotfile "vifm" "vifmrc";
 
-  # home.file.".config/vifm/colors/solarized-dark.vifm".text = getDotfile "vifm" "colors/solarized-dark.vifm";
-  # home.file.".local/bin/wl-screenshot".source = writeScript "wl-screenshot" (getDotfile "scripts" "wl-screenshot");
-  # home.file.".local/bin/git-status".source = writeScript "git-status" (getDotfile "scripts" "git-status");
-
   programs = {
-    git = {
-      enable = true;
-      userName = "Pablo Andres Dealbera";
-      userEmail = "dealberapablo07@gmail.com";
-      aliases = {
-        fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add";
-      };
-      extraConfig = {
-        push.followTags = true; # always push tags when "git push"
-        credential = {
-          helper = "store";
-        };
-        # pager.show = "nvim -R -c '%sm/\\e.\\{-}m//ge' +1 -";
-        diff.tool = "nvimdiff";
-        difftool.nvimdiff.cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
-        # difftool.prompt = false;
-        url."ssh://git@github.com/".insteadOf = "https://github.com/";
-      };
-    };
-
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -201,15 +156,6 @@ in
       shellAliases = shellAliases;
     };
 
-    ssh = {
-      enable = true;
-      extraConfig = ''
-        Host github.com
-        Hostname ssh.github.com
-        Port 443
-      '';
-    };
-
     fzf = {
       enable = true;
       defaultCommand = "fd --type f --hidden --exclude .git";
@@ -226,41 +172,6 @@ in
     tmux = {
       enable = true;
       extraConfig = getDotfile "tmux" ".tmux.conf";
-    };
-    htop = {
-      enable = true;
-      settings = {
-        hideThreads = true;
-        hideUserlandThreads = true;
-        showCpuUsage = true;
-        showProgramPath = false;
-        vimMode = true;
-        fields = with config.lib.htop.fields; [
-          PID
-          USER
-          PRIORITY
-          NICE
-          M_SIZE
-          M_RESIDENT
-          M_SHARE
-          STATE
-          PERCENT_CPU
-          PERCENT_MEM
-          TIME
-          COMM
-        ];
-        highlight_base_name = 1;
-        highlight_megabytes = 1;
-        highlight_threads = 1;
-      } // (with config.lib.htop; leftMeters [
-        (bar "LeftCPUs2")
-        (bar "Memory")
-        (bar "Swap")
-      ]) // (with config.lib.htop; rightMeters [
-        (bar "RightCPUs2")
-        (text "Tasks")
-        (text "LoadAverage")
-      ]);
     };
   };
 
