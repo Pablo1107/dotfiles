@@ -76,52 +76,6 @@ let
     readFile localPath;
 
   keyBindings = getDotfile "zsh" "key-bindings.zsh";
-
-  customFirefox = (
-    pkgs.firefox-wayland.override {
-      extraPrefs = ''
-        //  
-        var {classes:Cc,interfaces:Ci,utils:Cu} = Components;  
-              
-        /* set new tab page */  
-        try {  
-          Cu.import("resource:///modules/AboutNewTab.jsm");  
-          var newTabURL = "file:////home/pablo/index.html";  
-          AboutNewTab.newTabURL = newTabURL;  
-        } catch(e){Cu.reportError(e);} // report errors in the Browser Console
-      '';
-    }
-  ).overrideAttrs (
-    oldAttrs: {
-      buildCommand = oldAttrs.buildCommand + ''
-        echo 'pref("general.config.sandbox_enabled", false);' >> "$out/lib/firefox/defaults/pref/autoconfig.js"
-      '';
-      mozillaCfg = writeText "mozilla.cfg" ''
-          '';
-    }
-  );
-
-  firefoxNixGL = makeDesktopItem {
-    name = "firefox-nixgl";
-    exec = "${nixgl.nixGLIntel}/bin/nixGLIntel ${customFirefox}/bin/firefox %U";
-    icon = "${customFirefox}/share/icons/hicolor/64x64/apps/firefox.png";
-    comment = "";
-    desktopName = "Firefox";
-    genericName = "Web Browser";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-    mimeTypes = [
-      "text/html"
-      "text/xml"
-      "application/xhtml+xml"
-      "application/vnd.mozilla.xul+xml"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-      "x-scheme-handler/ftp"
-    ];
-  };
 in
 {
   # programs.mbsync.enable = true;
@@ -163,6 +117,8 @@ in
   personal.ssh.enable = true;
   personal.syncthing.enable = true;
   personal.xdg.enable = true;
+  personal.tmux.enable = true;
+  personal.firefox.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -171,7 +127,6 @@ in
     homeDirectory = "/home/pablo";
     sessionVariables = sessionVariables;
   };
-
   home.packages = [
     stow
     htop
@@ -224,7 +179,6 @@ in
     qt5.qtwayland
     xdg-utils
     nixgl.nixGLIntel
-    firefoxNixGL
     imv
     xfce.tumbler
     gnome3.gnome-keyring
@@ -321,41 +275,6 @@ in
     # };
   };
   programs = {
-    firefox = {
-      enable = true;
-      package = customFirefox;
-      profiles =
-        let
-          defaultSettings = {
-            "browser.aboutConfig.showWarning" = false;
-            "browser.startup.page" = 3;
-            "browser.tabs.insertAfterCurrent" = true;
-            "browser.tabs.tabMinWidth" = 200;
-            "browser.uidensity" = 1;
-            "devtools.theme" = "dark";
-            "gfx.webrender.all" = true;
-            "gfx.webrender.enabled" = true;
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-            "ui.systemUsesDarkTheme" = 1;
-          };
-        in
-        {
-          pablo = {
-            id = 0;
-            settings = defaultSettings;
-            userChrome = getDotfile "firefox" "chrome/userChrome.css";
-            userContent = getDotfile "firefox" "chrome/userContent.css";
-          };
-        };
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        ublock-origin
-        privacy-badger
-        multi-account-containers
-        https-everywhere
-        darkreader
-      ];
-    };
-
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
 
@@ -398,11 +317,6 @@ in
     };
 
     command-not-found.enable = true;
-    tmux = {
-      enable = true;
-      extraConfig = getDotfile "tmux" ".tmux.conf";
-    };
-
     rofi = {
       enable = true;
       extraConfig = {
