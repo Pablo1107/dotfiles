@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
 
@@ -70,6 +70,8 @@ let
 
     _JAVA_AWT_WM_NONREPARENTING = 1;
   };
+
+  keyBindings = myLib.getDotfile "zsh" "key-bindings.zsh";
 in
 {
   options.personal.shell = {
@@ -78,6 +80,13 @@ in
 
   config = mkIf cfg.enable {
     home.sessionVariables = sessionVariables;
+    home.packages = with pkgs; [
+      alacritty
+      tree
+      fd
+      silver-searcher
+      tmuxinator
+    ];
 
     programs.zsh = {
       enable = true;
@@ -88,7 +97,7 @@ in
       autocd = true;
 
       initExtra = keyBindings + shellFunctions + ''
-        fpath+=${pure-prompt}/share/zsh/site-functions
+        fpath+=${pkgs.pure-prompt}/share/zsh/site-functions
         autoload -U promptinit;
         promptinit
           prompt pure
