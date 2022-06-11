@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
 
@@ -25,6 +25,6 @@ in
         kb-remove-char-back = "BackSpace";
       };
     };
-    home.file.".config/rofi/desktop.rasi".text = getDotfile "rofi" "desktop.rasi";
+    home.file.".config/rofi/desktop.rasi".text = myLib.getDotfile "rofi" "desktop.rasi";
   };
 }
