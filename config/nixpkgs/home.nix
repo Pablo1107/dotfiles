@@ -55,6 +55,7 @@ in
   personal.firefox.enable = true;
   personal.rofi.enable = true;
   personal.shell.enable = true;
+  personal.vifm.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

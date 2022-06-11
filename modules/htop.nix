@@ -3,25 +3,48 @@
 with lib;
 
 let
-  cfg = config.personal.fzf;
+  cfg = config.personal.htop;
 in
 {
-  options.personal.fzf = {
-    enable = mkEnableOption "fzf";
+  options.personal.htop = {
+    enable = mkEnableOption "htop";
   };
 
   config = mkIf cfg.enable {
-    programs.fzf = {
+    programs.htop = {
       enable = true;
-      defaultCommand = "fd --type f --hidden --exclude .git";
-      fileWidgetCommand = "$FZF_DEFAULT_COMMAND";
-      defaultOptions = [
-        "--bind tab:toggle-out,shift-tab:toggle-in"
-        "--bind alt-j:down,alt-k:up,ctrl-j:preview-down,ctrl-k:preview-up"
-        "--color=dark"
-        "--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f"
-        "--color=info:#7aa6da,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
-      ];
+      settings = {
+        hideThreads = true;
+        hideUserlandThreads = true;
+        showCpuUsage = true;
+        showProgramPath = false;
+        vimMode = true;
+        fields = with config.lib.htop.fields; [
+          PID
+          USER
+          PRIORITY
+          NICE
+          M_SIZE
+          M_RESIDENT
+          M_SHARE
+          STATE
+          PERCENT_CPU
+          PERCENT_MEM
+          TIME
+          COMM
+        ];
+        highlight_base_name = 1;
+        highlight_megabytes = 1;
+        highlight_threads = 1;
+      } // (with config.lib.htop; leftMeters [
+        (bar "LeftCPUs2")
+        (bar "Memory")
+        (bar "Swap")
+      ]) // (with config.lib.htop; rightMeters [
+        (bar "RightCPUs2")
+        (text "Tasks")
+        (text "LoadAverage")
+      ]);
     };
   };
 }

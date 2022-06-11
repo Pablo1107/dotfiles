@@ -77,7 +77,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    zsh = {
+    programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
       history.extended = true;
@@ -109,7 +109,7 @@ in
       # sessionVariables = sessionVariables;
     };
 
-    bash = {
+    programs.bash = {
       enable = true;
       # sessionVariables = sessionVariables;
       shellAliases = shellAliases;

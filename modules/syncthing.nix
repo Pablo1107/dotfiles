@@ -11,42 +11,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    zsh = {
+    services.syncthing = {
       enable = true;
-      enableAutosuggestions = true;
-      history.extended = true;
-      history.size = 10000000;
-      shellAliases = shellAliases;
-      autocd = true;
-
-      initExtra = keyBindings + shellFunctions + ''
-        fpath+=${pure-prompt}/share/zsh/site-functions
-        autoload -U promptinit;
-        promptinit
-          prompt pure
- 
-          eval "$(${pkgs.z-lua}/bin/z --init zsh)"
-      '';
-
-      loginExtra = ''
-        setopt extendedglob
-        setopt appendhistory
-        setopt autocd
-
-        source /etc/profile.d/nix-daemon.sh
-      '';
-
-      profileExtra = ''
-        . /etc/profile
-      '';
-
-      # sessionVariables = sessionVariables;
+      tray.enable = true;
     };
-
-    bash = {
-      enable = true;
-      # sessionVariables = sessionVariables;
-      shellAliases = shellAliases;
+    # Fix tray.target not found
+    systemd.user.targets = {
+      tray = {
+        Unit = {
+          Description = "Tray";
+        };
+      };
     };
   };
 }
