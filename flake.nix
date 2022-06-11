@@ -30,6 +30,13 @@
         ];
       };
 
+      # not ready yet :(
+      # lib = nixpkgs.lib.extend
+      #   (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
+
+      myLib = import ./lib { };
+
+      # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
       personalModules = map (n: "${./modules}/${n}") (builtins.attrNames (builtins.readDir ./modules));
     in
     {
@@ -47,6 +54,9 @@
             nixpkgs = nixpkgsConfig;
           };
           extraModules = personalModules;
+          extraSpecialArgs = {
+            inherit myLib;
+          };
         };
       };
       darwinConfigurations.pablo = darwin.lib.darwinSystem {
