@@ -62,7 +62,6 @@ in
   home = {
     username = "pablo";
     homeDirectory = "/home/pablo";
-    sessionVariables = sessionVariables;
   };
   home.packages = [
     stow

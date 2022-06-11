@@ -77,6 +77,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.sessionVariables = sessionVariables;
+
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
