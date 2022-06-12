@@ -86,6 +86,7 @@ in
       fd
       silver-searcher
       tmuxinator
+      cached-nix-shell
     ];
 
     programs.zsh = {
