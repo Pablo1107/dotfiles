@@ -1,5 +1,5 @@
-#!/usr/bin/env cached-nix-shell
-#! nix-shell -i bash -p grim slurp jq wl-clipboard
+#!/usr/bin/env nix-shell
+#!nix-shell -i sh -p grim slurp jq wl-clipboard xdg-utils
 #// vim: set ft=sh:
 
 # Screenshot helper for sway based on Witalij Berdinskich script
