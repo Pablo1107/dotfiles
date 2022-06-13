@@ -2,40 +2,7 @@
 
 with pkgs;
 
-let
-  getDotfile = with builtins; ref: path:
-    let
-      localPath = ../. + "/${ref}/${path}";
-    in
-    readFile localPath;
-
-  keyBindings = getDotfile "zsh" "key-bindings.zsh";
-in
 {
-  # programs.mbsync.enable = true;
-  # programs.mu.enable = true;
-  # accounts.email.accounts.primary = {
-  #   primary = true;
-  #   address = "dealberapablo07@gmail.com";
-  #   userName = "dealberapablo07@gmail.com";
-  #   imap.host = "imap.gmail.com";
-  #   smtp.host = "smtp.gmail.com";
-  #   mbsync = {
-  #     enable = true;
-  #     create = "maildir";
-  #   };
-  #   mu.enable = true;
-  #   realName = "Pablo Andres Dealbera";
-  #   signature = {
-  #     text = ''
-  #       Pablo Andres Dealbera
-  #       Web Developer
-  #     '';
-  #     showSignature = "append";
-  #   };
-  #   passwordCommand = "gpg2 -q --for-your-eyes-only --no-tty -d ~/email.gpg";
-  # };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -63,21 +30,10 @@ in
     username = "pablo";
     homeDirectory = "/home/pablo";
   };
+
   home.packages = [
     stow
     htop
-    termite
-    alacritty
-    dmenu
-    pure-prompt
-    openssh
-    tree
-    brillo
-    fd
-    silver-searcher
-    tmuxinator
-    xclip
-    xsel
     grim
     slurp
     jq
@@ -107,6 +63,7 @@ in
     qt5.qttools
     unixtools.arp
     ripgrep
+    inetutils
 
     # Wayland
     xsettingsd
@@ -186,20 +143,12 @@ in
     { name = "nix-community"; sha256 = "00lpx4znr4dd0cc4w4q8fl97bdp7q19z1d3p50hcfxy26jz5g21g"; }
   ];
 
-  # vifm
-  home.file.".config/vifm/vifmrc".text = getDotfile "vifm" "vifmrc";
-
-  # home.file.".config/vifm/colors/solarized-dark.vifm".text = getDotfile "vifm" "colors/solarized-dark.vifm";
   # home.file.".local/bin/wl-screenshot".source = writeScript "wl-screenshot" (getDotfile "scripts" "wl-screenshot");
   # home.file.".local/bin/git-status".source = writeScript "git-status" (getDotfile "scripts" "git-status");
   home.file.".local/bin/xterm".source = writeScript "xterm" ''
     #!${pkgs.stdenv.shell}
     ${alacritty}/bin/alacritty "$@"
   '';
-  home.file.".local/share/fonts/cryptocoins.tff".source = fetchurl {
-    url = "https://raw.githubusercontent.com/AllienWorks/cryptocoins/master/webfont/cryptocoins.ttf";
-    sha256 = "18y3r25x5fb2nk7760dyk9w37kpsaqlh89ak4b1spwggwyq4in5n";
-  };
 
   fonts.fontconfig.enable = true;
   dconf = {
