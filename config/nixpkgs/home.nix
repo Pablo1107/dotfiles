@@ -163,7 +163,8 @@ with pkgs;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
 
-    command-not-found.enable = true;
+    command-not-found.enable = false;
+    nix-index.enable = true;
   };
 
   # This value determines the Home Manager release that your
