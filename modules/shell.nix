@@ -34,12 +34,6 @@ let
   sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "firefox";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_DATA_DIRS = "$HOME/.nix-profile/share:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
-    XDG_CURRENT_DESKTOP = "sway";
-
     XCOMPOSEFILE = "$XDG_CONFIG_HOME/X11/xcompose";
     XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
     GEM_HOME = "$XDG_DATA_HOME/gem";
@@ -48,27 +42,14 @@ let
     #GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
 
     NPM_PACKAGES = "$HOME/.npm-packages";
-    PATH = "$HOME/dotfiles/bin:$HOME/scripts:$HOME/.local/bin/:$NPM_PACKAGES/bin:$HOME/.emacs.d/bin:$PATH";
     MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
-    MOZ_ENABLE_WAYLAND = 1;
-    MOZ_DBUS_REMOTE = 1;
-
-    ROFI_FB_GENERIC_FO = "xdg-open";
-    ROFI_FB_PREV_LOC_FILE = "~/.local/share/rofi/rofi_fb_prevloc";
-    ROFI_FB_HISTORY_FILE = "~/.local/share/rofi/rofi_fb_history ";
-    ROFI_FB_START_DIR = "$HOME";
-
-    QT_QPA_PLATFORM = "wayland";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
 
     PKG_CONFIG_PATH = "$(pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
 
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
 
     LEDGER_FILE = "$HOME/ledger/all.journal";
-
-    _JAVA_AWT_WM_NONREPARENTING = 1;
   };
 
   keyBindings = myLib.getDotfile "zsh" "key-bindings.zsh";
@@ -76,10 +57,31 @@ in
 {
   options.personal.shell = {
     enable = mkEnableOption "shell";
+
+    envVariables = mkOption {
+      type = types.attrsOf types.str;
+      example = { EDITOR = "nvim"; };
+      default = sessionVariables;
+    };
+
+    path = mkOption {
+      type = types.listOf types.str;
+      example = [
+        "$HOME/.local/bin"
+        "\${xdg.configHome}/emacs/bin"
+        ".git/safe/../../bin"
+      ];
+      default = [
+        "$HOME/dotfiles/bin:"
+        "$HOME/scripts"
+        "$HOME/.local/bin/"
+        "NPM_PACKAGES/bin"
+        "HOME/.emacs.d/bin"
+      ];
+    };
   };
 
   config = mkIf cfg.enable {
-    home.sessionVariables = sessionVariables;
     home.packages = with pkgs; [
       alacritty
       tree
@@ -87,7 +89,10 @@ in
       silver-searcher
       tmuxinator
       cached-nix-shell
+      ripgrep
     ];
+    home.sessionVariables = cfg.envVariables;
+    home.sessionPath = cfg.path;
 
     programs.zsh = {
       enable = true;

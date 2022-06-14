@@ -69,6 +69,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = personalModules;
+            home-manager.extraSpecialArgs = {
+              inherit myLib;
+            };
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [
                 ./config/nixpkgs/darwin-home.nix

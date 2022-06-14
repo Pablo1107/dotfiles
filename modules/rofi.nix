@@ -11,6 +11,13 @@ in
   };
 
   config = mkIf cfg.enable {
+    personal.shell.envVariables = {
+      ROFI_FB_GENERIC_FO = "xdg-open";
+      ROFI_FB_PREV_LOC_FILE = "~/.local/share/rofi/rofi_fb_prevloc";
+      ROFI_FB_HISTORY_FILE = "~/.local/share/rofi/rofi_fb_history ";
+      ROFI_FB_START_DIR = "$HOME";
+    };
+
     programs.rofi = {
       enable = true;
       extraConfig = {

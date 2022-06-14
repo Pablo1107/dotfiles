@@ -11,6 +11,14 @@ in
   };
 
   config = mkIf cfg.enable {
+    personal.shell.envVariables = {
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_DATA_DIRS = "$HOME/.nix-profile/share:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
+      XDG_CURRENT_DESKTOP = "sway";
+    };
+
     xdg = {
       userDirs = {
         enable = true;

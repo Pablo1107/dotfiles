@@ -22,6 +22,9 @@ with pkgs;
   personal.firefox.enable = true;
   personal.rofi.enable = true;
   personal.shell.enable = true;
+  personal.shell.envVariables = {
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+  };
   personal.vifm.enable = true;
 
   # Home Manager needs a bit of information about you and the
