@@ -26,6 +26,7 @@ with pkgs;
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
   personal.vifm.enable = true;
+  personal.sway.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
