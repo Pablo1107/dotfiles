@@ -19,6 +19,8 @@ let
     "," = "NIX_AUTO_RUN=1 ";
     pacman = "aura";
     ssh = "TERM=xterm-256color ssh ";
+    icat = "kitty +kitten icat";
+    imgcat = "wezterm imgcat";
   };
 
   shellFunctions = ''
