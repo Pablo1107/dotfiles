@@ -44,13 +44,14 @@
       homeConfigurations = {
         pablo = home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           homeDirectory = "/home/pablo";
           username = "pablo";
           stateVersion = "21.05";
           configuration = {
             imports = [
               ./config/nixpkgs/home.nix
-              declarative-cachix.homeManagerModules.declarative-cachix
+              declarative-cachix.homeManagerModules.declarative-cachix-experimental
             ];
             nixpkgs = nixpkgsConfig;
           };
