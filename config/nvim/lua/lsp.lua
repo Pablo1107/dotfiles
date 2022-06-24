@@ -240,7 +240,7 @@ bg("TelescopeSelection", black2)
 telescope = require('telescope')
 actions = require('telescope.actions')
 telescope.setup{
-  defaults = {
+  defaults = require('telescope.themes').get_ivy {
     -- Default configuration for telescope goes here:
     -- config_key = value,
     mappings = {
