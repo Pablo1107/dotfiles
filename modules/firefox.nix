@@ -65,13 +65,13 @@ in
       MOZ_DBUS_REMOTE = "1";
     };
 
-    home.packages = with pkgs; [
-      firefoxNixGL
-    ];
+    # home.packages = with pkgs; [
+    #   firefoxNixGL
+    # ];
 
     programs.firefox = {
       enable = true;
-      package = customFirefox;
+      package = (myLib.nixGLWrapper pkgs { bin = "firefox"; });
       profiles =
         let
           defaultSettings = {
