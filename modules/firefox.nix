@@ -31,28 +31,6 @@ let
           '';
     }
   );
-
-  firefoxNixGL = pkgs.makeDesktopItem {
-    name = "firefox-nixgl";
-    exec = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${customFirefox}/bin/firefox %U";
-    icon = "${customFirefox}/share/icons/hicolor/64x64/apps/firefox.png";
-    comment = "";
-    desktopName = "Firefox";
-    genericName = "Web Browser";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-    mimeTypes = [
-      "text/html"
-      "text/xml"
-      "application/xhtml+xml"
-      "application/vnd.mozilla.xul+xml"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-      "x-scheme-handler/ftp"
-    ];
-  };
 in
 {
   options.personal.firefox = {
@@ -65,13 +43,12 @@ in
       MOZ_DBUS_REMOTE = "1";
     };
 
-    # home.packages = with pkgs; [
-    #   firefoxNixGL
-    # ];
-
     programs.firefox = {
       enable = true;
-      package = (myLib.nixGLWrapper pkgs { bin = "firefox"; });
+      package = (myLib.nixGLWrapper pkgs {
+        bin = "firefox";
+        package = customFirefox;
+      });
       profiles =
         let
           defaultSettings = {
