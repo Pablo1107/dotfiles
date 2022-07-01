@@ -13,6 +13,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       emacsPgtk
+      plantuml
     ];
 
     xdg.mimeApps = {
