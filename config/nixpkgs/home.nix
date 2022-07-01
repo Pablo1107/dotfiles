@@ -42,7 +42,6 @@ with pkgs;
     slurp
     jq
     xdg-user-dirs
-    vifm
     qrcp
     element-desktop
     gimp
