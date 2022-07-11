@@ -14,9 +14,10 @@
     nix-on-droid.url = "github:t184256/nix-on-droid";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid }:
+  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence }:
     let
       nixpkgsConfig = {
         config = {
@@ -43,19 +44,15 @@
     {
       homeConfigurations = {
         pablo = home-manager.lib.homeManagerConfiguration {
-          system = "x86_64-linux";
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          homeDirectory = "/home/pablo";
-          username = "pablo";
-          stateVersion = "21.05";
-          configuration = {
-            imports = [
-              ./config/nixpkgs/home.nix
-              declarative-cachix.homeManagerModules.declarative-cachix-experimental
-            ];
-            nixpkgs = nixpkgsConfig;
-          };
-          extraModules = personalModules;
+          modules = [
+            ./config/nixpkgs/home.nix
+            declarative-cachix.homeManagerModules.declarative-cachix-experimental
+            impermanence.nixosModules.home-manager.impermanence
+            {
+              nixpkgs = nixpkgsConfig;
+            }
+          ] ++ personalModules;
           extraSpecialArgs = {
             inherit myLib;
           };
@@ -99,9 +96,9 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = personalModules;
-	      home-manager.extraSpecialArgs = {
-		inherit myLib;
-	      };
+              home-manager.extraSpecialArgs = {
+                inherit myLib;
+              };
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./config/nixpkgs/android.nix ];
               };
