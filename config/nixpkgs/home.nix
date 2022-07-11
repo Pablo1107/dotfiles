@@ -27,6 +27,7 @@ with pkgs;
   };
   personal.vifm.enable = true;
   personal.sway.enable = true;
+  personal.nvim.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

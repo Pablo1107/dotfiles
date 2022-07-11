@@ -9,7 +9,8 @@
   personal.vifm.enable = true;
   personal.tmux.enable = true;
   personal.shell.enable = true;
-  
+  personal.nvim.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -21,7 +22,6 @@
   };
 
   home.packages = with pkgs; [
-    neovim
     hledger
   ];
 
