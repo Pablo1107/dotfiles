@@ -20,11 +20,9 @@ in
       removePrefixDirectory = true;
       allowOther = true;
       files = [
-        "vifm/.config/vifm"
+        "vifm/.config/vifm/colors"
+        "vifm/.config/vifm/vifmrc"
       ];
-      # directories = [
-      #   "vifm/.config/vifm"
-      # ];
     };
 
     # home.file.".config/vifm/vifmrc".text = myLib.getDotfile "vifm" "vifmrc";
