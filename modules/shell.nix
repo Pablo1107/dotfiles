@@ -63,7 +63,6 @@ in
     envVariables = mkOption {
       type = types.attrsOf types.str;
       example = { EDITOR = "nvim"; };
-      default = sessionVariables;
     };
 
     path = mkOption {
@@ -93,7 +92,7 @@ in
       cached-nix-shell
       ripgrep
     ];
-    home.sessionVariables = cfg.envVariables;
+    home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
 
     programs.zsh = {
