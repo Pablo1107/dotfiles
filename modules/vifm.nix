@@ -11,7 +11,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".config/vifm/vifmrc".text = myLib.getDotfile "vifm" "vifmrc";
+    home.packages = with pkgs; [
+      vifm
+      kitty # for icat kitten previews
+    ];
+
+    home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
+      removePrefixDirectory = true;
+      allowOther = true;
+      files = [
+        "vifm/.config/vifm"
+      ];
+      # directories = [
+      #   "vifm/.config/vifm"
+      # ];
+    };
+
+    # home.file.".config/vifm/vifmrc".text = myLib.getDotfile "vifm" "vifmrc";
     # home.file.".config/vifm/colors/solarized-dark.vifm".text = getDotfile "vifm" "colors/solarized-dark.vifm";
   };
 }

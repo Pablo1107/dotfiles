@@ -172,7 +172,13 @@ command! reload :write | restart full
 
 " Pdf
 filextype {*.pdf},<application/pdf> zathura %c %i &, apvlv %c, xpdf %c
-fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
+" fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
+
+filetype *.pdf open -a Preview %f &
+fileviewer *.pdf
+    \ tput cup %py %px > /dev/tty && convert -density 150 %c\[0\] -quality 100 -flatten -sharpen 0x1.0 -background white -alpha remove -alpha off /tmp/vifm-pdf-preview.jpg >/dev/null 2>&1 && kitty +kitten icat --transfer-mode=file --place=%pwx%ph@%pxx%py /tmp/vifm-pdf-preview.jpg %N
+    \ %pc
+    \ kitty +kitten icat --transfer-mode=file --place=%pwx%ph@%pxx%py --clear %N
 
 " PostScript
 filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
