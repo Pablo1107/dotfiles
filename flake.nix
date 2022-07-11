@@ -99,6 +99,9 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = personalModules;
+	      home-manager.extraSpecialArgs = {
+		inherit myLib;
+	      };
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./config/nixpkgs/android.nix ];
               };
