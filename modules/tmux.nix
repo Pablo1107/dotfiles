@@ -11,6 +11,10 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    home.packages = with pkgs; [
+      tmuxinator
+    ];
     programs.tmux = {
       enable = true;
       extraConfig = myLib.getDotfile "tmux" ".tmux.conf";
