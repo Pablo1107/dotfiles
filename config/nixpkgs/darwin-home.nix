@@ -17,48 +17,25 @@ with pkgs;
   personal.shell.enable = true;
 
   home.packages = [
-    stow
-    htop
-    pure-prompt
-    tree
-    fd
-    silver-searcher
-    ripgrep
-    tmuxinator
     jq
-    vifm
-
+    man-pages
     element-desktop
 
-    #texlive.combined.scheme-full
-    #anki
-    #slack
     hledger
     tealdeer
     ffmpeg-full
 
-    awscli2
+    # awscli2
     # aws-sam-cli
 
     # Node
     # (yarn.override { nodejs = nodejs-12_x; })
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
-    # nodejs
-    nodejs-14_x
+    nodejs
+    # nodejs-14_x
     deno
     efm-langserver
-
-    # Fonts
-    #noto-fonts
-    #noto-fonts-cjk
-    #noto-fonts-emoji
-    #hack-font
-    #font-awesome
-    #dejavu_fonts
-    #ibm-plex
-    #symbola
-    #material-design-icons
 
     # AWS
     git-remote-codecommit
@@ -77,7 +54,6 @@ with pkgs;
     pandoc
     # mongodb-compass
 
-    man-pages
     # clang
 
     hicolor-icon-theme

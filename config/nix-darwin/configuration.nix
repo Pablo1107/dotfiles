@@ -52,6 +52,7 @@ with pkgs;
       "pixman"
       "cairo"
       "pango"
+      "syncthing"
     ];
     casks = [
       "firefox"
