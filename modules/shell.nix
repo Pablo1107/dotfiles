@@ -47,7 +47,7 @@ let
     MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
 
-    PKG_CONFIG_PATH = "$(pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
+    PKG_CONFIG_PATH = "$(${pkgs.pkg-config}/bin/pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
 
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
 
