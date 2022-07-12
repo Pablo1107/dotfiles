@@ -28,6 +28,7 @@ in
         difftool.nvimdiff.cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
         # difftool.prompt = false;
         url."ssh://git@github.com/".insteadOf = "https://github.com/";
+        core.excludesfile = "~/.config/git/gitignore";
       };
     };
   };
