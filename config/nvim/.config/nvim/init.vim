@@ -9,85 +9,89 @@
 "           Year: 2020
 
 let plugin_on = 0
-if empty(glob('~/.config/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/site/autoload/plug.vim --create-dirs
+
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
+if !empty(glob('~/.config/nvim/autoload/plug.vim'))
+  " Run PlugInstall if there are missing plugins
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \| PlugInstall --sync | source $MYVIMRC
+  \| endif
 
-call plug#begin('~/.config/nvim/plugged')
+  call plug#begin('~/.config/nvim/plugged')
 
-Plug 'sheerun/vim-polyglot'
-" Plug 'tomtom/tcomment_vim'
-Plug 'terrortylor/nvim-comment'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
-Plug 'vifm/vifm.vim'
-Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'machakann/vim-sandwich'
-Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
-" Plug 'roman/golden-ratio' " Makes current split bigger
-" Plug 'lervag/vimtex'
-" Plug 'vimwiki/vimwiki'
-" Plug 'nathangrigg/vim-beancount'
-" Plug 'Pablo1107/codi.vim'
-Plug 'ap/vim-css-color'
-" coc.nvim
-Plug 'neoclide/jsonc.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
-" Plug 'epilande/vim-react-snippets'
-" Plug 'tpope/vim-dispatch'
-Plug 'ghifarit53/tokyonight-vim'
-" Plug 'folke/tokyonight.nvim'
-" Plug 'Pablo1107/codi.vim'
-" Plug 'arecarn/vim-crunch'
+  Plug 'sheerun/vim-polyglot'
+  " Plug 'tomtom/tcomment_vim'
+  Plug 'terrortylor/nvim-comment'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+  " Plug 'junegunn/fzf'
+  " Plug 'junegunn/fzf.vim'
+  Plug 'vifm/vifm.vim'
+  Plug 'tpope/vim-eunuch' " Helpers for UNIX (Move, Rename, etc)
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'machakann/vim-sandwich'
+  Plug 'christoomey/vim-tmux-navigator' " Seamless navigation in vim and tmux
+  " Plug 'roman/golden-ratio' " Makes current split bigger
+  " Plug 'lervag/vimtex'
+  " Plug 'vimwiki/vimwiki'
+  " Plug 'nathangrigg/vim-beancount'
+  " Plug 'Pablo1107/codi.vim'
+  Plug 'ap/vim-css-color'
+  " coc.nvim
+  Plug 'neoclide/jsonc.vim'
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'SirVer/ultisnips'
+  " Plug 'honza/vim-snippets'
+  " Plug 'epilande/vim-react-snippets'
+  " Plug 'tpope/vim-dispatch'
+  Plug 'ghifarit53/tokyonight-vim'
+  " Plug 'folke/tokyonight.nvim'
+  " Plug 'Pablo1107/codi.vim'
+  " Plug 'arecarn/vim-crunch'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'RishabhRD/popfix'
-Plug 'RishabhRD/nvim-lsputils'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'shaunsingh/solarized.nvim'
-" Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', { 'branch': 'main' }
-" Plug 'prettier/vim-prettier', {
-" \ 'do': 'yarn install',
-" \ 'branch': 'release/0.x'
-" \ }
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'romgrk/nvim-treesitter-context'
-Plug 'nvim-treesitter/playground'
-Plug 'lervag/wiki.vim'
-Plug 'sindrets/diffview.nvim'
-Plug 'luukvbaal/stabilize.nvim'
-Plug 'github/copilot.vim'
-Plug 'nathangrigg/vim-beancount'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'elkowar/yuck.vim'
-Plug 'eraserhd/parinfer-rust', {'do':
-      \  'cargo build --release'}
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
+  Plug 'RishabhRD/popfix'
+  Plug 'RishabhRD/nvim-lsputils'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'shaunsingh/solarized.nvim'
+  " Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', { 'branch': 'main' }
+  " Plug 'prettier/vim-prettier', {
+  " \ 'do': 'yarn install',
+  " \ 'branch': 'release/0.x'
+  " \ }
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
+  Plug 'ray-x/lsp_signature.nvim'
+  Plug 'romgrk/nvim-treesitter-context'
+  Plug 'nvim-treesitter/playground'
+  Plug 'lervag/wiki.vim'
+  Plug 'sindrets/diffview.nvim'
+  Plug 'luukvbaal/stabilize.nvim'
+  Plug 'github/copilot.vim'
+  Plug 'nathangrigg/vim-beancount'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'elkowar/yuck.vim'
+  Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 
-call plug#end()
+  call plug#end()
 
-let plugin_on = 1
+  let plugin_on = 1
 
-if match(&rtp, 'fzf.vim') != -1
-  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  if match(&rtp, 'fzf.vim') != -1
+    command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  endif
+
+  runtime macros/sandwich/keymap/surround.vim
 endif
 
-runtime macros/sandwich/keymap/surround.vim
 
 set history=10000
 set ttimeoutlen=100 " wait up to 100ms after Esc for special key
