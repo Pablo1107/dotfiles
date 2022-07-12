@@ -3,6 +3,8 @@
 with pkgs;
 
 {
+  imports = [ ./ssh.nix ];
+
   environment.packages = [
     neovim
     git
