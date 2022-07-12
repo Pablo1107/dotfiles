@@ -25,6 +25,9 @@ with pkgs;
   personal.shell.envVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
+  programs.zsh.loginExtra = ''
+    source /etc/profile.d/nix-daemon.sh
+  '';
   personal.vifm.enable = true;
   personal.sway.enable = true;
   personal.nvim.enable = true;
@@ -37,6 +40,7 @@ with pkgs;
   };
 
   home.packages = [
+    cached-nix-shell
     stow
     htop
     grim

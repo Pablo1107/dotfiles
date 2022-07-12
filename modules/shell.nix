@@ -89,7 +89,6 @@ in
       fd
       silver-searcher
       tmuxinator
-      cached-nix-shell
       ripgrep
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
@@ -116,8 +115,6 @@ in
         setopt extendedglob
         setopt appendhistory
         setopt autocd
-
-        source /etc/profile.d/nix-daemon.sh
       '';
 
       profileExtra = ''
