@@ -63,6 +63,7 @@ in
     envVariables = mkOption {
       type = types.attrsOf types.str;
       example = { EDITOR = "nvim"; };
+      default = {};
     };
 
     path = mkOption {

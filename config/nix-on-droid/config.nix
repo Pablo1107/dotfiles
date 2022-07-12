@@ -24,6 +24,7 @@ with pkgs;
     unzip
     ncurses
     neofetch
+    curl
   ];
 
   user = {
