@@ -67,7 +67,9 @@
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.sharedModules = personalModules;
+              home-manager.sharedModules = [
+                impermanence.nixosModules.home-manager.impermanence
+              ] ++ personalModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
             };
