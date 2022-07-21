@@ -7,9 +7,6 @@
 --           Author: Pablo Andres Dealbera
 --           Year: 2022
 
-vim.env.MYVIMRC = '/Users/pablo/nvim/init.lua'
-vim.opt.rtp:append('~/nvim')
-
 require('personal/lib')
 require('personal/plugins')
 require('personal/nvim-lspconfig')
