@@ -46,6 +46,7 @@ with pkgs;
     cleanup = "uninstall";
     taps = [
       "homebrew/cask"
+      "homebrew/services"
     ];
     brews = [
       "pkg-config"
