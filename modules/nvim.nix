@@ -13,6 +13,12 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       neovim
+      efm-langserver
+      rnix-lsp
+      nodePackages.typescript-language-server
+      nodePackages.vim-language-server
+      sumneko-lua-language-server
+      clang
     ];
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
@@ -20,7 +26,7 @@ in
       allowOther = true;
       files = [
         "nvim/.config/nvim/lua"
-        "nvim/.config/nvim/init.vim"
+        "nvim/.config/nvim/init.lua"
       ];
     };
   };
