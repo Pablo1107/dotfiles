@@ -29,9 +29,15 @@ local function plugins()
     use 'norcalli/nvim-colorizer.lua' -- Colorize hex colors strings
 
     -- use 'folke/tokyonight.nvim'
+    -- 'ghifarit53/tokyonight-vim',
     use {
-      'ghifarit53/tokyonight-vim',
+      'tiagovla/tokyodark.nvim',
       config = function()
+        vim.g.tokyodark_transparent_background = true
+        vim.g.tokyodark_enable_italic_comment = true
+        vim.g.tokyodark_enable_italic = true
+        vim.g.tokyodark_color_gamma = "1.0"
+        vim.cmd("colorscheme tokyodark")
       end
     }
     use 'arecarn/vim-crunch' -- Maths in VIM!
@@ -77,7 +83,7 @@ local function plugins()
           -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
           highlight = {
             enable = true, -- false will disable the whole extension
-            disable = { "nix", "ledger" }, -- list of language that will be disabled
+            disable = { "ledger" }, -- list of language that will be disabled
           },
         }
       end

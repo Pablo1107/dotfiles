@@ -181,33 +181,33 @@ autocmd('TermOpen', {
   end
 })
 
-vim.cmd [[
-function! AdaptColorscheme() abort
-highlight clear CursorLine
-highlight Normal ctermbg=none guibg=none
-highlight LineNr ctermbg=none guibg=none
-highlight Folded ctermbg=none guibg=none
-highlight NonText ctermbg=none guibg=none
-highlight EndOfBuffer ctermbg=none guibg=none
-highlight SpecialKey ctermbg=none guibg=none
-highlight VertSplit ctermbg=none guibg=none
-highlight SignColumn ctermbg=none guibg=none
-
-highlight StatusLine cterm=bold gui=bold
-highlight User1 cterm=bold gui=bold
-highlight StatusLineNC cterm=none ctermfg=none gui=none
-highlight VertSplit cterm=none ctermfg=blue guifg=black
-highlight Normal guibg=NONE
-highlight TabLine ctermbg=none guibg=none guifg=#626262
-highlight TabLineFill ctermbg=none guibg=none
-highlight TabLineSel cterm=bold gui=bold ctermbg=none guibg=none ctermfg=1 guifg=#00A8C6
-endfunction
-
-augroup Colors
-autocmd!
-autocmd ColorScheme * call AdaptColorscheme()
-augroup END
-
-colorscheme tokyonight
-call AdaptColorscheme()
-]]
+-- vim.cmd [[
+-- function! AdaptColorscheme() abort
+-- highlight clear CursorLine
+-- highlight Normal ctermbg=none guibg=none
+-- highlight LineNr ctermbg=none guibg=none
+-- highlight Folded ctermbg=none guibg=none
+-- highlight NonText ctermbg=none guibg=none
+-- highlight EndOfBuffer ctermbg=none guibg=none
+-- highlight SpecialKey ctermbg=none guibg=none
+-- highlight VertSplit ctermbg=none guibg=none
+-- highlight SignColumn ctermbg=none guibg=none
+--
+-- highlight StatusLine cterm=bold gui=bold
+-- highlight User1 cterm=bold gui=bold
+-- highlight StatusLineNC cterm=none ctermfg=none gui=none
+-- highlight VertSplit cterm=none ctermfg=blue guifg=black
+-- highlight Normal guibg=NONE
+-- highlight TabLine ctermbg=none guibg=none guifg=#626262
+-- highlight TabLineFill ctermbg=none guibg=none
+-- highlight TabLineSel cterm=bold gui=bold ctermbg=none guibg=none ctermfg=1 guifg=#00A8C6
+-- endfunction
+--
+-- augroup Colors
+-- autocmd!
+-- autocmd ColorScheme * call AdaptColorscheme()
+-- augroup END
+--
+-- colorscheme tokyonight
+-- call AdaptColorscheme()
+-- ]]
