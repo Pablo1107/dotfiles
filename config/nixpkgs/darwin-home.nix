@@ -35,7 +35,6 @@ with pkgs;
     # (yarn.override { nodejs = nodejs-12_x; })
     nodejs
     # nodejs-14_x
-    deno
     efm-langserver
 
     # AWS
