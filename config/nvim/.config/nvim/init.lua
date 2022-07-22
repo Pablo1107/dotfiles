@@ -7,9 +7,10 @@
 --           Author: Pablo Andres Dealbera
 --           Year: 2022
 
+pcall(require, 'impatient')
+
 require('personal/lib')
 require('personal/plugins')
-require('personal/nvim-lspconfig')
 
 vim.opt.ttimeoutlen = 100 -- wait up to 100ms after Esc for special key
 vim.opt.number = true
@@ -37,46 +38,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.termguicolors = true
-
-local augroup = vim.api.nvim_create_augroup
-local group_id = augroup('InitGroup', {})
--- local autocmd = vim.api.nvim_create_autocmd
-local autocmd = function(a, b)
-  vim.api.nvim_create_autocmd(a, table_merge({
-    group = group_id,
-  }, b))
-end
-
-vim.cmd [[
-function! AdaptColorscheme() abort
-  highlight clear CursorLine
-  highlight Normal ctermbg=none guibg=none
-  highlight LineNr ctermbg=none guibg=none
-  highlight Folded ctermbg=none guibg=none
-  highlight NonText ctermbg=none guibg=none
-  highlight EndOfBuffer ctermbg=none guibg=none
-  highlight SpecialKey ctermbg=none guibg=none
-  highlight VertSplit ctermbg=none guibg=none
-  highlight SignColumn ctermbg=none guibg=none
-
-  highlight StatusLine cterm=bold gui=bold
-  highlight User1 cterm=bold gui=bold
-  highlight StatusLineNC cterm=none ctermfg=none gui=none
-  highlight VertSplit cterm=none ctermfg=blue guifg=black
-  highlight Normal guibg=NONE
-  highlight TabLine ctermbg=none guibg=none guifg=#626262
-  highlight TabLineFill ctermbg=none guibg=none
-  highlight TabLineSel cterm=bold gui=bold ctermbg=none guibg=none ctermfg=1 guifg=#00A8C6
-endfunction
-
-augroup Colors
-  autocmd!
-  autocmd ColorScheme * call AdaptColorscheme()
-augroup END
-
-colorscheme tokyonight
-call AdaptColorscheme()
-]]
 
 -- Undo after closing Vim
 local undodir_path = vim.fn.stdpath('data') .. '/undo-dir'
@@ -219,3 +180,34 @@ autocmd('TermOpen', {
     vim.opt_local.relativenumber = false
   end
 })
+
+vim.cmd [[
+function! AdaptColorscheme() abort
+highlight clear CursorLine
+highlight Normal ctermbg=none guibg=none
+highlight LineNr ctermbg=none guibg=none
+highlight Folded ctermbg=none guibg=none
+highlight NonText ctermbg=none guibg=none
+highlight EndOfBuffer ctermbg=none guibg=none
+highlight SpecialKey ctermbg=none guibg=none
+highlight VertSplit ctermbg=none guibg=none
+highlight SignColumn ctermbg=none guibg=none
+
+highlight StatusLine cterm=bold gui=bold
+highlight User1 cterm=bold gui=bold
+highlight StatusLineNC cterm=none ctermfg=none gui=none
+highlight VertSplit cterm=none ctermfg=blue guifg=black
+highlight Normal guibg=NONE
+highlight TabLine ctermbg=none guibg=none guifg=#626262
+highlight TabLineFill ctermbg=none guibg=none
+highlight TabLineSel cterm=bold gui=bold ctermbg=none guibg=none ctermfg=1 guifg=#00A8C6
+endfunction
+
+augroup Colors
+autocmd!
+autocmd ColorScheme * call AdaptColorscheme()
+augroup END
+
+colorscheme tokyonight
+call AdaptColorscheme()
+]]

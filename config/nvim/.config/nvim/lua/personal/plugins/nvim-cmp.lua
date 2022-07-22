@@ -1,7 +1,3 @@
-if not _G.plugin_loaded("nvim-cmp") then
-  do return end
-end
-
 local cmp = require('cmp')
 
 if not cmp then return end

@@ -1,3 +1,12 @@
+_G.augroup = vim.api.nvim_create_augroup
+local group_id = augroup('InitGroup', {})
+-- local autocmd = vim.api.nvim_create_autocmd
+_G.autocmd = function(a, b)
+  vim.api.nvim_create_autocmd(a, table_merge({
+    group = group_id,
+  }, b))
+end
+
 function _G.put(...)
   local objects = {}
   for i = 1, select('#', ...) do

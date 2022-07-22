@@ -1,6 +1,6 @@
-if not _G.plugin_loaded("nvim-lspconfig") then
-  do return end
-end
+-- if not _G.plugin_loaded("nvim-lspconfig") then
+--   do return end
+-- end
 
 vim.cmd [[
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
