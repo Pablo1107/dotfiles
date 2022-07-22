@@ -18,7 +18,7 @@ in
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
       sumneko-lua-language-server
-      clang
+      clang-tools
     ];
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
