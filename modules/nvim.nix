@@ -19,6 +19,7 @@ in
       nodePackages.vim-language-server
       sumneko-lua-language-server
       clang-tools
+      nodePackages.prettier_d_slim
     ];
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
