@@ -11,6 +11,14 @@
   personal.shell.enable = true;
   personal.nvim.enable = true;
 
+  home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
+    removePrefixDirectory = true;
+    allowOther = true;
+    files = [
+      "ssh/.ssh/authorized_keys"
+    ];
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 

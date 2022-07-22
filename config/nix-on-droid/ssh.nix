@@ -3,7 +3,7 @@
 let
   sshdTmpDirectory = "${config.user.home}/sshd-tmp";
   sshdDirectory = "${config.user.home}/sshd";
-  pathToPubKey = "${config.user.home}/dotfiles/config/ssh/authorized_keys";
+  # pathToPubKey = "${config.user.home}/dotfiles/config/ssh/authorized_keys";
   port = 8022;
 in
 {
