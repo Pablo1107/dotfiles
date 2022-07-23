@@ -67,6 +67,7 @@ with pkgs;
       "telegram"
       "whatsapp"
       "dbeaver-community"
+      "steam"
     ];
   };
 
