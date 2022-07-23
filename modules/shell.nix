@@ -43,8 +43,6 @@ let
     LESSHISTFILE = "-";
     #GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
 
-    NPM_PACKAGES = "$HOME/.npm-packages";
-    MANPATH = "\${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man";
     TMUX_SCRIPTS_DIR = "$HOME/dotfiles/config/tmux/scripts";
 
     PKG_CONFIG_PATH = "$(${pkgs.pkg-config}/bin/pkg-config --variable pc_path pkg-config)\${PKG_CONFIG_PATH:+:}\${PKG_CONFIG_PATH}";
@@ -63,7 +61,7 @@ in
     envVariables = mkOption {
       type = types.attrsOf types.str;
       example = { EDITOR = "nvim"; };
-      default = {};
+      default = { };
     };
 
     path = mkOption {
@@ -77,8 +75,7 @@ in
         "$HOME/dotfiles/bin:"
         "$HOME/scripts"
         "$HOME/.local/bin/"
-        "NPM_PACKAGES/bin"
-        "HOME/.emacs.d/bin"
+        "$HOME/.emacs.d/bin"
       ];
     };
   };

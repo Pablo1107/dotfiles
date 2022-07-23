@@ -15,6 +15,7 @@ with pkgs;
   personal.vifm.enable = true;
   personal.tmux.enable = true;
   personal.shell.enable = true;
+  personal.npm.enable = true;
   personal.nvim.enable = true;
 
   home.packages = [

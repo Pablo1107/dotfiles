@@ -10,6 +10,7 @@
   personal.tmux.enable = true;
   personal.shell.enable = true;
   personal.nvim.enable = true;
+  personal.npm.enable = true;
 
   home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
     removePrefixDirectory = true;
