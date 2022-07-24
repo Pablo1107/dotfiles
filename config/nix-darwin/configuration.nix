@@ -158,7 +158,7 @@ with pkgs;
       # shadows and borders
       #window_shadow = "on";
       window_border = "on";
-      window_border_width = 6;
+      window_border_width = 1;
       active_window_border_color = "0xff007CA6";
       normal_window_border_color = "0x00ffffff";
       window_opacity = "on";
