@@ -1,0 +1,57 @@
+#!/usr/bin/env sh
+
+function start() {
+  echo "Starting GlobalProtect..."
+  launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
+  launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist
+  open -na GlobalProtect.app
+  echo "Done!"
+}
+
+function stop() {
+  echo "Stopping GlobalProtect..."
+  launchctl remove com.paloaltonetworks.gp.pangps
+  launchctl remove com.paloaltonetworks.gp.pangpa
+  killall GlobalProtect
+  echo "Done!"
+}
+
+function is_running () {
+  ps auwwwwx | grep -i globalprotect | grep -v 'grep ' > /dev/null
+}
+
+function toggle() {
+  is_running
+  IS_RUNNING=$?
+  if [ "$IS_RUNNING" -eq "0" ]; then
+    stop
+  else
+    start
+  fi
+}
+
+case $# in
+   0)
+      toggle
+      ;;
+   1)
+      case $1 in
+         start)
+            start
+            ;;
+         stop)
+            stop
+            ;;
+         *)
+            echo "'$1' is not a valid verb."
+            echo "Usage: $0 {start|stop}"
+            exit 2
+            ;;
+      esac
+      ;;
+   *)
+      echo "Too many args provided ($#)."
+      echo "Usage: $0 {start|stop}"
+      exit 3
+      ;;
+esac
