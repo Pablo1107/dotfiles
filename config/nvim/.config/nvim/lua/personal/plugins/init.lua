@@ -26,7 +26,13 @@ local function plugins()
     })
     use 'christoomey/vim-tmux-navigator' -- Seamless navigation in vim and tmux
     use 'roman/golden-ratio' -- Makes current split bigger
-    use 'norcalli/nvim-colorizer.lua' -- Colorize hex colors strings
+    use {
+      'norcalli/nvim-colorizer.lua', -- Colorize hex colors strings
+      config = function()
+        vim.opt.termguicolors = true
+        require('colorizer').setup()
+      end
+    }
 
     -- use 'folke/tokyonight.nvim'
     -- 'ghifarit53/tokyonight-vim',

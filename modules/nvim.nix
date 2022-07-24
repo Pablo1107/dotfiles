@@ -26,6 +26,7 @@ in
       removePrefixDirectory = true;
       allowOther = true;
       files = [
+        "nvim/.config/nvim/ftplugin"
         "nvim/.config/nvim/lua"
         "nvim/.config/nvim/init.lua"
       ];

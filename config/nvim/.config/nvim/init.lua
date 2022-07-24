@@ -142,9 +142,10 @@ end
 
 autocmd('BufWritePre', {
   desc = "Create parent directory if does not exists",
-  callback = function()
-    if not vim.fn.isdirectory(vim.fn.expand('<afile>:p:h')) then
-      vim.fn.mkdir(vim.fn.expand("<afile>:p:h"), "p")
+  callback = function(t)
+    local dir = vim.fn.fnamemodify(t.file, ':p:h')
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
     end
   end
 })
