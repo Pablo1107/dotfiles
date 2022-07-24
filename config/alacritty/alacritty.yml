@@ -4,6 +4,8 @@ env:
   WINIT_X11_SCALE_FACTOR: "1.0"
 
 window:
+  decorations: 'none' # hide titlebar in macos (requires restart)
+
   opacity: 0.85
 
   dimensions:

@@ -29,6 +29,7 @@
           nixgl.overlay
           emacs-overlay.overlay
           (import ./overlays/vifm.nix)
+          (import ./overlays/yabai.nix)
         ];
       };
 
