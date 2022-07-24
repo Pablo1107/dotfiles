@@ -127,10 +127,10 @@ with pkgs;
       shift + cmd - 8 : yabai -m window --space 8
 
       # control window size, modified to be intuitive
-      cmd + ctrl - h : yabai -m window --resize left:-20:0;yabai -m window --resize right:-20:0
-      cmd + ctrl - l : yabai -m window --resize right:20:0;yabai -m window --resize left:20:0
-      cmd + ctrl - j : yabai -m window --resize bottom:0:20;yabai -m window --resize top:0:20
-      cmd + ctrl - k : yabai -m window --resize top:0:-20;yabai -m window --resize bottom:0:-20
+      cmd + ctrl - h : yabai -m window --resize left:-20:0  || yabai -m window --resize right:-20:0
+      cmd + ctrl - l : yabai -m window --resize right:20:0  || yabai -m window --resize left:20:0
+      cmd + ctrl - j : yabai -m window --resize bottom:0:20 || yabai -m window --resize top:0:20
+      cmd + ctrl - k : yabai -m window --resize top:0:-20   || yabai -m window --resize bottom:0:-20
 
       # float / unfloat window and center on screen
       cmd - t : yabai -m window --toggle float;\
