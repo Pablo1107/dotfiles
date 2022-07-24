@@ -78,6 +78,11 @@ local group_id = augroup('lspconfig', {})
 
 autocmd("BufWritePre", {
   group = group_id,
-  callback = vim.lsp.buf.formatting_sync,
+  callback = function()
+    vim.lsp.buf.formatting_seq_sync(nil, nil, {
+      "tsserver",
+      "efm",
+    })
+  end,
   desc = "Format on quit"
 })
