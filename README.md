@@ -9,6 +9,8 @@ home-manager switch --flake .
 
 # Nix Darwin config
 
+![Nix Darwin Screenshot](./screenshots/nix-darwin-screenshot.png)
+
 ## Run this command
 ```
 darwin-rebuild switch --flake .
