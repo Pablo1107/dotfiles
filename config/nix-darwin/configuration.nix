@@ -70,6 +70,7 @@ with pkgs;
       "whatsapp"
       "dbeaver-community"
       "steam"
+      "netnewswire"
     ];
   };
 
