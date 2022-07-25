@@ -15,9 +15,11 @@
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
     impermanence.url = "github:nix-community/impermanence";
+    comma.url = "github:nix-community/comma";
+    comma.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence }:
+  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma }:
     let
       nixpkgsConfig = {
         config = {
@@ -28,6 +30,7 @@
           nur.overlay
           nixgl.overlay
           emacs-overlay.overlay
+          comma.overlays.default
           (import ./overlays/vifm.nix)
           (import ./overlays/yabai.nix)
         ];

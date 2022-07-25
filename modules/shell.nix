@@ -16,7 +16,7 @@ let
     # open = "setsid -f xdg-open";
     c = "clear";
     mux = "tmuxinator";
-    "," = "NIX_AUTO_RUN=1 ";
+    # "," = "NIX_AUTO_RUN=1 ";
     pacman = "aura";
     ssh = "TERM=xterm-256color ssh ";
     icat = "kitty +kitten icat";
@@ -88,6 +88,7 @@ in
       silver-searcher
       tmuxinator
       ripgrep
+      comma
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
