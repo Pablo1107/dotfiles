@@ -141,6 +141,11 @@ for i = 1, 10 do
 end
 
 autocmd('BufWritePre', {
+  desc = 'Remove trailing whitespace on save',
+  command = '%s/\\s\\+$//e'
+})
+
+autocmd('BufWritePre', {
   desc = "Create parent directory if does not exists",
   callback = function(t)
     local dir = vim.fn.fnamemodify(t.file, ':p:h')
