@@ -23,15 +23,16 @@ let
     imgcat = "wezterm imgcat";
   };
 
-  shellFunctions = ''
-    open() {
-      if [ -z $2 ]; then
-        [ -e $1 ] && setsid -f xdg-open $1 > /dev/null 2>&1
-      else
-        [ -e $2 ] && setsid -f $1 $2 > /dev/null 2>&1
-      fi
-    }
-  '';
+  shellFunctions =
+    if pkgs.stdenv.isLinux then ''
+      open() {
+        if [ -z $2 ]; then
+          [ -e $1 ] && setsid -f xdg-open $1 > /dev/null 2>&1
+        else
+          [ -e $2 ] && setsid -f $1 $2 > /dev/null 2>&1
+        fi
+      }
+    '' else "";
 
   sessionVariables = {
     EDITOR = "nvim";
@@ -105,9 +106,8 @@ in
         fpath+=${pkgs.pure-prompt}/share/zsh/site-functions
         autoload -U promptinit;
         promptinit
-          prompt pure
- 
-          eval "$(${pkgs.z-lua}/bin/z --init zsh)"
+        prompt pure
+        eval "$(${pkgs.z-lua}/bin/z --init zsh)"
       '';
 
       loginExtra = ''
@@ -130,3 +130,4 @@ in
     };
   };
 }
+

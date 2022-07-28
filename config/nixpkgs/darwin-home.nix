@@ -35,29 +35,9 @@ with pkgs;
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
     nodejs
-    # nodejs-14_x
-    efm-langserver
 
     # AWS
     git-remote-codecommit
-
-    # Databases
-
-    # LSP
-    rnix-lsp
-    nodePackages.typescript-language-server
-
-    # Rust
-    # rustup
-
-    docker-compose
-    tesseract
-    pandoc
-    # mongodb-compass
-
-    # clang
-
-    hicolor-icon-theme
   ];
 
   programs = {
