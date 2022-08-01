@@ -90,6 +90,7 @@ in
       tmuxinator
       ripgrep
       comma
+      elixir
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
