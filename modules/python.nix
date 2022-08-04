@@ -21,7 +21,6 @@ in
             wheel
             pynvim
             requests
-            selenium
             jinja2
             ply
             pyaml
