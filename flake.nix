@@ -43,7 +43,8 @@
       myLib = import ./lib { };
 
       # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
-      personalModules = map (n: "${./modules}/${n}") (builtins.attrNames (builtins.readDir ./modules));
+      hmModules = map (n: "${./modules/home-manager}/${n}") (builtins.attrNames (builtins.readDir ./modules/home-manager));
+      darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
     in
     {
       homeConfigurations = {
@@ -56,7 +57,7 @@
             {
               nixpkgs = nixpkgsConfig;
             }
-          ] ++ personalModules;
+          ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
           };
@@ -64,7 +65,7 @@
       };
       darwinConfigurations.pablo = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        modules = [
+        modules = darwinModules ++ [
           ./config/nix-darwin/configuration.nix
           home-manager.darwinModules.home-manager
           {
@@ -73,7 +74,7 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               impermanence.nixosModules.home-manager.impermanence
-            ] ++ personalModules;
+            ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
             };
@@ -103,7 +104,7 @@
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [
                 impermanence.nixosModules.home-manager.impermanence
-              ] ++ personalModules;
+              ] ++ hmModules;
               home-manager.extraSpecialArgs = {
                 inherit myLib;
               };
