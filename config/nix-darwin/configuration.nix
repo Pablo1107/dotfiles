@@ -32,7 +32,6 @@ with pkgs;
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
     neovim
-    skhd
   ];
 
   # Auto upgrade nix package and the daemon service.

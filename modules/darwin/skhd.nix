@@ -11,6 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.skhd ];
     services.skhd = {
       enable = true;
       skhdConfig = ''
