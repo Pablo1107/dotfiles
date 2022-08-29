@@ -34,6 +34,7 @@ in
         "cairo"
         "pango"
         "syncthing"
+        "redis"
       ];
       casks = [
         "firefox"
@@ -49,6 +50,9 @@ in
         "dbeaver-community"
         "steam"
         "netnewswire"
+        "obs"
+        "element"
+        "emacs"
       ];
     };
   };
