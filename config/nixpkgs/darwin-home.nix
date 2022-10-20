@@ -18,6 +18,10 @@ with pkgs;
   personal.npm.enable = true;
   personal.nvim.enable = true;
 
+  # to fix error with validating manuals
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = false;
+
   home.packages = [
     jq
     man-pages

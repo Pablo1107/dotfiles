@@ -8,6 +8,10 @@ with pkgs;
   personal.yabai.enable = true;
   personal.sketchybar.enable = false;
 
+  # to fix issue with validating manuals
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  documentation.enable = false;
+
   nix.extraOptions = ''
     experimental-features = nix-command flakes
     build-users-group = nixbld

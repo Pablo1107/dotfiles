@@ -23,7 +23,10 @@ in
 
     homebrew = {
       enable = true;
-      cleanup = "uninstall";
+      onActivation = {
+        cleanup = "uninstall";
+        upgrade = false;
+      };
       taps = [
         "homebrew/cask"
         "homebrew/services"
@@ -35,6 +38,7 @@ in
         "pango"
         "syncthing"
         "redis"
+        "gnumeric"
       ];
       casks = [
         "firefox"
@@ -53,6 +57,10 @@ in
         "obs"
         "element"
         "emacs"
+        "android-platform-tools"
+        "gimp"
+        "parsec"
+        "discord"
       ];
     };
   };
