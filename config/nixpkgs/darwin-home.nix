@@ -17,6 +17,7 @@ with pkgs;
   personal.shell.enable = true;
   personal.npm.enable = true;
   personal.nvim.enable = true;
+  personal.latex.enable = true;
 
   # to fix error with validating manuals
   # https://github.com/NixOS/nixpkgs/issues/196651
