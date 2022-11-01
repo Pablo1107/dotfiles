@@ -34,6 +34,7 @@ in
             plotly
             svgwrite
             graphviz
+            simplejson
           ]
         )
       )
