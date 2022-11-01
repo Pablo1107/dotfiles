@@ -39,6 +39,7 @@ in
         "syncthing"
         "redis"
         "gnumeric"
+        "hledger"
       ];
       casks = [
         "firefox"
@@ -61,6 +62,7 @@ in
         "gimp"
         "parsec"
         "discord"
+        "libreoffice"
       ];
     };
   };

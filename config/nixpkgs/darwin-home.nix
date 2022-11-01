@@ -28,7 +28,7 @@ with pkgs;
     man-pages
     element-desktop
 
-    hledger
+    # hledger
     tealdeer
     ffmpeg-full
 
