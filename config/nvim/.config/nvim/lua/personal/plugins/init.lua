@@ -89,7 +89,6 @@ local function plugins()
           -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
           highlight = {
             enable = true, -- false will disable the whole extension
-            disable = { "ledger" }, -- list of language that will be disabled
           },
         }
       end
@@ -165,7 +164,8 @@ local function plugins()
             -- Now the picker_config_key will be applied every time you call this
             -- builtin picker
             buffers = {
-              sort_lastused = true,
+              sort_mru = true,
+              ignore_current_buffer = true,
             },
             find_files = {
               hidden = true,

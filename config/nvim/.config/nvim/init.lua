@@ -7,6 +7,8 @@
 --           Author: Pablo Andres Dealbera
 --           Year: 2022
 
+vim.g.mapleader = ","
+
 pcall(require, 'impatient')
 
 require('personal/lib')
@@ -106,7 +108,6 @@ autocmd({ 'FocusLost', 'WinLeave' }, {
 })
 
 -- Mapping
-vim.g.mapleader = ","
 
 local map = vim.keymap.set
 
