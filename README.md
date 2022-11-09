@@ -18,6 +18,13 @@ darwin-rebuild switch --flake .
 
 # Nix on Android config
 
+## First install
+```
+nix --extra-experimental-features nix-command shell --extra-experimental-features flakes nixpkgs#git
+ssh-keygen
+git clone https://github.com/Pablo1107/dotfiles
+```
+
 ## Run this command
 ```
 nix-on-droid switch --flake ".#sm-g950f"
