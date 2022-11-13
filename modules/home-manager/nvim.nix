@@ -18,7 +18,7 @@ in
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
       sumneko-lua-language-server
-      clang-tools
+      gcc
       nodePackages.prettier_d_slim
     ];
 
