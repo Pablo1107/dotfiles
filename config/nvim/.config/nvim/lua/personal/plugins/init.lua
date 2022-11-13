@@ -213,7 +213,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) == 1 then
     vim.opt.packpath:append(packer_path)
 
     plugins().sync()
-    vim.cmd("source " .. compile_path)
   end
 else
   plugins()
