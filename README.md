@@ -18,6 +18,8 @@ darwin-rebuild switch --flake .
 
 # Nix on Android config
 
+![Nix on Droid Screenshot](./screenshots/nix-on-droid-screenshot.jpg)
+
 ## First install
 ```
 nix --extra-experimental-features nix-command shell --extra-experimental-features flakes nixpkgs#git
