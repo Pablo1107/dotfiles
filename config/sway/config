@@ -37,6 +37,7 @@ output * bg ~/downloads/bg_22.jpg fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 output HDMI-A-1 pos 0 0
+output DP-2 pos 0 0
 output eDP-1 pos 320 1440
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
@@ -68,12 +69,7 @@ exec_always ~/.config/sway/clamshell.sh
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input "1:1:AT_Translated_Set_2_keyboard" {
-    xkb_options caps:swapescape
-    xkb_layout us,latam
-}
-
-input "1266:2422:Chicony_Wireless_Device" {
+input type:keyboard {
     xkb_options caps:swapescape
     xkb_layout us,latam
 }
@@ -215,7 +211,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     bindsym Print exec wl-screenshot region
     bindsym Alt+Print exec wl-screenshot region --ocr
-    bindsym Ctrl+Print exec wl-screenshot 
+    bindsym Ctrl+Print exec wl-screenshot
     bindsym Shift+Print exec wl-screenshot window
     bindsym Ctrl+Shift+Print exec wl-screenshot qr
 
