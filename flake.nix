@@ -33,7 +33,6 @@
           comma.overlays.default
           (import ./overlays/vifm.nix)
           (import ./overlays/yabai.nix)
-          (import ./overlays/hledger.nix)
         ];
       };
 
