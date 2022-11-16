@@ -20,6 +20,7 @@ in
     services.yabai = {
       enable = true;
       package = pkgs.yabai;
+      enableScriptingAddition = true;
       config = {
         # layout
         layout = "bsp";
@@ -51,8 +52,8 @@ in
       };
       extraConfig = ''
         # load script for extended features
-        sudo yabai --load-sa
-        yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+        # sudo yabai --load-sa
+        # yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
         # Do not manage windows with certain titles eg. Copying files or moving to bin
         yabai -m rule --add title="(Copy|Bin|About This Mac|Info)" manage=off
