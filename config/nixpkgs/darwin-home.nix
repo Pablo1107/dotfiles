@@ -39,7 +39,7 @@ with pkgs;
     # (yarn.override { nodejs = nodejs-12_x; })
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
-    nodejs
+    nodejs-16_x
 
     # AWS
     git-remote-codecommit
