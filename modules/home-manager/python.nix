@@ -28,7 +28,6 @@ in
             sympy
             pygments
             matplotlib
-            seaborn
             pandas-datareader
             requests-cache
             plotly
