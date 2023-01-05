@@ -40,6 +40,7 @@ in
         "redis"
         "gnumeric"
         "hledger"
+        "portaudio"
       ];
       casks = [
         "firefox"
