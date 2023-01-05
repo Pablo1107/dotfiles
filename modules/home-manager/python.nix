@@ -12,7 +12,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      python.pkgs.pip
+      python310.pkgs.pip
       (
         python310.withPackages (
           ps: with ps; [
