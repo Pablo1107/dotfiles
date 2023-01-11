@@ -68,7 +68,6 @@ with pkgs;
     geckodriver
     chromedriver
     gnumeric
-    go-chromecast
     qt5.qttools
     unixtools.arp
     ripgrep
