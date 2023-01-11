@@ -13,8 +13,8 @@ in
   config = mkIf cfg.enable {
     # not using this because of declarative-cachix
     # https://github.com/jonascarpay/declarative-cachix#warning
-    # nix.extraOptions = ''
-    home.file.nixConf.text = ''
+    # home.file.nixConf.text = ''
+    nix.extraOptions = ''
       experimental-features = nix-command flakes
       tarball-ttl = 86400
       warn-dirty = false

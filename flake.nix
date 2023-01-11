@@ -50,7 +50,7 @@
         pablo = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
-            inherit nixpkgsConfig;
+            config = nixpkgsConfig.config;
           };
           modules = [
             ./config/nixpkgs/home.nix
