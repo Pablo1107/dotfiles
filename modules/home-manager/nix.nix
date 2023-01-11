@@ -21,5 +21,6 @@ in
       keep-derivations = true
       keep-outputs = true
     '';
+    nix.package = pkgs.nix;
   };
 }
