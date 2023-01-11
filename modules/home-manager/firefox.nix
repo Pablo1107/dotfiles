@@ -11,14 +11,14 @@ let
   customFirefox = (
     pkgs.firefox-wayland.override {
       extraPrefs = ''
-        //  
-        var {classes:Cc,interfaces:Ci,utils:Cu} = Components;  
-              
-        /* set new tab page */  
-        try {  
-          Cu.import("resource:///modules/AboutNewTab.jsm");  
-          var newTabURL = "file:////home/pablo/index.html";  
-          AboutNewTab.newTabURL = newTabURL;  
+        //
+        var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
+
+        /* set new tab page */
+        try {
+          Cu.import("resource:///modules/AboutNewTab.jsm");
+          var newTabURL = "file:////home/pablo/index.html";
+          AboutNewTab.newTabURL = newTabURL;
         } catch(e){Cu.reportError(e);} // report errors in the Browser Console
       '';
     }
@@ -75,7 +75,6 @@ in
         ublock-origin
         privacy-badger
         multi-account-containers
-        https-everywhere
         darkreader
       ];
     };
