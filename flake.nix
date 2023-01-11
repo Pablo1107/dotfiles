@@ -24,7 +24,6 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
-          allowUnfreePredicate = (pkg: true);
         };
         overlays = [
           nur.overlay
