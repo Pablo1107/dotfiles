@@ -24,6 +24,7 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
+          allowUnfreePredicate = (pkg: true);
         };
         overlays = [
           nur.overlay
@@ -48,7 +49,10 @@
     {
       homeConfigurations = {
         pablo = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            inherit nixpkgsConfig;
+          };
           modules = [
             ./config/nixpkgs/home.nix
             declarative-cachix.homeManagerModules.declarative-cachix-experimental
