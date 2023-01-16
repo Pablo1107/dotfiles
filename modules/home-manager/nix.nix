@@ -21,6 +21,6 @@ in
       keep-derivations = true
       keep-outputs = true
     '';
-    nix.package = pkgs.nix;
+    nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) pkgs.nix;
   };
 }
