@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     personal.shell.envVariables = {
       # to search pip installed packages
-      PYTHONPATH = "~/.local/lib/python3.10/site-packages/";
+      PYTHONPATH = "$HOME/.local/lib/python3.10/site-packages/";
     };
 
     home.packages = with pkgs; [
