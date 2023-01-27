@@ -168,9 +168,6 @@ with pkgs;
     # };
   };
   programs = {
-    direnv.enable = true;
-    direnv.nix-direnv.enable = true;
-
     command-not-found.enable = false;
     nix-index.enable = true;
   };

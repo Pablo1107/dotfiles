@@ -129,6 +129,11 @@ in
       # sessionVariables = sessionVariables;
       shellAliases = shellAliases;
     };
+
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }
 
