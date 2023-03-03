@@ -66,9 +66,8 @@ in
         "parsec"
         "discord"
         "libreoffice"
-        "qbittorrent"
         "transmission"
-        "synthesia"
+        "tetrio"
       ];
     };
   };
