@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   personal.fzf.enable = true;
@@ -9,6 +9,9 @@
   personal.vifm.enable = true;
   personal.tmux.enable = true;
   personal.shell.enable = true;
+  personal.shell.envVariables = {
+    LEDGER_FILE = lib.mkForce "$HOME/ledger/2023.journal";
+  };
   personal.nvim.enable = true;
   personal.npm.enable = true;
 

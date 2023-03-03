@@ -50,7 +50,7 @@ let
 
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
 
-    LEDGER_FILE = "$HOME/ledger/all.journal";
+    LEDGER_FILE = mkDefault "$HOME/ledger/all.journal";
   };
 
   keyBindings = myLib.getDotfile "zsh" "key-bindings.zsh";
