@@ -15,7 +15,7 @@
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
     impermanence.url = "github:nix-community/impermanence";
-    comma.url = "github:nix-community/comma";
+    comma.url = "github:nix-community/comma/v1.4.1";
     comma.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -39,7 +39,7 @@
       # lib = nixpkgs.lib.extend
       #   (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
 
-      myLib = import ./lib { };
+      myLib = import ./lib { inherit nixpkgs; };
 
       # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
       hmModules = map (n: "${./modules/home-manager}/${n}") (builtins.attrNames (builtins.readDir ./modules/home-manager));
@@ -119,5 +119,15 @@
           # pkgs = ...;
         };
       };
+      devShell = myLib.forAllSystems (system:
+        let
+          pkgs = myLib.nixpkgsFor.${system};
+        in
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            just
+          ];
+        }
+      );
     };
 }
