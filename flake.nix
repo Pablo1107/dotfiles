@@ -95,11 +95,8 @@
       };
       nixOnDroidConfigurations = {
         sm-g950f = nix-on-droid.lib.nixOnDroidConfiguration {
-          config = ./config/nix-on-droid/config.nix;
-          system = "aarch64-linux";
-          extraModules = [
-            # import source out-of-tree modules like:
-            # flake.nixOnDroidModules.module
+          modules = [
+            ./config/nix-on-droid/config.nix
             {
               #nixpkgs = nixpkgsConfig;
               home-manager.useGlobalPkgs = true;
