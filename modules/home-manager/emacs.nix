@@ -16,6 +16,14 @@ in
       plantuml
     ];
 
+    home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
+      removePrefixDirectory = true;
+      allowOther = true;
+      files = [
+        "emacs/init.el"
+      ];
+    };
+
     xdg.mimeApps = {
       # query mime type from a file like this:
       # xdg-mime query filetype your-file.extension
