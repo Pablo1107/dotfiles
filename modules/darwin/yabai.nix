@@ -60,6 +60,8 @@ in
 
         # Do not manage some apps which are not resizable
         yabai -m rule --add app="^(Calculator|System Preferences|[sS]tats)$" layer=above manage=off
+
+        yabai -m rule --add app=Emacs manage=on
       '';
     };
   };
