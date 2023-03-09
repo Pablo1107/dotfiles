@@ -20,7 +20,7 @@ in
       removePrefixDirectory = true;
       allowOther = true;
       files = [
-        "emacs/init.el"
+        "emacs/.config/emacs/init.el"
       ];
     };
 

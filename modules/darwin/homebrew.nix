@@ -30,7 +30,6 @@ in
       taps = [
         "homebrew/cask"
         "homebrew/services"
-        "dbt-labs/dbt"
       ];
       brews = [
         "pkg-config"
@@ -42,7 +41,6 @@ in
         "gnumeric"
         "hledger"
         "portaudio"
-        "dbt-postgres"
       ];
       casks = [
         "firefox"
@@ -60,7 +58,6 @@ in
         "netnewswire"
         "obs"
         "element"
-        "emacs"
         "android-platform-tools"
         "gimp"
         "parsec"
