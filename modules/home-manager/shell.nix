@@ -51,6 +51,8 @@ let
     DICPATH = "$DICPATH:$HOME/.nix-profile/share/hunspell:$HOME/nix-profile/share/myspell";
 
     LEDGER_FILE = mkDefault "$HOME/ledger/all.journal";
+
+    NODE_OPTIONS = "--openssl-legacy-provider"; # fix issue with openssl and nodejs
   };
 
   keyBindings = myLib.getDotfile "zsh" "key-bindings.zsh";
