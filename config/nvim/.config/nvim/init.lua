@@ -5,14 +5,28 @@
 --      ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
 --      ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
 --           Author: Pablo Andres Dealbera
---           Year: 2022
+--           Year: 2023
 
 vim.g.mapleader = ","
 
-pcall(require, 'impatient')
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
 
 require('personal/lib')
-require('personal/plugins')
+require('lazy').setup("personal/plugins")
 
 vim.opt.ttimeoutlen = 100 -- wait up to 100ms after Esc for special key
 vim.opt.number = true
