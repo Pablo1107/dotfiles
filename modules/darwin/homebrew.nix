@@ -41,6 +41,7 @@ in
         "gnumeric"
         "hledger"
         "portaudio"
+        "postgresql"
       ];
       casks = [
         "firefox"
