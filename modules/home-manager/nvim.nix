@@ -20,6 +20,7 @@ in
       sumneko-lua-language-server
       gcc
       nodePackages.prettier_d_slim
+      nodePackages.vscode-langservers-extracted
     ];
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
