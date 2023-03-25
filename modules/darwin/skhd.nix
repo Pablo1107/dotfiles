@@ -16,6 +16,7 @@ in
       enable = true;
       skhdConfig = ''
         cmd - return : open -na Alacritty.app
+        shift + cmd - return : emacsclient --create-frame --alternate-editor='emacs'
         cmd - h : yabai -m window --focus west
         cmd - l : yabai -m window --focus east
         cmd - j : yabai -m window --focus south
