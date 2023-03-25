@@ -7,6 +7,7 @@ with pkgs;
   personal.skhd.enable = true;
   personal.yabai.enable = true;
   personal.sketchybar.enable = false;
+  personal.emacs.enable = true;
 
   # to fix issue with validating manuals
   # https://github.com/NixOS/nixpkgs/issues/196651
