@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/22.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -19,7 +20,7 @@
     comma.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma }:
     let
       nixpkgsConfig = {
         config = {
@@ -62,10 +63,14 @@
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
+            pkgs-stable = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config = nixpkgsConfig.config;
+            };
           };
         };
       };
-      darwinConfigurations.pablo = darwin.lib.darwinSystem {
+      darwinConfigurations.pablo = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         modules = darwinModules ++ [
           ./config/nix-darwin/configuration.nix
@@ -79,6 +84,10 @@
             ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
+              pkgs-stable = import nixpkgs-stable {
+                inherit system;
+                config = nixpkgsConfig.config;
+              };
             };
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [
@@ -113,10 +122,16 @@
             }
           ];
           extraSpecialArgs = {
-            # arguments to be available in every nix-on-droid module
+            pkgs-stable = import nixpkgs-stable {
+              system = "aarch64-linux";
+              config = nixpkgsConfig.config;
+            };
           };
           # your own pkgs instance (see nix-on-droid.overlay for useful additions)
-          # pkgs = ...;
+          pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            config = nixpkgsConfig.config;
+          };
         };
       };
       devShell = myLib.forAllSystems (system:
