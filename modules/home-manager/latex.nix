@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs-stable, ... }:
 
 with lib;
 
@@ -6,10 +6,12 @@ let
   cfg = config.personal.latex;
 
   # from https://nixos.wiki/wiki/TexLive
-  tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-small
+  tex = (pkgs-stable.texlive.combine {
+    inherit (pkgs-stable.texlive) scheme-small
       wrapfig amsmath ulem hyperref capt-of
       newverbs tikzpagenodes ifoddpage
+      dvipng minted fvextra catchfile
+      xstring framed
     ;
   });
 in
@@ -19,7 +21,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs-stable; [
       tex
     ];
   };
