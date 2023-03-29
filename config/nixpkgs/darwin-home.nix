@@ -76,6 +76,8 @@ with pkgs;
 
     # AWS
     git-remote-codecommit
+
+    stripe-cli
   ];
 
   programs = {
