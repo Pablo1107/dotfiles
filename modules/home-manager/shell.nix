@@ -62,7 +62,7 @@ in
     enable = mkEnableOption "shell";
 
     envVariables = mkOption {
-      type = types.attrsOf types.str;
+      type = with types; lazyAttrsOf (oneOf [ str path int float ]);
       example = { EDITOR = "nvim"; };
       default = { };
     };

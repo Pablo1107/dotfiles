@@ -24,6 +24,10 @@ with pkgs;
   personal.shell.enable = true;
   personal.shell.envVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";
+
+    # Needed for Trash, SFTP in Nautilus, etc
+    # https://github.com/NixOS/nixpkgs/issues/29137#issuecomment-354229533
+    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
   };
   programs.zsh.loginExtra = ''
     source /etc/profile.d/nix-daemon.sh
@@ -51,6 +55,7 @@ with pkgs;
     qrcp
     element-desktop
     gimp
+    gnome3.gvfs # for sftp mount and stuff like that
     gnome3.nautilus
     gnome3.nautilus-python
     gnome3.sushi
