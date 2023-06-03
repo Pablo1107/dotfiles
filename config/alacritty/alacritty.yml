@@ -231,10 +231,6 @@ colors: *black
 #  program: /bin/bash
 #  args:
 #    - --login
-shell:
- program: /bin/zsh
- args:
-   - --login
 
 # Startup directory
 #
