@@ -98,8 +98,8 @@ with pkgs;
     # (yarn.override { nodejs = nodejs-12_x; })
     yarn
     # (yarn.override { nodejs = nodejs-12_x; })
-    # nodejs
-    nodejs-14_x
+    nodejs
+    # nodejs-14_x
     # nodejs-12_x
     deno
     efm-langserver

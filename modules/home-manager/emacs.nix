@@ -12,7 +12,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      emacsPgtk
+      emacs-pgtk
       plantuml
     ];
 
