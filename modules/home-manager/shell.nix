@@ -85,7 +85,10 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      alacritty
+      (myLib.nixGLWrapper pkgs {
+        bin = "alacritty";
+        package = alacritty;
+      })
       tree
       fd
       silver-searcher
