@@ -14,6 +14,7 @@ in
     personal.shell.envVariables = {
       QT_QPA_PLATFORM = "wayland";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      GTK_THEME = "Arc-Dark";
     };
 
     qt = {
