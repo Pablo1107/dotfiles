@@ -69,6 +69,27 @@
             };
           };
         };
+        deck = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config = nixpkgsConfig.config;
+          };
+          modules = [
+            ./config/nixpkgs/deck-home.nix
+            declarative-cachix.homeManagerModules.declarative-cachix-experimental
+            impermanence.nixosModules.home-manager.impermanence
+            {
+              nixpkgs = nixpkgsConfig;
+            }
+          ] ++ hmModules;
+          extraSpecialArgs = {
+            inherit myLib;
+            pkgs-stable = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config = nixpkgsConfig.config;
+            };
+          };
+        };
       };
       darwinConfigurations.pablo = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";

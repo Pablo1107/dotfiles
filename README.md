@@ -2,6 +2,11 @@
 
 ## TODO: bootstrap Arch Linux install
 
+## Bootstrap Home Manager
+```
+nix run --no-write-lock-file github:nix-community/home-manager/ -- --flake ".#$USER" switch
+```
+
 ## Run this command
 ```
 home-manager switch --flake .
