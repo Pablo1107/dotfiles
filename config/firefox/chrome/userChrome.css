@@ -1538,3 +1538,10 @@ See the above repository for updates as well as full license text. */
   .urlbarView-body-inner{ border-top-style: none !important; }
 
 }
+
+#PersonalToolbar {
+  position: fixed !important;
+  top: 36px !important;
+  width: 100vw !important;
+  z-index: 1 !important;
+}
