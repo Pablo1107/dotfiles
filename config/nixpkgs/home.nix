@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, myLib, ... }:
 
 with pkgs;
 
@@ -96,7 +96,10 @@ with pkgs;
     # totem
     # mcomix
 
-    chromium
+    (myLib.nixGLWrapper pkgs {
+      bin = "chromium";
+      package = chromium;
+    })
     awscli2
 
     # Node
