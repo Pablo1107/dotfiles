@@ -36,6 +36,7 @@ with pkgs;
   personal.sway.enable = true;
   personal.nvim.enable = true;
   personal.npm.enable = true;
+  personal.ai.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
