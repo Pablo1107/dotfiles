@@ -153,6 +153,7 @@ with pkgs;
     # clang
 
     hicolor-icon-theme
+    pop
   ];
 
   # nix
