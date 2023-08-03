@@ -26,16 +26,12 @@
         config = {
           allowUnfree = true;
         };
-        overlays = [
+        overlays = with builtins; [
           nur.overlay
           nixgl.overlay
           emacs-overlay.overlay
           comma.overlays.default
-          (import ./overlays/vifm.nix)
-          (import ./overlays/yabai.nix)
-          (import ./overlays/local-ai.nix)
-          (import ./overlays/local-shell-gpt.nix)
-        ];
+        ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
 
       # not ready yet :(
