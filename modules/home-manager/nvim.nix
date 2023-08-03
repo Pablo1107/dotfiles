@@ -12,7 +12,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      neovim
       efm-langserver
       rnix-lsp
       nodePackages.typescript-language-server
@@ -22,6 +21,13 @@ in
       nodePackages.prettier_d_slim
       nodePackages.vscode-langservers-extracted
     ];
+
+    programs.neovim = {
+      enable = true;
+      plugins = with pkgs.vimPlugins; [
+        nvim-treesitter.withAllGrammars
+      ];
+    };
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
       removePrefixDirectory = true;
