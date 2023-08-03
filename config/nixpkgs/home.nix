@@ -180,6 +180,7 @@ with pkgs;
   programs = {
     command-not-found.enable = false;
     nix-index.enable = true;
+    go.enable = true;
   };
 
   # This value determines the Home Manager release that your
