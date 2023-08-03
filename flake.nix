@@ -18,9 +18,10 @@
     impermanence.url = "github:nix-community/impermanence";
     comma.url = "github:nix-community/comma/v1.4.1";
     comma.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma, hyprland }:
     let
       nixpkgsConfig = {
         config = {
@@ -58,6 +59,7 @@
             {
               nixpkgs = nixpkgsConfig;
             }
+            hyprland.homeManagerModules.default
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
