@@ -89,6 +89,10 @@ in
         bin = "alacritty";
         package = alacritty;
       })
+      (myLib.nixGLWrapper pkgs {
+        bin = "foot";
+        package = foot;
+      })
       tree
       fd
       silver-searcher
