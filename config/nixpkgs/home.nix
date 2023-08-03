@@ -153,6 +153,8 @@ with pkgs;
     # clang
 
     hicolor-icon-theme
+
+    morgen
     pop
   ];
 
