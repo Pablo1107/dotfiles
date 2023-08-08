@@ -37,6 +37,7 @@
       };
       nixConfig = {
         registry.nixpkgs.flake = nixpkgs;
+        nixPath = [ "nixpkgs=${nixpkgs}" ];
       };
 
       # not ready yet :(
