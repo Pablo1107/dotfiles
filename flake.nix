@@ -60,6 +60,9 @@
           };
           modules = [
             ./config/nixpkgs/home.nix
+            {
+              nixpkgs = nixpkgsConfig;
+            }
             hyprland.homeManagerModules.default
           ] ++ hmModules;
           extraSpecialArgs = {
