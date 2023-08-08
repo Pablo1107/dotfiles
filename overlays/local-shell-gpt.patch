@@ -1,5 +1,5 @@
 diff --git a/README.md b/README.md
-index dc268dc..46a29ad 100644
+index 25ec6d3..9825dad 100644
 --- a/README.md
 +++ b/README.md
 @@ -9,7 +9,7 @@ pip install shell-gpt
@@ -25,8 +25,8 @@ index dc268dc..46a29ad 100644
  # Max amount of cached message per chat session.
  CHAT_CACHE_LENGTH=100
  # Chat cache folder.
-@@ -385,18 +385,16 @@ Switch `SYSTEM_ROLES` to force use [system roles](https://help.openai.com/en/art
- ```
+@@ -388,18 +388,16 @@ Switch `SYSTEM_ROLES` to force use [system roles](https://help.openai.com/en/art
+ By default, ShellGPT leverages OpenAI's large language models. However, it also provides the flexibility to use locally hosted models, which can be a cost-effective alternative. To use local models, you will need to run your own API server. You can accomplish this by using [LocalAI](https://github.com/go-skynet/LocalAI), a self-hosted, OpenAI-compatible API. Setting up LocalAI allows you to run language models on your own hardware, potentially without the need for an internet connection, depending on your usage. To set up your LocalAI, please follow this comprehensive [guide](https://github.com/TheR1D/shell_gpt/wiki/LocalAI). Remember that the performance of your local models may depend on the specifications of your hardware and the specific language model you choose to deploy.
  
  ## Docker
 -Run the container using the `OPENAI_API_KEY` environment variable, and a docker volume to store cache:
@@ -48,73 +48,36 @@ index dc268dc..46a29ad 100644
  sgpt --chat rainbow "inverse the list of your last answer"
  sgpt --chat rainbow "translate your last answer in french"
 diff --git a/sgpt/app.py b/sgpt/app.py
-index 1362d7b..99d12f0 100644
+index 0c97bda..28a474a 100644
 --- a/sgpt/app.py
 +++ b/sgpt/app.py
-@@ -32,9 +32,9 @@ def main(
+@@ -20,9 +20,9 @@ def main(
          show_default=False,
          help="The prompt to generate completions for.",
      ),
--    model: ModelOptions = typer.Option(
--        ModelOptions(cfg.get("DEFAULT_MODEL")).value,
--        help="OpenAI GPT model to use.",
+-    model: str = typer.Option(
 +    model: str = typer.Argument(
-+        cfg.get("DEFAULT_MODEL"),
+         cfg.get("DEFAULT_MODEL"),
+-        help="Large language model to use.",
 +        help="GPT model to use.",
      ),
      temperature: float = typer.Option(
          0.1,
-@@ -159,7 +159,7 @@ def main(
-         # Will be in infinite loop here until user exits with Ctrl+C.
-         ReplHandler(repl, role_class).handle(
-             prompt,
--            model=model.value,
-+            model=model,
-             temperature=temperature,
-             top_probability=top_probability,
-             chat_id=repl,
-@@ -169,7 +169,7 @@ def main(
-     if chat:
-         full_completion = ChatHandler(chat, role_class).handle(
-             prompt,
--            model=model.value,
-+            model=model,
-             temperature=temperature,
-             top_probability=top_probability,
-             chat_id=chat,
-@@ -178,7 +178,7 @@ def main(
-     else:
-         full_completion = DefaultHandler(role_class).handle(
-             prompt,
--            model=model.value,
-+            model=model,
-             temperature=temperature,
-             top_probability=top_probability,
-             caching=cache,
-@@ -198,7 +198,7 @@ def main(
-         elif option == "d":
-             DefaultHandler(DefaultRoles.DESCRIBE_SHELL.get_role()).handle(
-                 full_completion,
--                model=model.value,
-+                model=model,
-                 temperature=temperature,
-                 top_probability=top_probability,
-                 caching=cache,
 diff --git a/sgpt/config.py b/sgpt/config.py
-index 34f1f0c..33b2b36 100644
+index 45de530..de6698a 100644
 --- a/sgpt/config.py
 +++ b/sgpt/config.py
-@@ -24,7 +24,8 @@ DEFAULT_CONFIG = {
+@@ -22,7 +22,8 @@ DEFAULT_CONFIG = {
      "CACHE_LENGTH": int(os.getenv("CHAT_CACHE_LENGTH", "100")),
      "REQUEST_TIMEOUT": int(os.getenv("REQUEST_TIMEOUT", "60")),
-     "DEFAULT_MODEL": os.getenv("DEFAULT_MODEL", ModelOptions.GPT35TURBO.value),
+     "DEFAULT_MODEL": os.getenv("DEFAULT_MODEL", "gpt-3.5-turbo"),
 -    "OPENAI_API_HOST": os.getenv("OPENAI_API_HOST", "https://api.openai.com"),
 +    "LOCAL_AI_API_HOST": os.getenv("LOCAL_AI_API_HOST", "http://localhost:8080"),
 +    "LOCAL_AI_API_KEY": os.getenv("LOCAL_AI_API_KEY", "na"),
      "DEFAULT_COLOR": os.getenv("DEFAULT_COLOR", "magenta"),
      "ROLE_STORAGE_PATH": os.getenv("ROLE_STORAGE_PATH", str(ROLE_STORAGE_PATH)),
      "SYSTEM_ROLES": os.getenv("SYSTEM_ROLES", "false"),
-@@ -50,9 +51,9 @@ class Config(dict):  # type: ignore
+@@ -48,9 +49,9 @@ class Config(dict):  # type: ignore
          else:
              config_path.parent.mkdir(parents=True, exist_ok=True)
              # Don't write API key to config file if it is in the environment.
