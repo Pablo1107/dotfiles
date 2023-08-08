@@ -18,10 +18,12 @@
     impermanence.url = "github:nix-community/impermanence";
     comma.url = "github:nix-community/comma/v1.4.1";
     comma.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma, hyprland }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
     let
       nixpkgsConfig = {
         config = {
@@ -42,7 +44,11 @@
       myLib = import ./lib { inherit nixpkgs; };
 
       # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
-      hmModules = map (n: "${./modules/home-manager}/${n}") (builtins.attrNames (builtins.readDir ./modules/home-manager));
+      hmModules = with builtins; [
+        declarative-cachix.homeManagerModules.declarative-cachix-experimental
+        impermanence.nixosModules.home-manager.impermanence
+        nix-index-database.hmModules.nix-index
+      ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
     in
     {
@@ -54,11 +60,6 @@
           };
           modules = [
             ./config/nixpkgs/home.nix
-            declarative-cachix.homeManagerModules.declarative-cachix-experimental
-            impermanence.nixosModules.home-manager.impermanence
-            {
-              nixpkgs = nixpkgsConfig;
-            }
             hyprland.homeManagerModules.default
           ] ++ hmModules;
           extraSpecialArgs = {
@@ -76,11 +77,6 @@
           };
           modules = [
             ./config/nixpkgs/deck-home.nix
-            declarative-cachix.homeManagerModules.declarative-cachix-experimental
-            impermanence.nixosModules.home-manager.impermanence
-            {
-              nixpkgs = nixpkgsConfig;
-            }
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
@@ -100,9 +96,7 @@
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              impermanence.nixosModules.home-manager.impermanence
-            ] ++ hmModules;
+            home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
               pkgs-stable = import nixpkgs-stable {
@@ -128,12 +122,9 @@
           modules = [
             ./config/nix-on-droid/config.nix
             {
-              #nixpkgs = nixpkgsConfig;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [
-                impermanence.nixosModules.home-manager.impermanence
-              ] ++ hmModules;
+              home-manager.sharedModules = [ ] ++ hmModules;
               home-manager.extraSpecialArgs = {
                 inherit myLib;
               };

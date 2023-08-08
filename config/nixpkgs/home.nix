@@ -183,8 +183,6 @@ with pkgs;
     # };
   };
   programs = {
-    command-not-found.enable = false;
-    nix-index.enable = true;
     go.enable = true;
   };
 

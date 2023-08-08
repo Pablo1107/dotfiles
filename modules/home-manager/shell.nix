@@ -90,7 +90,6 @@ in
       silver-searcher
       tmuxinator
       ripgrep
-      comma
       elixir
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
@@ -134,6 +133,11 @@ in
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    programs.nix-index.enable = true;
+    programs.nix-index-database = {
+      comma.enable = true;
     };
   };
 }

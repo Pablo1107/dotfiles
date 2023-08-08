@@ -25,9 +25,4 @@ with pkgs;
 
     stateVersion = "21.05";
   };
-
-  programs = {
-    command-not-found.enable = false;
-    nix-index.enable = true;
-  };
 }
