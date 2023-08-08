@@ -153,7 +153,7 @@
             system = "aarch64-linux";
             config = nixpkgsConfig.config;
             overlays = [
-              nix-on-droid.overlay
+              nix-on-droid.overlays.default
             ] ++ nixpkgsConfig.overlays;
           };
         };
