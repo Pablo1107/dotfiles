@@ -152,6 +152,9 @@
           pkgs = import nixpkgs {
             system = "aarch64-linux";
             config = nixpkgsConfig.config;
+            overlays = [
+              nix-on-droid.overlay
+            ] ++ nixpkgsConfig.overlays;
           };
         };
       };
