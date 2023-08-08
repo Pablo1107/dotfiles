@@ -30,7 +30,6 @@
           allowUnfree = true;
         };
         overlays = with builtins; [
-          nur.overlay
           nixgl.overlay
           emacs-overlay.overlay
           comma.overlays.default
@@ -48,6 +47,7 @@
         declarative-cachix.homeManagerModules.declarative-cachix-experimental
         impermanence.nixosModules.home-manager.impermanence
         nix-index-database.hmModules.nix-index
+        nur.hmModules.nur
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
     in
