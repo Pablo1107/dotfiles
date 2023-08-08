@@ -38,6 +38,7 @@ with pkgs;
   personal.npm.enable = true;
   personal.ai.enable = true;
   personal.latex.enable = true;
+  personal.gui.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
