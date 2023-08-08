@@ -157,6 +157,7 @@ with pkgs;
 
     morgen
     pop
+    discord
   ];
 
   # nix
