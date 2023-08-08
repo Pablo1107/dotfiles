@@ -1,10 +1,11 @@
 self: pkgs:
 {
-  local-ai = pkgs.stdenv.mkDerivation {
+  local-ai = pkgs.stdenv.mkDerivation rec {
     name = "local-ai";
+    version = "1.23.1";
     src = pkgs.fetchurl {
-      url = "https://github.com/go-skynet/LocalAI/releases/download/v1.20.1/local-ai-avx-Linux-x86_64";
-      sha256 = "sha256-DZtMwdp4wPNc8kJJpJotDvyyU4p6eRvDV5fEP2GRfSo=";
+      url = "https://github.com/go-skynet/LocalAI/releases/download/v${version}/local-ai-avx2-Linux-x86_64";
+      sha256 = "1z6w4izxanqpq9nhbrxpkdcxacphzmvznah2w0g98pmwgkcxwqg1";
     };
     phases = ["installPhase" "patchPhase"];
     installPhase = ''
