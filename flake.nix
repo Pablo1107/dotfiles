@@ -35,6 +35,9 @@
           comma.overlays.default
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
+      nixConfig = {
+        registry.nixpkgs.flake = nixpkgs;
+      };
 
       # not ready yet :(
       # lib = nixpkgs.lib.extend
@@ -62,6 +65,7 @@
             ./config/nixpkgs/home.nix
             {
               nixpkgs = nixpkgsConfig;
+              nix = nixConfig;
             }
             hyprland.homeManagerModules.default
           ] ++ hmModules;
@@ -115,6 +119,7 @@
                 username = "pablo";
                 homeDirectory = "/Users/pablo";
               };
+              nix = nixConfig;
             };
           }
         ];
@@ -133,6 +138,7 @@
               };
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./config/nixpkgs/android.nix ];
+                nix = nixConfig;
               };
             }
           ];
