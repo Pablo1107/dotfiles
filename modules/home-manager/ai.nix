@@ -16,7 +16,7 @@ in
       local-shell-gpt
     ];
     home.sessionVariables = {
-      LOCAL_AI_API_HOST = "http://t14s.local:8000";
+      LOCAL_AI_API_HOST = "http://t14s.local:8080";
       DEFAULT_MODEL = "stablebeluga-13b.ggmlv3.q6_K.bin";
     };
     systemd.user.services.local-ai = {
