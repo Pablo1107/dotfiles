@@ -105,20 +105,17 @@ return {
               end,
           })
 
-          -- local autocmd = vim.api.nvim_create_autocmd
-          -- local augroup = vim.api.nvim_create_augroup
-          -- local group_id = augroup('lspconfig', {})
+          local autocmd = vim.api.nvim_create_autocmd
+          local augroup = vim.api.nvim_create_augroup
+          local group_id = augroup('lspconfig', {})
 
-          -- autocmd("BufWritePre", {
-          --     group = group_id,
-          --     callback = function()
-          --         vim.lsp.buf.formatting_seq_sync(nil, nil, {
-          --             "tsserver",
-          --             "efm",
-          --         })
-          --     end,
-          --     desc = "Format on quit"
-          -- })
+          autocmd("BufWritePre", {
+              group = group_id,
+              callback = function()
+                  vim.lsp.buf.format()
+              end,
+              desc = "Format on quit"
+          })
       end
     },
     {
