@@ -15,6 +15,10 @@
   personal.nvim.enable = true;
   personal.npm.enable = true;
 
+  home.shellAliases = {
+    ping = "/android/system/bin/linker64 /android/system/bin/ping";
+  };
+
   home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
     removePrefixDirectory = true;
     allowOther = true;
