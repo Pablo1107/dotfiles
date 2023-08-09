@@ -36,8 +36,10 @@
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
       nixConfig = {
-        registry.nixpkgs.flake = nixpkgs;
-        nixPath = [ "nixpkgs=${nixpkgs}" ];
+        nix.registry.nixpkgs.flake = nixpkgs;
+        home.sessionVariables = {
+          NIX_PATH = "nixpkgs=${nixpkgs}";
+        };
       };
 
       # not ready yet :(
@@ -52,6 +54,7 @@
         impermanence.nixosModules.home-manager.impermanence
         nix-index-database.hmModules.nix-index
         nur.hmModules.nur
+        nixConfig
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
     in
@@ -66,7 +69,6 @@
             ./config/nixpkgs/home.nix
             {
               nixpkgs = nixpkgsConfig;
-              nix = nixConfig;
             }
             hyprland.homeManagerModules.default
           ] ++ hmModules;
