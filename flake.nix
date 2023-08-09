@@ -122,7 +122,6 @@
                 username = "pablo";
                 homeDirectory = "/Users/pablo";
               };
-              nix = nixConfig;
             };
           }
         ];
@@ -141,7 +140,6 @@
               };
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./config/nixpkgs/android.nix ];
-                nix = nixConfig;
               };
             }
           ];
