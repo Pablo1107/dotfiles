@@ -17,7 +17,7 @@ in
     ];
     home.sessionVariables = {
       LOCAL_AI_HOST = "http://localhost:8000";
-      DEFAULT_MODEL = "ggml-gpt4all-j";
+      DEFAULT_MODEL = "stablebeluga-13b.ggmlv3.q6_K.bin";
     };
     systemd.user.services.local-ai = {
       Unit = {
