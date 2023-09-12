@@ -31,7 +31,7 @@
         };
         overlays = with builtins; [
           nixgl.overlay
-          emacs-overlay.overlay
+          # emacs-overlay.overlay
           comma.overlays.default
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
