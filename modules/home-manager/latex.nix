@@ -11,8 +11,9 @@ let
       wrapfig amsmath ulem hyperref capt-of
       newverbs tikzpagenodes ifoddpage
       dvipng minted fvextra catchfile
-      xstring framed
-    ;
+      xstring framed a4wide svg trimspaces
+      transparent tocbibind
+      ;
   });
 in
 {
