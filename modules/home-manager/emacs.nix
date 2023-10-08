@@ -12,7 +12,8 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      emacs29-pgtk
+      (lib.mkIf pkgs.stdenv.hostPlatform.isx86_64 emacs29-pgtk)
+      (lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 emacs29-nox)
       plantuml
     ];
 
