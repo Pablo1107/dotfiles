@@ -12,7 +12,8 @@ let
       newverbs tikzpagenodes ifoddpage
       dvipng minted fvextra catchfile
       xstring framed a4wide svg trimspaces
-      transparent tocbibind
+      transparent tocbibind microtype stix
+      geometry
       ;
   });
 in
