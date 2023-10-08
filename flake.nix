@@ -10,7 +10,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    # emacs-overlay.url = "github:nix-community/emacs-overlay";
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
     nix-on-droid.url = "github:t184256/nix-on-droid";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +23,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, emacs-overlay, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
     let
       nixpkgsConfig = {
         config = {
