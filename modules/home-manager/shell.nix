@@ -53,6 +53,8 @@ let
     LEDGER_FILE = mkDefault "$HOME/ledger/all.journal";
 
     NODE_OPTIONS = "--openssl-legacy-provider"; # fix issue with openssl and nodejs
+
+    _ZO_MAXAGE = "10000000";
   };
 
   keyBindings = myLib.getDotfile "zsh" "key-bindings.zsh";
@@ -108,7 +110,6 @@ in
         autoload -U promptinit;
         promptinit
         prompt pure
-        eval "$(${pkgs.z-lua}/bin/z --init zsh)"
       '';
 
       loginExtra = ''
@@ -138,6 +139,10 @@ in
     programs.nix-index.enable = true;
     programs.nix-index-database = {
       comma.enable = true;
+    };
+
+    programs.zoxide = {
+      enable = true;
     };
   };
 }
