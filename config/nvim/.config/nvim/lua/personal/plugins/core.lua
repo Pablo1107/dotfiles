@@ -1,13 +1,13 @@
 return {
     'github/copilot.vim',
-    'tpope/vim-eunuch', -- Helpers for UNIX (Move, Rename, etc)
+    'tpope/vim-eunuch',               -- Helpers for UNIX (Move, Rename, etc)
     'tpope/vim-unimpaired',
     'christoomey/vim-tmux-navigator', -- Seamless navigation in vim and tmux
-    'roman/golden-ratio', -- Makes current split bigger
-    'arecarn/vim-crunch', -- Maths in VIM!
+    'roman/golden-ratio',             -- Makes current split bigger
+    'arecarn/vim-crunch',             -- Maths in VIM!
     {
         "tiagovla/tokyodark.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             vim.g.tokyodark_transparent_background = true

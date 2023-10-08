@@ -26,6 +26,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('personal/lib')
+-- ./lua/personal/plugins
 require('lazy').setup("personal/plugins")
 
 vim.opt.ttimeoutlen = 100 -- wait up to 100ms after Esc for special key
@@ -41,6 +42,7 @@ vim.opt.complete:append('kspell')
 vim.opt.inccommand = 'nosplit'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.suffixesadd:append('.js,.jsx,.ts,.tsx,.json,.html,.css,.scss,.md,.mdx,.yaml,.yml,.go,.sh,.lua')
 
 -- Tab Sizing
 vim.opt.listchars = 'tab:►-,eol:¬,trail:●'
@@ -237,3 +239,47 @@ autocmd("ColorScheme", {
     callback = AdaptColorscheme,
 })
 AdaptColorscheme()
+
+vim.api.nvim_create_user_command(
+    'Cwd',
+    "cd %:p:h",
+    { nargs = 0 }
+)
+
+-- :map gf :e <cfile><CR>
+-- vim.keymap.set('n', 'gf', ':e <cfile><CR>', { silent = true })
+vim.keymap.set(
+    'n', 'gf',
+    function()
+        local path = vim.fn.expand('<cfile>')
+        if path == '' then
+            return
+        end
+
+        local ok = pcall(function() vim.cmd "norm!gf" end)
+
+        if ok then
+            return
+        end
+
+        local new_path = vim.fn.fnamemodify(vim.fn.expand('%:p:h') .. '/' .. path, ':p')
+        if vim.fn.fnamemodify(new_path, ':e') ~= '' then
+            return vim.cmd('edit ' .. new_path)
+        end
+
+        local suffixes = vim.opt.suffixesadd:get()
+        if not suffixes then
+            return
+        end
+
+        for _, suffix in ipairs(suffixes) do
+            vim.print(suffix)
+            if vim.fn.filereadable(new_path .. suffix) == 1 then
+                return vim.cmd('edit ' .. new_path .. suffix)
+            end
+        end
+
+        return vim.cmd('edit ' .. new_path)
+    end,
+    { silent = true }
+)
