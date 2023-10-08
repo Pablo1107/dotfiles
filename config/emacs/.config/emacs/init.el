@@ -15,7 +15,19 @@
 (setq fill-column 80)
 
 ;;(load-theme 'tango-dark t)
-(setq backup-directory-alist `(("." . "/home/pablo/.emacs.d/.local/cache/backup/")))
+(let ((backup-dir (concat (getenv "XDG_DATA_HOME") "/emacs/backups"))
+      (auto-saves-dir (concat (getenv "XDG_DATA_HOME") "/emacs/auto-saves")))
+  (dolist (dir (list backup-dir auto-saves-dir))
+    (when (not (file-directory-p dir))
+      (make-directory dir t)))
+  (setq backup-by-copying t      ; don't clobber symlinks
+	backup-directory-alist `((".*" . ,backup-dir))    ; don't litter my fs tree)
+	auto-save-file-name-transforms `((".*" ,auto-saves-dir t)) ; this does not fucking work for whatever reason
+  tramp-backup-directory-alist `((".*" . ,backup-dir))
+	delete-old-versions t
+	kept-new-versions 6
+	kept-old-versions 2
+	version-control t))       ; use versioned backups
 
 ;; Init package sources
 (require 'package)
@@ -129,10 +141,7 @@
   :config
   (which-key-mode 1))
 
-;; install interaction-log.el with use-package
-(use-package interaction-log
-  :config
-  (global-interaction-log-mode 1))
+(use-package command-log-mode)
 
 ;; (use-package pdf-tools
 ;;   :pin manual ;; don't reinstall when package updates
@@ -176,8 +185,18 @@
 
 ;; ;; Org Mode
 (use-package org
-  :custom (org-hide-leading-stars t))
+  :custom (org-hide-leading-stars t)
+  :config (require 'org-tempo))
 (require 'ox)
+
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+	org-appear-autosubmarkers t
+	org-appear-autolinks t
+	org-appear-autoentities t
+	org-appear-autokeywords t))
 
 (add-hook 'org-mode-hook 'auto-fill-mode)
 ;(add-hook 'org-mode-hook 'centered-window-mode-toggle)
@@ -434,6 +453,13 @@
             (org-display-inline-images nil nil (min beg end) (max beg end)))))))
 
 ;; Keybindings
+
+;; Map Ctrl + Shift + V to paste
+(global-set-key (kbd "C-S-v") 'yank)
+
+;; Map Ctrl + Shift + C to copy
+(global-set-key (kbd "C-S-c") 'kill-ring-save)
+
 (defun personal/update-latex-preview-scale ()
   (interactive)
   (setq org-format-latex-options
@@ -474,34 +500,74 @@
 (evil-define-key 'normal 'global (kbd "gk") #'evil-previous-visual-line)
 (evil-define-key 'insert 'global (kbd "C-x C-f") #'company-files)
 (evil-define-key 'insert 'global (kbd "C-x C-l") #'evil-collection-company-whole-lines)
+;; Define key mappings for Alt + j and Alt + k in Evil's Ex mode using evil-define-key
+(define-key evil-ex-completion-map (kbd "M-j") 'next-complete-history-element)
+(define-key evil-ex-completion-map (kbd "M-k") 'previous-complete-history-element)
+; (define-key evil-ex-completion-map (kbd "M-j")
+;   (lambda ()
+;     "Move to the end of the next complete history element in the minibuffer."
+;     (interactive)
+;     (let ((orig-pos (point)))
+;       (if (and (bound-and-true-p evil-ex-completion-orig-pos) (= (point) (line-end-position)))
+; 	(goto-char evil-ex-completion-orig-pos)
+;         (setq evil-ex-completion-orig-pos orig-pos))
+;       (next-complete-history-element 1)
+;       (end-of-line))))
+
+; (define-key evil-ex-completion-map (kbd "M-k")
+;   (lambda ()
+;     "Move to the end of the previous complete history element in the minibuffer."
+;     (interactive)
+;     (let ((orig-pos (point)))
+;       (if (and (bound-and-true-p evil-ex-completion-orig-pos) (= (point) (line-end-position)))
+; 	(goto-char evil-ex-completion-orig-pos)
+;         (setq evil-ex-completion-orig-pos orig-pos))
+;       (previous-complete-history-element 1)
+;       (end-of-line))))
+
+
+; ; define a function to clear evil-ex-completion-orig-pos variable
+; (defun clear-evil-ex-completion-orig-pos ()
+;   (interactive)
+;   (setq evil-ex-completion-orig-pos nil))
+; (advice-add 'abort-recursive-edit :before #'clear-evil-ex-completion-orig-pos)
+; (advice-add 'exit-minibuffer :before #'clear-evil-ex-completion-orig-pos)
+;; (advice-remove 'abort-recursive-edit #'clear-evil-ex-completion-orig-pos)
+;; (advice-remove 'exit-minibuffer #'clear-evil-ex-completion-orig-pos)
+;; (unintern 'evil-ex-completion-orig-pos)
+;; (bound-and-true-p evil-ex-completion-orig-pos)
 
 (evil-set-initial-state 'pdf-view-mode 'normal)
 
 ;(define-key evil-normal-state-map "Q" #'evil-fill-and-move)
 ;(define-key evil-normal-state-map "gj" #'evil-next-visual-line)
 ;(define-key evil-normal-state-map "gk" #'evil-previous-visual-line)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(interaction-log editorconfig copilot quelpa-use-package quelpa org-tree-slide olivetti hide-mode-line org-fragtog org-modern company yasnippet pdf-tools which-key ivy-rich counsel smex ivy doom-modeline all-the-icons doom-themes undo-fu-session undo-fu evil-nerd-commenter evil-org evil-collection evil)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 
 ;; Github Copilot
 (use-package copilot
   :quelpa (copilot :fetcher github
                    :repo "zerolfx/copilot.el"
                    :branch "main"
-                   :files ("dist" "*.el")))
+                   :files ("dist" "*.el"))
+  :bind (:map copilot-mode-map
+	      ("<tab>" . copilot-accept-completion)
+	      ("TAB" . copilot-accept-completion)
+	      ("C-TAB" . copilot-accept-completion-by-word)
+	      ("C-<tab>" . copilot-accept-completion-by-word)))
 ;; you can utilize :map :hook and :config to customize copilot
 (add-hook 'prog-mode-hook 'copilot-mode)
-(evil-define-key 'insert 'global (kbd "<tab>") #'copilot-accept-completion)
-(evil-define-key 'insert 'global (kbd "TAB") #'copilot-accept-completion)
+;; (evil-define-key 'insert 'global (kbd "<tab>") #'copilot-accept-completion)
+;; (evil-define-key 'insert 'global (kbd "TAB") #'copilot-accept-completion)
+
+(defun personal/org-reload-latex-fragments ()
+  "Check for the 'ltximg' folder and reload LaTeX fragments if found."
+  (interactive)
+  (let ((ltximg-folder "ltximg"))
+    (if (file-exists-p ltximg-folder)
+        (progn
+          (delete-directory ltximg-folder t) ; Delete the 'ltximg' folder and its contents
+          (message "Deleted 'ltximg' folder.")
+	  (org-clear-latex-preview (point-min) (point-max))
+	  (org--latex-preview-region (point-min) (point-max))
+          (message "Reloaded LaTeX fragments."))
+      (message "No 'ltximg' folder found. Nothing to do."))))
