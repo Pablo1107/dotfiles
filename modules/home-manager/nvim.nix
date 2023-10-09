@@ -42,7 +42,7 @@ in
 
     home.activation = {
       nvimTSUpdate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        ${pkgs.neovim}/bin/nvim --headless +TSUpdateSync +qa
+        PATH="${config.home.path}/bin:$PATH" ${pkgs.neovim}/bin/nvim --headless +TSUpdateSync +qa
         printf "\n\n"
       '';
     };
