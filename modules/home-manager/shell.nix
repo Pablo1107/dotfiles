@@ -52,8 +52,6 @@ let
 
     LEDGER_FILE = mkDefault "$HOME/ledger/all.journal";
 
-    NODE_OPTIONS = "--openssl-legacy-provider"; # fix issue with openssl and nodejs
-
     _ZO_MAXAGE = "10000000";
   };
 

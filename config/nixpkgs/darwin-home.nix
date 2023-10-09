@@ -68,12 +68,6 @@ with pkgs;
     # awscli2
     # aws-sam-cli
 
-    # Node
-    # (yarn.override { nodejs = nodejs-12_x; })
-    yarn
-    # (yarn.override { nodejs = nodejs-12_x; })
-    nodejs-16_x
-
     # AWS
     git-remote-codecommit
 
