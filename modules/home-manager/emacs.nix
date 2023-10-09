@@ -15,6 +15,7 @@ in
       (lib.mkIf pkgs.stdenv.hostPlatform.isx86_64 emacs29-pgtk)
       (lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 emacs29-nox)
       plantuml
+      nodejs
     ];
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
