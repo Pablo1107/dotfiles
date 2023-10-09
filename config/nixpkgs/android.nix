@@ -11,9 +11,12 @@
   personal.shell.enable = true;
   personal.shell.envVariables = {
     LEDGER_FILE = lib.mkForce "$HOME/ledger/2023.journal";
+    XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
   };
   personal.nvim.enable = true;
   personal.npm.enable = true;
+  personal.ai.enable = true;
+  personal.emacs.enable = true;
 
   home.shellAliases = {
     ping = "/android/system/bin/linker64 /android/system/bin/ping";
