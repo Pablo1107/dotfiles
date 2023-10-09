@@ -1,9 +1,11 @@
 (setq inhibit-startup-screen t)
 
-(scroll-bar-mode -1) ; Disable scroll bar
-(tool-bar-mode -1) ; Disable tool bar
-(tooltip-mode -1) ; Disable tooltips
-(menu-bar-mode t) ; Disable menu bar
+(if (display-graphic-p)
+  (progn
+    (scroll-bar-mode -1) ; Disable scroll bar
+    (tool-bar-mode -1) ; Disable tool bar
+    (tooltip-mode -1) ; Disable tooltips
+    (menu-bar-mode t))) ; Disable menu bar
 
 (set-fringe-mode 10) ; Give some breathing room
 
