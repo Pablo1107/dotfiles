@@ -181,9 +181,10 @@
 ;(setq display-line-numbers-type t)
 
 ;; recentf
+(setq recentf-auto-cleanup nil)
 (recentf-mode 1)
-(setq recentf-max-menu-items 150)
-(setq recentf-max-saved-items 150)
+(setq recentf-max-menu-items 1000)
+(setq recentf-max-saved-items 1000)
 
 ;; ;; Org Mode
 (use-package org
