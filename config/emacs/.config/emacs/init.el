@@ -1,13 +1,13 @@
 (setq inhibit-startup-screen t)
 
-(if (display-graphic-p)
-  (progn
-    (scroll-bar-mode -1) ; Disable scroll bar
-    (tool-bar-mode -1) ; Disable tool bar
-    (tooltip-mode -1) ; Disable tooltips
-    (menu-bar-mode t) ; Disable menu bar
-    (set-fringe-mode 10) ; Give some breathing room
-    (set-face-attribute 'default nil :font "Hack" :height 120)))
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1)) ; Disable scroll bar
+
+(tool-bar-mode -1) ; Disable tool bar
+(tooltip-mode -1) ; Disable tooltips
+(menu-bar-mode t) ; Disable menu bar
+(set-fringe-mode 10) ; Give some breathing room
+(set-face-attribute 'default nil :font "Hack" :height 120)
 
 
 (setq visible-bell t)
