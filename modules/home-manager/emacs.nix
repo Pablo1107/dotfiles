@@ -4,6 +4,23 @@ with lib;
 
 let
   cfg = config.personal.emacs;
+
+  emacs = pkgs.emacsWithPackagesFromUsePackage {
+    package = if pkgs.stdenv.hostPlatform.isx86_64 then pkgs.emacs29-pgtk else pkgs.emacs29-nox;
+    config = "../../config/emacs/.config/emacs/init.el";
+
+    # Optionally provide extra packages not in the configuration file.
+    extraEmacsPackages = epkgs: [
+      epkgs.quelpa-use-package
+    ];
+
+    # Optionally override derivations.
+    # override = epkgs: epkgs // {
+    #   somePackage = epkgs.melpaPackages.somePackage.overrideAttrs (old: {
+    #     # Apply fixes here
+    #   });
+    # };
+  };
 in
 {
   options.personal.emacs = {
@@ -12,8 +29,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      (lib.mkIf pkgs.stdenv.hostPlatform.isx86_64 emacs29-pgtk)
-      (lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 emacs29-nox)
+      emacs
       plantuml
       nodejs
     ];
