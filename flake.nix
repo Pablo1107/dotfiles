@@ -10,7 +10,9 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
-    # emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     declarative-cachix.url = "github:jonascarpay/declarative-cachix";
     nix-on-droid.url = "github:t184256/nix-on-droid";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +25,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
     let
       nixpkgsConfig = {
         config = {
@@ -31,7 +33,7 @@
         };
         overlays = with builtins; [
           nixgl.overlay
-          # emacs-overlay.overlay
+          emacs-overlay.overlay
           comma.overlays.default
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
