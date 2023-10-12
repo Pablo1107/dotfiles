@@ -17,7 +17,7 @@
 (setq fill-column 80)
 
 (setq custom-file (concat (getenv "XDG_CONFIG_HOME") "/emacs/custom.el"))
-(load custom-file)
+(if (file-exists-p custom-file) (load custom-file))
 
 ;;(load-theme 'tango-dark t)
 (let ((backup-dir (concat (getenv "XDG_DATA_HOME") "/emacs/backups"))
