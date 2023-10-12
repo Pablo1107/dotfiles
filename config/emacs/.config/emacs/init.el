@@ -16,6 +16,9 @@
 (column-number-mode)
 (setq fill-column 80)
 
+(setq custom-file (concat (getenv "XDG_CONFIG_HOME") "/emacs/custom.el"))
+(load custom-file)
+
 ;;(load-theme 'tango-dark t)
 (let ((backup-dir (concat (getenv "XDG_DATA_HOME") "/emacs/backups"))
       (auto-saves-dir (concat (getenv "XDG_DATA_HOME") "/emacs/auto-saves")))
@@ -561,19 +564,6 @@
 	  (org--latex-preview-region (point-min) (point-max))
           (message "Reloaded LaTeX fragments."))
       (message "No 'ltximg' folder found. Nothing to do."))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(esup editorconfig copilot org-tree-slide olivetti hide-mode-line org-fragtog org-modern org-appear company yasnippet command-log-mode which-key ivy-rich counsel smex ivy doom-modeline all-the-icons doom-themes undo-fu-session undo-fu evil-nerd-commenter evil-org evil-collection evil quelpa-use-package quelpa)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (use-package esup
   :ensure t
