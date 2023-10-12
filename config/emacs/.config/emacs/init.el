@@ -49,19 +49,6 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Bootstrap Quelpa
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)))
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://github.com/quelpa/quelpa-use-package.git"))
-(require 'quelpa-use-package)
-;;
-
 (use-package evil
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
@@ -580,10 +567,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(editorconfig copilot org-tree-slide olivetti hide-mode-line org-fragtog org-modern org-appear company yasnippet command-log-mode which-key ivy-rich counsel smex ivy doom-modeline all-the-icons doom-themes undo-fu-session undo-fu evil-nerd-commenter evil-org evil-collection evil quelpa-use-package quelpa)))
+   '(esup editorconfig copilot org-tree-slide olivetti hide-mode-line org-fragtog org-modern org-appear company yasnippet command-log-mode which-key ivy-rich counsel smex ivy doom-modeline all-the-icons doom-themes undo-fu-session undo-fu evil-nerd-commenter evil-org evil-collection evil quelpa-use-package quelpa)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(use-package esup
+  :ensure t
+  ;; To use MELPA Stable use ":pin melpa-stable",
+  :pin melpaProcess *esup-child* exited abnormally with code 1
+)
+;; Work around a bug where esup tries to step into the byte-compiled
+;; version of `cl-lib', and fails horribly.
+(setq esup-depth 0)
