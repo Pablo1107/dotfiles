@@ -171,5 +171,11 @@
           ];
         }
       );
+      templates = {
+        template = {
+          description = "My flake template";
+          path = ./template;
+        };
+      };
     };
 }
