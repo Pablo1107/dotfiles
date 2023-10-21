@@ -91,6 +91,9 @@ in
       tmuxinator
       ripgrep
       elixir
+      inetutils
+      docker-compose
+      pop # email client
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;

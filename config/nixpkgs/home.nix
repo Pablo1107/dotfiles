@@ -57,128 +57,21 @@ with pkgs;
     jq
     xdg-user-dirs
     qrcp
-    element-desktop
-    gimp
-    gnome3.gvfs # for sftp mount and stuff like that
-    gnome3.nautilus
-    gnome3.nautilus-python
-    gnome3.sushi
-    #texlive.combined.scheme-full
-    #anki
-    slack
     hledger
     tealdeer
-    qbittorrent
-    vlc
-    gnome3.file-roller
-    libreoffice
-    gnome3.eog
     ffmpeg-full
     geckodriver
     chromedriver
     gnumeric
-    qt5.qttools
-    unixtools.arp
-    ripgrep
-    inetutils
 
-    # Wayland
-    xsettingsd
-    waybar
-    wl-clipboard
-    qt5.qtwayland
-    xdg-utils
-    nixgl.nixGLIntel
-    imv
-    xfce.tumbler
-    gnome3.gnome-keyring
-    wayland-utils
-    # poppler-glib
-    # ffmpegthumbnailer
-    # freetype2
-    # libgsf
-    # totem
-    # mcomix
-
-    (myLib.nixGLWrapper pkgs {
-      bin = "chromium";
-      package = chromium;
-    })
-    awscli2
-
-
-    # Fonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    hack-font
-    font-awesome
-    dejavu_fonts
-    ibm-plex
-    symbola
-    material-design-icons
-
-
-    # AWS
-    git-remote-codecommit
-    git-annex
-    git-annex-remote-googledrive
-
-    # Databases
-    dbeaver
-
-    insomnia
-    postman
-
-    # LSP
-    rnix-lsp
-
-    # Rust
-    # rustup
-
-    docker-compose
-    zathura
     tesseract
-    tdesktop
-    pandoc
-    # mongodb-compass
 
     man-pages
-    # clang
-
-    hicolor-icon-theme
-
-    morgen
-    pop
-    discord
   ];
 
   # home.file.".local/bin/wl-screenshot".source = writeScript "wl-screenshot" (getDotfile "scripts" "wl-screenshot");
   # home.file.".local/bin/git-status".source = writeScript "git-status" (getDotfile "scripts" "git-status");
-  home.file.".local/bin/xterm".source = writeScript "xterm" ''
-    #!${pkgs.stdenv.shell}
-    ${alacritty}/bin/alacritty "$@"
-  '';
 
-  fonts.fontconfig.enable = true;
-  dconf = {
-    enable = true;
-    # settings = {
-    #   "org/gnome/settings-daemon/plugins/xsettings" = {
-    #     antialiasing = 1;
-    #   };
-    # };
-  };
-  programs = {
-    go.enable = true;
-  };
-
-  services = {
-    fluidsynth = {
-      enable = true;
-      soundService = "pipewire-pulse";
-    };
-  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
