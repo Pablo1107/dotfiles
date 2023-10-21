@@ -1,7 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i sh -p grim slurp jq wl-clipboard xdg-utils
-#// vim: set ft=sh:
-
+#!/usr/bin/env sh
 # Screenshot helper for sway based on Witalij Berdinskich script
 
 if [ -z $WAYLAND_DISPLAY ]; then
