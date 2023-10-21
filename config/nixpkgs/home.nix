@@ -152,11 +152,6 @@ with pkgs;
     discord
   ];
 
-  # nix
-  caches.cachix = [
-    { name = "nix-community"; sha256 = "0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x"; }
-  ];
-
   # home.file.".local/bin/wl-screenshot".source = writeScript "wl-screenshot" (getDotfile "scripts" "wl-screenshot");
   # home.file.".local/bin/git-status".source = writeScript "git-status" (getDotfile "scripts" "git-status");
   home.file.".local/bin/xterm".source = writeScript "xterm" ''

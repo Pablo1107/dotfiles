@@ -30,6 +30,8 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
+          buildPlatform.system = "x86_64-linux";
+          hostPlatform.system = "aarch64-linux";
         };
         overlays = with builtins; [
           nixgl.overlay
@@ -161,6 +163,35 @@
           };
         };
       };
+      nixosConfigurations.rpi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          ./config/nixos/rpi.nix
+          home-manager.nixosModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ ] ++ hmModules;
+            home-manager.extraSpecialArgs = {
+              inherit myLib;
+            };
+            home-manager.users.pablo = { pkgs, ... }: {
+              imports = [ ./config/nixpkgs/home-rpi.nix ];
+            };
+          }
+          {
+            config = {
+              # Disable zstd compression
+              sdImage.compressImage = false;
+              system = {
+                stateVersion = "22.05";
+              };
+            };
+          }
+        ];
+      };
       devShell = myLib.forAllSystems (system:
         let
           pkgs = myLib.nixpkgsFor.${system};
@@ -168,6 +199,7 @@
         pkgs.mkShell {
           buildInputs = with pkgs; [
             just
+            rpiboot
           ];
         }
       );

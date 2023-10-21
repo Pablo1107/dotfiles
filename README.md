@@ -36,3 +36,16 @@ git clone https://github.com/Pablo1107/dotfiles
 ```
 nix-on-droid switch --flake ".#sm-g950f"
 ```
+
+# NixOS on RPi
+```
+sudo pacman -S qemu-user-static qemu-user-static-binfmt
+```
+
+```
+nix build .#nixosConfigurations.rpi.config.system.build.sdImage
+```
+
+```
+rm -rf run-rpi-vm && cp result/bin/run-rpi-vm . && sed -i "s/[^ ]*qemu-host-cpu-only[^ ]*/$(which qemu-system-aarch64 | sed 's/\//\\\//g')/" run-rpi-vm && ./run-rpi-vm -serial stdio
+```
