@@ -568,8 +568,24 @@
 (use-package esup
   :ensure t
   ;; To use MELPA Stable use ":pin melpa-stable",
-  :pin melpaProcess *esup-child* exited abnormally with code 1
+  :pin melpa
 )
 ;; Work around a bug where esup tries to step into the byte-compiled
 ;; version of `cl-lib', and fails horribly.
 (setq esup-depth 0)
+
+(defun personal/evaluate-in-line (beg end)
+  "Evaluates the math expression from the region with calc syntax. 
+   The expression can be ended with => or not."
+    (interactive (list (region-beginning) (region-end)) )
+    (let ((evaluation(calc-eval(substring(buffer-string) (1- beg)(1- end)))))
+      (when (stringp evaluation)
+        (kill-region beg end)
+        (save-excursion
+          (insert(with-temp-buffer
+                   (insert  evaluation)
+                   (goto-char(point-min))
+                  (when (search-forward  "\\evalto" nil t) (replace-match "")
+                   (search-forward "\\to" nil t)
+                   (replace-match "="))
+                   (buffer-string)))))))
