@@ -187,7 +187,7 @@ autocmd({ 'FocusGained', 'BufEnter' }, {
 })
 
 -- Templates
-autocmd("BufNewFile *.sh", {
+autocmd("BufNewFile", {
     desc = 'Shell template',
     pattern = { '*.sh' },
     callback = function()
