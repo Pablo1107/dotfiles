@@ -14,6 +14,11 @@ in
     # sway installed on arch linux
     home.packages = with pkgs; [
       brillo
+      grim
+      slurp
+      jq
+      wl-clipboard
+      xdg-utils
     ];
   };
 }
