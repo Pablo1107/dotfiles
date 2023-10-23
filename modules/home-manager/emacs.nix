@@ -1,9 +1,16 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, inputs, ... }:
 
 with lib;
 
 let
   cfg = config.personal.emacs;
+
+  copilot = { trivialBuild, dash, s, editorconfig }: trivialBuild {
+    pname = "copilot";
+    version = "main";
+    src = inputs.emacs-copilot;
+    buildInputs = [ dash s editorconfig ];
+  };
 
   emacs = pkgs.emacsWithPackagesFromUsePackage {
     package = if pkgs.stdenv.hostPlatform.isx86_64 then pkgs.emacs29-pgtk else pkgs.emacs29-nox;
@@ -11,8 +18,7 @@ let
 
     # Optionally provide extra packages not in the configuration file.
     extraEmacsPackages = epkgs: [
-      epkgs.quelpa
-      epkgs.quelpa-use-package
+      (copilot { inherit (epkgs) trivialBuild dash s editorconfig; })
     ];
 
     # Optionally override derivations.

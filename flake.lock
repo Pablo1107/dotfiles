@@ -60,6 +60,22 @@
         "type": "github"
       }
     },
+    "emacs-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696919094,
+        "narHash": "sha256-FvR6cCUbcbUePIqL1IAx1qIpFLVnn/KNVIpGdRNMXiU=",
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "rev": "3086d214f40a9689d00d647667b73795abc07bc9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zerolfx",
+        "repo": "copilot.el",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -472,6 +488,7 @@
         "comma": "comma",
         "darwin": "darwin",
         "declarative-cachix": "declarative-cachix",
+        "emacs-copilot": "emacs-copilot",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

@@ -541,10 +541,6 @@
 
 ;; Github Copilot
 (use-package copilot
-  :quelpa (copilot :fetcher github
-                   :repo "zerolfx/copilot.el"
-                   :branch "main"
-                   :files ("dist" "*.el"))
   :bind (:map copilot-mode-map
 	      ("<tab>" . copilot-accept-completion)
 	      ("TAB" . copilot-accept-completion)

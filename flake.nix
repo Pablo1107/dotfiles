@@ -23,9 +23,13 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
+    emacs-copilot = {
+      url = "github:zerolfx/copilot.el";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -78,6 +82,7 @@
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
+            inherit inputs;
             pkgs-stable = import nixpkgs-stable {
               system = "x86_64-linux";
               config = nixpkgsConfig.config;
@@ -94,6 +99,7 @@
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
+            inherit inputs;
             pkgs-stable = import nixpkgs-stable {
               system = "x86_64-linux";
               config = nixpkgsConfig.config;
@@ -113,6 +119,7 @@
             home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
+              inherit inputs;
               pkgs-stable = import nixpkgs-stable {
                 inherit system;
                 config = nixpkgsConfig.config;
@@ -141,6 +148,7 @@
               home-manager.sharedModules = [ ] ++ hmModules;
               home-manager.extraSpecialArgs = {
                 inherit myLib;
+                inherit inputs;
               };
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./hosts/sm-f936b/home.nix ];
@@ -176,6 +184,7 @@
             home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
+              inherit inputs;
             };
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/rpi/home.nix ];
