@@ -6,7 +6,9 @@
 (tool-bar-mode -1) ; Disable tool bar
 (tooltip-mode -1) ; Disable tooltips
 (menu-bar-mode t) ; Disable menu bar
-(set-fringe-mode 10) ; Give some breathing room
+
+(if (fboundp 'set-fringe-mode)
+  (set-fringe-mode 10)) ; Give some breathing room
 (set-face-attribute 'default nil :font "Hack" :height 120)
 
 
@@ -51,6 +53,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(require 'quelpa-use-package)
 
 (use-package evil
   :init

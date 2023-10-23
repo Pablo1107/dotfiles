@@ -11,6 +11,7 @@ let
 
     # Optionally provide extra packages not in the configuration file.
     extraEmacsPackages = epkgs: [
+      epkgs.quelpa
       epkgs.quelpa-use-package
     ];
 
