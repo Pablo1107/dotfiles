@@ -70,7 +70,7 @@
             config = nixpkgsConfig.config;
           };
           modules = [
-            ./config/nixpkgs/home.nix
+            ./hosts/t14s/home.nix
             {
               nixpkgs = nixpkgsConfig;
             }
@@ -90,7 +90,7 @@
             config = nixpkgsConfig.config;
           };
           modules = [
-            ./config/nixpkgs/deck-home.nix
+            ./hosts/deck/home.nix
           ] ++ hmModules;
           extraSpecialArgs = {
             inherit myLib;
@@ -120,7 +120,7 @@
             };
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [
-                ./config/nixpkgs/darwin-home.nix
+                ./hosts/darwin/home.nix
               ];
               home = {
                 username = "pablo";
@@ -132,9 +132,9 @@
         inputs = { inherit darwin nixpkgs; };
       };
       nixOnDroidConfigurations = {
-        sm-g950f = nix-on-droid.lib.nixOnDroidConfiguration {
+        localhost = nix-on-droid.lib.nixOnDroidConfiguration {
           modules = [
-            ./config/nix-on-droid/config.nix
+            ./hosts/sm-f936b/nix-on-droid.nix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -143,7 +143,7 @@
                 inherit myLib;
               };
               home-manager.config = { pkgs, ... }: {
-                imports = [ ./config/nixpkgs/android.nix ];
+                imports = [ ./hosts/sm-f936b/home.nix ];
               };
             }
           ];
@@ -167,7 +167,7 @@
         system = "aarch64-linux";
         modules = [
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          ./config/nixos/rpi.nix
+          ./hosts/rpi/nixos.nix
           home-manager.nixosModules.home-manager
           {
             nixpkgs = nixpkgsConfig;
@@ -178,7 +178,7 @@
               inherit myLib;
             };
             home-manager.users.pablo = { pkgs, ... }: {
-              imports = [ ./config/nixpkgs/home-rpi.nix ];
+              imports = [ ./hosts/rpi/home.nix ];
             };
           }
           {
