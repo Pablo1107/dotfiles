@@ -540,13 +540,14 @@
 
 ;; Github Copilot
 (use-package copilot
+  :ensure nil
   :bind (:map copilot-mode-map
 	      ("<tab>" . copilot-accept-completion)
 	      ("TAB" . copilot-accept-completion)
 	      ("C-TAB" . copilot-accept-completion-by-word)
-	      ("C-<tab>" . copilot-accept-completion-by-word)))
+	      ("C-<tab>" . copilot-accept-completion-by-word))
+  :hook (prog-mode . copilot-mode))
 ;; you can utilize :map :hook and :config to customize copilot
-(add-hook 'prog-mode-hook 'copilot-mode)
 ;; (evil-define-key 'insert 'global (kbd "<tab>") #'copilot-accept-completion)
 ;; (evil-define-key 'insert 'global (kbd "TAB") #'copilot-accept-completion)
 

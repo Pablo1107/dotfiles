@@ -10,6 +10,9 @@ let
     version = "main";
     src = inputs.emacs-copilot;
     buildInputs = [ dash s editorconfig ];
+    postPatch = ''
+      ${pkgs.perl}/bin/perl -i -p0e "s#\(defconst copilot--base-dir\n  \(file-name-directory\n   \(or load-file-name\n       \(buffer-file-name\)\)\)\n  \"Directory containing this file.\"\)\n#(defconst copilot--base-dir\n  \"${inputs.emacs-copilot.outPath}\"\n  \"Directory containing this file.\")#" ./copilot.el
+    '';
   };
 
   emacs = pkgs.emacsWithPackagesFromUsePackage {
