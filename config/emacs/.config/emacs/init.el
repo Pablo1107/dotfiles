@@ -53,7 +53,6 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-(require 'quelpa-use-package)
 
 (use-package evil
   :init
@@ -574,7 +573,7 @@
 (setq esup-depth 0)
 
 (defun personal/evaluate-in-line (beg end)
-  "Evaluates the math expression from the region with calc syntax. 
+  "Evaluates the math expression from the region with calc syntax.
    The expression can be ended with => or not."
     (interactive (list (region-beginning) (region-end)) )
     (let ((evaluation(calc-eval(substring(buffer-string) (1- beg)(1- end)))))
