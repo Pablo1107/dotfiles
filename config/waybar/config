@@ -111,8 +111,9 @@
             "8": "Ⅷ",
             "9": "Ⅸ",
             "urgent": "",
-            "focused": "",
-            "default": ""
+            "focused": " ",
+            "default": "",
+            "high-priority-named": [ "1","2","3","4","5","6","7","8","9" ]
         }
     },
     "sway/window": {
