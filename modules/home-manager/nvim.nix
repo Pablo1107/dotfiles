@@ -26,6 +26,7 @@ in
       enable = true;
       plugins = with pkgs.vimPlugins; [
         nvim-treesitter.withAllGrammars
+        lazy-nvim
       ];
     };
 
