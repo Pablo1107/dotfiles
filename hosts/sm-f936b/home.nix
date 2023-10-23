@@ -12,6 +12,7 @@
   personal.shell.envVariables = {
     LEDGER_FILE = lib.mkForce "$HOME/ledger/2023.journal";
     XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
   };
   personal.nvim.enable = true;
   personal.npm.enable = true;
