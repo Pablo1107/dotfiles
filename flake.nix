@@ -132,7 +132,7 @@
         inputs = { inherit darwin nixpkgs; };
       };
       nixOnDroidConfigurations = {
-        localhost = nix-on-droid.lib.nixOnDroidConfiguration {
+        default = nix-on-droid.lib.nixOnDroidConfiguration {
           modules = [
             ./hosts/sm-f936b/nix-on-droid.nix
             {
