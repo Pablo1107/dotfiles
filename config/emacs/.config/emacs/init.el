@@ -11,6 +11,13 @@
   (set-fringe-mode 10)) ; Give some breathing room
 (set-face-attribute 'default nil :font "Hack" :height 120)
 
+(set-frame-parameter nil 'alpha-background 85)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)
 
 (setq visible-bell t)
 
