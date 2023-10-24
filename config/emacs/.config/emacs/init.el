@@ -5,7 +5,7 @@
 
 (tool-bar-mode -1) ; Disable tool bar
 (tooltip-mode -1) ; Disable tooltips
-(menu-bar-mode t) ; Disable menu bar
+(menu-bar-mode -1) ; Disable menu bar
 
 (if (fboundp 'set-fringe-mode)
   (set-fringe-mode 10)) ; Give some breathing room
