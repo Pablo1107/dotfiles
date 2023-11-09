@@ -11,6 +11,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      nvd
+    ];
     home.activation.reportChanges = lib.hm.dag.entryAnywhere ''
       ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
     '';

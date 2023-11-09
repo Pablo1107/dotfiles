@@ -1,0 +1,14 @@
+diff --git a/src/nvd b/src/nvd
+index 9a07fd2..7cf2e44 100755
+--- a/src/nvd
++++ b/src/nvd
+@@ -586,6 +586,9 @@ def run_diff(*, root1, root2):
+     if (left_resolved / "sw").is_dir() and (right_resolved / "sw").is_dir():
+         left_manifest = PackageManifest.parse_tree((left_resolved / "sw").resolve())
+         right_manifest = PackageManifest.parse_tree((right_resolved / "sw").resolve())
++    elif (left_resolved / "home-path").is_dir() and (right_resolved / "home-path").is_dir():
++        left_manifest = PackageManifest.parse_tree((left_resolved / "home-path").resolve())
++        right_manifest = PackageManifest.parse_tree((right_resolved / "home-path").resolve())
+     else:
+         left_manifest = PackageManifest.parse_tree(left_resolved)
+         right_manifest = PackageManifest.parse_tree(right_resolved)
