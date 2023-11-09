@@ -201,6 +201,18 @@
           }
         ];
       };
+      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/virtualisation/vmware-image.nix"
+          ./hosts/vm/nixos.nix
+          {
+            config = {
+              vmware.baseImageSize = 32 * 1024;
+            };
+          }
+        ];
+      };
       devShell = myLib.forAllSystems (system:
         let
           pkgs = myLib.nixpkgsFor.${system};
