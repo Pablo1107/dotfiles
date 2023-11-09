@@ -7,7 +7,7 @@
     ],
     "modules-right": [
       "network",
-      "custom/crypto",
+      "custom/updates",
       "custom/weather",
       "battery",
       "temperature",
@@ -18,6 +18,13 @@
       "clock#date",
       "clock#time"
     ],
+    "custom/updates": {
+      "format": "{}",
+      "tooltip": true,
+      "interval": 21600,
+      "exec": "hm-updates", // installed from hm module
+      "return-type": "json"
+    },
     "custom/weather": {
       "format": "{}",
       "tooltip": true,
