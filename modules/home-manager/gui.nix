@@ -12,6 +12,8 @@ in
 
 
   config = mkIf cfg.enable {
+    personal.waybar.enable = true;
+
     home.file.".local/bin/xterm".source = pkgs.writeScript "xterm" ''
       #!${pkgs.stdenv.shell}
       ${pkgs.alacritty}/bin/alacritty "$@"
@@ -59,7 +61,7 @@ in
       vlc # video player
       anki # flashcards for memorization
       qbittorrent # torrent client
-      transmission # torrent client
+      transmission-gtk # torrent client
       libreoffice # office suite
       zathura # pdf viewer
       tdesktop # telegram
@@ -93,6 +95,8 @@ in
       ibm-plex
       symbola
       material-design-icons
+      # apple-fonts
+      # nerdfonts
 
       # Databases
       dbeaver
