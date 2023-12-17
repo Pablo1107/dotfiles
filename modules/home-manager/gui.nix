@@ -29,6 +29,17 @@ in
       # };
     };
 
+    wayland.windowManager.hyprland = {
+      enable = true;
+      package = (myLib.nixGLWrapper pkgs {
+        bin = "Hyprland";
+        package = pkgs.hyprland;
+      });
+      systemdIntegration = false;
+      extraConfig = null;
+      plugins = [ ];
+    };
+
     services = {
       fluidsynth = {
         enable = true;
@@ -38,17 +49,26 @@ in
 
     home.packages = with pkgs; [
       (myLib.nixGLWrapper pkgs {
+        bin = "Hyprland";
+        package = pkgs.hyprland;
+      })
+      (myLib.nixGLWrapper pkgs {
         bin = "alacritty";
-        package = alacritty;
       })
       (myLib.nixGLWrapper pkgs {
         bin = "foot";
-        package = foot;
       })
       (myLib.nixGLWrapper pkgs {
         bin = "chromium";
-        package = chromium;
       })
+      (myLib.nixBothWrapper pkgs {
+        bin = "gamescope";
+      })
+      # (myLib.nixGLWrapper pkgs {
+      #   bin = "zoom";
+      #   package = zoom-us;
+      # })
+      anki
       element-desktop # matrix client
       slack
       gimp # image editor
@@ -57,9 +77,9 @@ in
       gnome3.nautilus-python
       gnome3.sushi # preview for nautilus
       gnome3.file-roller # archive manager
+      unrar # for rar archives
       gnome3.eog # image viewer
       vlc # video player
-      anki # flashcards for memorization
       qbittorrent # torrent client
       transmission-gtk # torrent client
       libreoffice # office suite
@@ -73,6 +93,7 @@ in
       qt5.qtwayland
       xdg-utils
       nixgl.nixGLIntel # wrapper GUI apps
+      nixgl.nixVulkanIntel # wrapper GUI apps (Vulkan)
       imv # lightweight image viewer
       xfce.tumbler
       gnome3.gnome-keyring
@@ -103,6 +124,8 @@ in
 
       insomnia
       # postman
+
+      bitwig-studio # music production
     ];
   };
 }
