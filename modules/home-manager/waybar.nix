@@ -18,7 +18,7 @@ in
         cd /tmp
 
         DOTFILES_PATH=~/dotfiles
-        GENERATION_PATH=$(home-manager generations | tail -n 1 | awk '{print $NF}')
+        GENERATION_PATH=$(home-manager generations | head -n 1 | awk '{print $NF}')
 
         cp "$DOTFILES_PATH"/flake.lock "$DOTFILES_PATH"/flake.lock.bak
         nix flake update "$DOTFILES_PATH" >/dev/null 2>&1
