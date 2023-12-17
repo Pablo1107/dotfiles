@@ -1,0 +1,20 @@
+#titlebar #TabsToolbar {
+	padding: 0 !important;
+}
+
+.tabbrowser-tab {
+  margin-right: 0 !important;
+}
+
+.tabbrowser-tab > .tab-stack > .tab-background:not([selected]) {
+	background-color: transparent !important;
+}
+
+#urlbar-background {
+  display: none !important;
+}
+
+#TabsToolbar #firefox-view-button:hover:not([open]) > .toolbarbutton-icon,
+.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected], [multiselected]) {
+  background-color: var(--base_color3) !important;
+}

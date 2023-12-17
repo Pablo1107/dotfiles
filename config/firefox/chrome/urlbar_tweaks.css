@@ -1,0 +1,38 @@
+#urlbar > .urlbarView {
+  position: fixed !important;
+  bottom: 30px !important;
+  left: -7px !important;
+  background: var(--toolbar-bgcolor) !important;
+  width: 100vw !important;
+  padding: 1px 5px 0 7px !important;
+}
+
+.search-one-offs {
+  display: none !important;
+}
+
+#nav-bar-customization-target * {
+  border: none !important;
+}
+
+#urlbar[breakout][breakout-extends] {
+  top: -50px !important;
+}
+
+#urlbar-background {
+  display: none !important;
+}
+
+#urlbar[focused] {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#urlbar-input {
+  text-align: center !important;
+}
+
+#navigator-toolbox,
+#browser {
+  border: none !important;
+}
