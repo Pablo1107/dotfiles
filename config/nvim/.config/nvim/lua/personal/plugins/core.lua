@@ -18,33 +18,36 @@ return {
         end,
     },
     {
-      'terrortylor/nvim-comment',
-      config = function()
-        require('nvim_comment').setup()
-      end
+        'terrortylor/nvim-comment',
+        config = function()
+            require('nvim_comment').setup()
+        end
     },
     {
-      'kylechui/nvim-surround',
-      config = function()
-        require("nvim-surround").setup({ })
-      end
+        'kylechui/nvim-surround',
+        config = function()
+            require("nvim-surround").setup({})
+        end
     },
     {
-      'norcalli/nvim-colorizer.lua', -- Colorize hex colors strings
-      config = function()
-        vim.opt.termguicolors = true
-        require('colorizer').setup()
-      end
+        'norcalli/nvim-colorizer.lua', -- Colorize hex colors strings
+        config = function()
+            vim.opt.termguicolors = true
+            require('colorizer').setup()
+        end
     },
     {
-      'lewis6991/gitsigns.nvim',
-      event = 'BufEnter',
-      config = function()
-        require('gitsigns').setup()
-      end
+        'lewis6991/gitsigns.nvim',
+        event = 'BufEnter',
+        config = function()
+            require('gitsigns').setup()
+        end
     },
     -- {
     --   'luukvbaal/stabilize.nvim',
     --   config = function() require("stabilize").setup() end
     -- },
+    {
+        'elkowar/yuck.vim',
+    },
 }

@@ -163,6 +163,8 @@ return {
             require('lspconfig')['tsserver'].setup {
                 capabilities = capabilities
             }
+
+            require('lspconfig').asm_lsp.setup {}
         end
     },
     {
