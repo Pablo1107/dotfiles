@@ -1,12 +1,28 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, inputs, ... }:
 
 with lib;
 
 let
   cfg = config.personal.firefox;
 
-  userChrome = myLib.getDotfile "firefox" "chrome/userChrome.css";
-  userContent = myLib.getDotfile "firefox" "chrome/userContent.css";
+  # userChrome = myLib.getDotfile "firefox" "chrome/userChrome.css";
+  # userContent = myLib.getDotfile "firefox" "chrome/userContent.css";
+  userChrome = ''
+    @import url("${inputs.firefox-csshacks.outPath}/chrome/navbar_below_content.css");
+    @import url("${config.home.homeDirectory}/dotfiles/config/firefox/chrome/proton_tweaks.css");
+    @import url("${config.home.homeDirectory}/dotfiles/config/firefox/chrome/urlbar_tweaks.css");
+
+    :root {
+      --toolbar-bgcolor: #25252D !important;
+      --toolbar-bgimage: none !important;
+      --base_color3: #4b4757 !important;
+      --base_color4: #007CA6 !important;
+      --autocomplete-popup-highlight-background: var(--base_color4) !important;
+      --lwt-selected-tab-background-color: var(--base_color4) !important;
+    }
+  '';
+  userContent = ''
+  '';
 
   customFirefox = (
     pkgs.firefox-wayland.override {
@@ -75,6 +91,10 @@ in
               darkreader
             ];
             inherit userChrome userContent;
+          };
+          test = {
+            id = 1;
+            settings = defaultSettings;
           };
         };
     };
