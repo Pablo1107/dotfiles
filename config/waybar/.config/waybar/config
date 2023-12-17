@@ -1,6 +1,7 @@
 {
     "layer": "top",
     "modules-left": [
+      "hyprland/workspaces",
       "sway/workspaces",
       "sway/mode",
       "sway/window"
@@ -18,13 +19,13 @@
       "clock#date",
       "clock#time"
     ],
-    "custom/updates": {
-      "format": "{}",
-      "tooltip": true,
-      "interval": 21600,
-      "exec": "hm-updates", // installed from hm module
-      "return-type": "json"
-    },
+//    "custom/updates": {
+//      "format": "{}",
+//      "tooltip": true,
+//      "interval": 21600,
+//      "exec": "hm-updates", // installed from hm module
+//      "return-type": "json"
+//    },
     "custom/weather": {
       "format": "{}",
       "tooltip": true,
