@@ -20,6 +20,7 @@ in
       gcc
       nodePackages.prettier_d_slim
       nodePackages.vscode-langservers-extracted
+      asm-lsp
     ];
 
     programs.neovim = {
