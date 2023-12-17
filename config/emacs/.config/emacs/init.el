@@ -595,3 +595,18 @@
                    (search-forward "\\to" nil t)
                    (replace-match "="))
                    (buffer-string)))))))
+
+(use-package org-download
+    :after org
+    :defer nil
+    :custom
+    (org-download-method 'directory)
+    (org-download-image-dir "images")
+    (org-download-heading-lvl nil)
+    (org-download-timestamp "%Y%m%d-%H%M%S_")
+    (org-image-actual-width 1000)
+    (org-download-screenshot-method "wl-paste --type image/png > %s")
+    ;; :bind
+    ;; ("C-M-y" . org-download-screenshot file)
+    :config
+    (require 'org-download))
