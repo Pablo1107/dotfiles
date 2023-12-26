@@ -16,6 +16,7 @@ with pkgs;
   personal.vifm.enable = true;
   personal.nvim.enable = true;
   personal.shell.enable = true;
+  personal.transmission.enable = true;
 
   home = {
     username = "deck";
