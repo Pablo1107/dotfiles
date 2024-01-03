@@ -64,11 +64,14 @@ in
       (myLib.nixBothWrapper pkgs {
         bin = "gamescope";
       })
-      # (myLib.nixGLWrapper pkgs {
-      #   bin = "zoom";
-      #   package = zoom-us;
-      # })
-      anki
+      (myLib.nixGLWrapper pkgs {
+        bin = "zoom";
+        package = zoom-us;
+      })
+      (myLib.nixGLWrapper pkgs {
+        bin = "anki";
+        output = "out";
+      })
       element-desktop # matrix client
       slack
       gimp # image editor
