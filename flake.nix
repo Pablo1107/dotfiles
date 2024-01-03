@@ -31,9 +31,13 @@
       url = "github:MrOtherGuy/firefox-csshacks";
       flake = false;
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, disko, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -217,6 +221,13 @@
           }
         ];
       };
+      nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/server/nixos.nix
+        ];
+      };
       devShell = myLib.forAllSystems (system:
         let
           pkgs = myLib.nixpkgsFor.${system};
@@ -225,6 +236,7 @@
           buildInputs = with pkgs; [
             just
             rpiboot
+            nixos-rebuild
           ];
         }
       );
