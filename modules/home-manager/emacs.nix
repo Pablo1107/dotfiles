@@ -19,9 +19,12 @@ let
     package = if pkgs.stdenv.hostPlatform.isx86_64 then pkgs.emacs29-pgtk else pkgs.emacs29-nox;
     config = "../../config/emacs/.config/emacs/init.el";
 
+    alwaysEnsure = true;
+
     # Optionally provide extra packages not in the configuration file.
     extraEmacsPackages = epkgs: [
       (copilot { inherit (epkgs) trivialBuild dash s editorconfig; })
+      epkgs.pdf-tools
     ];
 
     # Optionally override derivations.
