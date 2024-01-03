@@ -144,17 +144,18 @@
 
 (use-package command-log-mode)
 
-;; (use-package pdf-tools
-;;   :pin manual ;; don't reinstall when package updates
-;;   :mode  ("\\.pdf\\'" . pdf-view-mode)
-;;   :magic ("%PDF" . pdf-view-mode)
-;;   :hook (pdf-view-mode . pdf-view-midnight-minor-mode)
-;;   :bind (:map pdf-view-mode-map
-;; 	 ("zm" . pdf-view-midnight-minor-mode))
-;;   :config
-;;   (setq-default pdf-view-display-size 'fit-page)
-;;   (setq pdf-annot-activate-created-annotations t)
-;;   (pdf-tools-install :no-query))
+(use-package pdf-tools
+  :pin manual ;; don't reinstall when package updates
+  :mode  ("\\.pdf\\'" . pdf-view-mode)
+  :magic ("%PDF" . pdf-view-mode)
+  :hook (pdf-view-mode . pdf-view-midnight-minor-mode)
+  :bind (:map pdf-view-mode-map
+	 ("zm" . pdf-view-midnight-minor-mode))
+  :init
+  (pdf-tools-install :no-query)
+  :config
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t))
 
 (use-package yasnippet
   :config
@@ -478,6 +479,8 @@
   (text-scale-increase 1)
   (personal/update-latex-preview-scale))
 
+(define-key image-mode-map "," nil)
+(define-key image-mode-map "<normal-state> ," nil)
 (evil-set-leader 'normal (kbd ","))
 (evil-define-key 'normal 'global (kbd "<leader>h") #'counsel-recentf)
 (evil-define-key 'normal 'global (kbd "<leader>f") #'counsel-find-file)
@@ -601,7 +604,7 @@
     :defer nil
     :custom
     (org-download-method 'directory)
-    (org-download-image-dir "images")
+    (org-download-image-dir "assets")
     (org-download-heading-lvl nil)
     (org-download-timestamp "%Y%m%d-%H%M%S_")
     (org-image-actual-width 1000)
