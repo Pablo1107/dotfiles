@@ -246,5 +246,10 @@
           path = ./template;
         };
       };
+      nixpkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = nixpkgsConfig.config;
+        overlays = nixpkgsConfig.overlays;
+      };
     };
 }
