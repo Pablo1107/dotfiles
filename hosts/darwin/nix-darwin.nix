@@ -7,30 +7,36 @@ with pkgs;
   personal.skhd.enable = true;
   personal.yabai.enable = true;
   personal.sketchybar.enable = false;
-  personal.emacs.enable = true;
+  personal.emacs.enable = false;
+
+  personal.one.enable = true;
 
   # to fix issue with validating manuals
   # https://github.com/NixOS/nixpkgs/issues/196651
   documentation.enable = false;
 
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    build-users-group = nixbld
-    system = aarch64-darwin
-    extra-platforms = x86_64-darwin aarch64-darwin
-    warn-dirty = false
-  '';
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    tarball-ttl = 86400;
+    warn-dirty = false;
+    keep-derivations = true;
+    keep-outputs = true;
+    build-users-group = "nixbld";
+    system = "aarch64-darwin";
+    extra-platforms = [ "x86_64-darwin" "aarch64-linux" ];
+    trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
+  };
 
   fonts = {
     fontDir.enable = true;
     fonts = [
-      hack-font
+      (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };
 
-  users.users.pablo = {
-    name = "pablo";
-    home = "/Users/pablo";
+  users.users."pablo.dealbera.ctr" = {
+    name = "pablo.dealbera.ctr";
+    home = "/Users/pablo.dealbera.ctr";
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -54,6 +60,17 @@ with pkgs;
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
   };
+
+  system.defaults.dock = {
+    autohide = true;
+    autohide-delay = 9999999.0;
+    wvous-bl-corner = 1;
+    wvous-br-corner = 1;
+    wvous-tl-corner = 1;
+    wvous-tr-corner = 1;
+  };
+
+  security.pam.enableSudoTouchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
