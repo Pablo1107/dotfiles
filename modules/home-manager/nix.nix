@@ -21,7 +21,7 @@ in
       keep-derivations = true;
       keep-outputs = true;
       extra-platforms = [ "aarch64-linux" ];
-      trusted-users = [ "pablo" ];
+      trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
     };
     nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nix);
 
