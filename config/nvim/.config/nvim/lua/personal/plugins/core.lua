@@ -1,10 +1,27 @@
 return {
     'github/copilot.vim',
-    'tpope/vim-eunuch',               -- Helpers for UNIX (Move, Rename, etc)
+    'tpope/vim-eunuch', -- Helpers for UNIX (Move, Rename, etc)
     'tpope/vim-unimpaired',
-    'christoomey/vim-tmux-navigator', -- Seamless navigation in vim and tmux
-    'roman/golden-ratio',             -- Makes current split bigger
-    'arecarn/vim-crunch',             -- Maths in VIM!
+    {
+        -- Seamless navigation in vim and tmux
+        'christoomey/vim-tmux-navigator',
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+            { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+            { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+            { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+        },
+    },
+    'roman/golden-ratio', -- Makes current split bigger
+    'arecarn/vim-crunch', -- Maths in VIM!
     {
         "tiagovla/tokyodark.nvim",
         lazy = false,    -- make sure we load this during startup if it is your main colorscheme

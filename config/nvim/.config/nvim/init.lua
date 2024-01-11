@@ -142,10 +142,11 @@ map('i', '[<CR>', '[<CR>]<Esc>ko')
 map('i', '[<Space> [', ']<Esc>hi')
 map('i', '(<CR>', '(<CR>)<Esc>ko')
 map('i', '(<Space> (', ')<Esc>hi')
-map('', '<C-h>', '<C-w>h')
-map('', '<C-j>', '<C-w>j')
-map('', '<C-k>', '<C-w>k')
-map('', '<C-l>', '<C-w>l')
+-- handled by tmux plugin
+-- map('', '<C-h>', '<C-w>h')
+-- map('', '<C-j>', '<C-w>j')
+-- map('', '<C-k>', '<C-w>k')
+-- map('', '<C-l>', '<C-w>l')
 
 map('n', 'sr', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>')
 
