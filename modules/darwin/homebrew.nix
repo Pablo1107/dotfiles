@@ -65,7 +65,8 @@ in
         "discord"
         "libreoffice"
         "transmission"
-        "tetrio"
+        "slack"
+        "postman"
       ];
     };
   };

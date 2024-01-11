@@ -42,6 +42,10 @@ in
         cmd - 7 : yabai -m space --focus 7
         cmd - 8 : yabai -m space --focus 8
 
+        # move spaces to other display
+        #opt - cmd - k : yabai -m space --move north
+
+        # move windows to other spaces
         shift + cmd - 1 : yabai -m window --space 1
         shift + cmd - 2 : yabai -m window --space 2
         shift + cmd - 3 : yabai -m window --space 3
