@@ -115,10 +115,10 @@
           };
         };
       };
-      darwinConfigurations.pablo = darwin.lib.darwinSystem rec {
+      darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         modules = darwinModules ++ [
-          ./config/nix-darwin/configuration.nix
+          ./hosts/darwin/nix-darwin.nix
           home-manager.darwinModules.home-manager
           {
             nixpkgs = nixpkgsConfig;
@@ -133,13 +133,13 @@
                 config = nixpkgsConfig.config;
               };
             };
-            home-manager.users.pablo = { pkgs, ... }: {
+            home-manager.users."pablo.dealbera.ctr" = { pkgs, ... }: {
               imports = [
                 ./hosts/darwin/home.nix
               ];
               home = {
-                username = "pablo";
-                homeDirectory = "/Users/pablo";
+                username = "pablo.dealbera.ctr";
+                homeDirectory = "/Users/pablo.dealbera.ctr";
               };
             };
           }
