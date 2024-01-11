@@ -18,6 +18,9 @@ home-manager switch --flake .
 
 ## Run this command
 ```
+nix shell nixpkgs\#git
+nix clone https://github.com/Pablo1107/dotfiles
+nix run nix-darwin --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake .
 darwin-rebuild switch --flake .
 ```
 
