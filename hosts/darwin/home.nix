@@ -18,7 +18,10 @@ with pkgs;
   personal.npm.enable = true;
   personal.nvim.enable = true;
   personal.latex.enable = true;
-  personal.emacs.enable = true;
+  personal.emacs.enable = false;
+  personal.alacritty.enable = true;
+  personal.gpg.enable = true;
+  personal.docker.enable = true;
 
   # to fix Application not present in Spotlight
   # https://github.com/nix-community/home-manager/issues/1341#issuecomment-1446696577
@@ -65,8 +68,8 @@ with pkgs;
     tealdeer
     ffmpeg-full
 
-    # awscli2
-    # aws-sam-cli
+    awscli2
+    aws-sam-cli
 
     # AWS
     git-remote-codecommit
@@ -82,5 +85,5 @@ with pkgs;
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "21.05";
+  home.stateVersion = "23.11";
 }
