@@ -113,7 +113,7 @@ in
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      hack-font
+      (nerdfonts.override { fonts = [ "Hack" ]; })
       font-awesome
       dejavu_fonts
       ibm-plex
