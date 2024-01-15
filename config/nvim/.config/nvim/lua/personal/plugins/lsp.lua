@@ -30,6 +30,7 @@ return {
             map('n', 'gD', vim.lsp.buf.declaration, { noremap = true, silent = true })
             map('n', 'gr', vim.lsp.buf.references, { noremap = true, silent = true })
             map('n', 'gi', vim.lsp.buf.implementation, { noremap = true, silent = true })
+            map('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
             map('n', '<leader>ca', vim.lsp.buf.code_action, { noremap = true, silent = true })
             map('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = true })
             -- map('n', '[d', vim.lsp.diagnostic.goto_prev, { noremap = true, silent = true })
