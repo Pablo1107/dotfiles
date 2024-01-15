@@ -73,6 +73,7 @@
         nixConfig
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
+      nixosModules = map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
     in
     {
       homeConfigurations = {
@@ -223,9 +224,23 @@
       };
       nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
+        modules = nixosModules ++ [
           disko.nixosModules.disko
           ./hosts/server/nixos.nix
+          home-manager.nixosModules.home-manager
+          {
+            nixpkgs = nixpkgsConfig;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ ] ++ hmModules;
+            home-manager.extraSpecialArgs = {
+              inherit myLib;
+              inherit inputs;
+            };
+            home-manager.users.pablo = { pkgs, ... }: {
+              imports = [ ./hosts/server/home.nix ];
+            };
+          }
         ];
       };
       devShell = myLib.forAllSystems (system:
