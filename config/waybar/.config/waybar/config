@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "modules-left": [
-      "hyprland/workspaces",
+//    "hyprland/workspaces",
       "sway/workspaces",
       "sway/mode",
       "sway/window"
@@ -26,13 +26,13 @@
 //      "exec": "hm-updates", // installed from hm module
 //      "return-type": "json"
 //    },
-    "custom/weather": {
-      "format": "{}",
-      "tooltip": true,
-      "interval": 3600,
-      "exec": "$XDG_CONFIG_HOME/waybar/waybar-wttr.py",
-      "return-type": "json"
-    },
+//  "custom/weather": {
+//    "format": "{}",
+//    "tooltip": true,
+//    "interval": 3600,
+//    "exec": "$XDG_CONFIG_HOME/waybar/waybar-wttr.py",
+//    "return-type": "json"
+//  },
     "clock#date": {
         "format": "{:%A %b %d}",
         "format-alt": "{:%Y-%m-%d}",
@@ -54,7 +54,7 @@
         "format-plugged": "{capacity}% ",
         "format-full": "",
         "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [" ", " ", " ", " ", " "]
     },
     "temperature": {
       "critical-threshold": 80,
