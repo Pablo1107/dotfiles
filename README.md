@@ -52,3 +52,9 @@ nix build .#nixosConfigurations.rpi.config.system.build.sdImage
 ```
 rm -rf run-rpi-vm && cp result/bin/run-rpi-vm . && sed -i "s/[^ ]*qemu-host-cpu-only[^ ]*/$(which qemu-system-aarch64 | sed 's/\//\\\//g')/" run-rpi-vm && ./run-rpi-vm -serial stdio
 ```
+
+# NixOS on Server
+
+```
+nixos-rebuild switch --flake .#server --target-host "root@nixos.local"
+```
