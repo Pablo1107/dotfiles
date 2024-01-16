@@ -14,6 +14,7 @@ in
     services = {
       syncthing = {
         enable = true;
+        openDefaultPorts = true;
         user = "pablo";
         dataDir = "/home/pablo/Documents"; # Default folder for new synced folders
         configDir = "/home/pablo/.config/syncthing"; # Folder for Syncthing's settings and keys
