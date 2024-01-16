@@ -16,7 +16,10 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 22 2205 ];
+  };
 
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
