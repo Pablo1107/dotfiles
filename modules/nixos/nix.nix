@@ -20,7 +20,7 @@ in
       trusted-users = [ "pablo" ];
     };
 
-    caches.cachix = [
+    cachix = [
       { name = "nix-community"; sha256 = "0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x"; }
     ];
   };
