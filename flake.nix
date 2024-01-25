@@ -79,6 +79,7 @@
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
       nixosModules = [
+        declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
     in
