@@ -5,6 +5,7 @@
   personal.photoprism.enable = true;
   personal.homepage-dashboard.enable = true;
   personal.duckdns.enable = true;
+  personal.nix.enable = true;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
