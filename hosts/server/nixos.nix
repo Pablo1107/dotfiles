@@ -4,6 +4,7 @@
   personal.syncthing.enable = true;
   personal.photoprism.enable = true;
   personal.homepage-dashboard.enable = true;
+  personal.duckdns.enable = true;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
