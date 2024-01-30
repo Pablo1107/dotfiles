@@ -7,6 +7,9 @@ kanban-plugin: basic
 ## Backlog
 
 - [ ] [[(REGRESSION) hm-updates]]
+- [ ] [[(DARWIN) Set up native keyboard shortcuts]]
+- [ ] (SERVER) Setup a torrent server
+- [ ] (SERVER) Setup another service for photo sharing with family
 
 
 ## To Do
@@ -15,6 +18,7 @@ kanban-plugin: basic
 
 ## In Progress
 
+- [ ] [[(SERVER) Get multiple users in photoprism]]
 
 
 ## Done
@@ -26,6 +30,6 @@ kanban-plugin: basic
 
 %% kanban:settings
 ```
-{"kanban-plugin":"basic"}
+{"kanban-plugin":"basic","new-note-folder":"tickets"}
 ```
 %%

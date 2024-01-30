@@ -1,0 +1,9 @@
+Resources:
+https://www.reddit.com/r/NixOS/comments/17n3tcn/setting_keyboard_shortcuts_in_nix_darwin/
+https://github.com/LnL7/nix-darwin/pull/699
+https://github.com/LnL7/nix-darwin/pull/699/files
+https://zameermanji.com/blog/2021/6/8/applying-com-apple-symbolichotkeys-changes-instantaneously/
+https://github.com/search?q=com.apple.symbolichotkeys+language%3ANix+&type=code
+https://github.com/berryp/nix-configs/blob/277291c93802de2ab49823791546e7a53113cba4/darwin/defaults.nix#L82
+https://github.com/sliminality/nix-config/blob/d5356d616d8686cf0593171f276a42b2a93ca38d/darwin-modules/symbolichotkeys.nix
+https://superuser.com/questions/1211108/remove-osx-spotlight-keyboard-shortcut-from-command-line
