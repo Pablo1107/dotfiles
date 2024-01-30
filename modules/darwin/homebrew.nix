@@ -42,6 +42,7 @@ in
         "hledger"
         "portaudio"
         "postgresql"
+        "wakeonlan"
       ];
       casks = [
         "firefox"
@@ -67,6 +68,7 @@ in
         "transmission"
         "slack"
         "postman"
+        "obsidian"
       ];
     };
   };
