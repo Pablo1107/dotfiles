@@ -38,11 +38,22 @@
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "darwin";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+      inputs.darwin.follows = "home-manager";
+    };
+    secrets = {
+      # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594
+      url = "git+ssh://git@github.com/Pablo1107/nix-secrets.git";
+      flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, disko, chaotic, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, disko, chaotic, agenix, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -76,11 +87,18 @@
         nix-index-database.hmModules.nix-index
         nur.hmModules.nur
         nixConfig
+        agenix.homeManagerModules.default
+        # ./secrets/default.nix
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
-      darwinModules = map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
+      darwinModules = [
+        agenix.darwinModules.default
+        ./secrets/default.nix
+      ] ++ map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
       nixosModules = [
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
+        agenix.nixosModules.default
+        ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
     in
     {
@@ -153,7 +171,7 @@
             };
           }
         ];
-        inputs = { inherit darwin nixpkgs; };
+        specialArgs = { inherit inputs; };
       };
       nixOnDroidConfigurations = {
         default = nix-on-droid.lib.nixOnDroidConfiguration {
@@ -260,6 +278,7 @@
             just
             rpiboot
             nixos-rebuild
+            agenix.packages.${system}.default
           ];
         }
       );
