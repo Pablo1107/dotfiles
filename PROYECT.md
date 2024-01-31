@@ -10,6 +10,7 @@ kanban-plugin: basic
 - [ ] [[(DARWIN) Set up native keyboard shortcuts]]
 - [ ] (SERVER) Setup a torrent server
 - [ ] (SERVER) Setup another service for photo sharing with family
+- [ ] [[(SERVER) Setup a vpn server]]
 
 
 ## To Do
@@ -19,6 +20,7 @@ kanban-plugin: basic
 ## In Progress
 
 - [ ] [[(SERVER) Get multiple users in photoprism]]
+- [ ] [[(SERVER) Get agenix to work]]
 
 
 ## Done

@@ -1,0 +1,1 @@
+https://github.com/hlissner/dotfiles/blob/089f1a9da9018df9e5fc200c2d7bef70f4546026/hosts/ao/modules/wireguard.nix#L5
