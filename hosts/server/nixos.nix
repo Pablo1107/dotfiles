@@ -6,6 +6,7 @@
   personal.homepage-dashboard.enable = true;
   personal.duckdns.enable = true;
   personal.nix.enable = true;
+  personal.reverse-proxy.enable = true;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
