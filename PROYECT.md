@@ -11,6 +11,7 @@ kanban-plugin: basic
 - [ ] (SERVER) Setup a torrent server
 - [ ] (SERVER) Setup another service for photo sharing with family
 - [ ] [[(SERVER) Setup a vpn server]]
+- [ ] (DOTFILES) Save the dotfiles path on system activation
 
 
 ## To Do

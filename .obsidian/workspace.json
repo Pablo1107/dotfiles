@@ -177,6 +177,10 @@
   },
   "active": "4b84adf793ead91a",
   "lastOpenFiles": [
+    "colmena/flake.lock",
+    "colmena/flake.nix",
+    "colmena",
+    "hive.nix",
     "tickets/(SERVER) Setup a vpn server.md",
     "PROYECT.md",
     "tickets/(SERVER) Get agenix to work.md",
