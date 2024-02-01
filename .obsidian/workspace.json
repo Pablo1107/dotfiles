@@ -177,6 +177,7 @@
   },
   "active": "4b84adf793ead91a",
   "lastOpenFiles": [
+    "modules/nixos/reverse-proxy.nix",
     "colmena/flake.lock",
     "colmena/flake.nix",
     "colmena",
