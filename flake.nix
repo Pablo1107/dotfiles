@@ -49,7 +49,6 @@
     secrets = {
       # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594
       url = "git+ssh://git@github.com/Pablo1107/nix-secrets.git";
-      flake = false;
     };
   };
 
@@ -69,8 +68,9 @@
       };
       nixConfig = {
         nix.registry.nixpkgs.flake = nixpkgs;
+        nix.registry.dotfiles.flake = self;
         home.sessionVariables = {
-          NIX_PATH = "nixpkgs=${nixpkgs}";
+          NIX_PATH = "nixpkgs=${nixpkgs};dotfiles=${self}";
         };
       };
 
@@ -269,6 +269,47 @@
           }
         ];
       };
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+
+          # This parameter functions similarly to `sepcialArgs` in `nixosConfigurations.xxx`,
+          # used for passing custom arguments to all submodules.
+          specialArgs = {
+            inherit nixpkgs;
+          };
+        };
+
+        # Host name = "server"
+        "server" = { name, nodes, ... }: {
+          # Parameters related to remote deployment
+          deployment = inputs.secrets.deployment;
+
+          # This parameter functions similarly to `modules` in `nixosConfigurations.xxx`,
+          # used for importing all submodules.
+          imports = nixosModules ++ [
+            disko.nixosModules.disko
+            ./hosts/server/nixos.nix
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs = nixpkgsConfig;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ ] ++ hmModules;
+              home-manager.extraSpecialArgs = {
+                inherit myLib;
+                inherit inputs;
+              };
+              home-manager.users.pablo = { pkgs, ... }: {
+                imports = [ ./hosts/server/home.nix ];
+              };
+              home-manager.users.root = { pkgs, ... }: {
+                imports = [ ./hosts/server/root-home.nix ];
+              };
+            }
+          ];
+        };
+      };
       devShell = myLib.forAllSystems (system:
         let
           pkgs = myLib.nixpkgsFor.${system};
@@ -278,6 +319,7 @@
             just
             rpiboot
             nixos-rebuild
+            colmena
             agenix.packages.${system}.default
           ];
         }
