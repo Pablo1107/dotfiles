@@ -92,13 +92,13 @@
       ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
       darwinModules = [
         agenix.darwinModules.default
-        ./secrets/default.nix
+        # ./secrets/default.nix
       ] ++ map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
       nixosModules = [
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
-        ./secrets/default.nix
+        # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
     in
     {
@@ -277,6 +277,7 @@
           # used for passing custom arguments to all submodules.
           specialArgs = {
             inherit nixpkgs;
+            inherit inputs;
           };
         };
 

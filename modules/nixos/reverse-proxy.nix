@@ -38,6 +38,15 @@ in
           proxyWebsockets = true;
         };
       };
+      virtualHosts."nixos.local" = {
+        forceSSL = false;
+        enableACME = false;
+        http2 = true;
+        locations."/" = {
+          proxyPass = "http://nixos.local:2342";
+          proxyWebsockets = true;
+        };
+      };
     };
 
     security.acme = {
