@@ -10,7 +10,7 @@ with pkgs;
   # personal.emacs.enable = true;
   personal.fzf.enable = true;
   # personal.git.enable = true;
-  # personal.gtk.enable = true;
+  personal.gtk.enable = true;
   personal.htop.enable = true;
   personal.nix.enable = true;
   personal.python.enable = true;
@@ -18,8 +18,8 @@ with pkgs;
   personal.syncthing.enable = true;
   personal.xdg.enable = true;
   personal.tmux.enable = true;
-  # personal.firefox.enable = true;
-  # personal.rofi.enable = true;
+  personal.firefox.enable = true;
+  personal.rofi.enable = true;
   personal.shell.enable = true;
   # personal.shell.envVariables = {
   #   _JAVA_AWT_WM_NONREPARENTING = "1";
@@ -32,12 +32,13 @@ with pkgs;
   #   source /etc/profile.d/nix-daemon.sh
   # '';
   # personal.vifm.enable = true;
-  # personal.sway.enable = true;
+  personal.sway.enable = true;
   personal.nvim.enable = true;
   personal.npm.enable = true;
   # personal.ai.enable = true;
   # personal.latex.enable = true;
-  # personal.gui.enable = true;
+  personal.gui.enable = true;
+  personal.alacritty.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

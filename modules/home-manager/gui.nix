@@ -29,16 +29,16 @@ in
       # };
     };
 
-    wayland.windowManager.hyprland = {
-      enable = true;
-      package = (myLib.nixGLWrapper pkgs {
-        bin = "Hyprland";
-        package = pkgs.hyprland;
-      });
-      systemdIntegration = false;
-      extraConfig = null;
-      plugins = [ ];
-    };
+    # wayland.windowManager.hyprland = {
+    #   enable = true;
+    #   package = (myLib.nixGLWrapper pkgs {
+    #     bin = "Hyprland";
+    #     package = pkgs.hyprland;
+    #   });
+    #   systemdIntegration = false;
+    #   extraConfig = null;
+    #   plugins = [ ];
+    # };
 
     services = {
       fluidsynth = {

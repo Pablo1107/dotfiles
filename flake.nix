@@ -70,7 +70,7 @@
         nix.registry.nixpkgs.flake = nixpkgs;
         nix.registry.dotfiles.flake = self;
         home.sessionVariables = {
-          NIX_PATH = "nixpkgs=${nixpkgs};dotfiles=${self}";
+          NIX_PATH = "nixpkgs=${nixpkgs}:dotfiles=${self}";
         };
       };
 
