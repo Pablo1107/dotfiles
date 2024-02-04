@@ -7,6 +7,7 @@
   personal.duckdns.enable = true;
   personal.nix.enable = true;
   personal.reverse-proxy.enable = true;
+  personal.clone-dotfiles.enable = true;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")

@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
+  personal.clone-dotfiles.enable = true;
   # boot = {
   #   kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
   #   initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
@@ -68,12 +69,6 @@
   };
 
   nix.settings.trusted-users = [ "root" "pablo" ];
-
-  system.userActivationScripts.cloneDotfilesRepo.text = ''
-    # optionally check if the current user id is the one of tomato, as this runs for every user
-    [ ! -f "~/dotfiles/flake.nix" ] && rm -rf ~/dotfiles ; ${pkgs.git}/bin/git clone https://github.com/Pablo1107/dotfiles ~/dotfiles
-    # optionally git pull to keep them up to date
-  '';
 
   # hardware.enableRedistributableFirmware = true;
   # system.stateVersion = "23.11";
