@@ -20,5 +20,17 @@ in
       wl-clipboard
       xdg-utils
     ];
+
+    home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
+      removePrefixDirectory = true;
+      allowOther = true;
+      files = [
+        "sway/.config/sway/config"
+        "sway/.config/sway/import-gsettings"
+        "sway/.config/sway/shotman.conf"
+        "sway/.config/sway/maximize.sh"
+        "sway/.config/sway/clamshell.sh"
+      ];
+    };
   };
 }
