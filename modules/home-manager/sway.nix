@@ -30,6 +30,7 @@ in
         "sway/.config/sway/shotman.conf"
         "sway/.config/sway/maximize.sh"
         "sway/.config/sway/clamshell.sh"
+        "sway/.config/sway/bg.jpeg"
       ];
     };
   };
