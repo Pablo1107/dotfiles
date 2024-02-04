@@ -15,7 +15,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term /bin/alacritty
+set $term alacritty
 set $emacs emacsclient --create-frame --alternate-editor='emacs'
 set $new-window firefox --new-window
 # Your preferred application launcher
