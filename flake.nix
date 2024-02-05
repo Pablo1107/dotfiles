@@ -18,8 +18,6 @@
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
     impermanence.url = "github:nix-community/impermanence";
-    comma.url = "github:nix-community/comma/v1.4.1";
-    comma.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -50,9 +48,13 @@
       # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594
       url = "git+ssh://git@github.com/Pablo1107/nix-secrets.git";
     };
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, comma, hyprland, nix-index-database, disko, chaotic, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -63,7 +65,7 @@
         overlays = with builtins; [
           nixgl.overlay
           emacs-overlay.overlay
-          comma.overlays.default
+          nix-index-database.overlays.nix-index
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
       nixConfig = {
@@ -271,7 +273,11 @@
       };
       colmena = {
         meta = {
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config = nixpkgsConfig.config;
+            overlays = nixpkgsConfig.overlays;
+          };
 
           # This parameter functions similarly to `sepcialArgs` in `nixosConfigurations.xxx`,
           # used for passing custom arguments to all submodules.
@@ -320,7 +326,7 @@
             just
             rpiboot
             nixos-rebuild
-            colmena
+            colmena.packages.${system}.colmena
             agenix.packages.${system}.default
           ];
         }
