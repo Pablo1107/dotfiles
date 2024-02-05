@@ -114,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/(SERVER) Get agenix to work.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/(SERVER) Get agenix to work.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/(SERVER) Get agenix to work.md"
               }
             }
           }
@@ -175,15 +175,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4b84adf793ead91a",
+  "active": "36cf353f69c9d6d0",
   "lastOpenFiles": [
+    "modules/nixos/clone-dotfiles.nix",
+    "PROYECT.md",
     "modules/nixos/reverse-proxy.nix",
     "colmena/flake.lock",
     "colmena/flake.nix",
     "colmena",
     "hive.nix",
     "tickets/(SERVER) Setup a vpn server.md",
-    "PROYECT.md",
     "tickets/(SERVER) Get agenix to work.md",
     "tickets/(SERVER) Get multiple users in photoprism.md",
     "tickets/(DARWIN) Set up native keyboard shortcuts.md",
