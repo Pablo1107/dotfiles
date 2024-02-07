@@ -4,7 +4,10 @@
   personal.fzf.enable = true;
   personal.git.enable = true;
   personal.nix.enable = true;
-  personal.ssh.enable = true;
+  personal.ssh = {
+    enable = true;
+    withAuthorizationKeys = true;
+  };
   personal.python.enable = false;
   personal.vifm.enable = true;
   personal.tmux.enable = true;
@@ -43,6 +46,7 @@
 
   home.packages = with pkgs; [
     hledger
+    awk
   ];
 
   # This value determines the Home Manager release that your
