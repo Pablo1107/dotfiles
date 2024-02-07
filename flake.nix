@@ -153,6 +153,7 @@
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = {
               inherit myLib;
