@@ -177,6 +177,8 @@
   },
   "active": "36cf353f69c9d6d0",
   "lastOpenFiles": [
+    "modules/home-manager/nix.nix~",
+    "flake.nix~",
     "modules/nixos/clone-dotfiles.nix",
     "PROYECT.md",
     "modules/nixos/reverse-proxy.nix",
