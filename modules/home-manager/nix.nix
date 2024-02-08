@@ -21,7 +21,7 @@ in
       keep-derivations = true;
       keep-outputs = true;
       extra-platforms = [ "aarch64-linux" ];
-      trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
+      trusted-users = [ "pablo" "pablo.dealbera.ctr" "nix-on-droid" "@admin" ];
       builders = [ "ssh://root@nixos.local?ssh-key=${config.home.homeDirectory}/.ssh/id_rsa x86_64-linux" ];
       builders-use-substitutes = true;
     };

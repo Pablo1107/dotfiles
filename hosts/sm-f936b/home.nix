@@ -12,14 +12,19 @@
   personal.vifm.enable = true;
   personal.tmux.enable = true;
   personal.shell.enable = true;
-  personal.shell.envVariables = {
-    LEDGER_FILE = lib.mkForce "$HOME/ledger/2023.journal";
-    XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
-    XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
-  };
+  personal.shell.envVariables =
+    let dnshack = pkgs.callPackage (builtins.fetchTarball "https://github.com/ettom/dnshack/tarball/master") { };
+    in
+    {
+      LEDGER_FILE = lib.mkForce "$HOME/ledger/2023.journal";
+      XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      DNSHACK_RESOLVER_CMD = "${dnshack}/bin/dnshackresolver";
+      LD_PRELOAD = "${dnshack}/lib/libdnshackbridge.so";
+    };
   personal.nvim.enable = true;
   personal.npm.enable = true;
-  personal.ai.enable = true;
+  # personal.ai.enable = true;
   personal.emacs.enable = true;
 
   home.shellAliases = {
@@ -38,7 +43,8 @@
 
   home.packages = with pkgs; [
     hledger
-    awk
+    gawk
+    android-tools
   ];
 
   # This value determines the Home Manager release that your
