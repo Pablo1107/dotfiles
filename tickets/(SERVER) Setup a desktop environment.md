@@ -1,0 +1,1 @@
+Partially done. Sway and waybar are working but the status bar it's not 100% correct

@@ -4,23 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "98fa6fcf64283d36",
+        "id": "cd2f38f7efbabfa6",
         "type": "tabs",
         "children": [
           {
-            "id": "4ee9cbc59aa94ce9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tickets/(DARWIN) Set up native keyboard shortcuts.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4b84adf793ead91a",
+            "id": "37be4a5f6f8c85f7",
             "type": "leaf",
             "state": {
               "type": "kanban",
@@ -29,20 +17,19 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
-        "id": "416b2062b20c92d3",
+        "id": "17c7c377469a8836",
         "type": "tabs",
         "children": [
           {
-            "id": "5344ee615021659b",
+            "id": "4c21bc57da301fb6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tickets/(DOTFILES) Inspiration.md",
+                "file": "tickets/(SERVER) Setup a desktop environment.md",
                 "mode": "source",
                 "source": false
               }
@@ -114,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/(DOTFILES) Inspiration.md",
+                "file": "tickets/(SERVER) Setup a desktop environment.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/(DOTFILES) Inspiration.md",
+                "file": "tickets/(SERVER) Setup a desktop environment.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/(DOTFILES) Inspiration.md"
+                "file": "tickets/(SERVER) Setup a desktop environment.md"
               }
             }
           }
@@ -175,13 +162,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5344ee615021659b",
+  "active": "4c21bc57da301fb6",
   "lastOpenFiles": [
+    "PROYECT.md",
+    "tickets/(SERVER) Setup a desktop environment.md",
+    "tickets/(SERVER) Setup a torrent server.md",
+    "tickets/(SERVER) Get multiple users in photoprism.md",
+    "tickets/(DARWIN) Set up native keyboard shortcuts.md",
+    "tickets/(SERVER) Get agenix to work.md",
+    "tickets/(DOTFILES) Inspiration.md",
     "overlays/local-shell-gpt.nix~",
     "tickets/(SERVER) Investigate Immich.md",
-    "tickets/(DOTFILES) Inspiration.md",
-    "PROYECT.md",
-    "tickets/(SERVER) Get agenix to work.md",
     "modules/home-manager/nix.nix~",
     "flake.nix~",
     "modules/nixos/clone-dotfiles.nix",
@@ -191,10 +182,7 @@
     "colmena",
     "hive.nix",
     "tickets/(SERVER) Setup a vpn server.md",
-    "tickets/(SERVER) Get multiple users in photoprism.md",
-    "tickets/(DARWIN) Set up native keyboard shortcuts.md",
     "secrets/default.nix",
-    "secrets",
     "tickets/(REGRESSION) hm-updates.md",
     "README.md"
   ]

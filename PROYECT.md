@@ -8,11 +8,10 @@ kanban-plugin: basic
 
 - [ ] [[(REGRESSION) hm-updates]]
 - [ ] [[(DARWIN) Set up native keyboard shortcuts]]
-- [ ] (SERVER) Setup a torrent server
 - [ ] (SERVER) Setup another service for photo sharing with family
+- [ ] [[(SERVER) Investigate Immich]]
 - [ ] [[(SERVER) Setup a vpn server]]
 - [ ] (DOTFILES) Save the dotfiles path on system activation
-- [ ] [[(SERVER) Investigate Immich]]
 - [ ] [[(DOTFILES) Inspiration]]
 
 
@@ -22,13 +21,15 @@ kanban-plugin: basic
 
 ## In Progress
 
-- [ ] [[(SERVER) Get multiple users in photoprism]]
-- [ ] [[(SERVER) Get agenix to work]]
+- [ ] [[(SERVER) Setup a desktop environment]]
+- [ ] [[(SERVER) Setup a torrent server]]
 
 
 ## Done
 
 **Complete**
+- [x] [[(SERVER) Get multiple users in photoprism]]
+- [x] [[(SERVER) Get agenix to work]]
 
 
 
