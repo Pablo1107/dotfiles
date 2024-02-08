@@ -22,6 +22,8 @@ in
       keep-outputs = true;
       extra-platforms = [ "aarch64-linux" ];
       trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
+      builders = [ "ssh://root@nixos.local?ssh-key=${config.home.homeDirectory}/.ssh/id_rsa x86_64-linux" ];
+      builders-use-substitutes = true;
     };
     nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nix);
 
