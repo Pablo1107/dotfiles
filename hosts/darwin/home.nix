@@ -10,7 +10,10 @@ with pkgs;
   personal.fzf.enable = true;
   personal.git.enable = true;
   personal.nix.enable = true;
-  personal.ssh.enable = true;
+  personal.ssh = {
+    enable = true;
+    withAuthorizationKeys = true;
+  };
   personal.python.enable = true;
   personal.vifm.enable = true;
   personal.tmux.enable = true;
