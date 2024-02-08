@@ -1,17 +1,83 @@
+commit d472854175d4c8b6a0c7fb16eb99e639a8f8659e
+Author: Pablo Andres Dealbera <dealberapablo07@gmail.com>
+Date:   Thu Aug 3 00:56:42 2023 -0300
+
+    change OpenAI to LocalAI
+
 diff --git a/README.md b/README.md
-index 25ec6d3..9825dad 100644
+index 2217e38..92fa31d 100644
 --- a/README.md
 +++ b/README.md
-@@ -9,7 +9,7 @@ pip install shell-gpt
+@@ -8,8 +8,8 @@ https://github.com/TheR1D/shell_gpt/assets/16740832/9197283c-db6a-4b46-bfea-3eb7
+ pip install shell-gpt
  ```
- You'll need an OpenAI API key, you can generate one [here](https://beta.openai.com/account/api-keys).
  
--If the`$OPENAI_API_KEY` environment variable is set it will be used, otherwise, you will be prompted for your key which will then be stored in `~/.config/shell_gpt/.sgptrc`.
-+If the`$LOCAL_AI_API_KEY` environment variable is set it will be used, otherwise, you will be prompted for your key which will then be stored in `~/.config/shell_gpt/.sgptrc`.
+-You'll need an OpenAI API key, you can generate one [here](https://beta.openai.com/account/api-keys). 
+-You will be prompted for your key which will then be stored in `~/.config/shell_gpt/.sgptrc`. 
++You'll need an OpenAI API key, you can generate one [here](https://beta.openai.com/account/api-keys).
++You will be prompted for your key which will then be stored in `~/.config/shell_gpt/.sgptrc`.
  
  ## Usage
- `sgpt` has a variety of use cases, including simple queries, shell queries, and code queries.
-@@ -323,10 +323,10 @@ This is just some examples of what we can do using OpenAI GPT models, I'm sure y
+ **ShellGPT** is designed to quickly analyse and retrieve information. It's useful for straightforward requests ranging from technical configurations to general knowledge.
+@@ -124,7 +124,7 @@ for i in range(1, 101):
+     else:
+         print(i)
+ ```
+-Since it is valid python code, we can redirect the output to a file:  
++Since it is valid python code, we can redirect the output to a file:
+ ```shell
+ sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
+ python fizz_buzz.py
+@@ -160,7 +160,7 @@ for i in range(1, 101):
+         print(i)
+ ```
+ 
+-### Chat Mode 
++### Chat Mode
+ Often it is important to preserve and recall a conversation. `sgpt` creates conversational dialogue with each LLM completion requested. The dialogue can develop one-by-one (chat mode) or interactively, in a REPL loop (REPL mode). Both ways rely on the same underlying object, called a chat session. The session is located at the [configurable](#runtime-configuration-file) `CHAT_CACHE_PATH`.
+ 
+ To start a conversation, use the `--chat` option followed by a unique session name and a prompt.
+@@ -209,10 +209,10 @@ sgpt --chat conversation_3 "Convert the resulting file into an MP3"
+ # -> ffmpeg -i output.mp4 -vn -acodec libmp3lame -ac 2 -ab 160k -ar 48000 final_output.mp3
+ ```
+ 
+-To list all the sessions from either conversational mode, use the `--list-chats` or `-lc` option:  
++To list all the sessions from either conversational mode, use the `--list-chats` or `-lc` option:
+ ```shell
+ sgpt --list-chats
+-# .../shell_gpt/chat_cache/conversation_1  
++# .../shell_gpt/chat_cache/conversation_1
+ # .../shell_gpt/chat_cache/conversation_2
+ ```
+ 
+@@ -225,7 +225,7 @@ sgpt --show-chat conversation_1
+ # assistant: Your favorite number is 4, so if we add 4 to it, the result would be 8.
+ ```
+ 
+-### REPL Mode  
++### REPL Mode
+ There is very handy REPL (read–eval–print loop) mode, which allows you to interactively chat with GPT models. To start a chat session in REPL mode, use the `--repl` option followed by a unique session name. You can also use "temp" as a session name to start a temporary REPL session. Note that `--chat` and `--repl` are using same underlying object, so you can use `--chat` to start a chat session and then pick it up with `--repl` to continue the conversation in REPL mode.
+ 
+ <p align="center">
+@@ -281,7 +281,7 @@ The snippet of code you've provided is written in Python. It prompts the user...
+ >>> Follow up questions...
+ ```
+ 
+-### Function calling  
++### Function calling
+ [Function calls](https://platform.openai.com/docs/guides/function-calling) is a powerful feature OpenAI provides. It allows LLM to execute functions in your system, which can be used to accomplish a variety of tasks. To install [default functions](https://github.com/TheR1D/shell_gpt/tree/main/sgpt/default_functions/) run:
+ ```shell
+ sgpt --install-functions
+@@ -338,7 +338,7 @@ sgpt "Play music and open hacker news"
+ # -> Music is now playing, and Hacker News has been opened in your browser. Enjoy!
+ ```
+ 
+-This is just a simple example of how you can use function calls. It is truly a powerful feature that can be used to accomplish a variety of complex tasks. We have dedicated [category](https://github.com/TheR1D/shell_gpt/discussions/categories/functions) in GitHub Discussions for sharing and discussing functions. 
++This is just a simple example of how you can use function calls. It is truly a powerful feature that can be used to accomplish a variety of complex tasks. We have dedicated [category](https://github.com/TheR1D/shell_gpt/discussions/categories/functions) in GitHub Discussions for sharing and discussing functions.
+ LLM might execute destructive commands, so please use it at your own risk❗️
+ 
+ ### Roles
+@@ -375,10 +375,10 @@ This is just some examples of what we can do using OpenAI GPT models, I'm sure y
  ### Runtime configuration file
  You can setup some parameters in runtime configuration file `~/.config/shell_gpt/.sgptrc`:
  ```text
@@ -25,7 +91,7 @@ index 25ec6d3..9825dad 100644
  # Max amount of cached message per chat session.
  CHAT_CACHE_LENGTH=100
  # Chat cache folder.
-@@ -388,18 +388,16 @@ Switch `SYSTEM_ROLES` to force use [system roles](https://help.openai.com/en/art
+@@ -448,18 +448,16 @@ Possible options for `CODE_THEME`: https://pygments.org/styles/
  By default, ShellGPT leverages OpenAI's large language models. However, it also provides the flexibility to use locally hosted models, which can be a cost-effective alternative. To use local models, you will need to run your own API server. You can accomplish this by using [LocalAI](https://github.com/go-skynet/LocalAI), a self-hosted, OpenAI-compatible API. Setting up LocalAI allows you to run language models on your own hardware, potentially without the need for an internet connection, depending on your usage. To set up your LocalAI, please follow this comprehensive [guide](https://github.com/TheR1D/shell_gpt/wiki/LocalAI). Remember that the performance of your local models may depend on the specifications of your hardware and the specific language model you choose to deploy.
  
  ## Docker
@@ -48,10 +114,10 @@ index 25ec6d3..9825dad 100644
  sgpt --chat rainbow "inverse the list of your last answer"
  sgpt --chat rainbow "translate your last answer in french"
 diff --git a/sgpt/app.py b/sgpt/app.py
-index 0c97bda..28a474a 100644
+index 1851bae..1cd6f5b 100644
 --- a/sgpt/app.py
 +++ b/sgpt/app.py
-@@ -20,9 +20,9 @@ def main(
+@@ -29,9 +29,9 @@ def main(
          show_default=False,
          help="The prompt to generate completions for.",
      ),
@@ -62,22 +128,21 @@ index 0c97bda..28a474a 100644
 +        help="GPT model to use.",
      ),
      temperature: float = typer.Option(
-         0.1,
+         0.0,
 diff --git a/sgpt/config.py b/sgpt/config.py
-index 45de530..de6698a 100644
+index f7ebf34..5ccc6cd 100644
 --- a/sgpt/config.py
 +++ b/sgpt/config.py
-@@ -22,7 +22,8 @@ DEFAULT_CONFIG = {
+@@ -23,7 +23,7 @@ DEFAULT_CONFIG = {
      "CACHE_LENGTH": int(os.getenv("CHAT_CACHE_LENGTH", "100")),
      "REQUEST_TIMEOUT": int(os.getenv("REQUEST_TIMEOUT", "60")),
-     "DEFAULT_MODEL": os.getenv("DEFAULT_MODEL", "gpt-3.5-turbo"),
--    "OPENAI_API_HOST": os.getenv("OPENAI_API_HOST", "https://api.openai.com"),
-+    "LOCAL_AI_API_HOST": os.getenv("LOCAL_AI_API_HOST", "http://localhost:8080"),
-+    "LOCAL_AI_API_KEY": os.getenv("LOCAL_AI_API_KEY", "na"),
+     "DEFAULT_MODEL": os.getenv("DEFAULT_MODEL", "gpt-4-1106-preview"),
+-    "OPENAI_BASE_URL": os.getenv("OPENAI_API_HOST", "https://api.openai.com/v1"),
++    "LOCAL_AI_BASE_URL": os.getenv("LOCAL_AI_API_HOST", "http://localhost:8080"),
      "DEFAULT_COLOR": os.getenv("DEFAULT_COLOR", "magenta"),
      "ROLE_STORAGE_PATH": os.getenv("ROLE_STORAGE_PATH", str(ROLE_STORAGE_PATH)),
-     "SYSTEM_ROLES": os.getenv("SYSTEM_ROLES", "false"),
-@@ -48,9 +49,9 @@ class Config(dict):  # type: ignore
+     "DEFAULT_EXECUTE_SHELL_CMD": os.getenv("DEFAULT_EXECUTE_SHELL_CMD", "false"),
+@@ -52,9 +52,9 @@ class Config(dict):  # type: ignore
          else:
              config_path.parent.mkdir(parents=True, exist_ok=True)
              # Don't write API key to config file if it is in the environment.
@@ -90,22 +155,24 @@ index 45de530..de6698a 100644
              self._write()
  
 diff --git a/sgpt/handlers/handler.py b/sgpt/handlers/handler.py
-index f778e46..fb676e6 100644
+index 7d3b0d2..b72d883 100644
 --- a/sgpt/handlers/handler.py
 +++ b/sgpt/handlers/handler.py
-@@ -10,7 +10,7 @@ from ..role import SystemRole
- class Handler:
+@@ -16,8 +16,8 @@ class Handler:
+ 
      def __init__(self, role: SystemRole) -> None:
-         self.client = OpenAIClient(
--            cfg.get("OPENAI_API_HOST"), cfg.get("OPENAI_API_KEY")
-+            cfg.get("LOCAL_AI_API_HOST"), cfg.get("LOCAL_AI_API_KEY")
+         self.client = OpenAI(
+-            base_url=cfg.get("OPENAI_BASE_URL"),
+-            api_key=cfg.get("OPENAI_API_KEY"),
++            base_url=cfg.get("LOCAL_AI_BASE_URL"),
++            api_key=cfg.get("LOCAL_AI_API_KEY"),
+             timeout=int(cfg.get("REQUEST_TIMEOUT")),
          )
          self.role = role
-         self.color = cfg.get("DEFAULT_COLOR")
-diff --git a/tests/test_integration.py b/tests/test_integration.py
-index 37b8fc2..06445d7 100644
---- a/tests/test_integration.py
-+++ b/tests/test_integration.py
+diff --git a/tests/_integration.py b/tests/_integration.py
+index 513b913..43bfcb1 100644
+--- a/tests/_integration.py
++++ b/tests/_integration.py
 @@ -2,7 +2,7 @@
  This test module will execute real commands using shell.
  This means it will call sgpt.py with command line arguments.
@@ -115,22 +182,3 @@ index 37b8fc2..06445d7 100644
  It is useful for quick tests, saves a bit time.
  """
  
-diff --git a/tests/test_unit.py b/tests/test_unit.py
-index 888305c..6323962 100644
---- a/tests/test_unit.py
-+++ b/tests/test_unit.py
-@@ -8,12 +8,12 @@ from sgpt.client import OpenAIClient
- 
- 
- class TestMain(unittest.TestCase):
--    API_HOST = os.getenv("OPENAI_HOST", "https://api.openai.com")
-+    API_HOST = os.getenv("LOCAL_AI_HOST", "https://api.openai.com")
-     API_URL = f"{API_HOST}/v1/chat/completions"
-     # TODO: Fix tests.
- 
-     def setUp(self):
--        self.api_key = os.environ["OPENAI_API_KEY"] = "test key"
-+        self.api_key = os.environ["LOCAL_AI_API_KEY"] = "test key"
-         self.prompt = "What is the capital of France?"
-         self.shell = False
-         self.execute = False

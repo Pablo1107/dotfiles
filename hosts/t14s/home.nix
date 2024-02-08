@@ -36,7 +36,7 @@ with pkgs;
   personal.sway.enable = true;
   personal.nvim.enable = true;
   personal.npm.enable = true;
-  personal.ai.enable = true;
+  # personal.ai.enable = true;
   personal.latex.enable = true;
   personal.gui.enable = true;
   personal.reportChanges.enable = true;
