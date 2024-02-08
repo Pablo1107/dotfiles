@@ -14,6 +14,7 @@ kanban-plugin: basic
 - [ ] (DOTFILES) Save the dotfiles path on system activation
 - [ ] [[(DOTFILES) Inspiration]]
 - [ ] [[(DOTFILES) Semi automate git commits]]
+- [ ] [[Fix local-chat-gpt]]
 
 
 ## To Do
