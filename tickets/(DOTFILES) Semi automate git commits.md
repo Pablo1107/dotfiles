@@ -1,0 +1,1 @@
+There are some common commits that probably can be automated. Like updating Obsidian files.

@@ -13,6 +13,7 @@ kanban-plugin: basic
 - [ ] [[(SERVER) Setup a vpn server]]
 - [ ] (DOTFILES) Save the dotfiles path on system activation
 - [ ] [[(DOTFILES) Inspiration]]
+- [ ] [[(DOTFILES) Semi automate git commits]]
 
 
 ## To Do
