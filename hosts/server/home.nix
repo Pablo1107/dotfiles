@@ -15,7 +15,7 @@ with pkgs;
   personal.nix.enable = true;
   personal.python.enable = true;
   personal.ssh.enable = true;
-  personal.syncthing.enable = true;
+  # personal.syncthing.enable = true;
   personal.xdg.enable = true;
   personal.tmux.enable = true;
   personal.firefox.enable = true;
