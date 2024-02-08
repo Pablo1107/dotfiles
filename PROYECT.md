@@ -12,6 +12,8 @@ kanban-plugin: basic
 - [ ] (SERVER) Setup another service for photo sharing with family
 - [ ] [[(SERVER) Setup a vpn server]]
 - [ ] (DOTFILES) Save the dotfiles path on system activation
+- [ ] [[(SERVER) Investigate Immich]]
+- [ ] [[(DOTFILES) Inspiration]]
 
 
 ## To Do
