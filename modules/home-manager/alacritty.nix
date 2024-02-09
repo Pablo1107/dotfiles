@@ -18,7 +18,7 @@ in
       removePrefixDirectory = true;
       allowOther = true;
       files = [
-        "alacritty/.config/alacritty/alacritty.yml"
+        "alacritty/.config/alacritty/alacritty.toml"
       ];
     };
   };
