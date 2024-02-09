@@ -35,6 +35,21 @@ in
               path = "/home/pablo/Android/Camera";
               devices = [ "SM-F936B" ];
             };
+            "wiki" = {
+              id = "uyct7-9rdjp";
+              path = "/home/pablo/wiki";
+              devices = [ "SM-F936B" ];
+            };
+            "ledger" = {
+              id = "ledger";
+              path = "/home/pablo/ledger";
+              devices = [ "SM-F936B" ];
+            };
+            "org" = {
+              id = "org";
+              path = "/home/pablo/org";
+              devices = [ "SM-F936B" ];
+            };
           };
         };
       };
