@@ -70,11 +70,11 @@ chars = "\u001Bp"
 key = "P"
 mods = "Alt"
 
-[schemes.black.primary]
-background = "#000000"
-
-[schemes.dark_blue.primary]
-background = "#1e1f29"
+# [schemes.black.primary]
+# background = "#000000"
+#
+# [schemes.dark_blue.primary]
+# background = "#1e1f29"
 
 [scrolling]
 history = 100000
