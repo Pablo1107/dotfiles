@@ -7,7 +7,8 @@
   personal.duckdns.enable = true;
   personal.nix.enable = true;
   personal.reverse-proxy.enable = true;
-  personal.clone-dotfiles.enable = true;
+  # personal.clone-dotfiles.enable = true;
+  # personal.vm.enable = true;
 
   services.transmission = {
     enable = true; #Enable transmission daemon
@@ -48,6 +49,15 @@
   programs.sway = {
     enable = true;
   };
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
+
+  hardware.pulseaudio.enable = lib.mkForce false;
 
   programs.zsh.enable = true;
 
