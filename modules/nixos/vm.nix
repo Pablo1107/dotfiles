@@ -21,21 +21,41 @@ in
   };
 
   config = mkIf cfg.enable {
-    # https://technicalsourcery.net/posts/nixos-in-libvirt/
     boot.kernelModules = [ "kvm-intel" "kvm-amd" ];
 
-    virtualisation.libvirtd.enable = true;
-    virtualisation.libvirtd.allowedBridges =
-      [ "${cfg.libvert.bridgeInterface}" ];
+    users.users.pablo.extraGroups = [ "libvirtd" ];
 
-    networking.interfaces."${cfg.libvert.bridgeInterface}".useDHCP = true;
-
-    networking.bridges = {
-      "${cfg.libvert.bridgeInterface}" = {
-        interfaces = [ "${cfg.libvert.ethInterface}" ];
+    virtualisation.libvirtd = {
+      enable = true;
+      allowedBridges = [ "${cfg.bridgeInterface}" ];
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
+      # spiceUSBRedirection.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [ virt-manager kvm ];
+    programs.virt-manager.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      spice
+      spice-gtk
+      spice-protocol
+      virt-viewer
+      virtio-win
+      win-spice
+      gnome.adwaita-icon-theme
+    ];
+
+    home-manager.users.pablo = {
+      dconf.settings = {
+        "org/virt-manager/virt-manager/connections" = {
+          autoconnect = [ "qemu:///system" ];
+          uris = [ "qemu:///system" ];
+        };
+      };
+    };
   };
 }
