@@ -18,6 +18,24 @@
             }
           }
         ]
+      },
+      {
+        "id": "ac48a191cd4cc68e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "59a7c85da3f25cd3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -83,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md"
               }
             }
           }
@@ -144,10 +162,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "37be4a5f6f8c85f7",
+  "active": "59a7c85da3f25cd3",
   "lastOpenFiles": [
-    "tickets/Fix local-chat-gpt.md",
     "PROYECT.md",
+    "tickets/Make WhatsApp Desktop work on Linux.md",
+    "tickets/Fix local-chat-gpt.md",
     "tickets/(DOTFILES) Semi automate git commits.md",
     "tickets/(SERVER) Setup a desktop environment.md",
     "tickets/(SERVER) Setup a torrent server.md",
