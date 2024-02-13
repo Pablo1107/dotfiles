@@ -129,6 +129,7 @@ in
       # postman
 
       bitwig-studio # music production
+      obsidian
     ];
   };
 }

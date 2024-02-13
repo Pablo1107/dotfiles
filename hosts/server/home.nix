@@ -47,7 +47,11 @@ with pkgs;
     homeDirectory = "/home/pablo";
   };
 
-  home.packages = [ ];
+  home.packages = [
+    amplitube5
+    yabridge
+    yabridgectl
+  ];
 
   # nix
   caches.cachix = [

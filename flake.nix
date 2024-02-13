@@ -61,6 +61,8 @@
           allowUnfree = true;
           buildPlatform.system = "x86_64-linux";
           hostPlatform.system = "aarch64-linux";
+          permittedInsecurePackages = [ "electron-25.9.0" ];
+          # self.nixpkgs.lib.optional (self.nixpkgs.obsidian.version == "1.4.16")
         };
         overlays = with builtins; [
           nixgl.overlay

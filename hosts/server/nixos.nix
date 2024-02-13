@@ -12,6 +12,9 @@
   personal.cockpit.enable = true;
   personal.transmission.enable = true;
 
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -31,6 +34,7 @@
   environment.systemPackages = with pkgs; map lib.lowPrio [
     curl
     gitMinimal
+    toybox
   ];
 
   users = {
