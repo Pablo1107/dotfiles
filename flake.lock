@@ -72,7 +72,6 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1705617092,
         "narHash": "sha256-n9PK4O4X4S1JkwpkMuYm1wHZYJzRqif8g3RuVIPD+rY=",
         "rev": "fbe252a5c21febbe920c025560cbd63b20e24f3b",
         "revCount": 191,
@@ -147,7 +146,6 @@
     },
     "compare-to": {
       "locked": {
-        "lastModified": 1695341185,
         "narHash": "sha256-htO6DSbWyCgaDkxi7foPjXwJFPzGjVt3RRUbPSpNtZY=",
         "rev": "98b8e330823a3570d328720f87a1153f8a7f2224",
         "revCount": 2,
@@ -213,7 +211,6 @@
         ]
       },
       "locked": {
-        "lastModified": 1706473297,
         "narHash": "sha256-FbxuYIrHaXpsYCLtI1gCNJhd+qvERjPibXL3ctmVaCs=",
         "rev": "fe812ef0dad5bb93a56c599d318be176d080281d",
         "revCount": 493,
@@ -353,7 +350,6 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1706768574,
         "narHash": "sha256-4o6TMpzBHO659EiJTzd/EGQGUDdbgwKwhqf3u6b23U8=",
         "rev": "668102037129923cd0fc239d864fce71eabdc6a3",
         "revCount": 1762,
@@ -384,7 +380,6 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1696426674,
         "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
         "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "revCount": 57,
@@ -414,7 +409,6 @@
     },
     "flake-schemas": {
       "locked": {
-        "lastModified": 1693491534,
         "narHash": "sha256-ifw8Td8kD08J8DxFbYjeIx5naHcDLz7s2IFP3X42I/U=",
         "rev": "c702cbb663d6d70bbb716584a2ee3aeb35017279",
         "revCount": 21,
@@ -434,7 +428,6 @@
         ]
       },
       "locked": {
-        "lastModified": 1705309234,
         "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
         "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
         "revCount": 90,
@@ -1240,7 +1233,6 @@
         ]
       },
       "locked": {
-        "lastModified": 1695926485,
         "narHash": "sha256-wNFFnItckgSs8XeYhhv8vlJs2WF09fSQaWgw4xkDqHQ=",
         "rev": "7772afd6686458ca0ddbc599a52cf5d337367653",
         "revCount": 4,

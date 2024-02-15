@@ -58,3 +58,20 @@ rm -rf run-rpi-vm && cp result/bin/run-rpi-vm . && sed -i "s/[^ ]*qemu-host-cpu-
 ```
 nixos-rebuild switch --flake .#server --target-host "root@nixos.local"
 ```
+
+# Some known issues
+## unsupported tarball input
+
+```
+       error: unsupported tarball input attribute 'lastModified'
+```
+
+### Solution:
+```sh
+jq '.nodes |= map_values(if .locked.type? == "tarball" then .locked |= del(.lastModified) else . end)' flake.lock > flake.lock.new
+```
+
+[source](https://www.reddit.com/r/NixOS/comments/175w44g/comment/k4r8bzi/?utm_source=reddit&utm_medium=web2x&context=3)
+
+## Nix 17 vs Nix 18
+https://github.com/nix-community/home-manager/issues/4692
