@@ -25,7 +25,7 @@ in
       builders = [ "ssh://root@nixos.local?ssh-key=${config.home.homeDirectory}/.ssh/id_rsa x86_64-linux" ];
       builders-use-substitutes = true;
     };
-    nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nix);
+    nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nixVersions.nix_2_17);
 
     caches.cachix = [
       { name = "nix-community"; sha256 = "0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x"; }
