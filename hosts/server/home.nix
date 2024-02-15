@@ -39,6 +39,7 @@ with pkgs;
   # personal.latex.enable = true;
   personal.gui.enable = true;
   personal.alacritty.enable = true;
+  personal.daw.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -48,9 +49,6 @@ with pkgs;
   };
 
   home.packages = [
-    amplitube5
-    yabridge
-    yabridgectl
   ];
 
   # nix

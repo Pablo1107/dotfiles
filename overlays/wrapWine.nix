@@ -52,7 +52,6 @@ with pkgs;
           tricksCmd
         else "";
       script = writeShellScriptBin name ''
-        alias wget="${wget}/bin/wget"
         export APP_NAME="${NAME}"
         export WINEARCH=${WINEARCH}
         export WINE_NIX="$HOME/.wine-nix" # define antes de definir $HOME senão ele vai gravar na nova $HOME a .wine-nix

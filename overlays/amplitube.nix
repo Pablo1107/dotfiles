@@ -5,6 +5,7 @@ with pkgs;
 {
   amplitube5 =
     let
+      wine = pkgs.wineWowPackages.stable;
       # installer = wrapWine {
       #   name = "amplitube5";
       #   executable = "/var/lib/transmission/Downloads/IK Multimedia - AmpliTube v5.7.0/Setup AmpliTube 5 v5.7.0.exe";
@@ -19,12 +20,13 @@ with pkgs;
         executable = "$WINEPREFIX/drive_c/Program\ Files/IK\ Multimedia/AmpliTube\ 5/AmpliTube\ 5.exe";
         is64bits = true;
         firstrunScript = ''
-          ${wine}/bin/wine "/var/lib/transmission/Downloads/IK Multimedia - AmpliTube v5.7.0/Setup AmpliTube 5 v5.7.0.exe"
-          ${wine}/bin/wine "/var/lib/transmission/Downloads/IK Multimedia - AmpliTube v5.7.0/R2R/IK_Multimedia_Keygen.exe"
+          ${wine}/bin/wine64 "$INSTALLER_PATH/Setup AmpliTube 5 v5.7.0.exe"
+          ${wine}/bin/wine64 "$INSTALLER_PATH/R2R/IK_Multimedia_Keygen.exe"
         '';
         tricks = [
           "mfc42"
           "vcrun6sp6"
+          "corefonts"
         ];
       };
       desktop = makeDesktopItem {
