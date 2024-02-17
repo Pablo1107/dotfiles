@@ -134,6 +134,8 @@ in
       # bitwig-studio # music production
       amplitube5 # guitar amp sim
       obsidian
+
+      spotify
     ];
   };
 }
