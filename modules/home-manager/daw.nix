@@ -14,9 +14,17 @@ in
     home.packages = with pkgs; [
       amplitube5
       abpl
-      yabridge
-      yabridgectl
     ];
+
+    personal.yabridge = {
+      enable = true;
+      plugin_dirs = [
+        "/home/pablo/.wine-nix/amplitube5/drive_c/Program Files/Common Files/VST3"
+        "/home/pablo/.wine-nix/amplitube5/drive_c/Program Files/Steinberg/VSTPlugins"
+        "/home/pablo/.wine-nix/helix-native-3_60_0/drive_c/Program Files/Common Files/VST3"
+        "/home/pablo/.wine-nix/abpl/drive_c/Program Files/Steinberg/VSTPlugins"
+      ];
+    };
   };
 }
 

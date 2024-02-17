@@ -805,6 +805,21 @@
         "type": "github"
       }
     },
+    "nix-std": {
+      "locked": {
+        "lastModified": 1701658249,
+        "narHash": "sha256-KIt1TUuBvldhaVRta010MI5FeQlB8WadjqljybjesN0=",
+        "owner": "chessai",
+        "repo": "nix-std",
+        "rev": "715db541ffff4194620e48d210b76f73a74b5b5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chessai",
+        "repo": "nix-std",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -1011,6 +1026,7 @@
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
+        "nix-std": "nix-std",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable_2",
