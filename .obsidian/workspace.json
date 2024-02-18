@@ -4,34 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "cd2f38f7efbabfa6",
+        "id": "4bc542383be05d9b",
         "type": "tabs",
         "children": [
           {
-            "id": "37be4a5f6f8c85f7",
+            "id": "69a8b0415cfaaf51",
             "type": "leaf",
             "state": {
               "type": "kanban",
               "state": {
                 "file": "PROYECT.md"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "ac48a191cd4cc68e",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "59a7c85da3f25cd3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
-                "mode": "source",
-                "source": false
               }
             }
           }
@@ -101,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
+                "file": "PROYECT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
+                "file": "PROYECT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/Make WhatsApp Desktop work on Linux.md"
+                "file": "PROYECT.md"
               }
             }
           }
@@ -162,14 +144,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "59a7c85da3f25cd3",
+  "active": "69a8b0415cfaaf51",
   "lastOpenFiles": [
+    "tickets/Fix wl-screenshot deps.md",
     "PROYECT.md",
+    "tickets/(SERVER) Setup a desktop environment.md",
+    "tickets/(SERVER) Setup a torrent server.md",
     "tickets/Make WhatsApp Desktop work on Linux.md",
     "tickets/Fix local-chat-gpt.md",
     "tickets/(DOTFILES) Semi automate git commits.md",
-    "tickets/(SERVER) Setup a desktop environment.md",
-    "tickets/(SERVER) Setup a torrent server.md",
     "tickets/(SERVER) Get multiple users in photoprism.md",
     "tickets/(DARWIN) Set up native keyboard shortcuts.md",
     "tickets/(SERVER) Get agenix to work.md",
