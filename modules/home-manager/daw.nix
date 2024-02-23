@@ -13,6 +13,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       amplitube5
+      helix-native-3_60_0
       abpl
     ];
 
