@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     services.pipewire = {
       enable = true;
-      systemWide = true;
+      # systemWide = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       jack.enable = true;
