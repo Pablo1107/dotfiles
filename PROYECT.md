@@ -26,6 +26,7 @@ kanban-plugin: basic
 
 - [ ] [[(SERVER) Setup a desktop environment]]
 - [ ] [[Make WhatsApp Desktop work on Linux]]
+- [ ] [[(SERVER) Setup vms]]
 
 
 ## Done

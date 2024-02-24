@@ -22,5 +22,7 @@ in
         rpc-port = 9091;
       };
     };
+
+    users.users.pablo.extraGroups = [ "transmission" ];
   };
 }

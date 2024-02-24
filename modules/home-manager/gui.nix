@@ -100,7 +100,7 @@ in
       xdg-utils
       nixgl.nixGLIntel # wrapper GUI apps
       nixgl.nixVulkanIntel # wrapper GUI apps (Vulkan)
-      imv # lightweight image viewer
+      # imv # lightweight image viewer
       xfce.tumbler
       gnome3.gnome-keyring
       wayland-utils
