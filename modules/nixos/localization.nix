@@ -13,6 +13,7 @@ in
   config = mkIf cfg.enable {
     time.timeZone = "America/Argentina/Buenos_Aires";
     i18n.defaultLocale = "en_US.UTF-8";
-    console.keyMap = "us";
+    # defined in another place?
+    # console.keyMap = "us";
   };
 }
