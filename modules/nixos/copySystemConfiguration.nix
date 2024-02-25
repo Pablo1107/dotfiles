@@ -13,6 +13,7 @@ in
   config = mkIf cfg.enable {
     environment.etc."dotfiles/rev".text =
       (builtins.fetchGit { url = ./.; ref = "HEAD"; }).rev;
-    environment.etc."dotfiles/src".source = builtins.fetchGit ../../.;
+    # https://github.com/NixOS/nix/issues/9292
+    # environment.etc."dotfiles/src".source = builtins.fetchGit ../../.;
   };
 }
