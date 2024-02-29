@@ -11,25 +11,9 @@
             "id": "69a8b0415cfaaf51",
             "type": "leaf",
             "state": {
-              "type": "kanban",
-              "state": {
-                "file": "PROYECT.md"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "42b62237eb6daf63",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "71e97e022e3656aa",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
-                "file": "tickets/(SERVER) Setup vms.md",
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
                 "mode": "source",
                 "source": false
               }
@@ -101,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Make WhatsApp Desktop work on Linux.md"
               }
             }
           }
@@ -164,8 +148,9 @@
   },
   "active": "69a8b0415cfaaf51",
   "lastOpenFiles": [
-    "tickets/(SERVER) Setup vms.md",
+    "overlays/whatsapp.nix~",
     "PROYECT.md",
+    "tickets/(SERVER) Setup vms.md",
     "tickets/Fix wl-screenshot deps.md",
     "tickets/(SERVER) Setup a desktop environment.md",
     "tickets/(SERVER) Setup a torrent server.md",
