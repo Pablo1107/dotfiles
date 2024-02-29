@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.personal.photoprism;
+  nginxCfg = config.personal.reverse-proxy;
 in
 {
   options.personal.photoprism = {
@@ -41,6 +42,28 @@ in
             "photoprism.*" = "ALL PRIVILEGES";
           };
         }];
+      };
+      nginx.virtualHosts = {
+        "photoprism.${nginxCfg.publicDomain}" = {
+          useACMEHost = nginxCfg.localDomain;
+          forceSSL = true;
+          enableACME = false;
+          http2 = true;
+          locations."/" = {
+            proxyPass = "http://nixos.local:2342";
+            proxyWebsockets = true;
+          };
+        };
+        "photoprism.${nginxCfg.localDomain}" = {
+          useACMEHost = nginxCfg.localDomain;
+          forceSSL = true;
+          enableACME = false;
+          http2 = true;
+          locations."/" = {
+            proxyPass = "http://nixos.local:2342";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
 

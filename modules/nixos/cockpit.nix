@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.personal.cockpit;
+  nginxCfg = config.personal.reverse-proxy;
 in
 {
   options.personal.cockpit = {
@@ -29,6 +30,28 @@ in
           };
         };
         openFirewall = true;
+      };
+      nginx.virtualHosts = {
+        "cockpit.${nginxCfg.publicDomain}" = {
+          useACMEHost = nginxCfg.localDomain;
+          forceSSL = true;
+          enableACME = false;
+          http2 = true;
+          locations."/" = {
+            proxyPass = "http://nixos.local:9090";
+            proxyWebsockets = true;
+          };
+        };
+        "cockpit.${nginxCfg.localDomain}" = {
+          useACMEHost = nginxCfg.localDomain;
+          forceSSL = true;
+          enableACME = false;
+          http2 = true;
+          locations."/" = {
+            proxyPass = "http://nixos.local:9090";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
 

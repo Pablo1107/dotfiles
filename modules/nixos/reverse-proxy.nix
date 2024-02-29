@@ -8,6 +8,16 @@ in
 {
   options.personal.reverse-proxy = {
     enable = mkEnableOption "reverse-proxy";
+
+    publicDomain = mkOption {
+      type = types.str;
+      default = inputs.secrets.domains."67c831ed-46e1-4d39-ae12-e9d624fb35db";
+    };
+
+    localDomain = mkOption {
+      type = types.str;
+      default = inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -20,30 +30,13 @@ in
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      virtualHosts."${inputs.secrets.domains."67c831ed-46e1-4d39-ae12-e9d624fb35db"}" = {
-        forceSSL = true;
-        enableACME = true;
-        http2 = true;
-        locations."/" = {
-          proxyPass = "http://nixos.local:2342";
-          proxyWebsockets = true;
-        };
-      };
-      virtualHosts."${inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73"}" = {
-        forceSSL = true;
-        enableACME = true;
-        http2 = true;
-        locations."/" = {
-          proxyPass = "http://nixos.local:2342";
-          proxyWebsockets = true;
-        };
-      };
+      # virtualHosts configured on each service module
       virtualHosts."nixos.local" = {
         forceSSL = false;
         enableACME = false;
         http2 = true;
         locations."/" = {
-          proxyPass = "http://nixos.local:2342";
+          proxyPass = "http://nixos.local:8082";
           proxyWebsockets = true;
         };
       };
@@ -53,17 +46,20 @@ in
       acceptTerms = true;
       defaults.email = "dealberapablo07@gmail.com";
       certs = {
-        "${inputs.secrets.domains."67c831ed-46e1-4d39-ae12-e9d624fb35db"}" = {
-          domain = inputs.secrets.domains."67c831ed-46e1-4d39-ae12-e9d624fb35db";
+        "${cfg.publicDomain}" = {
+          domain = cfg.publicDomain;
           dnsProvider = "duckdns";
           environmentFile = "/etc/duckdns-updater/envs";
           webroot = null;
+          # extraDomainNames = [ "cockpit.${cfg.publicDomain}" ];
         };
-        "${inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73"}" = {
-          domain = inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73";
+        "${cfg.localDomain}" = {
+          domain = cfg.localDomain;
           dnsProvider = "duckdns";
           environmentFile = "/etc/duckdns-updater/envs";
           webroot = null;
+          extraDomainNames = [ "*.${cfg.localDomain}" ];
+          dnsPropagationCheck = false;
         };
       };
     };
