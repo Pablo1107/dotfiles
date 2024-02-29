@@ -11,20 +11,27 @@ with pkgs;
         sha256 = "sha256-cE7Ti4+M8guPuNE/iFEhRpGTtyJH7OBtTJaFhFimFec=";
       };
 
+      wine = pkgs.wineWowPackages.staging;
+
       bin = wrapWine {
+        inherit wine;
         is64bits = true;
         name = "whatsapp";
+        # executable = "${programfiles}/lib/net45/WhatsApp.exe";
         executable = "$WINEPREFIX/drive_c/lib/net45/WhatsApp.exe";
         firstrunScript = ''
           pushd "$WINEPREFIX/drive_c"
+            wineboot -u
+            wine iexplore
+            winecfg
             ${p7zip}/bin/7z x ${installer} -y
             ${p7zip}/bin/7z x WhatsApp-${version}.nupkg -y
           popd
         '';
-        tricks = [
-          "ie8"
-          "dotnet462"
-        ];
+        # tricks = [
+        #   "ie8"
+        #   "dotnet462"
+        # ];
       };
       # desktop = makeDesktopItem {
       #   name = "Pinball";
