@@ -31,7 +31,7 @@ in
           enableACME = false;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:9091";
+            proxyPass = "http://192.168.1.34:9091";
             proxyWebsockets = true;
           };
         };
@@ -41,7 +41,7 @@ in
           enableACME = false;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:9091";
+            proxyPass = "http://192.168.1.34:9091";
             proxyWebsockets = true;
           };
         };

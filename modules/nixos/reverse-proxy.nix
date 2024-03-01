@@ -31,15 +31,15 @@ in
       recommendedTlsSettings = true;
 
       # virtualHosts configured on each service module
-      virtualHosts."nixos.local" = {
-        forceSSL = false;
-        enableACME = false;
-        http2 = true;
-        locations."/" = {
-          proxyPass = "http://nixos.local:8082";
-          proxyWebsockets = true;
-        };
-      };
+      # virtualHosts."nixos.local" = {
+      #   forceSSL = false;
+      #   enableACME = false;
+      #   http2 = true;
+      #   locations."/" = {
+      #     proxyPass = "http://nixos.local:8082";
+      #     proxyWebsockets = true;
+      #   };
+      # };
     };
 
     security.acme = {

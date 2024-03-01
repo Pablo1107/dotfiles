@@ -18,6 +18,7 @@ in
         # package = ;
         openFirewall = true;
         listenPort = 8082;
+        # config in /var/lib/homepage-dashboard
       };
 
       nginx.virtualHosts = {
@@ -26,7 +27,7 @@ in
           enableACME = true;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:8082";
+            proxyPass = "http://192.168.1.34:8082";
             proxyWebsockets = true;
           };
         };
@@ -35,7 +36,7 @@ in
           enableACME = true;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:8082";
+            proxyPass = "http://192.168.1.34:8082";
             proxyWebsockets = true;
           };
         };

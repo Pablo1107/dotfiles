@@ -50,7 +50,7 @@ in
           enableACME = false;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:2342";
+            proxyPass = "http://192.168.1.34:2342";
             proxyWebsockets = true;
           };
         };
@@ -60,7 +60,7 @@ in
           enableACME = false;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://nixos.local:2342";
+            proxyPass = "http://192.168.1.34:2342";
             proxyWebsockets = true;
           };
         };
