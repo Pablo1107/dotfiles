@@ -16,6 +16,7 @@ kanban-plugin: basic
 - [ ] [[(DOTFILES) Semi automate git commits]]
 - [ ] [[Fix local-chat-gpt]]
 - [ ] [[Fix wl-screenshot deps]]
+- [ ] [[Local subdomains]]
 
 
 ## To Do
@@ -24,7 +25,6 @@ kanban-plugin: basic
 
 ## In Progress
 
-- [ ] [[(SERVER) Setup a desktop environment]]
 - [ ] [[Make WhatsApp Desktop work on Linux]]
 - [ ] [[(SERVER) Setup vms]]
 
@@ -32,6 +32,7 @@ kanban-plugin: basic
 ## Done
 
 **Complete**
+- [x] [[(SERVER) Setup a desktop environment]]
 - [x] [[(SERVER) Get multiple users in photoprism]]
 - [x] [[(SERVER) Get agenix to work]]
 - [x] [[(SERVER) Setup a torrent server]]
