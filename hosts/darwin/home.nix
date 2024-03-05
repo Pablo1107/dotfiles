@@ -14,7 +14,7 @@ with pkgs;
     enable = true;
     withAuthorizationKeys = true;
   };
-  personal.python.enable = true;
+  personal.python.enable = false;
   personal.vifm.enable = true;
   personal.tmux.enable = true;
   personal.shell.enable = true;
