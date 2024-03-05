@@ -144,12 +144,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "69a8b0415cfaaf51",
+  "active": "37be4a5f6f8c85f7",
   "lastOpenFiles": [
     "tickets/Local subdomains.md",
     "PROYECT.md",
     "tickets/(SERVER) Setup vms.md",
     "tickets/(SERVER) Setup a desktop environment.md",
+    "tickets/Nix-Homebrew.md",
+    "tickets/De-google.md",
     "tickets/Make WhatsApp Desktop work on Linux.md",
     "overlays/whatsapp.nix~",
     "tickets/Fix wl-screenshot deps.md",

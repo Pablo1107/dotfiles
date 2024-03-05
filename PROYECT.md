@@ -17,6 +17,8 @@ kanban-plugin: basic
 - [ ] [[Fix local-chat-gpt]]
 - [ ] [[Fix wl-screenshot deps]]
 - [ ] [[Local subdomains]]
+- [ ] [[De-google]]
+- [ ] [[Nix-Homebrew]]
 
 
 ## To Do
