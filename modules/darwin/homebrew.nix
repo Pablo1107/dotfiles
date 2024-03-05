@@ -28,7 +28,7 @@ in
         upgrade = false;
       };
       taps = [
-        "homebrew/cask"
+        # "homebrew/cask" not necessary anymore
         "homebrew/services"
       ];
       brews = [
