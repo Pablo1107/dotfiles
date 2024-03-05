@@ -94,15 +94,15 @@ return {
             lspconfig.vimls.setup {}
             lspconfig.clangd.setup {}
 
-            lspconfig.eslint.setup({
-                --- ...
-                on_attach = function(_, bufnr)
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        buffer = bufnr,
-                        command = "EslintFixAll",
-                    })
-                end,
-            })
+            -- lspconfig.eslint.setup({
+            --     --- ...
+            --     on_attach = function(_, bufnr)
+            --         vim.api.nvim_create_autocmd("BufWritePre", {
+            --             buffer = bufnr,
+            --             command = "EslintFixAll",
+            --         })
+            --     end,
+            -- })
         end
     },
     {
@@ -171,6 +171,7 @@ return {
     },
     {
         'folke/trouble.nvim',
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         lazy = true,
         cmd = { 'Trouble' },
         config = function()

@@ -205,12 +205,12 @@ autocmd('TermOpen', {
     end
 })
 
-autocmd("BufWritePre", {
-    desc = "LSP format on save",
-    callback = function()
-        vim.lsp.buf.format()
-    end,
-})
+-- autocmd("BufWritePre", {
+--     desc = "LSP format on save",
+--     callback = function()
+--         vim.lsp.buf.format()
+--     end,
+-- })
 
 function AdaptColorscheme()
     vim.cmd [[
