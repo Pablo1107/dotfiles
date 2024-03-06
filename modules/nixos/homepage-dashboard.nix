@@ -1,6 +1,7 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   cfg = config.personal.homepage-dashboard;
@@ -27,7 +28,7 @@ in
           enableACME = true;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://192.168.1.34:8082";
+            proxyPass = "http://127.0.0.1:8082";
             proxyWebsockets = true;
           };
         };
@@ -36,7 +37,7 @@ in
           enableACME = true;
           http2 = true;
           locations."/" = {
-            proxyPass = "http://192.168.1.34:8082";
+            proxyPass = "http://127.0.0.1:8082";
             proxyWebsockets = true;
           };
         };

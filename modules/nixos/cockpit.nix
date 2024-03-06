@@ -1,6 +1,7 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   cfg = config.personal.cockpit;
@@ -14,9 +15,9 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       cockpit
-      cockpit-machines
-      libosinfo # needed for cockpit-machines
-      osinfo-db # needed for cockpit-machines
+      # cockpit-machines
+      # libosinfo # needed for cockpit-machines
+      # osinfo-db # needed for cockpit-machines
     ];
     environment.pathsToLink = [ "/share/cockpit" ];
 
@@ -31,28 +32,13 @@ in
         };
         openFirewall = true;
       };
-      nginx.virtualHosts = {
-        "cockpit.${nginxCfg.publicDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:9090";
-            proxyWebsockets = true;
+      nginx.virtualHosts =
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "cockpit";
+            port = "9090";
           };
-        };
-        "cockpit.${nginxCfg.localDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:9090";
-            proxyWebsockets = true;
-          };
-        };
-      };
     };
 
     # systemd.packages = [ (pkgs.cockpit.override { packages = with pkgs; [ virtmanager ]; }) ];

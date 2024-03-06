@@ -1,6 +1,7 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   cfg = config.personal.transmission;
@@ -24,30 +25,49 @@ in
           rpc-port = 9091;
         };
       };
-      nginx.virtualHosts = {
-        "transmission.${nginxCfg.publicDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:9091";
-            proxyWebsockets = true;
-          };
-        };
-        "transmission.${nginxCfg.localDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:9091";
-            proxyWebsockets = true;
-          };
-        };
-      };
     };
 
     users.users.pablo.extraGroups = [ "transmission" ];
+
+    services = {
+      jackett = {
+        enable = true;
+        openFirewall = true;
+      };
+      radarr = {
+        enable = true;
+        openFirewall = true;
+      };
+      bazarr = {
+        enable = true;
+        openFirewall = true;
+      };
+
+      nginx.virtualHosts =
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "transmission";
+            port = "9091";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "jackett";
+            port = "9117";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "radarr";
+            port = "7878";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "bazarr";
+            port = "6767";
+          };
+    };
   };
 }

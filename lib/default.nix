@@ -80,6 +80,30 @@ rec {
         })
       { };
 
+  ## Nginx Reverse Proxy
+  createVirtualHosts = { subdomain, port, nginxCfg }: {
+    "${subdomain}.${nginxCfg.publicDomain}" = {
+      useACMEHost = nginxCfg.localDomain;
+      forceSSL = true;
+      enableACME = false;
+      http2 = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${port}";
+        proxyWebsockets = true;
+      };
+    };
+    "${subdomain}.${nginxCfg.localDomain}" = {
+      useACMEHost = nginxCfg.localDomain;
+      forceSSL = true;
+      enableACME = false;
+      http2 = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${port}";
+        proxyWebsockets = true;
+      };
+    };
+  };
+
   ## Flake Utils
   # System types to support.
   supportedSystems = [ "x86_64-linux" "aarch64-darwin" "aarch64-linux" ];

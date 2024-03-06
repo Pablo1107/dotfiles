@@ -1,6 +1,7 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   cfg = config.personal.photoprism;
@@ -43,28 +44,13 @@ in
           };
         }];
       };
-      nginx.virtualHosts = {
-        "photoprism.${nginxCfg.publicDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:2342";
-            proxyWebsockets = true;
+      nginx.virtualHosts =
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "photoprism";
+            port = "2342";
           };
-        };
-        "photoprism.${nginxCfg.localDomain}" = {
-          useACMEHost = nginxCfg.localDomain;
-          forceSSL = true;
-          enableACME = false;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://192.168.1.34:2342";
-            proxyWebsockets = true;
-          };
-        };
-      };
     };
 
     fileSystems."/var/lib/private/photoprism/originals/Android" = {
