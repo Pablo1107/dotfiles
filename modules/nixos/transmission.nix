@@ -42,6 +42,10 @@ in
         enable = true;
         openFirewall = true;
       };
+      prowlarr = {
+        enable = true;
+        openFirewall = true;
+      };
 
       nginx.virtualHosts =
         createVirtualHosts
@@ -67,6 +71,12 @@ in
             inherit nginxCfg;
             subdomain = "bazarr";
             port = "6767";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "prowlarr";
+            port = "9696";
           };
     };
   };
