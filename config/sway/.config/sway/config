@@ -112,7 +112,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     # Switch keyboard layout
-    bindsym Alt+Shift+k exec swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_switch_layout next
+    bindsym Alt+Shift+k exec swaymsg input type:keyboard xkb_switch_layout next
 #
 # Moving around:
 #
