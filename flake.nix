@@ -289,11 +289,11 @@
           specialArgs = {
             inherit nixpkgs;
             inherit inputs;
+            inherit myLib;
           };
         };
 
-        # Host name = "server"
-        "server" = { name, nodes, ... }: {
+        "nixos" = { name, nodes, ... }: {
           # Parameters related to remote deployment
           deployment = inputs.secrets.deployment;
 
