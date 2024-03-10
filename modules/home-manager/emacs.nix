@@ -5,11 +5,11 @@ with lib;
 let
   cfg = config.personal.emacs;
 
-  copilot = { trivialBuild, dash, s, editorconfig }: trivialBuild {
+  copilot = { epkgs }: epkgs.trivialBuild {
     pname = "copilot";
     version = "main";
     src = inputs.emacs-copilot;
-    buildInputs = [ dash s editorconfig ];
+    buildInputs = with epkgs; [ f dash s editorconfig ];
     postPatch = ''
       ${pkgs.perl}/bin/perl -i -p0e "s#\(defconst copilot--base-dir\n  \(file-name-directory\n   \(or load-file-name\n       \(buffer-file-name\)\)\)\n  \"Directory containing this file.\"\)\n#(defconst copilot--base-dir\n  \"${inputs.emacs-copilot.outPath}\"\n  \"Directory containing this file.\")#" ./copilot.el
     '';
@@ -23,7 +23,7 @@ let
 
     # Optionally provide extra packages not in the configuration file.
     extraEmacsPackages = epkgs: [
-      (copilot { inherit (epkgs) trivialBuild dash s editorconfig; })
+      (copilot { inherit epkgs; })
       epkgs.pdf-tools
     ];
 

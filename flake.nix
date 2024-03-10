@@ -22,7 +22,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
     emacs-copilot = {
-      url = "github:zerolfx/copilot.el";
+      url = "github:copilot-emacs/copilot.el";
       flake = false;
     };
     firefox-csshacks = {
