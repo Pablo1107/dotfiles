@@ -144,10 +144,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "37be4a5f6f8c85f7",
+  "active": "69a8b0415cfaaf51",
   "lastOpenFiles": [
-    "tickets/Local subdomains.md",
+    "tickets/Nginx Logging.md",
     "PROYECT.md",
+    "tickets/Local subdomains.md",
     "tickets/(SERVER) Setup vms.md",
     "tickets/(SERVER) Setup a desktop environment.md",
     "tickets/Nix-Homebrew.md",

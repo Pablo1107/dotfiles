@@ -19,6 +19,7 @@ kanban-plugin: basic
 - [ ] [[Local subdomains]]
 - [ ] [[De-google]]
 - [ ] [[Nix-Homebrew]]
+- [ ] [[Nginx Logging]]
 
 
 ## To Do
