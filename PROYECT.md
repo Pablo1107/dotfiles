@@ -24,6 +24,7 @@ kanban-plugin: basic
 
 ## To Do
 
+- [ ] [[Duckdns updater stops working]]
 
 
 ## In Progress

@@ -18,6 +18,24 @@
             }
           }
         ]
+      },
+      {
+        "id": "dd05735ab838f9f6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4e277f1b3808a098",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tickets/Duckdns updater stops working.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -83,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Duckdns updater stops working.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Duckdns updater stops working.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Duckdns updater stops working.md"
               }
             }
           }
@@ -144,10 +162,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "69a8b0415cfaaf51",
+  "active": "4e277f1b3808a098",
   "lastOpenFiles": [
-    "tickets/Nginx Logging.md",
     "PROYECT.md",
+    "tickets/Duckdns updater stops working.md",
     "tickets/Local subdomains.md",
     "tickets/(SERVER) Setup vms.md",
     "tickets/(SERVER) Setup a desktop environment.md",
