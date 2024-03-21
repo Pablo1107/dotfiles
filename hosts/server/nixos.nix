@@ -23,6 +23,7 @@
   personal.avahi.enable = true;
   personal.localization.enable = true;
   personal.copySystemConfiguration.enable = true;
+  personal.git-server.enable = true;
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
