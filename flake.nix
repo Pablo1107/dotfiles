@@ -106,6 +106,13 @@
         agenix.nixosModules.default
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
+
+      specialArgs = {
+        inherit myLib;
+        inherit inputs;
+        inherit nixpkgs;
+        rootPath = ./.;
+      };
     in
     {
       homeConfigurations = {
@@ -122,13 +129,11 @@
             hyprland.homeManagerModules.default
           ] ++ hmModules;
           extraSpecialArgs = {
-            inherit myLib;
-            inherit inputs;
             pkgs-stable = import nixpkgs-stable {
               system = "x86_64-linux";
               config = nixpkgsConfig.config;
             };
-          };
+          } // specialArgs;
         };
         deck = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -139,13 +144,11 @@
             ./hosts/deck/home.nix
           ] ++ hmModules;
           extraSpecialArgs = {
-            inherit myLib;
-            inherit inputs;
             pkgs-stable = import nixpkgs-stable {
               system = "x86_64-linux";
               config = nixpkgsConfig.config;
             };
-          };
+          } // specialArgs;
         };
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
@@ -160,13 +163,11 @@
             home-manager.backupFileExtension = "backup";
             home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = {
-              inherit myLib;
-              inherit inputs;
               pkgs-stable = import nixpkgs-stable {
                 inherit system;
                 config = nixpkgsConfig.config;
               };
-            };
+            } // specialArgs;
             home-manager.users."pablo.dealbera.ctr" = { pkgs, ... }: {
               imports = [
                 ./hosts/darwin/home.nix
@@ -178,7 +179,7 @@
             };
           }
         ];
-        specialArgs = { inherit inputs; };
+        inherit specialArgs;
       };
       nixOnDroidConfigurations = {
         default = nix-on-droid.lib.nixOnDroidConfiguration {
@@ -188,10 +189,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ ] ++ hmModules;
-              home-manager.extraSpecialArgs = {
-                inherit myLib;
-                inherit inputs;
-              };
+              home-manager.extraSpecialArgs = specialArgs;
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./hosts/sm-f936b/home.nix ];
               };
@@ -202,7 +200,7 @@
               system = "aarch64-linux";
               config = nixpkgsConfig.config;
             };
-          };
+          } // specialArgs;
           # your own pkgs instance (see nix-on-droid.overlay for useful additions)
           pkgs = import nixpkgs {
             system = "aarch64-linux";
@@ -224,10 +222,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = {
-              inherit myLib;
-              inherit inputs;
-            };
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/rpi/home.nix ];
             };
@@ -266,10 +261,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = {
-              inherit myLib;
-              inherit inputs;
-            };
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/server/home.nix ];
             };
@@ -286,16 +278,14 @@
 
           # This parameter functions similarly to `sepcialArgs` in `nixosConfigurations.xxx`,
           # used for passing custom arguments to all submodules.
-          specialArgs = {
-            inherit nixpkgs;
-            inherit inputs;
-            inherit myLib;
-          };
+          inherit specialArgs;
         };
 
         "nixos" = { name, nodes, ... }: {
           # Parameters related to remote deployment
-          deployment = inputs.secrets.deployment;
+          deployment = inputs.secrets.deployment // {
+            allowLocalDeployment = true;
+          };
 
           # This parameter functions similarly to `modules` in `nixosConfigurations.xxx`,
           # used for importing all submodules.
@@ -308,10 +298,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ ] ++ hmModules;
-              home-manager.extraSpecialArgs = {
-                inherit myLib;
-                inherit inputs;
-              };
+              home-manager.extraSpecialArgs = specialArgs;
               home-manager.users.pablo = { pkgs, ... }: {
                 imports = [ ./hosts/server/home.nix ];
               };
