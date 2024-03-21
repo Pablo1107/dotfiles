@@ -95,7 +95,7 @@
         nixConfig
         agenix.homeManagerModules.default
         # ./secrets/default.nix
-      ] ++ map (n: "${./modules/home-manager}/${n}") (attrNames (readDir ./modules/home-manager));
+      ] ++ (map (n: "${./modules/home-manager}/${n}") (filter (name: nixpkgs.lib.hasSuffix ".nix" name) (attrNames (readDir ./modules/home-manager))));
       darwinModules = [
         agenix.darwinModules.default
         # ./secrets/default.nix

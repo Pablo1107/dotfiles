@@ -7,8 +7,15 @@ let
 
   # userChrome = myLib.getDotfile "firefox" "chrome/userChrome.css";
   # userContent = myLib.getDotfile "firefox" "chrome/userContent.css";
+
+  patched-firefox-csshacks = pkgs.applyPatches {
+    name = "patched-firefox-csshacks";
+    src = inputs.firefox-csshacks.outPath;
+    patches = [ ./navbar_below_content.patch ];
+  };
+
   userChrome = ''
-    @import url("${inputs.firefox-csshacks.outPath}/chrome/navbar_below_content.css");
+    @import url("${patched-firefox-csshacks}/chrome/navbar_below_content.css");
     @import url("${config.home.homeDirectory}/dotfiles/config/firefox/chrome/proton_tweaks.css");
     @import url("${config.home.homeDirectory}/dotfiles/config/firefox/chrome/urlbar_tweaks.css");
 
