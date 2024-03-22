@@ -104,6 +104,25 @@ rec {
     };
   };
 
+  mkBrowserApp = pkgs: { name, url }:
+    pkgs.stdenv.mkDerivation {
+      name = "${name}";
+      pname = "${name}";
+      phases = [ "installPhase" ];
+      installPhase = ''
+              mkdir -p $out/share/applications
+              cat <<EOF > $out/share/applications/${name}.desktop
+        [Desktop Entry]
+        Name=${name}
+        Comment=Play this game on a Browser
+        Exec=${pkgs.chromium}/bin/chromium --app=${url} --start-fullscreen --disable-frame-rate-limit --use-angle=d3d9cd
+        Terminal=false
+        Type=Application
+        Categories=Game;
+        EOF
+      '';
+    };
+
   ## Flake Utils
   # System types to support.
   supportedSystems = [ "x86_64-linux" "aarch64-darwin" "aarch64-linux" ];
