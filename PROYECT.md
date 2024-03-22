@@ -29,7 +29,6 @@ kanban-plugin: basic
 
 ## In Progress
 
-- [ ] [[Make WhatsApp Desktop work on Linux]]
 - [ ] [[(SERVER) Setup vms]]
 
 
@@ -40,6 +39,12 @@ kanban-plugin: basic
 - [x] [[(SERVER) Get multiple users in photoprism]]
 - [x] [[(SERVER) Get agenix to work]]
 - [x] [[(SERVER) Setup a torrent server]]
+
+
+## Will Not Do
+
+**Complete**
+- [x] [[Make WhatsApp Desktop work on Linux]]
 
 
 
