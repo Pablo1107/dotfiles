@@ -1,9 +1,11 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   cfg = config.personal.syncthing;
+  nginxCfg = config.personal.reverse-proxy;
 in
 {
   options.personal.syncthing = {
@@ -53,6 +55,13 @@ in
           };
         };
       };
+      nginx.virtualHosts =
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "syncthing";
+            port = "8384";
+          };
     };
 
     networking.firewall = {
