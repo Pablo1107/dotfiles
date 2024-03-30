@@ -146,8 +146,11 @@
   },
   "active": "69a8b0415cfaaf51",
   "lastOpenFiles": [
-    "tickets/Fix wl-screenshot deps.md",
+    "tickets/File server.md",
     "PROYECT.md",
+    "tickets/OBS per window.md",
+    "tickets/Self-hosted steam.md",
+    "tickets/Fix wl-screenshot deps.md",
     "tickets/Duckdns updater stops working.md",
     "tickets/Local subdomains.md",
     "tickets/(SERVER) Setup vms.md",

@@ -20,6 +20,9 @@ kanban-plugin: basic
 - [ ] [[De-google]]
 - [ ] [[Nix-Homebrew]]
 - [ ] [[Nginx Logging]]
+- [ ] [[Self-hosted steam]]
+- [ ] [[OBS per window]]
+- [ ] [[File server]]
 
 
 ## To Do
