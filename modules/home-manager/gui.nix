@@ -136,6 +136,12 @@ in
       obsidian
 
       spotify
+
+      (wrapOBS.override { inherit obs-studio; } {
+        plugins = with obs-studio-plugins; [
+          wlrobs
+        ];
+      })
     ];
   };
 }
