@@ -23,6 +23,7 @@ kanban-plugin: basic
 - [ ] [[Self-hosted steam]]
 - [ ] [[OBS per window]]
 - [ ] [[File server]]
+- [ ] [[Build dotfiles over Github actions]]
 
 
 ## To Do

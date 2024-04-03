@@ -18,6 +18,24 @@
             }
           }
         ]
+      },
+      {
+        "id": "3cb3fc8b7e69d025",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe07b9122bd407d3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tickets/Build dotfiles over Github actions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -146,8 +164,9 @@
   },
   "active": "69a8b0415cfaaf51",
   "lastOpenFiles": [
-    "tickets/File server.md",
+    "tickets/Build dotfiles over Github actions.md",
     "PROYECT.md",
+    "tickets/File server.md",
     "tickets/OBS per window.md",
     "tickets/Self-hosted steam.md",
     "tickets/Fix wl-screenshot deps.md",
