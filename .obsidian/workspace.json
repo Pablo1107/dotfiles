@@ -16,26 +16,21 @@
                 "file": "PROYECT.md"
               }
             }
-          }
-        ]
-      },
-      {
-        "id": "3cb3fc8b7e69d025",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "fe07b9122bd407d3",
+            "id": "60ddc1a73fbd5572",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tickets/Build dotfiles over Github actions.md",
+                "file": "tickets/Fix wl-screenshot deps.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -101,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Fix wl-screenshot deps.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Fix wl-screenshot deps.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Fix wl-screenshot deps.md"
               }
             }
           }
@@ -162,10 +157,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "69a8b0415cfaaf51",
+  "active": "60ddc1a73fbd5572",
   "lastOpenFiles": [
-    "tickets/Build dotfiles over Github actions.md",
     "PROYECT.md",
+    "tickets/Build dotfiles over Github actions.md",
     "tickets/File server.md",
     "tickets/OBS per window.md",
     "tickets/Self-hosted steam.md",
