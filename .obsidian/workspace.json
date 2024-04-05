@@ -159,6 +159,9 @@
   },
   "active": "60ddc1a73fbd5572",
   "lastOpenFiles": [
+    "modules/home-manager/gui.nix~",
+    "overlays/wl-screenshot.nix~",
+    "overlays/wl-screenshot.nix",
     "PROYECT.md",
     "tickets/Build dotfiles over Github actions.md",
     "tickets/File server.md",
@@ -188,8 +191,6 @@
     "modules/nixos/reverse-proxy.nix",
     "colmena/flake.lock",
     "colmena/flake.nix",
-    "colmena",
-    "hive.nix",
     "tickets/(SERVER) Setup a vpn server.md",
     "tickets/(REGRESSION) hm-updates.md",
     "README.md"
