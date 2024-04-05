@@ -22,18 +22,18 @@ return {
     },
     'roman/golden-ratio', -- Makes current split bigger
     'arecarn/vim-crunch', -- Maths in VIM!
-    {
-        "tiagovla/tokyodark.nvim",
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            vim.g.tokyodark_transparent_background = true
-            vim.g.tokyodark_enable_italic_comment = true
-            vim.g.tokyodark_enable_italic = true
-            vim.g.tokyodark_color_gamma = "1.0"
-            vim.cmd.colorscheme("tokyodark")
-        end,
-    },
+    -- {
+    --     "tiagovla/tokyodark.nvim",
+    --     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    --     priority = 1000, -- make sure to load this before all the other start plugins
+    --     config = function()
+    --         vim.g.tokyodark_transparent_background = true
+    --         vim.g.tokyodark_enable_italic_comment = true
+    --         vim.g.tokyodark_enable_italic = true
+    --         vim.g.tokyodark_color_gamma = "1.0"
+    --         vim.cmd.colorscheme("tokyodark")
+    --     end,
+    -- },
     {
         'terrortylor/nvim-comment',
         config = function()
@@ -67,4 +67,12 @@ return {
     {
         'elkowar/yuck.vim',
     },
+    {
+        'catppuccin/nvim',
+        name = 'catppuccin',
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme("catppuccin")
+        end,
+    }
 }
