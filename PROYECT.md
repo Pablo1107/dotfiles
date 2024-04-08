@@ -24,6 +24,7 @@ kanban-plugin: basic
 - [ ] [[OBS per window]]
 - [ ] [[File server]]
 - [ ] [[Build dotfiles over Github actions]]
+- [ ] [[Network level Ad Blocking]]
 
 
 ## To Do

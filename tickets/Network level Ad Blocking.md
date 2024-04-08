@@ -1,0 +1,1 @@
+https://www.reddit.com/r/selfhosted/comments/1btx890/guide_adguard_home_network_wide_ad_blocking_in/
