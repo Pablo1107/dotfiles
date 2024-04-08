@@ -69,6 +69,9 @@ in
         "slack"
         "postman"
         "obsidian"
+        "microsoft-teams"
+        "macfuse"
+        "vlc"
       ];
     };
   };
