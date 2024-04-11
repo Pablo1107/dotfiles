@@ -25,6 +25,7 @@ kanban-plugin: basic
 - [ ] [[File server]]
 - [ ] [[Build dotfiles over Github actions]]
 - [ ] [[Network level Ad Blocking]]
+- [ ] [[nix-inspect]]
 
 
 ## To Do

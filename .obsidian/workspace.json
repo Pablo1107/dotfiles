@@ -28,9 +28,36 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "2d89d4516dd76c9c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.5.12"
+              }
+            }
           }
-        ],
-        "currentTab": 1
+        ]
+      },
+      {
+        "id": "300fdd67892b083c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ac8d1ab8c664ef1b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "tickets/nix-inspect.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -96,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/Fix wl-screenshot deps.md",
+                "file": "tickets/nix-inspect.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +140,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/Fix wl-screenshot deps.md",
+                "file": "tickets/nix-inspect.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +163,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/Fix wl-screenshot deps.md"
+                "file": "tickets/nix-inspect.md"
               }
             }
           }
@@ -157,12 +184,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "60ddc1a73fbd5572",
+  "active": "ac8d1ab8c664ef1b",
   "lastOpenFiles": [
+    "PROYECT.md",
+    "tickets/nix-inspect.md",
     "modules/home-manager/gui.nix~",
     "overlays/wl-screenshot.nix~",
     "overlays/wl-screenshot.nix",
-    "PROYECT.md",
     "tickets/Build dotfiles over Github actions.md",
     "tickets/File server.md",
     "tickets/OBS per window.md",
@@ -189,7 +217,6 @@
     "modules/nixos/clone-dotfiles.nix",
     "modules/nixos/reverse-proxy.nix",
     "colmena/flake.lock",
-    "colmena/flake.nix",
     "tickets/(SERVER) Setup a vpn server.md",
     "tickets/(REGRESSION) hm-updates.md",
     "README.md"
