@@ -69,7 +69,6 @@
           nixgl.overlay
           emacs-overlay.overlay
           nix-index-database.overlays.nix-index
-          (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
       nixConfig = {
