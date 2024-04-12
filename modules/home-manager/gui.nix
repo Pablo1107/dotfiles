@@ -96,6 +96,7 @@ in
 
       waybar
       wl-clipboard
+      wl-screenshot
       qt5.qtwayland
       xdg-utils
       nixgl.nixGLIntel # wrapper GUI apps
