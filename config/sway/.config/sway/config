@@ -40,6 +40,11 @@ output HDMI-A-1 pos 0 0
 output DP-1 pos 0 0
 output DP-2 pos 0 0
 output eDP-1 pos 320 1440
+output HEADLESS-1 resolution 1280x720 position 0,1080
+output HEADLESS-1 bg "#220900" solid_color
+workspace 0 output HEADLESS-1
+bindsym $mod+0 workspace number 0
+bindsym $mod+Shift+0 move container to workspace number 0
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
 exec_always ~/.config/sway/clamshell.sh
@@ -157,7 +162,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    # bindsym $mod+0 workspace number 10
     bindsym $mod+Tab workspace back_and_forth
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
@@ -169,7 +174,7 @@ input "2:14:ETPS/2_Elantech_Touchpad" {
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    # bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
