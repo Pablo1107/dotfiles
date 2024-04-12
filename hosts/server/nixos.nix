@@ -42,6 +42,7 @@
   environment.systemPackages = with pkgs; map lib.lowPrio [
     curl
     gitMinimal
+    killall
   ];
 
   programs.sway = {
