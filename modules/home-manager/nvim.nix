@@ -11,23 +11,27 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      efm-langserver
-      rnix-lsp
-      nodePackages.typescript-language-server
-      nodePackages.vim-language-server
-      sumneko-lua-language-server
-      gcc
-      nodePackages.prettier_d_slim
-      nodePackages.vscode-langservers-extracted
-    ];
-
     programs.neovim = {
       enable = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
       plugins = with pkgs.vimPlugins; [
         nvim-treesitter.withAllGrammars
         lazy-nvim
       ];
+      extraPackages = (with pkgs; [
+        efm-langserver
+        rnix-lsp
+        sumneko-lua-language-server
+        gcc
+      ]) ++ (with pkgs.nodePackages; [
+        nodejs
+        typescript-language-server
+        vim-language-server
+        prettier_d_slim
+        vscode-langservers-extracted
+      ]);
     };
 
     # stolen from https://discourse.nixos.org/t/conflicts-between-treesitter-withallgrammars-and-builtin-neovim-parsers-lua-c/33536/3
