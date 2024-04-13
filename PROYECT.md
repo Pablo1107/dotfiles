@@ -30,7 +30,6 @@ kanban-plugin: basic
 
 ## To Do
 
-- [ ] [[Duckdns updater stops working]]
 
 
 ## In Progress
@@ -45,6 +44,7 @@ kanban-plugin: basic
 - [x] [[(SERVER) Get multiple users in photoprism]]
 - [x] [[(SERVER) Get agenix to work]]
 - [x] [[(SERVER) Setup a torrent server]]
+- [x] [[Duckdns updater stops working]]
 
 
 ## Will Not Do
