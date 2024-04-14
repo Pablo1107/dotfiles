@@ -58,9 +58,9 @@ in
       (myLib.nixGLWrapper pkgs {
         bin = "foot";
       })
-      (myLib.nixGLWrapper pkgs {
-        bin = "chromium";
-      })
+      # (myLib.nixGLWrapper pkgs {
+      #   bin = "chromium";
+      # })
       (myLib.nixBothWrapper pkgs {
         bin = "gamescope";
       })
@@ -92,7 +92,7 @@ in
       zathura # pdf viewer
       tdesktop # telegram
       discord
-      morgen # calendar
+      # morgen # calendar
 
       waybar
       wl-clipboard
@@ -134,7 +134,7 @@ in
 
       # bitwig-studio # music production
       amplitube5 # guitar amp sim
-      obsidian
+      # obsidian
 
       spotify
 
