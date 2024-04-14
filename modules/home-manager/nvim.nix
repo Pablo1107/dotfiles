@@ -22,7 +22,9 @@ in
       ];
       extraPackages = (with pkgs; [
         efm-langserver
-        rnix-lsp
+        nixd
+        nil
+        nixpkgs-fmt
         sumneko-lua-language-server
         gcc
       ]) ++ (with pkgs.nodePackages; [

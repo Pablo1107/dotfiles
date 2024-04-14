@@ -91,7 +91,9 @@ return {
             --     root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
             -- }
             lspconfig.vtsls.setup{}
-            lspconfig.rnix.setup {}
+            -- lspconfig.rnix.setup {}
+            -- lspconfig.nixd.setup{}
+            lspconfig.nil_ls.setup{}
             lspconfig.vimls.setup {}
             lspconfig.clangd.setup {}
 
