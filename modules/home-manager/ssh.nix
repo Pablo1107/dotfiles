@@ -24,6 +24,10 @@ in
         Host github.com
         Hostname ssh.github.com
         Port 443
+
+        Host gitlab.com
+        Hostname altssh.gitlab.com
+        Port 443
       '';
     };
 
