@@ -29,6 +29,7 @@ in
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+      clientMaxBodySize = "0";
 
       # virtualHosts configured on each service module
       # virtualHosts."nixos.local" = {
