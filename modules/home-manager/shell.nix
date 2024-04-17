@@ -100,7 +100,7 @@ in
 
     programs.zsh = {
       enable = true;
-      autosuggestion.enable = true;
+      enableAutosuggestions = true;
       history.extended = true;
       history.size = 10000000;
       shellAliases = shellAliases;
