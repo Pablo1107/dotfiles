@@ -297,7 +297,12 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.sharedModules = [ ] ++ hmModules;
-              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.extraSpecialArgs = {
+                pkgs-stable = import nixpkgs-stable {
+                  system = "x86_64-linux";
+                  config = nixpkgsConfig.config;
+                };
+              } // specialArgs;
               home-manager.users.pablo = { pkgs, ... }: {
                 imports = [ ./hosts/server/home.nix ];
               };
