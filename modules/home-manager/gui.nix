@@ -93,6 +93,7 @@ in
       tdesktop # telegram
       discord
       # morgen # calendar
+      pavucontrol # pulseaudio volume control
 
       waybar
       wl-clipboard
