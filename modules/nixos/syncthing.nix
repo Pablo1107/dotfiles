@@ -30,6 +30,8 @@ in
         settings = {
           devices = {
             "SM-F936B" = { id = "CH4X7XP-YGGL2VQ-FWMWCWN-UXZ76UW-5RLZY3S-QHGDNV3-2R6SNRG-AEFBIQ3"; };
+            "steamdeck" = { id = "E6GUAAW-OFYFRAA-V5HDGD3-P5QV7O6-U5NOJ7I-KN7IURW-H5R6XA2-LW6PJQF"; };
+            "t14s" = { id = "22OJW2D-ZSZM4H7-AF5CJSO-HTHSOTJ-TBYOIVQ-JROECWX-VQZXH6H-TE7WNA5"; };
           };
           folders = {
             "Android Camera" = {
@@ -51,6 +53,11 @@ in
               id = "org";
               path = "/home/pablo/org";
               devices = [ "SM-F936B" ];
+            };
+            "Bitwig Projects" = {
+              id = "bitwig-projects";
+              path = "/home/pablo/Bitwig Studio/Projects";
+              devices = [ "t14s" ];
             };
           };
         };
