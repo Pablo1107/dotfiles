@@ -92,8 +92,8 @@ return {
             -- }
             lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
-            -- lspconfig.nixd.setup{}
-            lspconfig.nil_ls.setup{}
+            lspconfig.nixd.setup{}
+            -- lspconfig.nil_ls.setup{}
             lspconfig.vimls.setup {}
             lspconfig.clangd.setup {}
 

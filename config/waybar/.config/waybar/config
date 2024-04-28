@@ -34,12 +34,14 @@
 //    "return-type": "json"
 //  },
     "clock#date": {
+        "timezone": "America/Argentina/Buenos_Aires",
         "format": "{:%A %b %d}",
         "format-alt": "{:%Y-%m-%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "interval": 60
     },
     "clock#time": {
+        "timezone": "America/Argentina/Buenos_Aires",
         "format": "{:%H:%M:%S}",
         "interval": 1
     },
