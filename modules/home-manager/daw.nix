@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs-stable, ... }:
 
 with lib;
 
@@ -11,7 +11,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs-stable; [
+      (myLib.nixGLWrapper pkgs {
+        bin = "bitwig-studio";
+      })
       amplitube5
       abpl
       moises-desktop # for isolating instruments

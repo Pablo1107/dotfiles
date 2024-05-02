@@ -18,7 +18,6 @@ in {
     inherit name src;
     extraPkgs = pkgs: [ ];
     extraInstallCommands = ''
-      ls -l ${appimageContents}
       install -m 444 -D ${appimageContents}/moises-desktop.desktop -t $out/share/applications
       substituteInPlace $out/share/applications/moises-desktop.desktop \
         --replace 'Exec=AppRun' 'Exec=${name}'

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/22.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/23.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -69,6 +69,7 @@
           nixgl.overlay
           emacs-overlay.overlay
           nix-index-database.overlays.nix-index
+          (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
       nixConfig = {
@@ -301,6 +302,7 @@
                 pkgs-stable = import nixpkgs-stable {
                   system = "x86_64-linux";
                   config = nixpkgsConfig.config;
+                  overlays = nixpkgsConfig.overlays;
                 };
               } // specialArgs;
               home-manager.users.pablo = { pkgs, ... }: {

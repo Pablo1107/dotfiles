@@ -72,9 +72,6 @@ in
         bin = "anki";
         output = "out";
       })
-      (myLib.nixGLWrapper pkgs {
-        bin = "bitwig-studio";
-      })
       element-desktop # matrix client
       slack
       gimp # image editor
@@ -133,8 +130,6 @@ in
       insomnia
       # postman
 
-      # bitwig-studio # music production
-      amplitube5 # guitar amp sim
       # obsidian
 
       spotify

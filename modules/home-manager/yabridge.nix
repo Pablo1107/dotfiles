@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, inputs, ... }:
+{ config, options, lib, myLib, pkgs-stable, inputs, ... }:
 
 with lib;
 with inputs.nix-std.lib.serde;
@@ -83,7 +83,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs-stable; [
       yabridge
       yabridgectl
     ];
@@ -93,7 +93,7 @@ in
     };
 
     home.activation.yabridgectlSync = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ${pkgs.yabridgectl}/bin/yabridgectl sync
+      ${pkgs-stable.yabridgectl}/bin/yabridgectl sync
     '';
   };
 }
