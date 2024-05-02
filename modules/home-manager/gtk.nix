@@ -19,7 +19,7 @@ in
 
     qt = {
       enable = true;
-      platformTheme.name = "gtk";
+      platformTheme = "gtk";
     };
     gtk =
       let
