@@ -10,7 +10,7 @@ in
     enable = mkEnableOption "ssh";
     withAuthorizationKeys = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = ''
         Adds the authorization keys to the correct file
       '';
