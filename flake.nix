@@ -119,7 +119,7 @@
         pablo = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
-            config = nixpkgsConfig.config;
+            inherit (nixpkgsConfig) config overlays;
           };
           modules = [
             ./hosts/t14s/home.nix
@@ -131,14 +131,14 @@
           extraSpecialArgs = {
             pkgs-stable = import nixpkgs-stable {
               system = "x86_64-linux";
-              config = nixpkgsConfig.config;
+              inherit (nixpkgsConfig) config overlays;
             };
           } // specialArgs;
         };
         deck = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
-            config = nixpkgsConfig.config;
+            inherit (nixpkgsConfig) config overlays;
           };
           modules = [
             ./hosts/deck/home.nix
