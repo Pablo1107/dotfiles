@@ -26,6 +26,7 @@ kanban-plugin: basic
 - [ ] [[Build dotfiles over Github actions]]
 - [ ] [[Network level Ad Blocking]]
 - [ ] [[nix-inspect]]
+- [ ] [[Setup dns server]]
 
 
 ## To Do

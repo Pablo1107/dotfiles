@@ -1,0 +1,1 @@
+https://www.reddit.com/r/selfhosted/comments/1c4jbe8/what_dns_do_you_use_on_your_home_router/

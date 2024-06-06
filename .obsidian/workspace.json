@@ -146,9 +146,10 @@
   },
   "active": "df8c0e6d3125d6ed",
   "lastOpenFiles": [
+    "tickets/Setup dns server.md",
+    "PROYECT.md",
     "tickets/Fix wl-screenshot deps.md",
     "tickets/Duckdns updater stops working.md",
-    "PROYECT.md",
     "tickets/nix-inspect.md",
     "modules/home-manager/gui.nix~",
     "overlays/wl-screenshot.nix~",
