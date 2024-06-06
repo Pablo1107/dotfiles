@@ -90,7 +90,7 @@ return {
             -- lspconfig.tsserver.setup {
             --     root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
             -- }
-            lspconfig.vtsls.setup{}
+            -- lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
             lspconfig.nixd.setup{}
             -- lspconfig.nil_ls.setup{}
@@ -168,9 +168,9 @@ return {
             -- require('lspconfig')['tsserver'].setup {
             --     capabilities = capabilities
             -- }
-            require('lspconfig')['vtsls'].setup {
-                capabilities = capabilities
-            }
+            -- require('lspconfig')['vtsls'].setup {
+            --     capabilities = capabilities
+            -- }
 
             require('lspconfig').asm_lsp.setup {}
         end
@@ -188,5 +188,10 @@ return {
                 -- auto_fold = true,
             }
         end
+    },
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
     },
 }
