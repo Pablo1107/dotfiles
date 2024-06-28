@@ -17,12 +17,15 @@ with pkgs;
   personal.nvim.enable = true;
   personal.shell.enable = true;
   personal.transmission.enable = true;
+  personal.syncthing.enable = true;
 
   home = {
     username = "deck";
     homeDirectory = "/home/deck";
 
-    packages = [ ];
+    packages = [
+      shortix
+    ];
 
     stateVersion = "21.05";
   };
