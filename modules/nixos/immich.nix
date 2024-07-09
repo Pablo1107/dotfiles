@@ -52,7 +52,7 @@ in
         UPLOAD_LOCATION = "/var/lib/immich/"; # The systemd StateDirectory
 
         # The Immich version to use. You can pin this to a specific version like "v1.71.0"
-        IMMICH_VERSION = "release";
+        IMMICH_VERSION = "v1.107.2";
 
         # Connection secret for postgres. You should change it to a random password
         DB_PASSWORD = "postgres";
