@@ -26,6 +26,8 @@
   personal.git-server.enable = true;
   personal.grocy.enable = true;
 
+  services.gvfs.enable = true;
+
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
@@ -38,6 +40,7 @@
   services.openssh = {
     enable = true;
     ports = [ 22 2205 ];
+    passwordAuthentication = false;
   };
 
   environment.systemPackages = with pkgs; map lib.lowPrio [
