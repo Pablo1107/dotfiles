@@ -42,6 +42,15 @@
     ports = [ 22 2205 ];
     passwordAuthentication = false;
   };
+  services.fail2ban = {
+    enable = true;
+    maxretry = 1;
+    ignoreIP = [
+      "192.168.0.0/16"
+      "192.168.1.0/16"
+    ];
+    bantime = "1w";
+  };
 
   environment.systemPackages = with pkgs; map lib.lowPrio [
     curl
