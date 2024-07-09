@@ -59,6 +59,11 @@ rm -rf run-rpi-vm && cp result/bin/run-rpi-vm . && sed -i "s/[^ ]*qemu-host-cpu-
 nixos-rebuild switch --flake .#server --target-host "root@nixos.local"
 ```
 
+# Nix Template
+```
+nix flake init -t ~/dotfiles\#template
+```
+
 # Some known issues
 ## unsupported tarball input
 
