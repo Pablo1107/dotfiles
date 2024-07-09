@@ -30,10 +30,10 @@ in
     users.users.pablo.extraGroups = [ "transmission" ];
 
     services = {
-      jackett = {
-        enable = true;
-        openFirewall = true;
-      };
+      # jackett = {
+      #   enable = true;
+      #   openFirewall = true;
+      # };
       radarr = {
         enable = true;
         openFirewall = true;
@@ -54,12 +54,12 @@ in
             subdomain = "transmission";
             port = "9091";
           } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "jackett";
-            port = "9117";
-          } //
+        # createVirtualHosts
+        #   {
+        #     inherit nginxCfg;
+        #     subdomain = "jackett";
+        #     port = "9117";
+        #   } //
         createVirtualHosts
           {
             inherit nginxCfg;
@@ -78,6 +78,35 @@ in
             subdomain = "prowlarr";
             port = "9696";
           };
+    };
+    virtualisation = {
+      podman = {
+        enable = true;
+
+        # Create a `docker` alias for podman, to use it as a drop-in replacement
+        # dockerCompat = true;
+
+        # Required for containers under podman-compose to be able to talk to each other.
+        defaultNetwork.settings.dns_enabled = true;
+      };
+
+      # https://github.com/NixOS/nixpkgs/issues/294789#issuecomment-2016820757
+      oci-containers = {
+        backend = "podman";
+        containers = {
+          flare-solvarr = {
+            image = "ghcr.io/flaresolverr/flaresolverr:latest";
+            autoStart = true;
+            ports = ["127.0.0.1:8191:8191"];
+            environment = {
+              LOG_LEVEL = "info";
+              LOG_HTML = "false";
+              CAPTCHA_SOLVER = "hcaptcha-solver";
+              TZ="America/New_York";
+            };
+          };
+        };
+      };
     };
   };
 }
