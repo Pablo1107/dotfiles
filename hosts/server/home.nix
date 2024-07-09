@@ -7,7 +7,7 @@ with pkgs;
   programs.home-manager.enable = true;
 
   # personal modules
-  # personal.emacs.enable = true;
+  personal.emacs.enable = true;
   personal.fzf.enable = true;
   personal.git.enable = true;
   personal.gtk.enable = true;
@@ -36,7 +36,7 @@ with pkgs;
   personal.nvim.enable = true;
   personal.npm.enable = true;
   # personal.ai.enable = true;
-  # personal.latex.enable = true;
+  personal.latex.enable = true;
   personal.gui.enable = true;
   personal.alacritty.enable = true;
   personal.daw.enable = true;
