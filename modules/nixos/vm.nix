@@ -51,7 +51,7 @@ in
       virt-viewer
       virtio-win
       win-spice
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       gnome.gnome-boxes
     ];
 

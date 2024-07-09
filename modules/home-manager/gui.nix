@@ -75,16 +75,16 @@ in
       element-desktop # matrix client
       slack
       gimp # image editor
-      gnome3.gvfs # for sftp mount and stuff like that
-      gnome3.nautilus # file manager
-      gnome3.nautilus-python
-      gnome3.sushi # preview for nautilus
-      gnome3.file-roller # archive manager
+      gvfs # for sftp mount and stuff like that
+      nautilus # file manager
+      nautilus-python
+      sushi # preview for nautilus
+      file-roller # archive manager
       unrar # for rar archives
-      gnome3.eog # image viewer
+      eog # image viewer
       vlc # video player
       qbittorrent # torrent client
-      transmission-gtk # torrent client
+      transmission_3-gtk # torrent client
       libreoffice # office suite
       zathura # pdf viewer
       tdesktop # telegram
@@ -101,7 +101,7 @@ in
       nixgl.nixVulkanIntel # wrapper GUI apps (Vulkan)
       # imv # lightweight image viewer
       xfce.tumbler
-      gnome3.gnome-keyring
+      gnome-keyring
       wayland-utils
       # poppler-glib
       # ffmpegthumbnailer
@@ -126,7 +126,7 @@ in
       # nerdfonts
 
       # Databases
-      dbeaver
+      dbeaver-bin
 
       insomnia
       # postman

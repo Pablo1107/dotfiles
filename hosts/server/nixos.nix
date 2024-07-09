@@ -37,13 +37,17 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
+
+  networking.firewall.enable = false;
   services.openssh = {
     enable = true;
     ports = [ 22 2205 ];
-    passwordAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+    };
   };
   services.fail2ban = {
-    enable = true;
+    enable = false;
     maxretry = 1;
     ignoreIP = [
       "192.168.0.0/16"
@@ -64,7 +68,6 @@
 
   programs.zsh.enable = true;
 
-  networking.firewall.enable = false;
 
   system.stateVersion = "24.05";
 }
