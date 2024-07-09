@@ -1,5 +1,10 @@
 return {
-    'github/copilot.vim',
+    {
+        'github/copilot.vim',
+        config = function()
+            vim.g.copilot_filetypes = {markdown = true}
+        end,
+    },
     'tpope/vim-eunuch', -- Helpers for UNIX (Move, Rename, etc)
     'tpope/vim-unimpaired',
     {
