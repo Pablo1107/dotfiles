@@ -58,9 +58,9 @@ in
       (myLib.nixGLWrapper pkgs {
         bin = "foot";
       })
-      # (myLib.nixGLWrapper pkgs {
-      #   bin = "chromium";
-      # })
+      (myLib.nixGLWrapper pkgs {
+        bin = "chromium";
+      })
       (myLib.nixBothWrapper pkgs {
         bin = "gamescope";
       })
@@ -115,6 +115,7 @@ in
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      hack-font
       (nerdfonts.override { fonts = [ "Hack" ]; })
       font-awesome
       dejavu_fonts
