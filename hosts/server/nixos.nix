@@ -25,6 +25,7 @@
   personal.copySystemConfiguration.enable = true;
   personal.git-server.enable = true;
   personal.grocy.enable = true;
+  personal.wireguard.enable = true;
 
   services.gvfs.enable = true;
 
