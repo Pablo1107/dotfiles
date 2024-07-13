@@ -22,6 +22,36 @@ in
 
     hardware.pulseaudio.enable = lib.mkForce false;
 
-    users.users.pablo.extraGroups = [ "pipewire" ];
+    users.users.pablo.extraGroups = [ "pipewire" "audio" ];
+
+    security.rtkit.enable = true; # Required for low-latency audio
+    powerManagement.cpuFreqGovernor = "performance";
+    boot.kernelParams = [ "threadirqs" ];
+    security.pam.loginLimits = [
+      {
+        domain = "@audio";
+        type = "hard";
+        item = "rtprio";
+        value = "95";
+      }
+      {
+        domain = "@audio";
+        type = "soft";
+        item = "rtprio";
+        value = "95";
+      }
+      {
+        domain = "@audio";
+        type = "hard";
+        item = "memlock";
+        value = "unlimited";
+      }
+      {
+        domain = "@audio";
+        type = "soft";
+        item = "memlock";
+        value = "unlimited";
+      }
+    ];
   };
 }
