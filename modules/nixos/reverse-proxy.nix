@@ -52,7 +52,7 @@ in
           dnsProvider = "duckdns";
           environmentFile = "/etc/duckdns-updater/envs";
           webroot = null;
-          # extraDomainNames = [ "cockpit.${cfg.publicDomain}" ];
+          group = "nginx";
         };
         "${cfg.localDomain}" = {
           domain = cfg.localDomain;
@@ -61,6 +61,7 @@ in
           webroot = null;
           extraDomainNames = [ "*.${cfg.localDomain}" ];
           dnsPropagationCheck = false;
+          group = "nginx";
         };
       };
     };

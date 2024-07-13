@@ -22,26 +22,13 @@ in
         # config in /var/lib/homepage-dashboard
       };
 
-      nginx.virtualHosts = {
-        "${nginxCfg.publicDomain}" = {
-          forceSSL = true;
-          enableACME = true;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8082";
-            proxyWebsockets = true;
+      nginx.virtualHosts =
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "homepage";
+            port = "8082";
           };
-        };
-        "${nginxCfg.localDomain}" = {
-          forceSSL = true;
-          enableACME = true;
-          http2 = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8082";
-            proxyWebsockets = true;
-          };
-        };
-      };
     };
   };
 }
