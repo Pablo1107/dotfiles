@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "e92584fa16e8f63c",
+        "id": "bba776c46a4df727",
         "type": "tabs",
         "children": [
           {
-            "id": "df8c0e6d3125d6ed",
+            "id": "95f6c1ea2cb1b908",
             "type": "leaf",
             "state": {
               "type": "kanban",
@@ -144,11 +144,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "df8c0e6d3125d6ed",
+  "active": "95f6c1ea2cb1b908",
   "lastOpenFiles": [
-    "tickets/Setup dns server.md",
+    "tickets/Setup wake on demand homelab.md",
+    "tickets/Investigate hoarder.md",
     "PROYECT.md",
     "tickets/Fix wl-screenshot deps.md",
+    "tickets/(SERVER) Setup vms.md",
+    "tickets/Use a backup service like restic or borg.md",
+    "tickets/Trash Guides on arr stack.md",
+    "tickets/Homelab notifications.md",
+    "README.md",
+    "tickets/Local subdomains.md",
+    "tickets/Setup dns server.md",
     "tickets/Duckdns updater stops working.md",
     "tickets/nix-inspect.md",
     "modules/home-manager/gui.nix~",
@@ -158,7 +166,6 @@
     "tickets/File server.md",
     "tickets/OBS per window.md",
     "tickets/Self-hosted steam.md",
-    "tickets/Local subdomains.md",
     "tickets/(SERVER) Setup a desktop environment.md",
     "tickets/Nix-Homebrew.md",
     "tickets/De-google.md",
@@ -169,17 +176,11 @@
     "tickets/(DOTFILES) Semi automate git commits.md",
     "tickets/(SERVER) Get multiple users in photoprism.md",
     "tickets/(DARWIN) Set up native keyboard shortcuts.md",
-    "tickets/(SERVER) Get agenix to work.md",
-    "tickets/(DOTFILES) Inspiration.md",
     "overlays/local-shell-gpt.nix~",
-    "tickets/(SERVER) Investigate Immich.md",
     "modules/home-manager/nix.nix~",
     "flake.nix~",
     "modules/nixos/clone-dotfiles.nix",
     "modules/nixos/reverse-proxy.nix",
-    "colmena/flake.lock",
-    "tickets/(SERVER) Setup a vpn server.md",
-    "tickets/(REGRESSION) hm-updates.md",
-    "README.md"
+    "colmena/flake.lock"
   ]
 }

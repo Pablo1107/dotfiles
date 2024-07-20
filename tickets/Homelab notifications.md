@@ -1,0 +1,1 @@
+https://www.reddit.com/r/selfhosted/comments/17ke5ax/ntfy_is_a_great_tool_what_do_you_use_it_for/

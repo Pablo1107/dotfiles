@@ -6,6 +6,9 @@ kanban-plugin: basic
 
 ## Backlog
 
+- [ ] [[Homelab notifications]]
+- [ ] [[Use a backup service like restic or borg]]
+- [ ] [[Setup dns server]]
 - [ ] [[(REGRESSION) hm-updates]]
 - [ ] [[(DARWIN) Set up native keyboard shortcuts]]
 - [ ] (SERVER) Setup another service for photo sharing with family
@@ -13,7 +16,6 @@ kanban-plugin: basic
 - [ ] [[(DOTFILES) Inspiration]]
 - [ ] [[(DOTFILES) Semi automate git commits]]
 - [ ] [[Fix local-chat-gpt]]
-- [ ] [[Fix wl-screenshot deps]]
 - [ ] [[De-google]]
 - [ ] [[Nix-Homebrew]]
 - [ ] [[Nginx Logging]]
@@ -23,8 +25,10 @@ kanban-plugin: basic
 - [ ] [[Build dotfiles over Github actions]]
 - [ ] [[Network level Ad Blocking]]
 - [ ] [[nix-inspect]]
-- [ ] [[Setup dns server]]
-- [ ] [[Use a backup service like restic or borg]]
+- [ ] [[Trash Guides on arr stack]]
+- [ ] [[(SERVER) Setup vms]]
+- [ ] [[Investigate hoarder]]
+- [ ] [[Setup wake on demand homelab]]
 
 
 ## To Do
@@ -33,7 +37,6 @@ kanban-plugin: basic
 
 ## In Progress
 
-- [ ] [[(SERVER) Setup vms]]
 
 
 ## Done
@@ -47,6 +50,7 @@ kanban-plugin: basic
 - [x] [[(SERVER) Investigate Immich]]
 - [x] [[(SERVER) Setup a vpn server]]
 - [x] [[Local subdomains]]
+- [x] [[Fix wl-screenshot deps]]
 
 
 ## Will Not Do
