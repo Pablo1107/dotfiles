@@ -9,14 +9,11 @@ kanban-plugin: basic
 - [ ] [[(REGRESSION) hm-updates]]
 - [ ] [[(DARWIN) Set up native keyboard shortcuts]]
 - [ ] (SERVER) Setup another service for photo sharing with family
-- [ ] [[(SERVER) Investigate Immich]]
-- [ ] [[(SERVER) Setup a vpn server]]
 - [ ] (DOTFILES) Save the dotfiles path on system activation
 - [ ] [[(DOTFILES) Inspiration]]
 - [ ] [[(DOTFILES) Semi automate git commits]]
 - [ ] [[Fix local-chat-gpt]]
 - [ ] [[Fix wl-screenshot deps]]
-- [ ] [[Local subdomains]]
 - [ ] [[De-google]]
 - [ ] [[Nix-Homebrew]]
 - [ ] [[Nginx Logging]]
@@ -27,6 +24,7 @@ kanban-plugin: basic
 - [ ] [[Network level Ad Blocking]]
 - [ ] [[nix-inspect]]
 - [ ] [[Setup dns server]]
+- [ ] [[Use a backup service like restic or borg]]
 
 
 ## To Do
@@ -46,6 +44,9 @@ kanban-plugin: basic
 - [x] [[(SERVER) Get agenix to work]]
 - [x] [[(SERVER) Setup a torrent server]]
 - [x] [[Duckdns updater stops working]]
+- [x] [[(SERVER) Investigate Immich]]
+- [x] [[(SERVER) Setup a vpn server]]
+- [x] [[Local subdomains]]
 
 
 ## Will Not Do
