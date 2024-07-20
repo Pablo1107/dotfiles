@@ -132,7 +132,7 @@ in
       insomnia
       # postman
 
-      # obsidian
+      obsidian
 
       spotify
 
