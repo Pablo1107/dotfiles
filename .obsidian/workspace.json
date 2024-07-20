@@ -11,9 +11,11 @@
             "id": "95f6c1ea2cb1b908",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Setup wake on demand homelab.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -83,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Setup wake on demand homelab.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PROYECT.md",
+                "file": "tickets/Setup wake on demand homelab.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PROYECT.md"
+                "file": "tickets/Setup wake on demand homelab.md"
               }
             }
           }
@@ -146,9 +148,9 @@
   },
   "active": "95f6c1ea2cb1b908",
   "lastOpenFiles": [
+    "PROYECT.md",
     "tickets/Setup wake on demand homelab.md",
     "tickets/Investigate hoarder.md",
-    "PROYECT.md",
     "tickets/Fix wl-screenshot deps.md",
     "tickets/(SERVER) Setup vms.md",
     "tickets/Use a backup service like restic or borg.md",
