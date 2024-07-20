@@ -81,7 +81,7 @@ rec {
       { };
 
   ## Nginx Reverse Proxy
-  createVirtualHosts = { subdomain, port, nginxCfg }: {
+  createVirtualHosts = { subdomain, port, nginxCfg, extraConfig ? "" }: {
     "${subdomain}.${nginxCfg.publicDomain}" = {
       useACMEHost = nginxCfg.localDomain;
       forceSSL = true;
@@ -91,6 +91,7 @@ rec {
         proxyPass = "http://127.0.0.1:${port}";
         proxyWebsockets = true;
       };
+      inherit extraConfig;
     };
     "${subdomain}.${nginxCfg.localDomain}" = {
       useACMEHost = nginxCfg.localDomain;
@@ -101,6 +102,7 @@ rec {
         proxyPass = "http://127.0.0.1:${port}";
         proxyWebsockets = true;
       };
+      inherit extraConfig;
     };
   };
 

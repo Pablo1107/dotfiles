@@ -16,6 +16,7 @@ in
     services = {
       transmission = {
         enable = true; #Enable transmission daemon
+        group = "arr";
         openRPCPort = true; #Open firewall for RPC
         settings = {
           rpc-authentication-required = false;
@@ -24,13 +25,20 @@ in
           rpc-whitelist-enabled = false;
           rpc-port = 9091;
           ratio-limit = 3;
+          ratio-limit-enabled = true;
         };
       };
     };
 
-    users.users.pablo.extraGroups = [ "transmission" ];
+    users.groups.arr = {};
+    users.users.pablo.extraGroups = [ "transmission" "arr" ];
 
     services = {
+      jellyfin = {
+        enable = true;
+        openFirewall = true;
+        group = "arr";
+      };
       # jackett = {
       #   enable = true;
       #   openFirewall = true;
@@ -38,10 +46,12 @@ in
       radarr = {
         enable = true;
         openFirewall = true;
+        group = "arr";
       };
       bazarr = {
         enable = true;
         openFirewall = true;
+        group = "arr";
       };
       prowlarr = {
         enable = true;
@@ -78,6 +88,12 @@ in
             inherit nginxCfg;
             subdomain = "prowlarr";
             port = "9696";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "jellyfin";
+            port = "8096";
           };
     };
     virtualisation = {
@@ -109,5 +125,13 @@ in
         };
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      jellyfin
+      jellyfin-web
+      jellyfin-ffmpeg
+      jellyfin-media-player
+      jellyfin-mpv-shim
+    ];
   };
 }

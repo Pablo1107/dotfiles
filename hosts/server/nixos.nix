@@ -26,6 +26,7 @@
   personal.git-server.enable = true;
   personal.grocy.enable = true;
   personal.wireguard.enable = true;
+  personal.plex.enable = true;
 
   services.gvfs.enable = true;
 

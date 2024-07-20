@@ -72,6 +72,7 @@ in
         bin = "anki";
         output = "out";
       })
+      plex-mpv-shim
       element-desktop # matrix client
       slack
       gimp # image editor
