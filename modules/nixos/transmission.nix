@@ -48,6 +48,11 @@ in
         openFirewall = true;
         group = "arr";
       };
+      sonarr = {
+        enable = true;
+        openFirewall = true;
+        group = "arr";
+      };
       bazarr = {
         enable = true;
         openFirewall = true;
@@ -76,6 +81,12 @@ in
             inherit nginxCfg;
             subdomain = "radarr";
             port = "7878";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "sonarr";
+            port = "8989";
           } //
         createVirtualHosts
           {
