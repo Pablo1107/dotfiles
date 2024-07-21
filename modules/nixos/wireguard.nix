@@ -56,6 +56,10 @@ in
             publicKey = "5Dnedbi81GpRqFj2wdan4oHYEbnh/MlKCacoXEraoDY=";
             allowedIPs = [ "10.100.0.3/32" ];
           }
+          { # Sofia Tablet
+            publicKey = "8JUv3YNXTnidDB2xcPsgLRAyCot9FIECtsDQBi2Iwws=";
+            allowedIPs = [ "10.100.0.4/32" ];
+          }
         ];
       };
     };
