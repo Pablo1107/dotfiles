@@ -39,10 +39,6 @@ in
         openFirewall = true;
         group = "arr";
       };
-      # jackett = {
-      #   enable = true;
-      #   openFirewall = true;
-      # };
       radarr = {
         enable = true;
         openFirewall = true;
@@ -62,6 +58,10 @@ in
         enable = true;
         openFirewall = true;
       };
+      jellyseerr = {
+        enable = true;
+        openFirewall = true;
+      };
 
       nginx.virtualHosts =
         createVirtualHosts
@@ -70,12 +70,6 @@ in
             subdomain = "transmission";
             port = "9091";
           } //
-        # createVirtualHosts
-        #   {
-        #     inherit nginxCfg;
-        #     subdomain = "jackett";
-        #     port = "9117";
-        #   } //
         createVirtualHosts
           {
             inherit nginxCfg;
@@ -105,6 +99,12 @@ in
             inherit nginxCfg;
             subdomain = "jellyfin";
             port = "8096";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
+            subdomain = "jellyseerr";
+            port = "5055";
           };
     };
     virtualisation = {

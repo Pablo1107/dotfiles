@@ -19,12 +19,6 @@ in
         openFirewall = true;
         group = "arr";
       };
-      ombi = {
-        enable = true;
-        openFirewall = true;
-        port = 5000;
-        group = "arr";
-      };
       nginx.virtualHosts =
         createVirtualHosts
           {
