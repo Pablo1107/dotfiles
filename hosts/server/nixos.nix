@@ -39,6 +39,7 @@
     efiInstallAsRemovable = true;
   };
 
+  networking.wireless.iwd.enable = true;
   networking.firewall.enable = false;
   services.openssh = {
     enable = true;
