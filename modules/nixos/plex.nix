@@ -81,12 +81,6 @@ in
               proxy_redirect off;
               proxy_buffering off;
             '';
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "ombi";
-            port = "5000";
           };
     };
   };
