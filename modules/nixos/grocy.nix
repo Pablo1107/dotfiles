@@ -23,8 +23,13 @@ in
 
     services.nginx.virtualHosts."grocy.${nginxCfg.localDomain}" = {
       useACMEHost = nginxCfg.localDomain;
-      forceSSL = true;
+      forceSSL = false;
       enableACME = false;
+      listen = [
+        { addr = "192.168.1.34"; port = 2525; }
+        { addr = "0.0.0.0"; port = 443; }
+        { addr = "[::0]"; port = 443; }
+      ];
     };
 
     services.grocy = {

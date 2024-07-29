@@ -41,6 +41,18 @@ in
       #     proxyWebsockets = true;
       #   };
       # };
+
+      virtualHosts."default" = {
+        serverAliases = [ "_" ];
+        default = true;
+        useACMEHost = cfg.localDomain;
+        forceSSL = true;
+        enableACME = false;
+        http2 = true;
+        locations."/" = {
+          return = "404";
+        };
+      };
     };
 
     security.acme = {
