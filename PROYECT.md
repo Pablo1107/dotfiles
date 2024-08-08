@@ -6,6 +6,7 @@ kanban-plugin: basic
 
 ## Backlog
 
+- [ ] [[Setup Biwarden/Vaultwarden]]
 - [ ] [[Homelab notifications]]
 - [ ] [[Use a backup service like restic or borg]]
 - [ ] [[Setup dns server]]

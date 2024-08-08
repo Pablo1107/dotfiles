@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tickets/Setup wake on demand homelab.md",
+                "file": "Setup Biwarden/Vaultwarden.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/Setup wake on demand homelab.md",
+                "file": "Setup Biwarden/Vaultwarden.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/Setup wake on demand homelab.md",
+                "file": "Setup Biwarden/Vaultwarden.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/Setup wake on demand homelab.md"
+                "file": "Setup Biwarden/Vaultwarden.md"
               }
             }
           }
@@ -149,6 +149,8 @@
   "active": "95f6c1ea2cb1b908",
   "lastOpenFiles": [
     "PROYECT.md",
+    "Setup Biwarden/Vaultwarden.md",
+    "Setup Biwarden",
     "tickets/Setup wake on demand homelab.md",
     "tickets/Investigate hoarder.md",
     "tickets/Fix wl-screenshot deps.md",
@@ -177,12 +179,10 @@
     "tickets/Fix local-chat-gpt.md",
     "tickets/(DOTFILES) Semi automate git commits.md",
     "tickets/(SERVER) Get multiple users in photoprism.md",
-    "tickets/(DARWIN) Set up native keyboard shortcuts.md",
     "overlays/local-shell-gpt.nix~",
     "modules/home-manager/nix.nix~",
     "flake.nix~",
     "modules/nixos/clone-dotfiles.nix",
-    "modules/nixos/reverse-proxy.nix",
-    "colmena/flake.lock"
+    "modules/nixos/reverse-proxy.nix"
   ]
 }
