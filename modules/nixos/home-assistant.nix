@@ -17,7 +17,6 @@ in
       home-assistant = {
         enable = true;
         openFirewall = true;
-        group = "arr";
       };
       nginx.virtualHosts =
         createVirtualHosts
