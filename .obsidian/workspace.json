@@ -20,16 +20,16 @@
         ]
       },
       {
-        "id": "bdd1e09a1febd2f4",
+        "id": "7d4b8009bbdb7b9d",
         "type": "tabs",
         "children": [
           {
-            "id": "fa4138f1dc5427b7",
+            "id": "00e306440ad87cf8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tickets/Setup Bitwarden Vaultwarden.md",
+                "file": "tickets/Investigate some services.md",
                 "mode": "source",
                 "source": false
               }
@@ -101,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/Setup Bitwarden Vaultwarden.md",
+                "file": "tickets/Investigate some services.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/Setup Bitwarden Vaultwarden.md",
+                "file": "tickets/Investigate some services.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/Setup Bitwarden Vaultwarden.md"
+                "file": "tickets/Investigate some services.md"
               }
             }
           }
@@ -162,11 +162,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fa4138f1dc5427b7",
+  "active": "00e306440ad87cf8",
   "lastOpenFiles": [
-    "Setup Biwarden/Vaultwarden.md",
-    "tickets/Setup Bitwarden Vaultwarden.md",
     "PROYECT.md",
+    "tickets/Investigate some services.md",
+    "tickets/Setup Bitwarden Vaultwarden.md",
+    "Setup Biwarden/Vaultwarden.md",
     "Setup Biwarden",
     "tickets/Setup wake on demand homelab.md",
     "tickets/Investigate hoarder.md",
@@ -194,7 +195,6 @@
     "overlays/whatsapp.nix~",
     "tickets/(SERVER) Setup a torrent server.md",
     "tickets/Fix local-chat-gpt.md",
-    "tickets/(DOTFILES) Semi automate git commits.md",
     "overlays/local-shell-gpt.nix~",
     "modules/home-manager/nix.nix~",
     "flake.nix~",

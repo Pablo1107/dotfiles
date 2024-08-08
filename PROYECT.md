@@ -30,6 +30,7 @@ kanban-plugin: basic
 - [ ] [[(SERVER) Setup vms]]
 - [ ] [[Investigate hoarder]]
 - [ ] [[Setup wake on demand homelab]]
+- [ ] [[Investigate some services]]
 
 
 ## To Do
