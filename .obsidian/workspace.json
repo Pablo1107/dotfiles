@@ -11,9 +11,25 @@
             "id": "95f6c1ea2cb1b908",
             "type": "leaf",
             "state": {
+              "type": "kanban",
+              "state": {
+                "file": "PROYECT.md"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "bdd1e09a1febd2f4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fa4138f1dc5427b7",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "Setup Biwarden/Vaultwarden.md",
+                "file": "tickets/Setup Bitwarden Vaultwarden.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Setup Biwarden/Vaultwarden.md",
+                "file": "tickets/Setup Bitwarden Vaultwarden.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Setup Biwarden/Vaultwarden.md",
+                "file": "tickets/Setup Bitwarden Vaultwarden.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Setup Biwarden/Vaultwarden.md"
+                "file": "tickets/Setup Bitwarden Vaultwarden.md"
               }
             }
           }
@@ -146,10 +162,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "95f6c1ea2cb1b908",
+  "active": "fa4138f1dc5427b7",
   "lastOpenFiles": [
-    "PROYECT.md",
     "Setup Biwarden/Vaultwarden.md",
+    "tickets/Setup Bitwarden Vaultwarden.md",
+    "PROYECT.md",
     "Setup Biwarden",
     "tickets/Setup wake on demand homelab.md",
     "tickets/Investigate hoarder.md",
@@ -178,7 +195,6 @@
     "tickets/(SERVER) Setup a torrent server.md",
     "tickets/Fix local-chat-gpt.md",
     "tickets/(DOTFILES) Semi automate git commits.md",
-    "tickets/(SERVER) Get multiple users in photoprism.md",
     "overlays/local-shell-gpt.nix~",
     "modules/home-manager/nix.nix~",
     "flake.nix~",

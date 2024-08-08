@@ -1,0 +1,1 @@
+https://www.reddit.com/r/selfhosted/comments/1elfi35/hosting_your_own_password_vault_how_do_you_keep/
