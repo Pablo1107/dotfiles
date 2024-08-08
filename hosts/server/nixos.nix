@@ -65,6 +65,7 @@
     curl
     gitMinimal
     killall
+    armsim
   ];
 
   programs.sway = {
