@@ -26,6 +26,8 @@
   personal.git-server.enable = true;
   personal.grocy.enable = true;
   personal.wireguard.enable = true;
+  personal.ilv-map.enable = true;
+
 
   services.gvfs.enable = true;
 
