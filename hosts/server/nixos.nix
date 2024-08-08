@@ -28,6 +28,7 @@
   personal.wireguard.enable = true;
   personal.ilv-map.enable = true;
 
+  services.fwupd.enable = true;
 
   services.gvfs.enable = true;
 
@@ -68,6 +69,22 @@
 
   programs.sway = {
     enable = true;
+  };
+  security.polkit.enable = true;
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
   };
 
   programs.zsh.enable = true;
