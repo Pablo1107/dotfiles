@@ -16,6 +16,7 @@ in
     services = {
       transmission = {
         enable = true; #Enable transmission daemon
+        user = "arr";
         group = "arr";
         openRPCPort = true; #Open firewall for RPC
         settings = {
@@ -31,27 +32,33 @@ in
     };
 
     users.groups.arr = {};
+    users.users.arr.group = "arr";
+    users.users.arr.isSystemUser = true;
     users.users.pablo.extraGroups = [ "transmission" "arr" ];
 
     services = {
       jellyfin = {
         enable = true;
         openFirewall = true;
+        user = "arr";
         group = "arr";
       };
       radarr = {
         enable = true;
         openFirewall = true;
+        user = "arr";
         group = "arr";
       };
       sonarr = {
         enable = true;
         openFirewall = true;
+        user = "arr";
         group = "arr";
       };
       bazarr = {
         enable = true;
         openFirewall = true;
+        user = "arr";
         group = "arr";
       };
       prowlarr = {
@@ -144,5 +151,9 @@ in
       jellyfin-media-player
       jellyfin-mpv-shim
     ];
+
+    systemd.services.bazarr.serviceConfig = {
+      KillSignal = "SIGINT";
+    };
   };
 }
