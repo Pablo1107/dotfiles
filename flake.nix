@@ -53,9 +53,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-std.url = "github:chessai/nix-std";
+    attic.url = "github:zhaofengli/attic";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, attic, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -104,6 +105,7 @@
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
+        attic.nixosModules.atticd
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
 

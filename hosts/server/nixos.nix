@@ -28,6 +28,7 @@
   personal.wireguard.enable = true;
   personal.ilv-map.enable = true;
   personal.vaultwarden.enable = true;
+  personal.attic.enable = true;
 
   services.fwupd.enable = true;
 
