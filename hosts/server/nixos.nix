@@ -27,6 +27,7 @@
   personal.grocy.enable = true;
   personal.wireguard.enable = true;
   personal.ilv-map.enable = true;
+  personal.vaultwarden.enable = true;
 
   services.fwupd.enable = true;
 
