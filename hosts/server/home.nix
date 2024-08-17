@@ -31,7 +31,7 @@ with pkgs;
   # programs.zsh.loginExtra = ''
   #   source /etc/profile.d/nix-daemon.sh
   # '';
-  # personal.vifm.enable = true;
+  personal.vifm.enable = true;
   personal.sway.enable = true;
   personal.nvim.enable = true;
   personal.npm.enable = true;
