@@ -31,6 +31,11 @@
   personal.attic.enable = true;
   personal.uptime-kuma.enable = true;
 
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   services.fwupd.enable = true;
 
   services.gvfs.enable = true;
