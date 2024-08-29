@@ -27,6 +27,7 @@ in
         nixpkgs-fmt
         sumneko-lua-language-server
         gcc
+        rust-analyzer
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript-language-server
