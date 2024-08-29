@@ -73,7 +73,8 @@
     curl
     gitMinimal
     killall
-    armsim
+    man-pages
+    man-pages-posix
   ];
 
   programs.sway = {
