@@ -29,6 +29,7 @@
   personal.ilv-map.enable = true;
   personal.vaultwarden.enable = true;
   personal.attic.enable = true;
+  personal.uptime-kuma.enable = true;
 
   services.fwupd.enable = true;
 
