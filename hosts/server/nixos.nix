@@ -75,6 +75,13 @@
     killall
     man-pages
     man-pages-posix
+    gnome-software
+    (steam.override {
+      extraPkgs = pkgs: [
+        libGLU
+        openldap24
+      ];
+    })
   ];
 
   programs.sway = {
