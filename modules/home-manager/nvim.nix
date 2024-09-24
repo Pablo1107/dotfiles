@@ -28,6 +28,7 @@ in
         sumneko-lua-language-server
         gcc
         rust-analyzer
+        clang-tools
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript-language-server
