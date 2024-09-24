@@ -49,11 +49,11 @@ in
               path = "/home/pablo/ledger";
               devices = [ "SM-F936B" ];
             };
-            "org" = {
-              id = "org";
-              path = "/home/pablo/org";
-              devices = [ "SM-F936B" ];
-            };
+            # "org" = {
+            #   id = "org";
+            #   path = "/home/pablo/org";
+            #   devices = [ "SM-F936B" ];
+            # };
             "Bitwig Projects" = {
               id = "bitwig-projects";
               path = "/home/pablo/Bitwig Studio/Projects";
