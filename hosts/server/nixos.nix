@@ -30,6 +30,7 @@
   personal.vaultwarden.enable = true;
   personal.attic.enable = true;
   personal.uptime-kuma.enable = true;
+  personal.classquiz.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
