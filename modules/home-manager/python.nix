@@ -17,9 +17,9 @@ in
     };
 
     home.packages = with pkgs; [
-      python310.pkgs.pip
+      python3.pkgs.pip
       (
-        python310.withPackages (
+        python3.withPackages (
           ps: with ps; [
             tkinter
             setuptools
@@ -33,12 +33,13 @@ in
             sympy
             pygments
             matplotlib
-            pandas-datareader
+            # pandas-datareader
             requests-cache
             plotly
             svgwrite
             graphviz
             simplejson
+            six
           ]
         )
       )
