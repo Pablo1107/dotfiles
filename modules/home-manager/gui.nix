@@ -13,6 +13,7 @@ in
 
   config = mkIf cfg.enable {
     personal.waybar.enable = true;
+    personal.spicetify.enable = true;
 
     home.file.".local/bin/xterm".source = pkgs.writeScript "xterm" ''
       #!${pkgs.stdenv.shell}
@@ -134,7 +135,7 @@ in
 
       obsidian
 
-      spotify
+      # spotify # installed by spicetify
 
       (wrapOBS.override { inherit obs-studio; } {
         plugins = with obs-studio-plugins; [

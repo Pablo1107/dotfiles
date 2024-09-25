@@ -54,9 +54,13 @@
     };
     nix-std.url = "github:chessai/nix-std";
     attic.url = "github:zhaofengli/attic";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, attic, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, attic, spicetify-nix, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -95,6 +99,7 @@
         nur.hmModules.nur
         nixConfig
         agenix.homeManagerModules.default
+        spicetify-nix.homeManagerModules.default
         # ./secrets/default.nix
       ] ++ (map (n: "${./modules/home-manager}/${n}") (filter (name: nixpkgs.lib.hasSuffix ".nix" name) (attrNames (readDir ./modules/home-manager))));
       darwinModules = [
