@@ -30,9 +30,10 @@ in
         MEILI_MASTER_KEY = "klxV7lyDi5F6khdfJtStDxPBlNWgGQ++LKMFefPI/kypFmZQ";
         NEXTAUTH_URL = "http://localhost:3000";
 
-        OLLAMA_BASE_URL = "http://localhost:11434";
-        INFERENCE_TEXT_MODEL = "llama3.1:8b-text-q4_0";
-        INFERENCE_IMAGE_MODEL = "llava:13b";
+        OLLAMA_BASE_URL = "http://host.docker.internal:11434";
+        INFERENCE_TEXT_MODEL = "mistral";
+        INFERENCE_IMAGE_MODEL = "llava";
+        INFERENCE_JOB_TIMEOUT_SEC = "60";
       };
 
       file = pkgs.fetchurl {
@@ -47,6 +48,9 @@ in
           ];
           volumes = [
             "/var/lib/hoarder:/data"
+          ];
+          extra_hosts = [
+            "host.docker.internal:host-gateway"
           ];
         };
       };
