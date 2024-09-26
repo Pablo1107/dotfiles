@@ -31,6 +31,7 @@
   personal.attic.enable = true;
   personal.uptime-kuma.enable = true;
   personal.classquiz.enable = true;
+  personal.ai.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
