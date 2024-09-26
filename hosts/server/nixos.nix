@@ -32,6 +32,7 @@
   personal.uptime-kuma.enable = true;
   personal.classquiz.enable = true;
   personal.ai.enable = true;
+  personal.hoarder.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
