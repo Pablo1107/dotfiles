@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.personal.reverse-proxy;
+  legacyDomain = inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73";
 in
 {
   options.personal.reverse-proxy = {
@@ -16,7 +17,12 @@ in
 
     localDomain = mkOption {
       type = types.str;
-      default = inputs.secrets.domains."4a6f01f1-6768-4f66-8af9-f43697811d73";
+      default = inputs.secrets.domains."5ab27717-dffb-4770-a992-7b3681760c2e";
+    };
+
+    legacyDomain = mkOption {
+      type = types.str;
+      default = legacyDomain;
     };
   };
 
@@ -66,13 +72,22 @@ in
           webroot = null;
           group = "nginx";
         };
-        "${cfg.localDomain}" = {
-          domain = cfg.localDomain;
+        "${legacyDomain}" = {
+          domain = legacyDomain;
           dnsProvider = "duckdns";
           environmentFile = "/etc/duckdns-updater/envs";
           webroot = null;
-          extraDomainNames = [ "*.${cfg.localDomain}" ];
+          extraDomainNames = [ "*.${legacyDomain}" ];
           dnsPropagationCheck = false;
+          group = "nginx";
+        };
+        "${cfg.localDomain}" = {
+          domain = cfg.localDomain;
+          dnsProvider = "cloudflare";
+          environmentFile = "/etc/cloudflare.env";
+          # webroot = null;
+          extraDomainNames = [ "*.${cfg.localDomain}" ];
+          # dnsPropagationCheck = false;
           group = "nginx";
         };
       };
