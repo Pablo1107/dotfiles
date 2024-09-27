@@ -82,7 +82,6 @@
     (steam.override {
       extraPkgs = pkgs: [
         libGLU
-        openldap24
       ];
     })
   ];
