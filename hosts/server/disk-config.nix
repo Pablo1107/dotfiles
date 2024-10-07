@@ -41,6 +41,32 @@
         };
       };
     };
+    disk.disk2 = {
+      device = lib.mkDefault "/dev/sda";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          data = {
+            name = "data";
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = [ "-L" "data" "-f" ];
+              subvolumes = {
+                "/data" = {
+                  mountpoint = "/data";
+                  mountOptions = [
+                    "compress=zstd"
+                  ];
+                };
+              };
+              mountpoint = "/btrfs";
+            };
+          };
+        };
+      };
+    };
     lvm_vg = {
       pool = {
         type = "lvm_vg";
