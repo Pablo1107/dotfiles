@@ -22,6 +22,7 @@ let
     rm $out/docker-compose.yml
   '' + lib.optionalString (value.override != null) ''
     ln -sfn ${pkgs.writers.writeYAML "docker-compose.override.yml" value.override} $out/docker-compose.override.yml
+    ${pkgs.gnused}/bin/sed -i 's/ports:/ports: !override/' $out/docker-compose.override.yml
   '' + lib.optionalString (value.env != null) ''
     ln -sfn ${(pkgs.formats.keyValue { }).generate ".env" value.env} $out/.env
   '' + ''
