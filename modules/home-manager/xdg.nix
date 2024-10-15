@@ -19,6 +19,12 @@ in
       XDG_CURRENT_DESKTOP = "sway";
     };
 
+    home.packages = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
+
     xdg = {
       userDirs = {
         enable = true;
@@ -31,6 +37,16 @@ in
         publicShare = "\$HOME/desktop/public";
         templates = "\$HOME/desktop/templates";
       };
+    };
+    xdg.portal = {
+      xdgOpenUsePortal = true;
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal
+        xdg-desktop-portal-gtk
+        # xdg-desktop-portal-kde
+        xdg-desktop-portal-wlr
+      ];
     };
     xdg.configFile."mimeapps.list".force = true;
     xdg.dataFile."applications/mimeapps.list".force = true;
