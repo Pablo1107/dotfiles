@@ -331,7 +331,7 @@
             just
             rpiboot
             nixos-rebuild
-            colmena.packages.${system}.colmena
+            pkgs.colmena
             agenix.packages.${system}.default
           ];
         }
