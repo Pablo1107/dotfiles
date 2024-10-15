@@ -31,6 +31,12 @@ in
         createVirtualHosts
           {
             inherit nginxCfg;
+            subdomain = "ollama";
+            port = "11434";
+          } //
+        createVirtualHosts
+          {
+            inherit nginxCfg;
             subdomain = "open-webui";
             port = "7555";
           };
