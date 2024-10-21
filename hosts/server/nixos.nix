@@ -33,6 +33,7 @@
   personal.classquiz.enable = true;
   personal.ai.enable = true;
   personal.hoarder.enable = true;
+  personal.gaming.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
