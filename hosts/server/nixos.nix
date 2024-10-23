@@ -10,7 +10,7 @@
   personal.syncthing.enable = true;
   personal.immich.enable = true;
   personal.homepage-dashboard.enable = true;
-  personal.duckdns.enable = true;
+  personal.ddns.enable = true;
   personal.nix.enable = true;
   personal.reverse-proxy.enable = true;
   # personal.clone-dotfiles.enable = true;
