@@ -79,5 +79,14 @@ return {
         config = function()
             vim.cmd.colorscheme("catppuccin")
         end,
-    }
+    },
+    {
+        'vim-test/vim-test',
+        dependencies = { 'christoomey/vim-tmux-runner'},
+        config = function()
+            vim.g['test#strategy'] = 'vtr'
+        end,
+    },
+
+
 }
