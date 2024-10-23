@@ -154,6 +154,7 @@ in
 
     systemd.services.bazarr.serviceConfig = {
       KillSignal = "SIGINT";
+      SuccessExitStatus = "0 156";
     };
   };
 }
