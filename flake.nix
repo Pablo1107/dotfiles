@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -55,7 +56,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -114,6 +115,11 @@
         inherit nixpkgs;
         rootPath = ./.;
         pkgs-stable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config = nixpkgsConfig.config;
+          overlays = nixpkgsConfig.overlays;
+        };
+        pkgs-23_11 = import nixpkgs-23_11 {
           system = "x86_64-linux";
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
