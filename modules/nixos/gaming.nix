@@ -20,7 +20,7 @@ in
           libgudev
           speex
           libvdpau
-          libusb
+          libusb1
           gst_all_1.gst-plugins-bad
         ];
         extraPkgs = pkgs: [
