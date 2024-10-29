@@ -12,10 +12,10 @@ in
 
   config = mkIf cfg.enable {
     services.atticd = {
-      enable = true;
+      enable = false;
 
       # Replace with absolute path to your credentials file
-      credentialsFile = "/etc/atticd.env";
+      # credentialsFile = "/etc/atticd.env";
 
       settings = {
         listen = "[::]:9595";
