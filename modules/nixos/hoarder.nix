@@ -42,6 +42,7 @@ in
       };
 
       override = {
+        name = "hoarder";
         services.web = {
           ports = [
             "4561:3000"

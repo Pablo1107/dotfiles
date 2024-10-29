@@ -40,6 +40,7 @@ in
       directory = "${classquizRepo}";
 
       override = {
+        name = "classquiz";
         services.frontend = {
           build = {
             context = "${classquizRepo}/frontend";
