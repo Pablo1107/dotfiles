@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -48,26 +48,21 @@
       # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594
       url = "git+ssh://git@github.com/Pablo1107/nix-secrets.git";
     };
-    colmena = {
-      url = "github:zhaofengli/colmena";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-std.url = "github:chessai/nix-std";
-    attic.url = "github:zhaofengli/attic";
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, colmena, attic, spicetify-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
           buildPlatform.system = "x86_64-linux";
           hostPlatform.system = "aarch64-linux";
-          permittedInsecurePackages = [ "electron-25.9.0" ];
+          permittedInsecurePackages = [ "electron-27.3.11" ];
           # self.nixpkgs.lib.optional (self.nixpkgs.obsidian.version == "1.4.16")
         };
         overlays = with builtins; [
@@ -110,7 +105,6 @@
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
-        attic.nixosModules.atticd
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
 
@@ -119,6 +113,11 @@
         inherit inputs;
         inherit nixpkgs;
         rootPath = ./.;
+        pkgs-stable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config = nixpkgsConfig.config;
+          overlays = nixpkgsConfig.overlays;
+        };
       };
     in
     {
@@ -257,7 +256,8 @@
           }
         ];
       };
-      nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
         system = "x86_64-linux";
         modules = nixosModules ++ [
           disko.nixosModules.disko
@@ -268,59 +268,21 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.extraSpecialArgs = {
+              pkgs-stable = import nixpkgs-stable {
+                system = "x86_64-linux";
+                config = nixpkgsConfig.config;
+                overlays = nixpkgsConfig.overlays;
+              };
+            } // specialArgs;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/server/home.nix ];
             };
+            home-manager.users.root = { pkgs, ... }: {
+              imports = [ ./hosts/server/root-home.nix ];
+            };
           }
         ];
-      };
-      colmena = {
-        meta = {
-          nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config = nixpkgsConfig.config;
-            overlays = nixpkgsConfig.overlays;
-          };
-
-          # This parameter functions similarly to `sepcialArgs` in `nixosConfigurations.xxx`,
-          # used for passing custom arguments to all submodules.
-          inherit specialArgs;
-        };
-
-        "nixos" = { name, nodes, ... }: {
-          # Parameters related to remote deployment
-          deployment = inputs.secrets.deployment // {
-            allowLocalDeployment = true;
-          };
-
-          # This parameter functions similarly to `modules` in `nixosConfigurations.xxx`,
-          # used for importing all submodules.
-          imports = nixosModules ++ [
-            disko.nixosModules.disko
-            ./hosts/server/nixos.nix
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ ] ++ hmModules;
-              home-manager.extraSpecialArgs = {
-                pkgs-stable = import nixpkgs-stable {
-                  system = "x86_64-linux";
-                  config = nixpkgsConfig.config;
-                  overlays = nixpkgsConfig.overlays;
-                };
-              } // specialArgs;
-              home-manager.users.pablo = { pkgs, ... }: {
-                imports = [ ./hosts/server/home.nix ];
-              };
-              home-manager.users.root = { pkgs, ... }: {
-                imports = [ ./hosts/server/root-home.nix ];
-              };
-            }
-          ];
-        };
       };
       devShell = myLib.forAllSystems (system:
         let
@@ -331,7 +293,6 @@
             just
             rpiboot
             nixos-rebuild
-            pkgs.colmena
             agenix.packages.${system}.default
           ];
         }
