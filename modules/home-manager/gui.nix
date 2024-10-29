@@ -115,7 +115,7 @@ in
 
       # Fonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       hack-font
       (nerdfonts.override { fonts = [ "Hack" ]; })
