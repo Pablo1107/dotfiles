@@ -38,16 +38,6 @@ in
         templates = "\$HOME/desktop/templates";
       };
     };
-    xdg.portal = {
-      xdgOpenUsePortal = true;
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal
-        xdg-desktop-portal-gtk
-        # xdg-desktop-portal-kde
-        xdg-desktop-portal-wlr
-      ];
-    };
     xdg.configFile."mimeapps.list".force = true;
     xdg.dataFile."applications/mimeapps.list".force = true;
     xdg.mime.enable = true;
@@ -58,15 +48,15 @@ in
       # also check out:
       # https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
       defaultApplications = {
-        "application/json" = [ "firefox.desktop" ];
-        "application/pdf" = [ "firefox.desktop" ];
+        "application/json" = [ "io.github.zen_browser.zen.desktop" ];
+        "application/pdf" = [ "io.github.zen_browser.zen.desktop" ];
         "application/x-bittorrent" = [ "org.qbittorrent.qBittorrent.desktop" ];
         "application/x-shellscript" = [ "nvim.desktop" ];
-        "application/x-xpinstall" = [ "firefox.desktop" ];
-        "application/xhtml+xml" = [ "firefox.desktop" ];
+        "application/x-xpinstall" = [ "io.github.zen_browser.zen.desktop" ];
+        "application/xhtml+xml" = [ "io.github.zen_browser.zen.desktop" ];
         "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "text/english" = [ "nvim.desktop" ];
-        "text/html" = [ "firefox.desktop" ];
+        "text/html" = [ "io.github.zen_browser.zen.desktop" ];
         "text/plain" = [ "nvim.desktop" ];
         "text/x-c" = [ "nvim.desktop" ];
         "text/x-c++" = [ "nvim.desktop" ];
@@ -79,7 +69,7 @@ in
         "text/x-moc" = [ "nvim.desktop" ];
         "text/x-pascal" = [ "nvim.desktop" ];
         "text/x-tcl" = [ "nvim.desktop" ];
-        "text/xml" = [ "firefox.desktop" ];
+        "text/xml" = [ "io.github.zen_browser.zen.desktop" ];
         "image/bmp" = [ "org.gnome.eog.desktop" ];
         "image/g3fax" = [ "gimp.desktop" ];
         "image/gif" = [ "org.gnome.eog.desktop" ];
@@ -90,15 +80,15 @@ in
         "image/svg+xml" = [ "org.gnome.eog.desktop" ];
         "image/svg+xml-compressed" = [ "org.gnome.eog.desktop" ];
         "image/tiff" = [ "org.gnome.eog.desktop" ];
-        "image/webp" = [ "firefox.desktop" ];
-        "x-scheme-handler/about" = [ "firefox.desktop" ];
+        "image/webp" = [ "io.github.zen_browser.zen.desktop" ];
+        "x-scheme-handler/about" = [ "io.github.zen_browser.zen.desktop" ];
         "x-scheme-handler/eclipse+command" = [ "dbeaver.desktop" ];
-        "x-scheme-handler/http" = [ "firefox.desktop" ];
-        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "x-scheme-handler/http" = [ "io.github.zen_browser.zen.desktop" ];
+        "x-scheme-handler/https" = [ "io.github.zen_browser.zen.desktop" ];
         "x-scheme-handler/magnet" = [ "org.qbittorrent.qBittorrent.desktop" ];
         "x-scheme-handler/postman" = [ "Postman.desktop" ];
         "x-scheme-handler/slack" = [ "slack.desktop" ];
-        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+        "x-scheme-handler/unknown" = [ "io.github.zen_browser.zen.desktop" ];
       };
     };
   };

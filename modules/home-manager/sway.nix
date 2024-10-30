@@ -33,5 +33,23 @@ in
         "sway/.config/sway/bg.jpeg"
       ];
     };
+
+    xdg.portal = {
+      xdgOpenUsePortal = true;
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
+      ];
+      config = {
+        sway = {
+          default = [
+            "wlr"
+            "gtk"
+          ];
+        };
+      };
+    };
   };
 }
