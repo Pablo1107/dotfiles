@@ -33,6 +33,7 @@ return {
             map('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
             map('n', '<leader>ca', vim.lsp.buf.code_action, { noremap = true, silent = true })
             map('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = true })
+            map('n', '<leader>f', vim.lsp.buf.format, { noremap = true, silent = true })
             -- map('n', '[d', vim.lsp.diagnostic.goto_prev, { noremap = true, silent = true })
             -- map('n', ']d', vim.lsp.diagnostic.goto_next, { noremap = true, silent = true })
 
@@ -92,7 +93,15 @@ return {
             -- }
             -- lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
-            lspconfig.nixd.setup{}
+            lspconfig.nixd.setup({
+                settings = {
+                    nixd = {
+                        formatting = {
+                            command = { "nixfmt" },
+                        },
+                    }
+                }
+            })
             -- lspconfig.nil_ls.setup{}
             lspconfig.vimls.setup {}
             lspconfig.clangd.setup {}

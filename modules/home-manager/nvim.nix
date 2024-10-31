@@ -29,6 +29,9 @@ in
         gcc
         rust-analyzer
         clang-tools
+        nixfmt-classic # nix formatter
+        nixpkgs-fmt # nix formatter
+        alejandra # nix formatter
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript-language-server
