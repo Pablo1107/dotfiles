@@ -52,7 +52,7 @@ in
       virtio-win
       win-spice
       adwaita-icon-theme
-      gnome.gnome-boxes
+      gnome-boxes
     ];
 
     home-manager.users.pablo = {
