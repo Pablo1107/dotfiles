@@ -88,9 +88,9 @@ return {
                 },
             }
 
-            -- lspconfig.tsserver.setup {
-            --     root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
-            -- }
+            lspconfig.tsserver.setup {
+                root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+            }
             -- lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
             lspconfig.nixd.setup({
@@ -183,9 +183,9 @@ return {
 
             -- Setup lspconfig.
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            -- require('lspconfig')['tsserver'].setup {
-            --     capabilities = capabilities
-            -- }
+            require('lspconfig')['tsserver'].setup {
+                capabilities = capabilities
+            }
             -- require('lspconfig')['vtsls'].setup {
             --     capabilities = capabilities
             -- }
@@ -207,9 +207,9 @@ return {
             }
         end
     },
-    {
-      "pmizio/typescript-tools.nvim",
-      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-      opts = {},
-    },
+    -- {
+    --   "pmizio/typescript-tools.nvim",
+    --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    --   opts = {},
+    -- },
 }

@@ -87,6 +87,7 @@ return {
             vim.g['test#strategy'] = 'vtr'
         end,
     },
-
-
+    {
+        'sindrets/diffview.nvim',
+    },
 }

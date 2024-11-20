@@ -284,3 +284,26 @@ vim.keymap.set(
     end,
     { silent = true }
 )
+
+function GetRemoteUrl()
+  local file_path = vim.fn.expand('%:p')
+  local git_dir = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local relative_path = file_path:sub(#git_dir + 2)
+  local remote_url = vim.fn.systemlist('git config --get remote.origin.url')[1]
+  local branch = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')[1]
+
+  -- Convert SSH URL to HTTPS URL if necessary
+  if remote_url:find('^git@') then
+    remote_url = remote_url:gsub('^git@', 'https://')
+    remote_url = remote_url:gsub('%.com:', '.com/')
+  end
+
+  -- Replace the .git suffix with /blob/branch/relative_path for GitLab URLs
+  if remote_url:find('gitlab.com') then
+    remote_url = remote_url:gsub('%.git$', '') .. '/blob/' .. branch .. '/' .. relative_path
+  end
+
+  return remote_url
+end
+
+vim.api.nvim_set_keymap('n', '<leader>gu', ':lua print(GetRemoteUrl())<CR>', { noremap = true, silent = true })
