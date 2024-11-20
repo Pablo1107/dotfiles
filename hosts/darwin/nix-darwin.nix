@@ -28,8 +28,7 @@ with pkgs;
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = [
+    packages = [
       (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };

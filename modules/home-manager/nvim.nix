@@ -34,6 +34,7 @@ in
         alejandra # nix formatter
       ]) ++ (with pkgs.nodePackages; [
         nodejs
+        typescript
         typescript-language-server
         vim-language-server
         prettier_d_slim

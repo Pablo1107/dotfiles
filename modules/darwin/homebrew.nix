@@ -62,7 +62,6 @@ in
         "element"
         "android-platform-tools"
         "gimp"
-        "parsec"
         "discord"
         "libreoffice"
         "transmission"
