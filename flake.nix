@@ -114,6 +114,25 @@
         inherit inputs;
         inherit nixpkgs;
         rootPath = ./.;
+        pkgs-patched = let
+          nixpkgs-patched = with self.nixpkgs; applyPatches {
+            name = "nixpkgs-patched";
+            src = inputs.nixpkgs;
+            patches = [
+              # https://github.com/NixOS/nixpkgs/pull/354969
+              (fetchpatch {
+                name = "ollama: 0.3.12 -> 0.4.1";
+                url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
+                hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
+              })
+            ];
+          };
+        in
+          import nixpkgs-patched {
+            system = "x86_64-linux";
+            config = nixpkgsConfig.config;
+            overlays = nixpkgsConfig.overlays;
+          };
         pkgs-stable = import nixpkgs-stable {
           system = "x86_64-linux";
           config = nixpkgsConfig.config;
