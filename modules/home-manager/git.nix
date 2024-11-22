@@ -30,6 +30,7 @@ in
         #url."ssh://git@github.com/".insteadOf = "https://github.com/";
         core.excludesfile = "~/.config/git/gitignore";
       };
+      lfs.enable = true;
     };
   };
 }
