@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-patched, pkgs-stable, ... }:
 
 with lib;
 with myLib;
@@ -18,6 +18,7 @@ in
         enable = true;
         port = 11434;
         host = "0.0.0.0";
+        package = pkgs-patched.ollama;
         # acceleration = "cuda";
       };
       open-webui = {
