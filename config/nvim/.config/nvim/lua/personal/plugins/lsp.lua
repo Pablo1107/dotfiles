@@ -88,7 +88,7 @@ return {
                 },
             }
 
-            lspconfig.tsserver.setup {
+            lspconfig.ts_ls.setup {
                 root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
             }
             -- lspconfig.vtsls.setup{}
@@ -183,7 +183,7 @@ return {
 
             -- Setup lspconfig.
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            require('lspconfig')['tsserver'].setup {
+            require('lspconfig')['ts_ls'].setup {
                 capabilities = capabilities
             }
             -- require('lspconfig')['vtsls'].setup {
