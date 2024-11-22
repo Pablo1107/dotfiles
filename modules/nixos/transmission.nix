@@ -149,7 +149,7 @@ in
       jellyfin-web
       jellyfin-ffmpeg
       jellyfin-media-player
-      jellyfin-mpv-shim
+      # jellyfin-mpv-shim # produces a build if pywebview
     ];
 
     systemd.services.bazarr.serviceConfig = {
