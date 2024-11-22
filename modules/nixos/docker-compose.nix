@@ -17,12 +17,15 @@ let
   query = ''.services = (.services | map_values(.restart = "no") | map_values(.logging = { "driver": "json-file" }))'';
 
   sanitise = value: pkgs.runCommand "docker-compose-sanitised" { } (''
-    cp -rs ${value.directory} $out
+    cp -r ${value.directory} $out
     chmod +w -R $out/
     rm $out/docker-compose.yml
   '' + lib.optionalString (value.override != null) ''
     ln -sfn ${pkgs.writers.writeYAML "docker-compose.override.yml" value.override} $out/docker-compose.override.yml
     ${pkgs.gnused}/bin/sed -i 's/ports:/ports: !override/' $out/docker-compose.override.yml
+    ${pkgs.gnused}/bin/sed -i 's/env_file:/env_file: !override/' $out/docker-compose.override.yml
+    ${pkgs.gnused}/bin/sed -i 's/deploy:/deploy: !override/' $out/docker-compose.override.yml
+    ${pkgs.gnused}/bin/sed -i 's/volumes:/volumes: !override/' $out/docker-compose.override.yml
   '' + lib.optionalString (value.env != null) ''
     ln -sfn ${(pkgs.formats.keyValue { }).generate ".env" value.env} $out/.env
   '' + ''
@@ -140,5 +143,13 @@ in
     ) cfg;
 
     environment.systemPackages = mapAttrsToList (name: value: value.wrapperScript) cfg;
+
+    virtualisation.oci-containers.containers."watchtower" = {
+      autoStart = true;
+      image = "containrrr/watchtower";
+      volumes = [
+        "/var/run/docker.sock:/var/run/docker.sock"
+      ];
+    };
   };
 }
