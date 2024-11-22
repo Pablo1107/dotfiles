@@ -18,7 +18,10 @@ in
     # cloudflare
     services.cfdyndns = {
       enable = true;
-      records = [ "sagaro.fun" ];
+      records = [
+        "sagaro.fun"
+        "immich-pp.sagaro.fun"
+      ];
       apiTokenFile = "/etc/cfdyndns.env";
     };
 

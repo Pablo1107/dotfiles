@@ -79,5 +79,23 @@ in
         };
       };
     };
+
+    personal.docker-compose.immich-public-proxy = {
+      stateDirectory.enable = true;
+
+      file = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/alangrainger/immich-public-proxy/refs/tags/v1.5.2/docker-compose.yml";
+        hash = "sha256-uzqzdAUV0+SxdplhtbFMU/y+w3Z9aTFlt6Moj4Y/o/U=";
+      };
+
+      override = {
+        services.immich-public-proxy = {
+          ports = [ "3456:3000" ];
+          environment = [
+            "IMMICH_URL=https://immich.${nginxCfg.localDomain}"
+          ];
+        };
+      };
+    };
   };
 }

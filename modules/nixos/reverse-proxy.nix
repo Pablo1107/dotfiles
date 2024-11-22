@@ -1,5 +1,6 @@
-{ config, options, lib, pkgs, inputs, ... }:
+{ config, options, lib, myLib, pkgs, inputs, ... }:
 
+with myLib;
 with lib;
 
 let
@@ -89,6 +90,69 @@ in
           extraDomainNames = [ "*.${cfg.localDomain}" ];
           # dnsPropagationCheck = false;
           group = "nginx";
+        };
+      };
+    };
+
+    # public nginx
+    containers.public-nginx = {
+      autoStart = true;
+      config = { config, pkgs, lib, ... }: {
+        networking.firewall.allowedTCPPorts = [ 80 443 8443 8008 ];
+
+        services.nginx = {
+          enable = true;
+          defaultSSLListenPort = 8443;
+          defaultHTTPListenPort = 8008;
+          recommendedGzipSettings = true;
+          recommendedOptimisation = true;
+          recommendedProxySettings = true;
+          recommendedTlsSettings = true;
+          clientMaxBodySize = "0";
+
+          virtualHosts = let
+            subdomain = "immich-pp";
+            port = "3456";
+          in
+          {
+            "default" = {
+              serverAliases = [ "_" ];
+              default = true;
+              useACMEHost = cfg.localDomain;
+              forceSSL = true;
+              enableACME = false;
+              http2 = true;
+              locations."/" = {
+                return = "404";
+              };
+            };
+            "${subdomain}.${cfg.localDomain}" = {
+              forceSSL = true;
+              enableACME = true;
+              http2 = true;
+              locations = {
+                "/" = {
+                  proxyPass = "http://127.0.0.1:${port}";
+                  proxyWebsockets = true;
+                };
+              };
+            };
+          };
+        };
+
+        security.acme = {
+          acceptTerms = true;
+          defaults.email = "dealberapablo07@gmail.com";
+          certs = {
+            "${cfg.localDomain}" = {
+              domain = "immich-pp.${cfg.localDomain}";
+              dnsProvider = "cloudflare";
+              environmentFile = "/etc/cloudflare.env";
+              # webroot = null;
+              # dnsPropagationCheck = false;
+              group = "nginx";
+            };
+          };
         };
       };
     };
