@@ -34,6 +34,7 @@
   personal.ai.enable = true;
   personal.hoarder.enable = true;
   personal.gaming.enable = true;
+  personal.dawarich.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
