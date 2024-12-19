@@ -54,6 +54,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # paisa = {
+    #   url = "github:ananthakumaran/paisa";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
@@ -70,6 +74,7 @@
           nixgl.overlay
           emacs-overlay.overlay
           nix-index-database.overlays.nix-index
+          nur.overlays.default
           (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
@@ -92,7 +97,7 @@
         declarative-cachix.homeManagerModules.declarative-cachix-experimental
         impermanence.nixosModules.home-manager.impermanence
         nix-index-database.hmModules.nix-index
-        nur.hmModules.nur
+        nur.modules.homeManager.default
         nixConfig
         agenix.homeManagerModules.default
         spicetify-nix.homeManagerModules.default
@@ -119,12 +124,13 @@
             name = "nixpkgs-patched";
             src = inputs.nixpkgs;
             patches = [
-              # https://github.com/NixOS/nixpkgs/pull/354969
-              (fetchpatch {
-                name = "ollama: 0.3.12 -> 0.4.1";
-                url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
-                hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
-              })
+              # already merged
+              # # https://github.com/NixOS/nixpkgs/pull/354969
+              # (fetchpatch {
+              #   name = "ollama: 0.3.12 -> 0.4.1";
+              #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
+              #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
+              # })
             ];
           };
         in

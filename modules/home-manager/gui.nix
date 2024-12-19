@@ -118,7 +118,7 @@ in
       noto-fonts-cjk-sans
       noto-fonts-emoji
       hack-font
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      nerd-fonts.hack
       font-awesome
       dejavu_fonts
       ibm-plex
@@ -134,6 +134,7 @@ in
       # postman
 
       obsidian
+      # logseq
 
       # spotify # installed by spicetify
 

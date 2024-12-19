@@ -29,7 +29,7 @@ with pkgs;
 
   fonts = {
     packages = [
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      pkgs.nerd-fonts.hack
     ];
   };
 

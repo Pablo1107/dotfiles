@@ -91,7 +91,7 @@ in
           pablo = {
             id = 0;
             settings = defaultSettings;
-            extensions = with config.nur.repos.rycee.firefox-addons; [
+            extensions = with pkgs.nur.repos.rycee.firefox-addons; [
               ublock-origin
               privacy-badger
               multi-account-containers
