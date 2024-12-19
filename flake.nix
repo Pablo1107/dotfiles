@@ -54,10 +54,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # paisa = {
-    #   url = "github:ananthakumaran/paisa";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    paisa = {
+      url = "github:ananthakumaran/paisa";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
