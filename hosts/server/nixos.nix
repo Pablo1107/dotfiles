@@ -28,13 +28,16 @@
   personal.wireguard.enable = true;
   personal.ilv-map.enable = true;
   personal.vaultwarden.enable = true;
-  personal.attic.enable = true;
+  personal.attic.enable = false;
   personal.uptime-kuma.enable = true;
   personal.classquiz.enable = true;
   personal.ai.enable = true;
   personal.hoarder.enable = true;
   personal.gaming.enable = true;
   personal.dawarich.enable = true;
+  personal.paisa.enable = true;
+
+  services.flatpak.enable = true;
 
   virtualisation.docker.rootless = {
     enable = true;
