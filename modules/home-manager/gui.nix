@@ -45,6 +45,9 @@ in
       fluidsynth = {
         enable = true;
         soundService = "pipewire-pulse";
+        extraOptions = [
+          "--gain 2" # more volume
+        ];
       };
     };
 
