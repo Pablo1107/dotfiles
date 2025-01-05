@@ -36,6 +36,7 @@
   personal.gaming.enable = true;
   personal.dawarich.enable = true;
   personal.paisa.enable = true;
+  personal.samba.enable = true;
 
   services.flatpak.enable = true;
 
