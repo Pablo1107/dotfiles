@@ -60,6 +60,14 @@ in
             publicKey = "8JUv3YNXTnidDB2xcPsgLRAyCot9FIECtsDQBi2Iwws=";
             allowedIPs = [ "10.100.0.4/32" ];
           }
+          { # Sofia Notebook
+            publicKey = "iLItoeiRiKfAy428oUgAgSHgfoD5gGOj6GiPqkRXPhY=";
+            allowedIPs = [ "10.100.0.5/32" ];
+          }
+          { # Omen Windows
+            publicKey = "/l/SZu14CLhxG651iAll7MU2QeOa/tByBh8Fvz/B1gQ=";
+            allowedIPs = [ "10.100.0.6/32" ];
+          }
         ];
       };
     };
