@@ -20,7 +20,7 @@ in
       pulse.enable = true;
     };
 
-    hardware.pulseaudio.enable = lib.mkForce false;
+    # hardware.pulseaudio.enable = lib.mkForce false;
 
     users.users.pablo.extraGroups = [ "pipewire" "audio" ];
 
