@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, inputs, ... }:
 
 with lib;
 
@@ -26,6 +26,8 @@ in
       # builders-use-substitutes = true;
     };
     # nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nixVersions.nix_2_18);
+
+    nix.registry.nixpkgs-stable.flake = inputs.nixpkgs-stable;
 
     caches.cachix = [
       { name = "nix-community"; sha256 = "0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x"; }
