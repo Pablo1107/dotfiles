@@ -41,7 +41,7 @@ if [ -t 0 ]; then
   project=$(find_projects | fzf)
 else
   # Non-interactive shell, use rofi
-  project=$(find_projects | rofi -dmenu -p "Select Bitwig Project")
+  project=$(find_projects | rofi -dmenu -i -p "Select Bitwig Project")
 fi
 
 # Open the selected project or close Bitwig Studio if no project is selected
