@@ -31,6 +31,7 @@ in
         kb-mode-previous = "Shift+Left,Control+Shift+Tab,Alt+h";
         kb-remove-char-back = "BackSpace";
       };
+      theme = "desktop";
     };
     home.file.".config/rofi/desktop.rasi".text = myLib.getDotfile "rofi" "desktop.rasi";
   };
