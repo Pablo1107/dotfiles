@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Path to the Bitwig Studio Projects folder
+PROJECTS_DIR=~/Bitwig\ Studio/Projects
+
+# Detect the operating system
+OS=$(uname)
+if [[ "$OS" == "Darwin" ]]; then
+  OPEN_CMD="open"
+  START_CMD="open -a 'Bitwig Studio'"
+  KILL_CMD="pkill -f -i bitwig"
+elif [[ "$OS" == "Linux" ]]; then
+  OPEN_CMD="xdg-open"
+  START_CMD="bitwig-studio"
+  KILL_CMD="pkill -f -i bitwig"
+else
+  echo "Unsupported operating system: $OS"
+  exit 1
+fi
+
+# Start Bitwig Studio in the background, suppressing stdout and stderr
+if ! pgrep -x "Bitwig Studio" > /dev/null; then
+  nohup $START_CMD >/dev/null 2>&1 &
+fi
+
+# Function to find all .bwproject files, excluding auto-backups
+find_projects() {
+  find "$PROJECTS_DIR" -type f -name "*.bwproject" ! -path "*/auto-backups/*" | sed "s|$PROJECTS_DIR/||"
+}
+
+# Function to open the selected project
+open_project() {
+  local project="$1"
+  echo "Opening project: $PROJECTS_DIR/$project"
+  $OPEN_CMD "$PROJECTS_DIR/$project"
+}
+
+# Select project using fzf or rofi based on terminal interaction
+if [ -t 0 ]; then
+  # Interactive shell, use fzf
+  project=$(find_projects | fzf)
+else
+  # Non-interactive shell, use rofi
+  project=$(find_projects | rofi -dmenu -p "Select Bitwig Project")
+fi
+
+# Open the selected project or close Bitwig Studio if no project is selected
+if [ -n "$project" ]; then
+  open_project "$project"
+else
+  echo "No project selected. Closing Bitwig Studio..."
+  $KILL_CMD
+fi
