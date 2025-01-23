@@ -24,6 +24,10 @@ in
       trusted-users = [ "${config.home.username}" "@admin" ];
       # builders = [ "ssh://root@nixos.local?ssh-key=${config.home.homeDirectory}/.ssh/id_rsa x86_64-linux" ];
       # builders-use-substitutes = true;
+
+      # some issue with downloading cache binaries
+      # https://github.com/NixOS/nix/issues/11352#issuecomment-2608698554
+      http2 = false;
     };
     # nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nixVersions.nix_2_18);
 
