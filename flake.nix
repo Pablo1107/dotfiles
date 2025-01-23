@@ -199,12 +199,18 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
             home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = {
+            home-manager.extraSpecialArgs = specialArgs // {
               pkgs-stable = import nixpkgs-stable {
                 inherit system;
                 config = nixpkgsConfig.config;
+                overlays = nixpkgsConfig.overlays;
               };
-            } // specialArgs;
+              pkgs-23_11 = import nixpkgs-23_11 {
+                inherit system;
+                config = nixpkgsConfig.config;
+                overlays = nixpkgsConfig.overlays;
+              };
+            };
             home-manager.users."pablo.dealbera.ctr" = { pkgs, ... }: {
               imports = [
                 ./hosts/darwin/home.nix
@@ -216,7 +222,22 @@
             };
           }
         ];
-        inherit specialArgs;
+        specialArgs = {
+          inherit myLib;
+          inherit inputs;
+          inherit nixpkgs;
+          rootPath = ./.;
+          pkgs-stable = import nixpkgs-stable {
+            inherit system;
+            config = nixpkgsConfig.config;
+            overlays = nixpkgsConfig.overlays;
+          };
+          pkgs-23_11 = import nixpkgs-23_11 {
+            inherit system;
+            config = nixpkgsConfig.config;
+            overlays = nixpkgsConfig.overlays;
+          };
+        };
       };
       nixOnDroidConfigurations = {
         default = nix-on-droid.lib.nixOnDroidConfiguration {
