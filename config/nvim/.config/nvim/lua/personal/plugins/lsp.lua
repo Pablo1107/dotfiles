@@ -88,9 +88,7 @@ return {
                 },
             }
 
-            lspconfig.ts_ls.setup {
-                root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
-            }
+            -- lspconfig.ts_ls.setup {}
             -- lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
             lspconfig.nixd.setup({
@@ -182,15 +180,15 @@ return {
             -- })
 
             -- Setup lspconfig.
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            require('lspconfig')['ts_ls'].setup {
-                capabilities = capabilities
-            }
-            -- require('lspconfig')['vtsls'].setup {
+            -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            -- require('lspconfig')['ts_ls'].setup {
             --     capabilities = capabilities
             -- }
-
-            require('lspconfig').asm_lsp.setup {}
+            -- -- require('lspconfig')['vtsls'].setup {
+            -- --     capabilities = capabilities
+            -- -- }
+            --
+            -- require('lspconfig').asm_lsp.setup {}
         end
     },
     {
@@ -207,9 +205,19 @@ return {
             }
         end
     },
-    -- {
-    --   "pmizio/typescript-tools.nvim",
-    --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    --   opts = {},
-    -- },
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
+      config = function()
+        require("typescript-tools").setup {
+            settings = {
+              tsserver_max_memory = 8192,
+              tsserver_file_preferences = {
+                includeCompletionsForModuleExports = true,
+              },
+            },
+        }
+      end,
+    },
 }
