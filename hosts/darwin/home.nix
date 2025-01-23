@@ -20,7 +20,7 @@ with pkgs;
   personal.shell.enable = true;
   personal.npm.enable = true;
   personal.nvim.enable = true;
-  personal.latex.enable = true;
+  personal.latex.enable = false;
   personal.emacs.enable = false;
   personal.alacritty.enable = true;
   personal.gpg.enable = true;
