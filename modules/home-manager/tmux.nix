@@ -18,6 +18,7 @@ in
     programs.tmux = {
       enable = true;
       extraConfig = myLib.getDotfile "tmux" ".tmux.conf";
+      sensibleOnTop = false; # https://github.com/nix-community/home-manager/issues/5952
     };
   };
 }
