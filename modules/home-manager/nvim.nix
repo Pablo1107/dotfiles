@@ -46,11 +46,7 @@ in
     # stolen from https://discourse.nixos.org/t/conflicts-between-treesitter-withallgrammars-and-builtin-neovim-parsers-lua-c/33536/3
     xdg.configFile."nvim/parser".source = "${pkgs.symlinkJoin {
       name = "treesitter-parsers";
-      paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
-        c
-        lua
-        query
-      ])).dependencies;
+      paths = (pkgs.vimPlugins.nvim-treesitter.withAllGrammars).dependencies;
     }}/parser";
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
