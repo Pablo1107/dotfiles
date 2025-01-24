@@ -18,8 +18,8 @@ in
         enable = true;
         port = 11434;
         host = "0.0.0.0";
-        package = pkgs.ollama;
-        # acceleration = "cuda";
+        package = pkgs.ollama-cuda;
+        acceleration = "cuda";
       };
       open-webui = {
         enable = true;
