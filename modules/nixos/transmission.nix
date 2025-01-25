@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
 
 with lib;
 with myLib;
@@ -63,6 +63,7 @@ in
         openFirewall = true;
         user = "arr";
         group = "arr";
+        package = pkgs-stable.sonarr;
       };
       bazarr = {
         enable = true;
