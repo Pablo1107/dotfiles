@@ -98,6 +98,8 @@ in
     containers.public-nginx = {
       autoStart = true;
       config = { config, pkgs, lib, ... }: {
+        system.stateVersion = "25.05";
+
         networking.firewall.allowedTCPPorts = [ 80 443 8443 8008 ];
 
         services.nginx = {

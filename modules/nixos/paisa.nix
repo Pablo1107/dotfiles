@@ -8,7 +8,7 @@ with myLib;
 let
   cfg = config.personal.paisa;
   nginxCfg = config.personal.reverse-proxy;
-  paisa-fhs = pkgs.buildFHSUserEnv {
+  paisa-fhs = pkgs.buildFHSEnv {
     name = "paisa";
     targetPkgs =
       pkgs: with pkgs; [
