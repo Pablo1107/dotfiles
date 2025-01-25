@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
 
 with lib;
 
@@ -94,6 +94,7 @@ in
       inetutils
       docker-compose
       pop # email client
+      pkgs-patched.beancount3
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
