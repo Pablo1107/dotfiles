@@ -14,25 +14,9 @@
               "type": "kanban",
               "state": {
                 "file": "PROYECT.md"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "7d4b8009bbdb7b9d",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "00e306440ad87cf8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "tickets/Investigate some services.md",
-                "mode": "source",
-                "source": false
-              }
+              },
+              "icon": "lucide-trello",
+              "title": "PROYECT"
             }
           }
         ]
@@ -55,7 +39,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -70,7 +56,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -78,7 +66,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -101,7 +91,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tickets/Investigate some services.md",
+                "file": "PROYECT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -109,7 +99,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for PROYECT"
             }
           },
           {
@@ -118,10 +110,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "tickets/Investigate some services.md",
+                "file": "PROYECT.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from PROYECT"
             }
           },
           {
@@ -132,7 +126,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -141,8 +137,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "tickets/Investigate some services.md"
-              }
+                "file": "PROYECT.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of PROYECT"
             }
           }
         ]
@@ -162,7 +160,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "00e306440ad87cf8",
+  "active": "95f6c1ea2cb1b908",
   "lastOpenFiles": [
     "PROYECT.md",
     "tickets/Investigate some services.md",
