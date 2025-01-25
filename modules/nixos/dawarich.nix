@@ -25,8 +25,8 @@ in
       stateDirectory.enable = true;
 
       file = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/Freika/dawarich/refs/tags/0.18.2/docker-compose.yml";
-        hash = "sha256-CHa0gypq8lV7H2bJ1kzDiJGMN8mHlosBFbQNFcFWqFc=";
+        url = "https://raw.githubusercontent.com/Freika/dawarich/refs/tags/0.22.1/docker/docker-compose.yml";
+        hash = "sha256-gbhYZ3gqDHwszjtT2eOFS9dPybpknrQQb76m2iR1gSw=";
       };
 
       override = {
@@ -48,7 +48,7 @@ in
           };
         };
         volumes = {
-          db_data = {
+          dawarich_db_data = {
             driver = "local";
             driver_opts = {
               type = "none";
@@ -56,15 +56,7 @@ in
               device = "/var/lib/dawarich/db_data";
             };
           };
-          gem_cache = {
-            driver = "local";
-            driver_opts = {
-              type = "none";
-              o = "bind";
-              device = "/var/lib/dawarich/gem_cache";
-            };
-          };
-          shared_data = {
+          dawarich_shared = {
             driver = "local";
             driver_opts = {
               type = "none";
@@ -72,7 +64,7 @@ in
               device = "/var/lib/dawarich/shared_data";
             };
           };
-          public = {
+          dawarich_public = {
             driver = "local";
             driver_opts = {
               type = "none";
@@ -80,7 +72,7 @@ in
               device = "/var/lib/dawarich/public";
             };
           };
-          watched = {
+          dawarich_watched = {
             driver = "local";
             driver_opts = {
               type = "none";
