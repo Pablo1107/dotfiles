@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -67,7 +67,14 @@
           allowUnfree = true;
           buildPlatform.system = "x86_64-linux";
           hostPlatform.system = "aarch64-linux";
-          permittedInsecurePackages = [ "electron-27.3.11" ];
+          # HACK: until https://github.com/NixOS/nixpkgs/issues/360592 is resolved
+          # needed for sonarr
+          permittedInsecurePackages = [
+            "aspnetcore-runtime-6.0.36"
+            "aspnetcore-runtime-wrapped-6.0.36"
+            "dotnet-sdk-6.0.428"
+            "dotnet-sdk-wrapped-6.0.428"
+          ];
           # self.nixpkgs.lib.optional (self.nixpkgs.obsidian.version == "1.4.16")
         };
         overlays = with builtins; [
@@ -131,6 +138,11 @@
               #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
               #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
               # })
+              (fetchpatch {
+                name = "python312Packages.beancount3: init at 3.0.0";
+                url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/371541.patch";
+                hash = "sha256-A16UAioV4OYjhRmuGawA6Z4Ufl512H8owy85X2sAtts=";
+              })
             ];
           };
         in
