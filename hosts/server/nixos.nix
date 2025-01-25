@@ -37,6 +37,7 @@
   personal.dawarich.enable = true;
   personal.paisa.enable = true;
   personal.samba.enable = true;
+  personal.nvidia.enable = true;
 
   services.flatpak.enable = true;
 
