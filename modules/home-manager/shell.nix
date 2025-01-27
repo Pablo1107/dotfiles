@@ -95,6 +95,7 @@ in
       docker-compose
       pop # email client
       pkgs-patched.beancount3
+      shell-gpt
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
@@ -112,6 +113,20 @@ in
         autoload -U promptinit;
         promptinit
         prompt pure
+
+        # Shell-GPT integration ZSH v0.2
+        _sgpt_zsh() {
+        if [[ -n "$BUFFER" ]]; then
+            _sgpt_prev_cmd=$BUFFER
+            BUFFER+="⌛"
+            zle -I && zle redisplay
+            BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd" --no-interaction)
+            zle end-of-line
+        fi
+        }
+        zle -N _sgpt_zsh
+        bindkey ^l _sgpt_zsh
+        # Shell-GPT integration ZSH v0.2
       '';
 
       loginExtra = ''
