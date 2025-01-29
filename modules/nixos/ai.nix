@@ -13,6 +13,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    personal.openedai-vision.enable = true;
+
     services = {
       ollama = {
         enable = true;
