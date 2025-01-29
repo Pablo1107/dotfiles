@@ -38,6 +38,7 @@
   personal.paisa.enable = true;
   personal.samba.enable = true;
   personal.nvidia.enable = true;
+  personal.steam-headless.enable = true;
 
   services.flatpak.enable = true;
 
