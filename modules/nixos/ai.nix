@@ -26,7 +26,7 @@ in
         openFirewall = true;
         host = "0.0.0.0";
         port = 7555;
-        package = pkgs-stable.open-webui;
+        package = pkgs.open-webui;
       };
 
       nginx.virtualHosts =
