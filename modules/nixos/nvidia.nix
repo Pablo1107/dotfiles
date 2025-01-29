@@ -30,6 +30,7 @@ in
       open = false;
       nvidiaSettings = true;
     };
+    hardware.nvidia-container-toolkit.enable = true;
 
     # boot.initrd.availableKernelModules = [
     #   "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
@@ -76,6 +77,7 @@ in
                   # Stop services that might be using the GPU
                   ${pkgs.systemd}/bin/systemctl stop ollama
                   ${pkgs.systemd}/bin/systemctl stop openrgb
+                  ${pkgs.systemd}/bin/systemctl stop podman-steam-headless
 
                   # Avoid race condition
                   sleep 2
@@ -99,8 +101,9 @@ in
                   ${pkgs.kmod}/bin/modprobe nvidia_drm nvidia_modeset nvidia_uvm nvidia
 
                   # Restart services that were using the GPU
-                  ${pkgs.systemd}/bin/systemctl restart ollama
-                  ${pkgs.systemd}/bin/systemctl restart openrgb
+                  ${pkgs.systemd}/bin/systemctl start ollama
+                  ${pkgs.systemd}/bin/systemctl start openrgb
+                  ${pkgs.systemd}/bin/systemctl start podman-steam-headless
                   ;;
               esac
             '';
