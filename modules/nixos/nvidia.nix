@@ -78,6 +78,7 @@ in
                   ${pkgs.systemd}/bin/systemctl stop ollama
                   ${pkgs.systemd}/bin/systemctl stop openrgb
                   ${pkgs.systemd}/bin/systemctl stop podman-steam-headless
+                  ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision
 
                   # Avoid race condition
                   sleep 2
@@ -104,6 +105,7 @@ in
                   ${pkgs.systemd}/bin/systemctl start ollama
                   ${pkgs.systemd}/bin/systemctl start openrgb
                   ${pkgs.systemd}/bin/systemctl start podman-steam-headless
+                  ${pkgs.systemd}/bin/systemctl start podman-openedai-vision
                   ;;
               esac
             '';
