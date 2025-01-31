@@ -13,6 +13,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      (llama-cpp.override { cudaSupport = true; })
+    ];
+
     personal.openedai-vision.enable = true;
 
     services = {
