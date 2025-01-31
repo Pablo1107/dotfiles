@@ -39,6 +39,8 @@
   personal.samba.enable = true;
   personal.nvidia.enable = true;
   personal.steam-headless.enable = true;
+  personal.openiscsi.enable = true;
+  # personal.jovian.enable = true;
 
   services.flatpak.enable = true;
 
@@ -97,6 +99,8 @@
   programs.sway = {
     enable = true;
   };
+  programs.dconf.enable = true;
+
   security.polkit.enable = true;
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
