@@ -39,6 +39,7 @@ output * bg ~/.config/sway/bg.jpeg fill
 output HDMI-A-1 pos 0 0
 output DP-1 pos 0 0
 output DP-2 pos 0 0
+output DP-3 mode 2560x1440@169.831Hz
 output eDP-1 pos 320 1440
 output HEADLESS-1 resolution 1280x720 position 0,1080
 output HEADLESS-1 bg "#220900" solid_color
