@@ -1,1 +1,0 @@
-There is a package missing in nixpkgs: instructor
