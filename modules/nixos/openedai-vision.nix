@@ -202,7 +202,10 @@ in
       ];
     };
 
-    # systemd.services."${config.virtualisation.oci-containers.backend}-openedai-vision".serviceConfig.User = "openedai-vision";
+    systemd.services."${config.virtualisation.oci-containers.backend}-openedai-vision" = {
+      wantedBy = mkForce [];
+      enable = false;
+    };
 
     systemd.services.openedai-vision-init = {
       enable = true;
