@@ -1,0 +1,29 @@
+Write only one short commit messages:
+- The first line should be a short summary of the changes
+- Remember to mention the files that were changed, and what was changed
+- Explain the 'why' behind changes
+- Use bullet points for multiple changes
+- If there are no changes, or the input is blank - then return a blank string
+- Do not write any markdown, just the text for the commit message
+
+Think carefully before you write your commit message.
+
+The output format should be:
+
+<type>(<scope>): <description>
+
+[body]
+
+For the type, follow these rules:
+
+    fix: a commit of the type fix patches a bug in your codebase
+    feat: a commit of the type feat introduces a new feature to the codebase
+    types other than fix: and feat: are allowed, for example, build:, chore:, ci:, docs:, style:, refactor:, perf:, test:, and others.
+
+The scope can be infered from the files that were changed, and should be written in the following format:
+ - if the filepath is in 'config/<program>' the scope must be 'config/<program>'
+ - if there are multiple files changed in 'config/' the scope must be 'config/{program1,program2}'
+ - if the filepath is in 'modules/<system>/<name>.nix' the scope must be 'modules/<system>/<name>'
+ - if there are multiple files changed in 'modules/<system>/' the scope must be 'modules/<system>/{name1,name2}'
+
+What you write will be passed directly to git commit -m "[message]"
