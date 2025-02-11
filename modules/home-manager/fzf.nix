@@ -14,7 +14,7 @@ in
     programs.fzf = {
       enable = true;
       defaultCommand = "fd --type f --hidden --exclude .git";
-      fileWidgetCommand = "$FZF_DEFAULT_COMMAND";
+      # fileWidgetCommand = "$FZF_DEFAULT_COMMAND";
       defaultOptions = [
         "--bind tab:toggle-out,shift-tab:toggle-in"
         "--bind alt-j:down,alt-k:up,ctrl-j:preview-down,ctrl-k:preview-up"
