@@ -121,36 +121,35 @@
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
 
+      nixpkgs-patched = with self.nixpkgs; applyPatches {
+        name = "nixpkgs-patched";
+        src = inputs.nixpkgs;
+        patches = [
+          # already merged
+          # # https://github.com/NixOS/nixpkgs/pull/354969
+          # (fetchpatch {
+          #   name = "ollama: 0.3.12 -> 0.4.1";
+          #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
+          #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
+          # })
+          (fetchpatch {
+            name = "python312Packages.beancount3: init at 3.0.0";
+            url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/371541.patch";
+            hash = "sha256-A16UAioV4OYjhRmuGawA6Z4Ufl512H8owy85X2sAtts=";
+          })
+        ];
+      };
+
       specialArgs = {
         inherit myLib;
         inherit inputs;
         inherit nixpkgs;
         rootPath = ./.;
-        pkgs-patched = let
-          nixpkgs-patched = with self.nixpkgs; applyPatches {
-            name = "nixpkgs-patched";
-            src = inputs.nixpkgs;
-            patches = [
-              # already merged
-              # # https://github.com/NixOS/nixpkgs/pull/354969
-              # (fetchpatch {
-              #   name = "ollama: 0.3.12 -> 0.4.1";
-              #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
-              #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
-              # })
-              (fetchpatch {
-                name = "python312Packages.beancount3: init at 3.0.0";
-                url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/371541.patch";
-                hash = "sha256-A16UAioV4OYjhRmuGawA6Z4Ufl512H8owy85X2sAtts=";
-              })
-            ];
-          };
-        in
-          import nixpkgs-patched {
-            system = "x86_64-linux";
-            config = nixpkgsConfig.config;
-            overlays = nixpkgsConfig.overlays;
-          };
+        pkgs-patched = import nixpkgs-patched {
+          system = "x86_64-linux";
+          config = nixpkgsConfig.config;
+          overlays = nixpkgsConfig.overlays;
+        };
         pkgs-stable = import nixpkgs-stable {
           system = "x86_64-linux";
           config = nixpkgsConfig.config;
@@ -212,6 +211,11 @@
             home-manager.backupFileExtension = "backup";
             home-manager.sharedModules = [ ] ++ hmModules;
             home-manager.extraSpecialArgs = specialArgs // {
+              pkgs-patched = import nixpkgs-patched {
+                inherit system;
+                config = nixpkgsConfig.config;
+                overlays = nixpkgsConfig.overlays;
+              };
               pkgs-stable = import nixpkgs-stable {
                 inherit system;
                 config = nixpkgsConfig.config;
