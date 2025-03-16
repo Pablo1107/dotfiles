@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     # enable NAT
     networking.nat.enable = true;
-    networking.nat.externalInterface = "enp4s0";
+    networking.nat.externalInterface = "enp5s0";
     networking.nat.internalInterfaces = [ "wg0" ];
     networking.firewall = {
       allowedUDPPorts = [ 51820 ];
@@ -67,6 +67,10 @@ in
           { # Omen Windows
             publicKey = "/l/SZu14CLhxG651iAll7MU2QeOa/tByBh8Fvz/B1gQ=";
             allowedIPs = [ "10.100.0.6/32" ];
+          }
+          { # Steam Deck
+            publicKey = "IE68MmDZCef9+52PQz0hZbQMD2WAF0j5EE2Lz+03exc=";
+            allowedIPs = [ "10.100.0.7/32" ];
           }
         ];
       };
