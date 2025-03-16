@@ -16,7 +16,7 @@ in
 
     ethInterface = mkOption {
       type = types.str;
-      default = "enp4s0";
+      default = "enp5s0";
     };
   };
 
