@@ -17,7 +17,7 @@ in
       userEmail = "dealberapablo07@gmail.com";
       aliases = {
         fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add";
-        llm-commit = "!git commit -e -m \"$(git diff --staged | llm -m $\{1:-gemma2:27b\} -s \"$(cat ~/.config/llm/git-commit-system-prompt.txt)\")\"";
+        llm-commit = "!git commit -e -m \"$(git diff --staged $(git diff --staged --stat | awk '/\\|/ { if ($3 < 15) print $1 }') | llm -m $\{1:-gemma2:27b\} -s \"$(cat ~/.config/llm/git-commit-system-prompt.txt)\")\"";
       };
       extraConfig = {
         push.followTags = true; # always push tags when "git push"
