@@ -17,7 +17,7 @@ in
       If you want to connect with this computer via SSH, you can use the following command:
       ssh root@${config.networking.hostName}.local
 
-      IP Address: \4{enp4s0}
+      IP Address: \4{enp5s0}
     '';
     environment.etc."issue.d/ip.issue".text = "\\4\n";
     networking.dhcpcd.runHook = "${pkgs.utillinux}/bin/agetty --reload";
