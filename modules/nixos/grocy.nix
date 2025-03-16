@@ -27,7 +27,7 @@ in
       enableACME = false;
       listen = [
         { addr = "127.0.0.1"; port = 2525; }
-        { addr = "192.168.1.34"; port = 2525; }
+        { addr = "192.168.1.6"; port = 2525; }
         { addr = "0.0.0.0"; port = 443; }
         { addr = "[::0]"; port = 443; }
       ];
