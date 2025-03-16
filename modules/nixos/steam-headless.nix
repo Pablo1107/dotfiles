@@ -24,13 +24,17 @@ in
       uid = 600;
       isSystemUser = true;
       group = "steam-headless";
+      extraGroups = [ "audio" "video" "input" "uinput" ];
     };
 
     users.groups.steam-headless = {
       gid = 600;
     };
 
-    virtualisation.oci-containers.containers.steam-headless = {
+    virtualisation.oci-containers.containers.steam-headless = let
+      SERVICE_PATH = "/var/lib/steam-headless";
+      NAME = "steam-headless";
+    in {
       image = "josh5/steam-headless:latest";
 
       # lol, --network=host because I can't be bothered to find all the ports anymore
@@ -38,10 +42,11 @@ in
 
       ];
 
-      hostname = "shrinky";
+      hostname = NAME;
 
       extraOptions = [
-        "--gpus=all"
+        # "--gpus=all"
+        "--device=nvidia.com/gpu=all"
         "--security-opt=apparmor=unconfined"
         "--security-opt=seccomp=unconfined"
         "--device=/dev/uinput"
@@ -51,20 +56,22 @@ in
         "--cap-add=SYS_ADMIN"
         "--cap-add=SYS_NICE"
         "--ipc=host"
-        "--add-host=steam-headless:127.0.0.1"
-        "--add-host=shrinky:127.0.0.1"
+        "--add-host=${NAME}:127.0.0.1"
         "--network=host"
       ];
 
       volumes = [
-        "/var/lib/steam-headless/home:/home/default:rw"
-        "/var/lib/steam-headless/games:/mnt/games:rw"
+        "${SERVICE_PATH}/home/:/home/default:rw"
+        "${SERVICE_PATH}/.X11-unix/:/tmp/.X11-unix:rw"
+        "${SERVICE_PATH}/pulse/:/tmp/pulse:rw"
+        "/shared:/mnt/games:rw"
+        "/dev/input:/dev/input:rw"
       ];
 
       # https://github.com/Steam-Headless/docker-steam-headless/blob/master/docs/compose-files/.env
       environment = {
-        NAME = "SteamHeadless";
-        TZ = "America/New_York";
+        inherit NAME;
+        TZ = "America/Argentina/Buenos_Aires";
         USER_LOCALES = "en_US.UTF-8 UTF-8";
         DISPLAY = ":55";
         MODE = "primary";
@@ -110,7 +117,7 @@ in
 
       script = ''
         umask 077
-        mkdir -p /var/lib/steam-headless/{home,.X11-unix,pulse,games}
+        mkdir -p /var/lib/steam-headless/{home,.X11-unix,pulse}
         umask 066
       '';
 
