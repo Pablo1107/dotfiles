@@ -94,7 +94,6 @@ in
       inetutils
       docker-compose
       pop # email client
-      # pkgs-patched.beancount3
       shell-gpt
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
