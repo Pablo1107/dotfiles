@@ -25,8 +25,8 @@ in
       stateDirectory.enable = true;
 
       file = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/Freika/dawarich/refs/tags/0.22.1/docker/docker-compose.yml";
-        hash = "sha256-gbhYZ3gqDHwszjtT2eOFS9dPybpknrQQb76m2iR1gSw=";
+        url = "https://raw.githubusercontent.com/Freika/dawarich/refs/tags/0.24.0-rc/docker/docker-compose.yml";
+        hash = "sha256-F60vq222cXt4veBkd9VjYqgWLtG3Uy0onaQi7iSPz1g=";
       };
 
       override = {
