@@ -61,7 +61,7 @@ with pkgs;
     qrcp
     hledger
     tealdeer
-    ffmpeg-full
+    # ffmpeg-full
     geckodriver
     chromedriver
     gnumeric
