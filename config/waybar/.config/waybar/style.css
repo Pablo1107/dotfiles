@@ -1,6 +1,7 @@
 * {
   background: none;
-  font-family: "Hack Nerd Font", "Hack", "Material Icons", "cryptocoins";
+  /* font-family: "Hack Nerd Font", "Hack", "Material Icons", "cryptocoins", "Adwaita Mono"; */
+  font-family: "Hack", "Material Icons";
 }
 
 .modules-right > *:first-child > * {
