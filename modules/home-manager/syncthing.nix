@@ -13,15 +13,15 @@ in
   config = mkIf cfg.enable {
     services.syncthing = {
       enable = true;
-      tray.enable = true;
+      # tray.enable = true;
     };
     # Fix tray.target not found
-    systemd.user.targets = {
-      tray = {
-        Unit = {
-          Description = "Tray";
-        };
-      };
-    };
+    # systemd.user.targets = {
+    #   tray = {
+    #     Unit = {
+    #       Description = "Tray";
+    #     };
+    #   };
+    # };
   };
 }

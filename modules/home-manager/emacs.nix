@@ -16,7 +16,7 @@ let
   };
 
   emacs = pkgs.emacsWithPackagesFromUsePackage {
-    package = if pkgs.stdenv.hostPlatform.isx86_64 then pkgs.emacs29-pgtk else pkgs.emacs29-nox;
+    package = if pkgs.stdenv.hostPlatform.isx86_64 then pkgs.emacs30-pgtk else pkgs.emacs30-nox;
     config = "../../config/emacs/.config/emacs/init.el";
 
     alwaysEnsure = true;

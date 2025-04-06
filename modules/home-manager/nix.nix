@@ -29,7 +29,7 @@ in
       # https://github.com/NixOS/nix/issues/11352#issuecomment-2608698554
       http2 = false;
     };
-    # nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nixVersions.nix_2_18);
+    nix.package = mkIf (pkgs.stdenv.hostPlatform.isLinux) (mkForce pkgs.nix);
 
     nix.registry.nixpkgs-stable.flake = inputs.nixpkgs-stable;
 
