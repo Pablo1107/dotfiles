@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-stable, pkgs-patched, ... }:
 
 with lib;
 with myLib;
@@ -14,6 +14,20 @@ let
     WLR_DRM_DEVICES=/dev/dri/card0 dbus-run-session sway &
     sleep 2
     sudo /var/lib/libvirt/hooks/qemu.d/nvidia-passthrough - release
+  '';
+
+  vulkanDriverFiles = [
+    "${config.hardware.nvidia.package}/share/vulkan/icd.d/nvidia_icd.x86_64.json"
+    "${config.hardware.nvidia.package.lib32}/share/vulkan/icd.d/nvidia_icd.i686.json"
+  ];
+
+  nvidia-vulkan = pkgs.writeShellScriptBin "nvidia-vulkan" ''
+    export VK_DRIVER_FILES="${lib.concatStringsSep ":" vulkanDriverFiles}"
+    exec "$@"
+  '';
+
+  gamescope-session = pkgs.writeShellScriptBin "gamescope-session" ''
+    ${nvidia-vulkan}/bin/nvidia-vulkan gamescope -h 1440 -H 1440 -r 170 --adaptive-sync --steam  -- steam -tenfoot -pipewire-dmabuf
   '';
 in
 {
@@ -48,6 +62,17 @@ in
       cudaPackages.cudatoolkit
       openrgb
       start-sway
+      nvidia-vulkan
+      gamescope-session
+      gwe
+      corectrl
+      (gpu-burn.override {
+        config = {
+          cudaSupport = true;
+        };
+      })
+      nvtopPackages.nvidia
+      pkgs-patched.nvidia_oc
     ];
 
     programs.virt-manager = {
