@@ -42,6 +42,8 @@
   personal.openiscsi.enable = true;
   # personal.jovian.enable = true;
 
+  hardware.graphics.enable = true;
+
   services.flatpak.enable = true;
 
   virtualisation.docker.rootless = {
