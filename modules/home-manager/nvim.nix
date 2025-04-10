@@ -32,6 +32,8 @@ in
         nixfmt-classic # nix formatter
         nixpkgs-fmt # nix formatter
         alejandra # nix formatter
+        jdt-language-server # java language server
+        pyright # python language server
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript
