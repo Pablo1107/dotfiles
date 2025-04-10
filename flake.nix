@@ -118,6 +118,7 @@
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
+        home-manager.nixosModules.home-manager
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
 
@@ -125,18 +126,13 @@
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
         patches = [
-          # already merged
+          # example
           # # https://github.com/NixOS/nixpkgs/pull/354969
           # (fetchpatch {
           #   name = "ollama: 0.3.12 -> 0.4.1";
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
           #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
           # })
-          (fetchpatch {
-            name = "python312Packages.beancount3: init at 3.0.0";
-            url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/371541.patch";
-            hash = "sha256-A16UAioV4OYjhRmuGawA6Z4Ufl512H8owy85X2sAtts=";
-          })
         ];
       };
 
@@ -161,6 +157,15 @@
           overlays = nixpkgsConfig.overlays;
         };
       };
+
+      # System types to support.
+      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
+
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      # Nixpkgs instantiated for supported system types.
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
       homeConfigurations = {
@@ -330,7 +335,6 @@
         modules = nixosModules ++ [
           disko.nixosModules.disko
           ./hosts/server/nixos.nix
-          home-manager.nixosModules.home-manager
           {
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
