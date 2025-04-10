@@ -36,8 +36,14 @@ in
         ];
       })
       wineWowPackages.waylandFull
+      heroic
     ];
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      gamescopeSession = {
+        enable = true;
+      };
+    };
     # programs.nix-ld = {
     #   enable = true;
     #   libraries = with pkgs; [
@@ -45,6 +51,13 @@ in
     #     libGLU
     #   ] ++ (pkgs.steam-run.fhsenv.args.multiPkgs pkgs);
     # };
+
+    # needed for gamescope
+    boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+    programs.gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
 
     systemd.services.qemu-nbd-connect = {
       description = "Connect QCOW2 file using qemu-nbd";
