@@ -122,6 +122,9 @@ return {
                 }
               }
             }
+
+            lspconfig.jdtls.setup {}
+            lspconfig.pyright.setup {}
         end
     },
     {
