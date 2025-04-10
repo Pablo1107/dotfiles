@@ -100,6 +100,11 @@
     enable = true;
   };
   programs.dconf.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
+  users.users.pablo.extraGroups = [ "wireshark" ];
 
   security.polkit.enable = true;
   systemd = {
