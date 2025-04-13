@@ -95,6 +95,7 @@ in
       docker-compose
       pop # email client
       shell-gpt
+      devenv
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
