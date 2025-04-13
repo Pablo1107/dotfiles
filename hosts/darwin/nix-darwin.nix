@@ -8,24 +8,25 @@ with pkgs;
   personal.yabai.enable = true;
   personal.sketchybar.enable = false;
   personal.emacs.enable = false;
-
   personal.one.enable = true;
 
   # to fix issue with validating manuals
   # https://github.com/NixOS/nixpkgs/issues/196651
   documentation.enable = false;
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    tarball-ttl = 86400;
-    warn-dirty = false;
-    keep-derivations = true;
-    keep-outputs = true;
-    build-users-group = "nixbld";
-    system = "aarch64-darwin";
-    extra-platforms = [ "x86_64-darwin" "aarch64-linux" ];
-    trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
-  };
+  nix.enable = false;
+  # cannot set nix settings when using DetSys Nix
+  #nix.settings = {
+  #  experimental-features = [ "nix-command" "flakes" ];
+  #  tarball-ttl = 86400;
+  #  warn-dirty = false;
+  #  keep-derivations = true;
+  #  keep-outputs = true;
+  #  build-users-group = "nixbld";
+  #  system = "aarch64-darwin";
+  #  extra-platforms = [ "x86_64-darwin" "aarch64-linux" ];
+  #  trusted-users = [ "pablo" "pablo.dealbera.ctr" "@admin" ];
+  #};
 
   fonts = {
     packages = [
@@ -45,7 +46,7 @@ with pkgs;
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  # services.nix-daemon.enable = true; not needed because of DetSys Nix Daemon
   # nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
@@ -69,7 +70,7 @@ with pkgs;
     wvous-tr-corner = 1;
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
