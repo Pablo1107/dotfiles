@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     homebrew = {
       taps = [
-        "homebrew/cask-fonts"
+        #"homebrew/cask-fonts"
       ];
       brews = [
         # Organization wide packages
@@ -31,7 +31,7 @@ in
         # "wget"
         # "helm"
         "stern"
-        "vault"
+        #"hault"
         "yq" # possible installed by nix
         # python3
 
@@ -39,12 +39,12 @@ in
         "cairo"
 
         # "mysql@5.7"
-        {
-          name = "mysql@5.7";
-          restart_service = true;
-          link = true;
-          conflicts_with = [ "mysql" ];
-        }
+        #{
+        #  name = "mysql@5.7";
+        #  restart_service = true;
+        #  link = true;
+        #  conflicts_with = [ "mysql" ];
+        #}
 
         "pango"
         "redis"

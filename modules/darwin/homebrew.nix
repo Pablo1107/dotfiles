@@ -28,8 +28,6 @@ in
         upgrade = false;
       };
       taps = [
-        # "homebrew/cask" not necessary anymore
-        "homebrew/services"
       ];
       brews = [
         "pkg-config"
@@ -41,12 +39,11 @@ in
         "gnumeric"
         "hledger"
         "portaudio"
-        "postgresql"
         "wakeonlan"
       ];
       casks = [
         "firefox"
-        "zoom"
+        #"zoom"
         "google-chrome"
         "chromium"
         "insomnia"
@@ -71,6 +68,8 @@ in
         "microsoft-teams"
         "macfuse"
         "vlc"
+        "localsend"
+        "remarkable"
       ];
     };
   };
