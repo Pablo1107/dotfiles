@@ -104,6 +104,8 @@ in
                   ${pkgs.systemd}/bin/systemctl stop openrgb
                   ${pkgs.systemd}/bin/systemctl stop podman-steam-headless
                   ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision
+                  ${pkgs.systemd}/bin/systemctl stop shared.mount
+                  ${pkgs.systemd}/bin/systemctl stop qemu-nbd-connect.service
 
                   # Avoid race condition
                   sleep 2
@@ -131,6 +133,8 @@ in
                   ${pkgs.systemd}/bin/systemctl start openrgb
                   ${pkgs.systemd}/bin/systemctl start podman-steam-headless
                   ${pkgs.systemd}/bin/systemctl start podman-openedai-vision
+                  ${pkgs.systemd}/bin/systemctl start shared.mount
+                  ${pkgs.systemd}/bin/systemctl start qemu-nbd-connect.service
                   ;;
               esac
             '';
