@@ -35,12 +35,15 @@
   personal.hoarder.enable = true;
   personal.gaming.enable = true;
   personal.dawarich.enable = true;
-  personal.paisa.enable = true;
+  personal.paisa.enable = false;
   personal.samba.enable = true;
   personal.nvidia.enable = true;
   personal.steam-headless.enable = true;
   personal.openiscsi.enable = true;
   # personal.jovian.enable = true;
+  # personal.access-point = {
+  #   enable = false;
+  # };
 
   programs.mininet.enable = true;
 
