@@ -129,7 +129,6 @@
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
-        jovian.nixosModules.default
         home-manager.nixosModules.home-manager
         (hmModuleConfig system)
         { nixpkgs = nixpkgsConfig; }
