@@ -99,6 +99,14 @@
 
       myLib = import ./lib { inherit nixpkgs; };
 
+      hmModuleConfig = system: {
+        home-manager.backupFileExtension = "backup";
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.sharedModules = [ ] ++ hmModules;
+        home-manager.extraSpecialArgs = (commonSpecialArgs system);
+      };
+
       # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
       hmModules = with builtins; [
         declarative-cachix.homeManagerModules.declarative-cachix-experimental
@@ -110,15 +118,21 @@
         spicetify-nix.homeManagerModules.default
         # ./secrets/default.nix
       ] ++ (map (n: "${./modules/home-manager}/${n}") (filter (name: nixpkgs.lib.hasSuffix ".nix" name) (attrNames (readDir ./modules/home-manager))));
-      darwinModules = [
+      darwinModules = system: [
+        home-manager.darwinModules.home-manager
         agenix.darwinModules.default
+        (hmModuleConfig system)
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/darwin}/${n}") (builtins.attrNames (builtins.readDir ./modules/darwin));
-      nixosModules = [
+      nixosModules = system: [
+        disko.nixosModules.disko
         declarative-cachix.nixosModules.declarative-cachix
         chaotic.nixosModules.default
         agenix.nixosModules.default
+        jovian.nixosModules.default
         home-manager.nixosModules.home-manager
+        (hmModuleConfig system)
+        { nixpkgs = nixpkgsConfig; }
         # ./secrets/default.nix
       ] ++ map (n: "${./modules/nixos}/${n}") (builtins.attrNames (builtins.readDir ./modules/nixos));
 
@@ -136,7 +150,7 @@
         ];
       };
 
-      specialArgs = {
+      commonSpecialArgs = system: {
         inherit myLib;
         inherit inputs;
         inherit nixpkgs;
@@ -170,68 +184,22 @@
     {
       homeConfigurations = {
         pablo = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
           modules = [
             ./hosts/t14s/home.nix
-            {
-              nixpkgs = nixpkgsConfig;
-            }
-            hyprland.homeManagerModules.default
           ] ++ hmModules;
-          extraSpecialArgs = {
-            pkgs-stable = import nixpkgs-stable {
-              system = "x86_64-linux";
-              inherit (nixpkgsConfig) config overlays;
-            };
-          } // specialArgs;
-        };
+        } ++ (hmModuleConfig "x86_64-linux").home-manager;
         deck = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            inherit (nixpkgsConfig) config overlays;
-          };
           modules = [
             ./hosts/deck/home.nix
           ] ++ hmModules;
-          extraSpecialArgs = {
-            pkgs-stable = import nixpkgs-stable {
-              system = "x86_64-linux";
-              config = nixpkgsConfig.config;
-            };
-          } // specialArgs;
-        };
+        } ++ (hmModuleConfig "x86_64-linux").home-manager;
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
-        modules = darwinModules ++ [
+        commonSpecialArgs = (commonSpecialArgs system);
+        modules = (darwinModules system) ++ [
           ./hosts/darwin/nix-darwin.nix
-          home-manager.darwinModules.home-manager
           {
-            nixpkgs = nixpkgsConfig;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = specialArgs // {
-              pkgs-patched = import nixpkgs-patched {
-                inherit system;
-                config = nixpkgsConfig.config;
-                overlays = nixpkgsConfig.overlays;
-              };
-              pkgs-stable = import nixpkgs-stable {
-                inherit system;
-                config = nixpkgsConfig.config;
-                overlays = nixpkgsConfig.overlays;
-              };
-              pkgs-23_11 = import nixpkgs-23_11 {
-                inherit system;
-                config = nixpkgsConfig.config;
-                overlays = nixpkgsConfig.overlays;
-              };
-            };
             home-manager.users."pablo.dealbera.ctr" = { pkgs, ... }: {
               imports = [
                 ./hosts/darwin/home.nix
@@ -243,43 +211,18 @@
             };
           }
         ];
-        specialArgs = {
-          inherit myLib;
-          inherit inputs;
-          inherit nixpkgs;
-          rootPath = ./.;
-          pkgs-stable = import nixpkgs-stable {
-            inherit system;
-            config = nixpkgsConfig.config;
-            overlays = nixpkgsConfig.overlays;
-          };
-          pkgs-23_11 = import nixpkgs-23_11 {
-            inherit system;
-            config = nixpkgsConfig.config;
-            overlays = nixpkgsConfig.overlays;
-          };
-        };
       };
       nixOnDroidConfigurations = {
         default = nix-on-droid.lib.nixOnDroidConfiguration {
           modules = [
             ./hosts/sm-f936b/nix-on-droid.nix
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ ] ++ hmModules;
-              home-manager.extraSpecialArgs = specialArgs;
               home-manager.config = { pkgs, ... }: {
                 imports = [ ./hosts/sm-f936b/home.nix ];
               };
             }
-          ];
-          extraSpecialArgs = {
-            pkgs-stable = import nixpkgs-stable {
-              system = "aarch64-linux";
-              config = nixpkgsConfig.config;
-            };
-          } // specialArgs;
+          ] ++ (hmModuleConfig "aarch64-linux");
+          extraSpecialArgs = (commonSpecialArgs "aarch64-linux");
           # your own pkgs instance (see nix-on-droid.overlay for useful additions)
           pkgs = import nixpkgs {
             system = "aarch64-linux";
@@ -290,29 +233,18 @@
           };
         };
       };
-      nixosConfigurations.rpi = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.rpi = nixpkgs.lib.nixosSystem rec {
         system = "aarch64-linux";
-        modules = [
+        modules = (nixosModules system) ++ [
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./hosts/rpi/nixos.nix
-          home-manager.nixosModules.home-manager
           {
-            nixpkgs = nixpkgsConfig;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/rpi/home.nix ];
             };
-          }
-          {
             config = {
               # Disable zstd compression
               sdImage.compressImage = false;
-              system = {
-                stateVersion = "22.05";
-              };
             };
           }
         ];
@@ -329,24 +261,12 @@
           }
         ];
       };
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        modules = nixosModules ++ [
-          disko.nixosModules.disko
+        specialArgs = (commonSpecialArgs system);
+        modules = (nixosModules system) ++ [
           ./hosts/server/nixos.nix
           {
-            nixpkgs = nixpkgsConfig;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [ ] ++ hmModules;
-            home-manager.extraSpecialArgs = {
-              pkgs-stable = import nixpkgs-stable {
-                system = "x86_64-linux";
-                config = nixpkgsConfig.config;
-                overlays = nixpkgsConfig.overlays;
-              };
-            } // specialArgs;
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/server/home.nix ];
             };

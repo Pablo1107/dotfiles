@@ -71,5 +71,5 @@
   nix.settings.trusted-users = [ "root" "pablo" ];
 
   # hardware.enableRedistributableFirmware = true;
-  # system.stateVersion = "23.11";
+  system.stateVersion = "22.05";
 }
