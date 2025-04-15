@@ -112,7 +112,6 @@
         declarative-cachix.homeManagerModules.declarative-cachix-experimental
         impermanence.nixosModules.home-manager.impermanence
         nix-index-database.hmModules.nix-index
-        nur.modules.homeManager.default
         nixConfig
         agenix.homeManagerModules.default
         spicetify-nix.homeManagerModules.default
