@@ -16,9 +16,9 @@ in
     ];
 
     # cloudflare
-    services.cfdyndns = {
+    services.cloudflare-dyndns = {
       enable = true;
-      records = [
+      domains = [
         "sagaro.fun"
         "immich-pp.sagaro.fun"
       ];
