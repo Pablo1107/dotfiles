@@ -65,9 +65,9 @@ in
       (myLib.nixGLWrapper pkgs {
         bin = "chromium";
       })
-      (myLib.nixBothWrapper pkgs {
-        bin = "gamescope";
-      })
+      # (myLib.nixBothWrapper pkgs {
+      #   bin = "gamescope";
+      # })
       (myLib.nixGLWrapper pkgs {
         bin = "zoom";
         package = zoom-us;
