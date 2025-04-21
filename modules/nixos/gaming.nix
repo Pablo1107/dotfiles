@@ -61,14 +61,14 @@ in
 
     systemd.services.qemu-nbd-connect = {
       description = "Connect QCOW2 file using qemu-nbd";
-      before = [ "mnt-qcow2.mount" ];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.qemu-utils}/bin/qemu-nbd --connect=/dev/nbd0 ${cfg.qcow2Path}";
         ExecStop = "${pkgs.qemu-utils}/bin/qemu-nbd --disconnect /dev/nbd0";
         RemainAfterExit = true;
+        BindsTo = [ "shared.mount" ];
+        PartOf = [ "shared.mount" ];
       };
-      wantedBy = [ "multi-user.target" ];
     };
 
     boot.supportedFilesystems = [ "ntfs" ];
@@ -81,8 +81,7 @@ in
         what = "/dev/nbd0p2";
         where = "/shared";
         type = "ntfs";
-        options = "defaults";
-        wantedBy = [ "multi-user.target" ];
+        options = "defaults,uid=1000,gid=100";
       }
     ];
   };
