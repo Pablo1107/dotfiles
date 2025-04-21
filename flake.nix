@@ -288,9 +288,13 @@
         }
       );
       templates = {
-        template = {
+        default = {
           description = "My flake template";
-          path = ./template;
+          path = ./template/default;
+        };
+        python = {
+          description = "Python and Latex devenv template";
+          path = ./template/python;
         };
       };
       nixpkgs = import nixpkgs {
