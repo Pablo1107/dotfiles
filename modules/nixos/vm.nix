@@ -43,6 +43,16 @@ in
       # spiceUSBRedirection.enable = true;
     };
 
+    environment.etc = {
+      "ovmf/edk2-x86_64-secure-code.fd" = {
+        source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-x86_64-secure-code.fd";
+      };
+
+      "ovmf/edk2-i386-vars.fd" = {
+        source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-i386-vars.fd";
+      };
+    };
+
     programs.virt-manager.enable = true;
 
     environment.systemPackages = with pkgs; [
@@ -62,6 +72,15 @@ in
           autoconnect = [ "qemu:///system" ];
           uris = [ "qemu:///system" ];
         };
+      };
+    };
+
+    networking.useDHCP = false;
+    networking.interfaces."${cfg.ethInterface}".useDHCP = true;
+    networking.interfaces."${cfg.bridgeInterface}".useDHCP = true;
+    networking.bridges = {
+      "${cfg.bridgeInterface}" = {
+        interfaces = [ cfg.ethInterface ];
       };
     };
   };
