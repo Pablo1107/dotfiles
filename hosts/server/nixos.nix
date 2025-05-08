@@ -96,12 +96,19 @@
     man-pages
     man-pages-posix
     gnome-software
-    (steam.override {
-      extraPkgs = pkgs: [
-        libGLU
-      ];
-    })
   ];
+
+  services.xserver.desktopManager.xterm.enable = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs = pkgs: with pkgs; [
+        libsForQt5.full
+      ];
+    };
+  };
 
   programs.sway = {
     enable = true;
