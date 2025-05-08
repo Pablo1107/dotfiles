@@ -27,6 +27,8 @@ in
           rpc-port = 9091;
           ratio-limit = 3;
           ratio-limit-enabled = true;
+          download-dir = "/data/transmission/downloads";
+          incomplete-dir = "/data/transmission/incomplete";
         };
       };
     };
