@@ -17,7 +17,7 @@ in {
         enable = true;
         # package = ;
         openFirewall = true;
-        listenPort = 8082;
+        listenPort = 7083;
         bookmarks = [
           {
             Developer = [{
@@ -155,7 +155,7 @@ in {
       nginx.virtualHosts = createVirtualHosts {
         inherit nginxCfg;
         subdomain = "homepage";
-        port = "8082";
+        port = "7083";
       };
     };
   };
