@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     # enable NAT
     networking.nat.enable = true;
-    networking.nat.externalInterface = "enp5s0";
+    networking.nat.externalInterface = "br0";
     networking.nat.internalInterfaces = [ "wg0" ];
     networking.firewall = {
       allowedUDPPorts = [ 51820 ];
