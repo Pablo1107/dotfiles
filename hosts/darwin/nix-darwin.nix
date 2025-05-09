@@ -68,6 +68,7 @@ with pkgs;
     wvous-br-corner = 1;
     wvous-tl-corner = 1;
     wvous-tr-corner = 1;
+    mru-spaces = false;
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
