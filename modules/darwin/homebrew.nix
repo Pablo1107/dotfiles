@@ -70,6 +70,7 @@ in
         "vlc"
         "localsend"
         "remarkable"
+        "cursor"
       ];
     };
   };
