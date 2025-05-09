@@ -34,6 +34,7 @@ in
         alejandra # nix formatter
         jdt-language-server # java language server
         pyright # python language server
+        vtsls
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript
@@ -41,7 +42,6 @@ in
         vim-language-server
         prettier_d_slim
         vscode-langservers-extracted
-        pkgs.customNodePackages."@vtsls/language-server"
       ]);
     };
 
