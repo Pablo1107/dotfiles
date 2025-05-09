@@ -194,7 +194,7 @@
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
-        commonSpecialArgs = (commonSpecialArgs system);
+        specialArgs = (commonSpecialArgs system);
         modules = (darwinModules system) ++ [
           ./hosts/darwin/nix-darwin.nix
           {
