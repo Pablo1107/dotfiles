@@ -97,13 +97,13 @@ in
     # public nginx
     systemd.services."container@public-nginx" = {
       after = [
-        "docker-compose-immich-public-proxy.service"
+        "immich-public-proxy.service"
       ];
       bindsTo = [
-        "docker-compose-immich-public-proxy.service"
+        "immich-public-proxy.service"
       ];
       partOf = [
-        "docker-compose-immich-public-proxy.service"
+        "immich-public-proxy.service"
       ];
     };
 

@@ -6,6 +6,7 @@ with myLib;
 let
   cfg = config.personal.immich;
   nginxCfg = config.personal.reverse-proxy;
+  port = "2283";
 in
 {
   options.personal.immich = {
@@ -16,10 +17,24 @@ in
     services.nginx.virtualHosts =
       createVirtualHosts
         {
-          inherit nginxCfg;
+          inherit nginxCfg port;
           subdomain = "immich";
-          port = "2283";
+          # https://wiki.nixos.org/wiki/Immich#Using_Immich_behind_Nginx
+          extraLocations = {
+            "/" = {
+              proxyPass = "http://[::1]:${port}";
+              proxyWebsockets = true;
+              recommendedProxySettings = true;
+              extraConfig = ''
+                client_max_body_size 50000M;
+                proxy_read_timeout   600s;
+                proxy_send_timeout   600s;
+                send_timeout         600s;
+              '';
+            };
+          };
         };
+
 
     systemd.timers."immich-people-to-album" = {
       wantedBy = [ "timers.target" ];
@@ -44,11 +59,13 @@ in
     services.immich = {
       enable = true;
       mediaLocation = "/data/services/immich";
+      host = "::";
     };
 
     services.immich-public-proxy = {
       enable = true;
       immichUrl = "https://immich.${nginxCfg.localDomain}";
+      port = 3456;
     };
   };
 }
