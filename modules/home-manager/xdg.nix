@@ -16,7 +16,6 @@ in
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_DATA_DIRS = "$HOME/.nix-profile/share:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
-      XDG_CURRENT_DESKTOP = "sway";
     };
 
     home.packages = with pkgs; [

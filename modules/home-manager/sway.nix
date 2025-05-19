@@ -21,6 +21,10 @@ in
       xdg-utils
     ];
 
+    personal.shell.envVariables = {
+      XDG_CURRENT_DESKTOP = "sway";
+    };
+
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
       removePrefixDirectory = true;
       allowOther = true;
