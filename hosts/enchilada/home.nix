@@ -9,7 +9,7 @@ with pkgs;
   # personal modules
   # personal.emacs.enable = true;
   personal.fzf.enable = true;
-  # personal.git.enable = true;
+  personal.git.enable = true;
   # personal.gtk.enable = true;
   personal.htop.enable = true;
   personal.nix.enable = true;
