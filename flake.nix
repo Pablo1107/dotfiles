@@ -67,9 +67,12 @@
       url = "github:matthewcroughan/mobile-nixos/mc/611";
       flake = false;
     };
+    gnome-mobile = {
+      url = "github:chuangzhu/nixpkgs-gnome-mobile";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -91,6 +94,7 @@
           emacs-overlay.overlay
           nix-index-database.overlays.nix-index
           nur.overlays.default
+          gnome-mobile.overlays.default
           (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
@@ -285,18 +289,15 @@
       };
       nixosConfigurations.enchilada = nixpkgs.lib.nixosSystem rec {
         system = "aarch64-linux";
-        modules = [
+        modules = (nixosModules system) ++ [
           (import "${mobile-nixos}/lib/configuration.nix" { device = "oneplus-enchilada"; })
+          gnome-mobile.nixosModules.gnome-mobile
           ./hosts/enchilada/nixos.nix
-          # {
-          #   home-manager.users.pablo = { pkgs, ... }: {
-          #     imports = [ ./hosts/rpi/home.nix ];
-          #   };
-          #   config = {
-          #     # Disable zstd compression
-          #     sdImage.compressImage = false;
-          #   };
-          # }
+          {
+            home-manager.users.pablo = { pkgs, ... }: {
+              imports = [ ./hosts/rpi/home.nix ];
+            };
+          }
         ];
         specialArgs = (commonSpecialArgs system);
       };
