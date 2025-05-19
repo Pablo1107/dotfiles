@@ -1,6 +1,11 @@
 {
   description = "A Home Manager flake";
 
+  nixConfig = {
+    extra-substituters = [ "https://matthewcroughan.cachix.org" ];
+    extra-trusted-public-keys = [ "matthewcroughan.cachix.org-1:fON2C9BdzJlp1qPan4t5AF0xlnx8sB0ghZf8VDo7+e8=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -58,9 +63,13 @@
       url = "github:ananthakumaran/paisa";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mobile-nixos = {
+      url = "github:matthewcroughan/mobile-nixos/mc/611";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -274,6 +283,23 @@
           }
         ];
       };
+      nixosConfigurations.enchilada = nixpkgs.lib.nixosSystem rec {
+        system = "aarch64-linux";
+        modules = [
+          (import "${mobile-nixos}/lib/configuration.nix" { device = "oneplus-enchilada"; })
+          ./hosts/enchilada/nixos.nix
+          # {
+          #   home-manager.users.pablo = { pkgs, ... }: {
+          #     imports = [ ./hosts/rpi/home.nix ];
+          #   };
+          #   config = {
+          #     # Disable zstd compression
+          #     sdImage.compressImage = false;
+          #   };
+          # }
+        ];
+        specialArgs = (commonSpecialArgs system);
+      };
       devShell = myLib.forAllSystems (system:
         let
           pkgs = myLib.nixpkgsFor.${system};
@@ -301,6 +327,12 @@
         system = "x86_64-linux";
         config = nixpkgsConfig.config;
         overlays = nixpkgsConfig.overlays;
+      };
+
+      packages = {
+        "aarch64-linux" = {
+          enchilada-mobile-images = self.nixosConfigurations.enchilada.config.mobile.outputs.android.android-fastboot-images;
+        };
       };
     };
 }
