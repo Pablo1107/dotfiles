@@ -2,6 +2,7 @@
   background: none;
   /* font-family: "Hack Nerd Font", "Hack", "Material Icons", "cryptocoins", "Adwaita Mono"; */
   font-family: "Hack", "Material Icons";
+  color: #fafafa;
 }
 
 .modules-right > *:first-child > * {
@@ -36,7 +37,7 @@ tooltip,
   padding: 1px 5px 0 5px;
   margin-top: 5px;
   background-color: transparent;
-  color: #ffffff;
+  color: #fafafa;
   border-bottom: 3px solid transparent;
 }
 
@@ -59,7 +60,7 @@ window#waybar:not(.empty) #window {
   padding: 1px 5px 0 5px;
   margin-top: 5px;
   margin-left: 1px;
-  color: #ffffff;
+  color: #fafafa;
   border-bottom: 3px solid transparent;
   background-color: rgba(0,0,0,.7);
   border-radius: 3px;
@@ -78,7 +79,7 @@ window#waybar #window {
 
 #battery.critical:not(.charging) {
   background-color: #f53c3c;
-  color: #ffffff;
+  color: #fafafa;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
