@@ -122,7 +122,7 @@ in
     gnome-console
     vim
     git
-    firefox
+    firefox-mobile
   ];
 
   # programs.dconf = {
