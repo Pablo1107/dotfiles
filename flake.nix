@@ -1,11 +1,6 @@
 {
   description = "A Home Manager flake";
 
-  nixConfig = {
-    extra-substituters = [ "https://matthewcroughan.cachix.org" ];
-    extra-trusted-public-keys = [ "matthewcroughan.cachix.org-1:fON2C9BdzJlp1qPan4t5AF0xlnx8sB0ghZf8VDo7+e8=" ];
-  };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -64,15 +59,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mobile-nixos = {
-      url = "github:matthewcroughan/mobile-nixos/mc/611";
+      url = "github:mobile-nixos/mobile-nixos";
       flake = false;
     };
     gnome-mobile = {
       url = "github:chuangzhu/nixpkgs-gnome-mobile";
     };
+    nix-software-center.url = "github:snowfallorg/nix-software-center";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -95,6 +91,7 @@
           nix-index-database.overlays.nix-index
           nur.overlays.default
           gnome-mobile.overlays.default
+          nix-software-center.overlay
           (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
