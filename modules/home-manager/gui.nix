@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
 
 with lib;
 
@@ -146,6 +146,8 @@ in
           wlrobs
         ];
       })
+
+      pkgs-patched.super-productivity
     ];
   };
 }
