@@ -40,6 +40,11 @@
   personal.nvidia.enable = true;
   personal.steam-headless.enable = true;
   personal.openiscsi.enable = true;
+  personal.free-games-claimers.enable = true;
+  personal.super-productivity.enable = true;
+
+  services.davfs2.enable = true;
+
   # personal.jovian.enable = true;
   # personal.access-point = {
   #   enable = false;
@@ -69,6 +74,8 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
   };
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   networking.wireless.iwd.enable = true;
   networking.firewall.enable = false;
