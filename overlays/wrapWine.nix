@@ -13,7 +13,7 @@ with pkgs;
     { is64bits ? false
     , wine ? if is64bits then pkgs.wineWowPackages.stable else pkgs.wine
     , wineFlags ? ""
-    , executable
+    , executable ? "$1"
     , chdir ? null
     , name
     , tricks ? [ ]

@@ -96,6 +96,22 @@
     man-pages
     man-pages-posix
     gnome-software
+    (wrapWine {
+      name = "wrapWine";
+      is64bits = true;
+      tricks = [
+        "dxvk"
+        "xact"
+        "xinput"
+        "vcrun2022"
+        "vkd3d"
+        "corefonts"
+        "win10"
+        "mfc42"
+        "vcrun6sp6"
+        "corefonts"
+      ];
+    })
   ];
 
   services.xserver.desktopManager.xterm.enable = true;
