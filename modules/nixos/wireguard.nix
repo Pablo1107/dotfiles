@@ -53,7 +53,7 @@ in
             allowedIPs = [ "10.100.0.2/32" ];
           }
           { # Sofia
-            publicKey = "5Dnedbi81GpRqFj2wdan4oHYEbnh/MlKCacoXEraoDY=";
+            publicKey = "UZgq8WThQFVBsbTJWNE0p7kZGhTESQXlhOx6DRExNTU=";
             allowedIPs = [ "10.100.0.3/32" ];
           }
           { # Sofia Tablet
