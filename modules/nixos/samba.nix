@@ -32,7 +32,7 @@ in
           "path" = "/data/";
           "browseable" = "yes";
           "read only" = "no";
-          "guest ok" = "yes";
+          "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
           "force user" = "pablo";
@@ -44,6 +44,7 @@ in
     services.samba-wsdd = {
       enable = true;
       openFirewall = true;
+      interface = "br0";
     };
 
     services.avahi = {
