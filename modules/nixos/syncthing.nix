@@ -36,7 +36,7 @@ in
           folders = {
             "Android Camera" = {
               id = "sm-f936b_dkse-photos";
-              path = "/home/pablo/Android/Camera";
+              path = "/data/backups/sm-f936b_dkse-photos";
               devices = [ "SM-F936B" ];
             };
             "wiki" = {
@@ -49,16 +49,21 @@ in
               path = "/home/pablo/ledger";
               devices = [ "SM-F936B" ];
             };
+            "super-productivity" = {
+              id = "super-productivity";
+              path = "/home/pablo/super-productivity";
+              devices = [ "SM-F936B" ];
+            };
             # "org" = {
             #   id = "org";
             #   path = "/home/pablo/org";
             #   devices = [ "SM-F936B" ];
             # };
-            "Bitwig Projects" = {
-              id = "bitwig-projects";
-              path = "/home/pablo/Bitwig Studio/Projects";
-              devices = [ "t14s" ];
-            };
+            # "Bitwig Projects" = {
+            #   id = "bitwig-projects";
+            #   path = "/home/pablo/Bitwig Studio/Projects";
+            #   devices = [ "t14s" ];
+            # };
           };
         };
       };
