@@ -40,10 +40,21 @@ in
     ];
     programs.steam = {
       enable = true;
+      package = (pkgs.steam.override {
+        extraPkgs = pkgs: with pkgs; [
+          libGLU
+          libsForQt5.qt5.qtbase
+        ];
+        extraLibraries = pkgs: with pkgs; [
+          libGLU
+          libsForQt5.qt5.qtbase
+        ];
+      });
       gamescopeSession = {
         enable = true;
       };
     };
+    programs.alvr.enable = true;
     # programs.nix-ld = {
     #   enable = true;
     #   libraries = with pkgs; [
@@ -61,14 +72,22 @@ in
 
     systemd.services.qemu-nbd-connect = {
       description = "Connect QCOW2 file using qemu-nbd";
+      unitConfig = {
+        # Make sure this service is started before the mount
+        # Before = [ "shared.mount" ];
+        # After = [ "local-fs.target" ];
+        DefaultDependencies = false;
+      };
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${pkgs.qemu-utils}/bin/qemu-nbd --connect=/dev/nbd0 ${cfg.qcow2Path}";
         ExecStop = "${pkgs.qemu-utils}/bin/qemu-nbd --disconnect /dev/nbd0";
         RemainAfterExit = true;
-        BindsTo = [ "shared.mount" ];
-        PartOf = [ "shared.mount" ];
+        DefaultDependencies = false;
       };
+
+      bindsTo = [ "shared.mount" ];
+      partOf = [ "shared.mount" ];
     };
 
     boot.supportedFilesystems = [ "ntfs" ];
@@ -82,7 +101,26 @@ in
         where = "/shared";
         type = "ntfs";
         options = "defaults,uid=1000,gid=100";
+        wantedBy = [ "multi-user.target" ];
       }
     ];
+
+    hardware.xpadneo.enable = true;
+
+    hardware.bluetooth.settings = {
+      General = {
+        Privacy = "device";
+        JustWorksRepairing = "always";
+        Class = "0x000100";
+        FastConnectable = true;
+      };
+    };
+
+    boot = {
+      extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
+      extraModprobeConfig = ''
+        options bluetooth disable_ertm=Y
+      '';
+    };
   };
 }
