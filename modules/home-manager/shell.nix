@@ -161,6 +161,14 @@ in
     programs.zoxide = {
       enable = true;
     };
+
+    xresources.properties = {
+      "xterm.background" = "#1E1E2E";
+      "xterm.foreground" = "white";
+      "xterm.faceName" = "Hack";
+      "xterm.faceSize" = "12";
+      "xterm.geometry" = "95x23";
+    };
   };
 }
 
