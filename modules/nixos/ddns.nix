@@ -26,9 +26,9 @@ in
     };
 
     # fallback
-    chaotic.duckdns = {
-      enable = true;
-      domain = "sagaro";
-    };
+    # chaotic.duckdns = {
+    #   enable = true;
+    #   domain = "sagaro";
+    # };
   };
 }

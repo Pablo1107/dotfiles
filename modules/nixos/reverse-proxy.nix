@@ -66,22 +66,22 @@ in
       acceptTerms = true;
       defaults.email = "dealberapablo07@gmail.com";
       certs = {
-        "${cfg.publicDomain}" = {
-          domain = cfg.publicDomain;
-          dnsProvider = "duckdns";
-          environmentFile = "/etc/duckdns-updater/envs";
-          webroot = null;
-          group = "nginx";
-        };
-        "${legacyDomain}" = {
-          domain = legacyDomain;
-          dnsProvider = "duckdns";
-          environmentFile = "/etc/duckdns-updater/envs";
-          webroot = null;
-          extraDomainNames = [ "*.${legacyDomain}" ];
-          dnsPropagationCheck = false;
-          group = "nginx";
-        };
+        # "${cfg.publicDomain}" = {
+        #   domain = cfg.publicDomain;
+        #   dnsProvider = "duckdns";
+        #   environmentFile = "/etc/duckdns-updater/envs";
+        #   webroot = null;
+        #   group = "nginx";
+        # };
+        # "${legacyDomain}" = {
+        #   domain = legacyDomain;
+        #   dnsProvider = "duckdns";
+        #   environmentFile = "/etc/duckdns-updater/envs";
+        #   webroot = null;
+        #   extraDomainNames = [ "*.${legacyDomain}" ];
+        #   dnsPropagationCheck = false;
+        #   group = "nginx";
+        # };
         "${cfg.localDomain}" = {
           domain = cfg.localDomain;
           dnsProvider = "cloudflare";

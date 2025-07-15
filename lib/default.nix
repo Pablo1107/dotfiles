@@ -93,15 +93,15 @@ rec {
     #   };
     #   inherit extraConfig;
     # };
-    "${subdomain}.${nginxCfg.legacyDomain}" = {
-      useACMEHost = nginxCfg.legacyDomain;
-      forceSSL = true;
-      enableACME = false;
-      http2 = true;
-      locations."/" = {
-        return = "301 https://${subdomain}.${nginxCfg.localDomain}";
-      };
-    };
+    # "${subdomain}.${nginxCfg.legacyDomain}" = {
+    #   useACMEHost = nginxCfg.legacyDomain;
+    #   forceSSL = true;
+    #   enableACME = false;
+    #   http2 = true;
+    #   locations."/" = {
+    #     return = "301 https://${subdomain}.${nginxCfg.localDomain}";
+    #   };
+    # };
     "${subdomain}.${nginxCfg.localDomain}" = {
       useACMEHost = nginxCfg.localDomain;
       forceSSL = true;
