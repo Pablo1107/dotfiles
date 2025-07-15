@@ -42,6 +42,7 @@
   personal.openiscsi.enable = true;
   personal.free-games-claimers.enable = true;
   personal.super-productivity.enable = true;
+  personal.minecraft-servers.enable = true;
 
   services.davfs2.enable = true;
 

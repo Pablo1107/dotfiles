@@ -47,7 +47,7 @@
     };
     secrets = {
       # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594
-      url = "git+ssh://git@github.com/Pablo1107/nix-secrets.git";
+      url = "git+file:///home/pablo/nix-secrets";
     };
     nix-std.url = "github:chessai/nix-std";
     spicetify-nix = {
@@ -58,6 +58,10 @@
       url = "github:ananthakumaran/paisa";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mobile-nixos = {
       url = "github:mobile-nixos/mobile-nixos";
       flake = false;
@@ -66,9 +70,10 @@
       url = "github:chuangzhu/nixpkgs-gnome-mobile";
     };
     nix-software-center.url = "github:snowfallorg/nix-software-center";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -92,6 +97,7 @@
           nur.overlays.default
           gnome-mobile.overlays.default
           nix-software-center.overlay
+          nix-minecraft.overlay
           (import ./overlays/wrapWine.nix)
         ] ++ map (n: import ("${./overlays}/${n}")) (filter (file: !isNull (match ".*\.nix$" file)) (attrNames (readDir ./overlays)));
       };
@@ -139,6 +145,7 @@
         chaotic.nixosModules.default
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
+        nix-minecraft.nixosModules.default
         (hmModuleConfig system)
         { nixpkgs = nixpkgsConfig; }
         # ./secrets/default.nix
@@ -304,10 +311,10 @@
         in
         pkgs.mkShell {
           buildInputs = with pkgs; [
-            just
-            rpiboot
+            # just
+            # rpiboot
             nixos-rebuild
-            agenix.packages.${system}.default
+            # agenix.packages.${system}.default
           ];
         }
       );
@@ -327,7 +334,17 @@
         overlays = nixpkgsConfig.overlays;
       };
 
-      packages = {
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = (inputs.nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            modules = [ ./packages/nvf.nix ];
+          }).neovim;
+        }
+      ) // {
         "aarch64-linux" = {
           enchilada-mobile-images = self.nixosConfigurations.enchilada.config.mobile.outputs.android.android-fastboot-images;
         };
