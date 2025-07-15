@@ -145,7 +145,7 @@
         chaotic.nixosModules.default
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
-        nix-minecraft.nixosModules.default
+        nix-minecraft.nixosModules.minecraft-servers
         (hmModuleConfig system)
         { nixpkgs = nixpkgsConfig; }
         # ./secrets/default.nix
