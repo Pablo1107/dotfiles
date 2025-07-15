@@ -45,6 +45,8 @@
 
   services.davfs2.enable = true;
 
+  programs.java.enable = true;
+
   # personal.jovian.enable = true;
   # personal.access-point = {
   #   enable = false;
