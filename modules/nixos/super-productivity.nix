@@ -102,10 +102,10 @@ in
 
     # Ensure the state directory exists
     systemd.tmpfiles.rules = [
-      "d ${cfg.stateDir} 0755 root root - - -"
+      "d ${cfg.stateDir} 0755 root root -"
       "f ${cfg.stateDir}/webdav/config.yaml 0644 root root - - -"
-      "d ${cfg.stateDir}/webdav/data 0755 root root - - -"
-      "d ${cfg.stateDir}/webdav/sync 0755 root root - - -"
+      "d ${cfg.stateDir}/webdav/data 0755 root root -"
+      "d ${cfg.stateDir}/webdav/sync 0755 root root -"
     ];
   };
 }
