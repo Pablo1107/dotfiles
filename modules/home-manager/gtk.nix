@@ -40,8 +40,8 @@ in
       {
         enable = true;
         theme = {
-          package = pkgs.arc-theme;
-          name = "Arc-Dark";
+          # package = pkgs.arc-theme;
+          name = "Adwaita";
         };
         iconTheme = {
           name = "Adwaita";
