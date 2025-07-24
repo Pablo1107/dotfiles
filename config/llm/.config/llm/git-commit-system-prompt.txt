@@ -27,3 +27,5 @@ The scope can be infered from the files that were changed, and should be written
  - if there are multiple files changed in 'modules/<system>/' the scope must be 'modules/<system>/{name1,name2}'
 
 What you write will be passed directly to git commit -m "[message]"
+
+A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g., fix: array parsing issue when multiple spaces were contained in string.
