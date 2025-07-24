@@ -34,7 +34,7 @@
   personal.ai.enable = true;
   personal.hoarder.enable = true;
   personal.gaming.enable = true;
-  personal.dawarich.enable = true;
+  personal.dawarich.enable = false;
   personal.paisa.enable = false;
   personal.samba.enable = true;
   personal.nvidia.enable = true;
@@ -53,7 +53,7 @@
   #   enable = false;
   # };
 
-  programs.mininet.enable = true;
+  programs.niri.enable = true;
 
   hardware.graphics.enable = true;
 
