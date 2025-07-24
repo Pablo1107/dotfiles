@@ -68,10 +68,10 @@ in
 
     programs.firefox = {
       enable = true;
-      package = (myLib.nixGLWrapper pkgs {
-        bin = "firefox";
-        package = customFirefox;
-      });
+      # package = (myLib.nixGLWrapper pkgs {
+      #   bin = "firefox";
+      #   package = customFirefox;
+      # });
       profiles =
         let
           defaultSettings = {
