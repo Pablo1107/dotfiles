@@ -147,7 +147,7 @@ in
         ];
       })
 
-      pkgs-patched.super-productivity
+      super-productivity
     ];
   };
 }
