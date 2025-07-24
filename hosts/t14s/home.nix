@@ -19,7 +19,7 @@ with pkgs;
   personal.syncthing.enable = true;
   personal.xdg.enable = true;
   personal.tmux.enable = true;
-  personal.firefox.enable = true;
+  personal.firefox.enable = false;
   personal.rofi.enable = true;
   personal.shell.enable = true;
   personal.shell.envVariables = {
