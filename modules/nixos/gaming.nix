@@ -37,6 +37,7 @@ in
       })
       wineWowPackages.waylandFull
       heroic
+      yuzu
     ];
     programs.steam = {
       enable = true;
