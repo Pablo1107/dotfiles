@@ -28,4 +28,4 @@ The scope can be infered from the files that were changed, and should be written
 
 What you write will be passed directly to git commit -m "[message]"
 
-A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g., fix: array parsing issue when multiple spaces were contained in string.
+A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g., fix: array parsing issue when multiple spaces were contained in string. Note that the description should not be capitalized, and should not end with a period.
