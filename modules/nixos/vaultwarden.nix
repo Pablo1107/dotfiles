@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
 
 with lib;
 with myLib;
@@ -16,6 +16,7 @@ in
     services = {
       vaultwarden = {
         enable = true;
+        package = pkgs-patched.vaultwarden;
         dbBackend = "postgresql";
         environmentFile = "/etc/vaultwarden/envs";
         config = {
