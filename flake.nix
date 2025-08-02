@@ -162,11 +162,11 @@
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
           #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
           # })
-          (fetchpatch {
-            name = "vaultwarden: 1.34.1 -> 1.34.3; vaultwarden.webvault: 2025.5.0.0 -> 2025.7.0.0";
-            url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/429138.patch";
-            hash = "sha256-3sR1dOCbEAvOtTp4yWDzOsyu1Fq70CdhMZdOSO+6zUI=";
-          })
+          # (fetchpatch {
+          #   name = "vaultwarden: 1.34.1 -> 1.34.3; vaultwarden.webvault: 2025.5.0.0 -> 2025.7.0.0";
+          #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/429138.patch";
+          #   hash = "sha256-3sR1dOCbEAvOtTp4yWDzOsyu1Fq70CdhMZdOSO+6zUI=";
+          # })
         ];
       };
 
