@@ -18,7 +18,7 @@ in
       bitwig-studio
       amplitube5
       abpl
-      # moises-desktop # for isolating instruments
+      moises-desktop # for isolating instruments
     ];
 
     personal.yabridge = {
