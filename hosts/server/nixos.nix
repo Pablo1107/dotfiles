@@ -44,6 +44,15 @@
   personal.super-productivity.enable = true;
   personal.minecraft-servers.enable = true;
 
+  services.beesd.filesystems = {
+    data = {
+      spec = "/data";
+      hashTableSizeMB = 2048;
+      verbosity = "crit";
+      extraOptions = [ "--loadavg-target" "5.0" ];
+    };
+  };
+
   services.davfs2.enable = true;
 
   programs.java.enable = true;
