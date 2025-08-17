@@ -53,6 +53,8 @@
     };
   };
 
+  programs.droidcam.enable = true;
+
   services.davfs2.enable = true;
 
   programs.java.enable = true;

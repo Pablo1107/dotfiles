@@ -60,6 +60,18 @@
                     "compress=zstd"
                   ];
                 };
+                "/windows" = {
+                  mountpoint = "/windows";
+                  mountOptions = [
+                    "compress=zstd"
+                  ];
+                };
+                "/games" = {
+                  mountpoint = "/games";
+                  mountOptions = [
+                    "compress=zstd"
+                  ];
+                };
               };
               mountpoint = "/btrfs";
             };

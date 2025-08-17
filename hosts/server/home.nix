@@ -41,6 +41,7 @@ with pkgs;
   personal.alacritty.enable = true;
   personal.daw.enable = true;
   personal.spicetify.enable = true;
+  personal.niri.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
