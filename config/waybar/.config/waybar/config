@@ -2,6 +2,7 @@
     "layer": "top",
     "modules-left": [
 //    "hyprland/workspaces",
+      "niri/workspaces",
       "sway/workspaces",
       "sway/mode",
       "sway/window"
