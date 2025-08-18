@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Usage: niri-debug <card>
+# Example: niri-debug card1
+
+CARD="$1"
+if [ -z "$CARD" ]; then
+    echo "Usage: $0 <card>"
+    echo "Example: $0 card1"
+    exit 1
+fi
+
+BASE_CONFIG="$HOME/.config/niri/config.kdl"
+TMP_CONFIG="$(mktemp)"
+
+# Clean up the temporary file on exit
+trap 'rm -f "$TMP_CONFIG"' EXIT
+
+# Copy base config
+cat "$BASE_CONFIG" > "$TMP_CONFIG"
+
+# Append dynamic block
+cat >> "$TMP_CONFIG" <<EOF
+debug {
+    render-drm-device "/dev/dri/$CARD"
+}
+EOF
+
+# Run niri with the generated config
+exec niri --session --config "$TMP_CONFIG"
