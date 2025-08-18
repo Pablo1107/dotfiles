@@ -9,13 +9,13 @@
 
   personal.syncthing.enable = true;
   personal.immich.enable = true;
-  personal.homepage-dashboard.enable = true;
+  personal.homepage-dashboard.enable = false;
   personal.ddns.enable = true;
   personal.nix.enable = true;
   personal.reverse-proxy.enable = true;
   # personal.clone-dotfiles.enable = true;
   personal.vm.enable = true;
-  personal.cockpit.enable = true;
+  personal.cockpit.enable = false;
   personal.transmission.enable = true;
   personal.audio.enable = true;
   personal.users.enable = true;
@@ -30,7 +30,7 @@
   personal.vaultwarden.enable = true;
   personal.attic.enable = false;
   personal.uptime-kuma.enable = true;
-  personal.classquiz.enable = true;
+  personal.classquiz.enable = false;
   personal.ai.enable = true;
   personal.hoarder.enable = true;
   personal.gaming.enable = true;

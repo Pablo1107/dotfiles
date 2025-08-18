@@ -27,13 +27,13 @@ in
         package = pkgs.ollama-cuda;
         acceleration = "cuda";
       };
-      open-webui = {
-        enable = true;
-        openFirewall = true;
-        host = "0.0.0.0";
-        port = 7555;
-        package = pkgs-stable.open-webui;
-      };
+      # open-webui = {
+      #   enable = true;
+      #   openFirewall = true;
+      #   host = "0.0.0.0";
+      #   port = 7555;
+      #   package = pkgs-stable.open-webui;
+      # };
 
       nginx.virtualHosts =
         createVirtualHosts
