@@ -16,6 +16,7 @@
       "backlight",
       "pulseaudio",
       "sway/language",
+      "niri/language",
       "tray",
       "clock#date",
       "clock#time"
