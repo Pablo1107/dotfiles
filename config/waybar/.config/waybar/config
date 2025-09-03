@@ -106,7 +106,7 @@
             "default": [""]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "pwvucontrol"
     },
     "sway/workspaces": {
         "disable-scroll": true,
