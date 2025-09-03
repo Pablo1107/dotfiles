@@ -32,7 +32,7 @@ with pkgs;
   #   source /etc/profile.d/nix-daemon.sh
   # '';
   personal.vifm.enable = true;
-  personal.sway.enable = true;
+  personal.sway.enable = false;
   personal.nvim.enable = true;
   personal.npm.enable = true;
   personal.ai.enable = true;
