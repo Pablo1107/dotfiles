@@ -12,22 +12,28 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # brillo
-      # grim
-      # slurp
-      # jq
-      # wl-clipboard
-      # xdg-utils
-      gnome-keyring
+      brillo
+      grim
+      slurp
+      jq
+      wl-clipboard
+      xdg-utils
       swaybg
       xwayland-satellite
+      pwvucontrol
     ];
+
+    # this needs to be activated at NixOS level
+    # services.gnome.gnome-keyring.enable = true;
+
+    services.mako.enable = true;
 
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
       removePrefixDirectory = true;
       allowOther = true;
       files = [
         "niri/.config/niri/config.kdl"
+        "niri/.config/niri/bg.jpeg"
       ];
     };
 
