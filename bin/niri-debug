@@ -27,4 +27,4 @@ debug {
 EOF
 
 # Run niri with the generated config
-exec niri --session --config "$TMP_CONFIG"
+GSK_RENDERER=ngl NIRI_CONFIG=$TMP_CONFIG exec niri-session
