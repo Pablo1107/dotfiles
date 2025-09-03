@@ -103,14 +103,14 @@ input {
 }
 
 output "HDMI-A-1" {
-    // off
+    off
     mode "2560x1440@143.856"
     scale 1
     position x=0 y=0
 }
 
 output "HDMI-A-2" {
-    // off
+    off
     mode "2560x1440@143.856"
     scale 1
     // position x=0 y=0
@@ -124,10 +124,11 @@ output "DP-1" {
 }
 
 output "DP-2" {
-    off
+    // off
     mode "2560x1440@169.831"
     // scale 1
     position x=0 y=0
+    variable-refresh-rate
 }
 
 output "DP-3" {
@@ -293,13 +294,16 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-i" "/home/pablo/.config/sway/bg.jpeg"
+spawn-at-startup "swaybg" "-i" "/home/pablo/.config/niri/bg.jpeg"
 
 // To run things like Steam
 spawn-at-startup "xwayland-satellite"
 environment {
     DISPLAY ":0"
 }
+
+// Notification Daemon
+spawn-at-startup "mako"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
