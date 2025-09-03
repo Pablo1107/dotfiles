@@ -15,6 +15,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       (llama-cpp.override { cudaSupport = true; })
+      lmstudio
     ];
 
     personal.openedai-vision.enable = true;
