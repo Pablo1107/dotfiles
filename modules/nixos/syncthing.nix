@@ -52,7 +52,10 @@ in
             "super-productivity" = {
               id = "super-productivity";
               path = "/home/pablo/super-productivity";
-              devices = [ "SM-F936B" ];
+              devices = [
+                "SM-F936B"
+                "t14s"
+              ];
             };
             # "org" = {
             #   id = "org";
