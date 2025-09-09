@@ -116,18 +116,25 @@
       myLib = import ./lib { inherit nixpkgs; };
 
       hmModuleConfig = system: {
-        home-manager.backupFileExtension = "backup";
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.sharedModules = [ ] ++ hmModules;
-        home-manager.extraSpecialArgs = (commonSpecialArgs system);
+        home-manager = {
+          pkgs = import nixpkgs {
+            inherit system;
+            config = nixpkgsConfig.config;
+            overlays = nixpkgsConfig.overlays;
+          };
+          backupFileExtension = "backup";
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          sharedModules = [ ] ++ hmModules;
+          extraSpecialArgs = (commonSpecialArgs system);
+        };
       };
 
       # creates a list of all the modules, e.g. [ ./modules/dunst.nix ./modules/emacs.nix etc... ]
       hmModules = with builtins; [
         declarative-cachix.homeManagerModules.declarative-cachix-experimental
         impermanence.nixosModules.home-manager.impermanence
-        nix-index-database.hmModules.nix-index
+        nix-index-database.homeModules.nix-index
         nixConfig
         agenix.homeManagerModules.default
         spicetify-nix.homeManagerModules.default
@@ -199,20 +206,28 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
       # Nixpkgs instantiated for supported system types.
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system: import nixpkgs {
+        inherit system;
+        config = nixpkgsConfig.config;
+        overlays = nixpkgsConfig.overlays;
+      });
     in
     {
       homeConfigurations = {
         pablo = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgsFor.x86_64-linux;
+          extraSpecialArgs = (commonSpecialArgs "x86_64-linux");
           modules = [
             ./hosts/t14s/home.nix
           ] ++ hmModules;
-        } ++ (hmModuleConfig "x86_64-linux").home-manager;
+        };
         deck = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgsFor.x86_64-linux;
+          extraSpecialArgs = (commonSpecialArgs "x86_64-linux");
           modules = [
             ./hosts/deck/home.nix
           ] ++ hmModules;
-        } ++ (hmModuleConfig "x86_64-linux").home-manager;
+        };
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
