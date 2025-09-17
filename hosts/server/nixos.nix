@@ -38,11 +38,12 @@
   personal.paisa.enable = false;
   personal.samba.enable = true;
   personal.nvidia.enable = true;
-  personal.steam-headless.enable = true;
+  personal.steam-headless.enable = false;
   personal.openiscsi.enable = true;
-  personal.free-games-claimers.enable = true;
+  personal.free-games-claimers.enable = false;
   personal.super-productivity.enable = true;
-  personal.minecraft-servers.enable = true;
+  personal.minecraft-servers.enable = false;
+  personal.nh.enable = true;
 
   services.beesd.filesystems = {
     data = {
