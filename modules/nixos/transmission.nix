@@ -168,5 +168,16 @@ in
       KillSignal = "SIGINT";
       SuccessExitStatus = "0 156";
     };
+
+    systemd.tmpfiles.rules = let
+      Prowlarr-Indexers = pkgs.fetchFromGitHub {
+        owner = "dreulavelle";
+        repo = "Prowlarr-Indexers";
+        rev = "main";
+        sha256 = "sha256-hKCvu/TLDNDf4UyqxHYK6hrvxWtWXTXOoo3+XLDaW9A=";
+      };
+    in [
+      "L /var/lib/prowlarr/Definitions/Custom - - - - ${Prowlarr-Indexers}/Custom"
+    ];
   };
 }
