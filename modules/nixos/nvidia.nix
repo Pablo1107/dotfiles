@@ -100,12 +100,12 @@ in
               case $OPERATION in
                 prepare)
                   # Stop services that might be using the GPU
-                  ${pkgs.systemd}/bin/systemctl stop ollama
-                  ${pkgs.systemd}/bin/systemctl stop openrgb
-                  ${pkgs.systemd}/bin/systemctl stop podman-steam-headless
-                  ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision
-                  ${pkgs.systemd}/bin/systemctl stop shared.mount
-                  ${pkgs.systemd}/bin/systemctl stop qemu-nbd-connect.service
+                  ${pkgs.systemd}/bin/systemctl stop ollama || true
+                  ${pkgs.systemd}/bin/systemctl stop openrgb || true
+                  ${pkgs.systemd}/bin/systemctl stop podman-steam-headless || true
+                  ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision || true
+                  ${pkgs.systemd}/bin/systemctl stop shared.mount || true
+                  ${pkgs.systemd}/bin/systemctl stop qemu-nbd-connect.service || true
 
                   # Avoid race condition
                   sleep 2
@@ -129,12 +129,12 @@ in
                   ${pkgs.kmod}/bin/modprobe nvidia_drm nvidia_modeset nvidia_uvm nvidia
 
                   # Restart services that were using the GPU
-                  ${pkgs.systemd}/bin/systemctl start ollama
-                  ${pkgs.systemd}/bin/systemctl start openrgb
-                  ${pkgs.systemd}/bin/systemctl start podman-steam-headless
-                  ${pkgs.systemd}/bin/systemctl start podman-openedai-vision
-                  ${pkgs.systemd}/bin/systemctl start shared.mount
-                  ${pkgs.systemd}/bin/systemctl start qemu-nbd-connect.service
+                  ${pkgs.systemd}/bin/systemctl start ollama || true
+                  ${pkgs.systemd}/bin/systemctl start openrgb || true
+                  ${pkgs.systemd}/bin/systemctl start podman-steam-headless || true
+                  ${pkgs.systemd}/bin/systemctl start podman-openedai-vision || true
+                  ${pkgs.systemd}/bin/systemctl start shared.mount || true
+                  ${pkgs.systemd}/bin/systemctl start qemu-nbd-connect.service || true
                   ;;
               esac
             '';
