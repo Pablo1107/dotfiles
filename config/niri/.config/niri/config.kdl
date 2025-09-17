@@ -103,7 +103,7 @@ input {
 }
 
 output "HDMI-A-1" {
-    off
+    // off
     mode "2560x1440@143.856"
     scale 1
     position x=0 y=0
