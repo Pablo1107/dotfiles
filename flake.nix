@@ -117,11 +117,6 @@
 
       hmModuleConfig = system: {
         home-manager = {
-          pkgs = import nixpkgs {
-            inherit system;
-            config = nixpkgsConfig.config;
-            overlays = nixpkgsConfig.overlays;
-          };
           backupFileExtension = "backup";
           useGlobalPkgs = true;
           useUserPackages = true;
