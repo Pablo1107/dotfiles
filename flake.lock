@@ -1392,11 +1392,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1727399183,
-        "narHash": "sha256-neWU8xsbXzBYsJZT5q/MZGUoUQjWqaKzItCecmGHVmE=",
+        "lastModified": 1758954418,
+        "narHash": "sha256-YVveP22JFeerx5Eby4WcPnI7Q0rxRJclQl8pSdjiXPc=",
         "ref": "refs/heads/main",
-        "rev": "aac9909d59e5bc58bace59801982c6b2c33ca42d",
-        "revCount": 7,
+        "rev": "b61f9cc37b5ac01df89e21e62d61a90b1c1d4bdb",
+        "revCount": 8,
         "type": "git",
         "url": "file:///home/pablo/nix-secrets"
       },
