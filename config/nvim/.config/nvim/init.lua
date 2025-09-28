@@ -299,7 +299,7 @@ function GetRemoteUrl()
   end
 
   -- Replace the .git suffix with /blob/branch/relative_path for GitLab URLs
-  if remote_url:find('gitlab.com') then
+  if remote_url:find('github.com') then
     remote_url = remote_url:gsub('%.git$', '') .. '/blob/' .. branch .. '/' .. relative_path
   end
 
