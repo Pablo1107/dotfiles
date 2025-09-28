@@ -44,6 +44,16 @@ in
       nginx.enableSSL = false;
     };
 
+    services.gatus.settings.endpoints = [{
+      name = "Grocy";
+      url = "https://grocy." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
+
     # custom.virtualHosts.grocy = {
     #   onlyEnableTLS = true;
     # };

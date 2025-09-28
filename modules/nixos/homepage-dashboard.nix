@@ -157,6 +157,16 @@ in {
         subdomain = "homepage";
         port = "7083";
       };
+
+      gatus.settings.endpoints = [{
+        name = "Homepage Dashboard";
+        url = "https://homepage." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }];
     };
   };
 }

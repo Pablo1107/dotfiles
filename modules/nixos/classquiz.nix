@@ -90,6 +90,16 @@ in
           port = "9323";
         };
 
+    services.gatus.settings.endpoints = [{
+      name = "ClassQuiz";
+      url = "https://quiz." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
+
     # systemd.services."docker-compose-${classquiz}" = {
     #   serviceConfig = {
     #     # Stop services before in case they're running

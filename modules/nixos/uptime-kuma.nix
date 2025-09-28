@@ -27,5 +27,15 @@ in
           subdomain = "uptime";
           port = "5436";
         };
+
+    services.gatus.settings.endpoints = [{
+      name = "Uptime Kuma";
+      url = "https://uptime." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
   };
 }

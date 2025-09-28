@@ -55,6 +55,35 @@ in
             subdomain = "scriberr";
             port = "4564";
           };
+      gatus.settings.endpoints = [
+        {
+          name = "Ollama";
+          url = "https://ollama." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [
+            "[STATUS] == 200"
+            "[RESPONSE_TIME] < 300"
+          ];
+        }
+        {
+          name = "Open WebUI";
+          url = "https://open-webui." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [
+            "[STATUS] == 200"
+            "[RESPONSE_TIME] < 300"
+          ];
+        }
+        {
+          name = "Scriberr";
+          url = "https://scriberr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [
+            "[STATUS] == 200"
+            "[RESPONSE_TIME] < 300"
+          ];
+        }
+      ];
     };
 
     personal.docker-compose.scriberr = {

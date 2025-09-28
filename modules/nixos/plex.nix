@@ -82,6 +82,15 @@ in
               proxy_buffering off;
             '';
           };
+      gatus.settings.endpoints = [{
+        name = "Plex";
+        url = "https://plex." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }];
     };
   };
 }

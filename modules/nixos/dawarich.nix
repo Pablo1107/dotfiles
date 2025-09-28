@@ -21,6 +21,16 @@ in
           port = "2284";
         };
 
+    services.gatus.settings.endpoints = [{
+      name = "Dawarich";
+      url = "https://dawarich." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
+
     personal.docker-compose.dawarich = {
       stateDirectory.enable = true;
 

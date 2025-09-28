@@ -51,6 +51,15 @@ in
             subdomain = "photoprism";
             port = "2342";
           };
+      gatus.settings.endpoints = [{
+        name = "PhotoPrism";
+        url = "https://photoprism." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }];
     };
 
     fileSystems."/var/lib/private/photoprism/originals/Android" = {

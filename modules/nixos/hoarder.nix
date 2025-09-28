@@ -21,6 +21,16 @@ in
           port = "4561";
         };
 
+    services.gatus.settings.endpoints = [{
+      name = "Hoarder";
+      url = "https://hoarder." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
+
     personal.docker-compose.hoarder = rec {
       stateDirectory.enable = true;
 

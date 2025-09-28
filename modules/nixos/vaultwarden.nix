@@ -74,6 +74,15 @@ in
           }
         ];
       };
+      gatus.settings.endpoints = [{
+        name = "Bitwarden (Vaultwarden)";
+        url = "https://bitwarden." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }];
     };
   };
 }

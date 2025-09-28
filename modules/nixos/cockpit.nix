@@ -39,6 +39,15 @@ in
             subdomain = "cockpit";
             port = "9090";
           };
+      gatus.settings.endpoints = [{
+        name = "Cockpit";
+        url = "https://cockpit." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }];
     };
 
     # systemd.packages = [ (pkgs.cockpit.override { packages = with pkgs; [ virtmanager ]; }) ];

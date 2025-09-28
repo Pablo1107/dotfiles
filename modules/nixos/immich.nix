@@ -67,5 +67,15 @@ in
       immichUrl = "https://immich.${nginxCfg.localDomain}";
       port = 3456;
     };
+
+    services.gatus.settings.endpoints = [{
+      name = "Immich";
+      url = "https://immich." + nginxCfg.localDomain;
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[RESPONSE_TIME] < 300"
+      ];
+    }];
   };
 }

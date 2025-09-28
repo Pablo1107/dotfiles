@@ -44,6 +44,7 @@
   personal.super-productivity.enable = true;
   personal.minecraft-servers.enable = false;
   personal.nh.enable = true;
+  personal.gatus.enable = true;
 
   boot.extraModprobeConfig = ''
     # fix the F* keys on the Air75
