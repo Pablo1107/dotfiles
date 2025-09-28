@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, inputs, ... }:
 
 with lib;
 
@@ -19,8 +19,8 @@ in
     services.cloudflare-dyndns = {
       enable = true;
       domains = [
-        "sagaro.fun"
-        "immich-pp.sagaro.fun"
+        inputs.secrets.domains."5ab27717-dffb-4770-a992-7b3681760c2e"
+        "immich-pp.${inputs.secrets.domains."5ab27717-dffb-4770-a992-7b3681760c2e"}"
       ];
       apiTokenFile = "/etc/cfdyndns.env";
     };
