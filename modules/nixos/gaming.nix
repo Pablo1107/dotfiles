@@ -38,6 +38,7 @@ in
       wineWowPackages.waylandFull
       heroic
       yuzu
+      protonup-qt
     ];
     programs.steam = {
       enable = true;
