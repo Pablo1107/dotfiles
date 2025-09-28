@@ -45,6 +45,11 @@
   personal.minecraft-servers.enable = false;
   personal.nh.enable = true;
 
+  boot.extraModprobeConfig = ''
+    # fix the F* keys on the Air75
+    options hid_apple fnmode=0
+  '';
+
   services.beesd.filesystems = {
     data = {
       spec = "/data";
