@@ -45,11 +45,11 @@ in
       package = (pkgs.steam.override {
         extraPkgs = pkgs: with pkgs; [
           libGLU
-          libsForQt5.qt5.qtbase
+          # libsForQt5.qt5.qtbase
         ];
         extraLibraries = pkgs: with pkgs; [
           libGLU
-          libsForQt5.qt5.qtbase
+          # libsForQt5.qt5.qtbase
         ];
       });
       gamescopeSession = {

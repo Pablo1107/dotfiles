@@ -149,7 +149,7 @@
     binfmt = true;
     package = pkgs.appimage-run.override {
       extraPkgs = pkgs: with pkgs; [
-        libsForQt5.full
+        # libsForQt5.full
       ];
     };
   };

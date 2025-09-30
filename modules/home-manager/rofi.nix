@@ -20,7 +20,7 @@ in
 
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
+      package = pkgs.rofi;
       extraConfig = {
         modi = "run,ssh,drun";
         kb-row-up = "Up,Alt+k,Shift+Tab,Shift+ISO_Left_Tab";

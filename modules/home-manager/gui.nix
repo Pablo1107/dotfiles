@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
 
 with lib;
 
@@ -93,7 +93,7 @@ in
       libreoffice # office suite
       zathura # pdf viewer
       tdesktop # telegram
-      discord
+      pkgs-stable.discord
       # morgen # calendar
       pavucontrol # pulseaudio volume control
 
