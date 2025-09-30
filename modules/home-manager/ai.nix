@@ -16,6 +16,7 @@ in
         llm
         llm-ollama
       ]))
+      opencode
     ];
     # home.sessionVariables = {
     #   LOCAL_AI_API_HOST = "http://t14s.local:8080";
