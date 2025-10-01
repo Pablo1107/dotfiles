@@ -29,7 +29,6 @@
   personal.ilv-map.enable = true;
   personal.vaultwarden.enable = true;
   personal.attic.enable = false;
-  personal.uptime-kuma.enable = true;
   personal.classquiz.enable = false;
   personal.ai.enable = true;
   personal.hoarder.enable = true;
