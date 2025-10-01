@@ -77,16 +77,16 @@ in
             subdomain = "syncthing";
             port = "8384";
           };
-    };
 
-    gatus.settings.endpoints = [
-      {
-        name = "Syncthing";
-        url = "https://syncthing." + nginxCfg.localDomain;
-        interval = "5m";
-        conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
-      }
-    ];
+      gatus.settings.endpoints = [
+        {
+          name = "Syncthing";
+          url = "https://syncthing." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+      ];
+    };
 
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
