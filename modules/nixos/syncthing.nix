@@ -79,6 +79,15 @@ in
           };
     };
 
+    gatus.settings.endpoints = [
+      {
+        name = "Syncthing";
+        url = "https://syncthing." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+      }
+    ];
+
     networking.firewall = {
       allowedTCPPorts = [ 8384 22000 ];
       allowedUDPPorts = [ 22000 21027 ];

@@ -13,6 +13,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    gatus.settings.endpoints = [
+      {
+        name = "Minecraft";
+        url = "tcp://127.0.0.1:25565";
+        interval = "5m";
+        conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+      }
+    ];
+
     services.minecraft-servers = {
       enable = true;
       eula = true;

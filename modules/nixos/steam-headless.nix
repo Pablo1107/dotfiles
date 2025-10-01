@@ -20,6 +20,15 @@ in
       port = "8083";
     };
 
+    gatus.settings.endpoints = [
+      {
+        name = "Steam Headless";
+        url = "https://steam." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+      }
+    ];
+
     users.users.steam-headless = {
       uid = 600;
       isSystemUser = true;

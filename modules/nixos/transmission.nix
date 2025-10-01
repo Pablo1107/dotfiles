@@ -6,19 +6,16 @@ with myLib;
 let
   cfg = config.personal.transmission;
   nginxCfg = config.personal.reverse-proxy;
-in
-{
-  options.personal.transmission = {
-    enable = mkEnableOption "transmission";
-  };
+in {
+  options.personal.transmission = { enable = mkEnableOption "transmission"; };
 
   config = mkIf cfg.enable {
     services = {
       transmission = {
-        enable = true; #Enable transmission daemon
+        enable = true; # Enable transmission daemon
         user = "arr";
         group = "arr";
-        openRPCPort = true; #Open firewall for RPC
+        openRPCPort = true; # Open firewall for RPC
         settings = {
           rpc-authentication-required = false;
           rpc-bind-address = "0.0.0.0";
@@ -33,7 +30,7 @@ in
       };
     };
 
-    users.groups.arr = {};
+    users.groups.arr = { };
     users.users.arr.group = "arr";
     users.users.arr.isSystemUser = true;
     users.users.pablo.extraGroups = [ "transmission" "arr" ];
@@ -82,49 +79,80 @@ in
         openFirewall = true;
       };
 
-      nginx.virtualHosts =
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "transmission";
-            port = "9091";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "radarr";
-            port = "7878";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "sonarr";
-            port = "8989";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "bazarr";
-            port = "6767";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "prowlarr";
-            port = "9696";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "jellyfin";
-            port = "8096";
-          } //
-        createVirtualHosts
-          {
-            inherit nginxCfg;
-            subdomain = "jellyseerr";
-            port = "5055";
-          };
+      nginx.virtualHosts = createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "transmission";
+        port = "9091";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "radarr";
+        port = "7878";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "sonarr";
+        port = "8989";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "bazarr";
+        port = "6767";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "prowlarr";
+        port = "9696";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "jellyfin";
+        port = "8096";
+      } // createVirtualHosts {
+        inherit nginxCfg;
+        subdomain = "jellyseerr";
+        port = "5055";
+      };
+
+      gatus.settings.endpoints = [
+        {
+          name = "Transmission";
+          url = "https://transmission." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Jellyfin";
+          url = "https://jellyfin." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Radarr";
+          url = "https://radarr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Sonarr";
+          url = "https://sonarr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Bazarr";
+          url = "https://bazarr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Prowlarr";
+          url = "https://prowlarr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+        {
+          name = "Jellyseerr";
+          url = "https://jellyseerr." + nginxCfg.localDomain;
+          interval = "5m";
+          conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+        }
+      ];
     };
     virtualisation = {
       podman = {
@@ -144,12 +172,12 @@ in
           flare-solvarr = {
             image = "ghcr.io/flaresolverr/flaresolverr:latest";
             autoStart = true;
-            ports = ["127.0.0.1:8191:8191"];
+            ports = [ "127.0.0.1:8191:8191" ];
             environment = {
               LOG_LEVEL = "info";
               LOG_HTML = "false";
               CAPTCHA_SOLVER = "hcaptcha-solver";
-              TZ="America/New_York";
+              TZ = "America/New_York";
             };
           };
         };

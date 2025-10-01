@@ -34,6 +34,18 @@ in
           port = "4444";
         };
 
+    services.gatus.settings.endpoints = [
+      {
+        name = "ILV-Map";
+        url = "https://ilv-map." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }
+    ];
+
     systemd.services.ilv-map = {
       description = "ilv-map";
       wantedBy = [ "multi-user.target" ];

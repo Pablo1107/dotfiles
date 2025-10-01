@@ -39,6 +39,7 @@ in
             subdomain = "cockpit";
             port = "9090";
           };
+
       gatus.settings.endpoints = [{
         name = "Cockpit";
         url = "https://cockpit." + nginxCfg.localDomain;

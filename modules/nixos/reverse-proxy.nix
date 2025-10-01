@@ -107,6 +107,15 @@ in
       ];
     };
 
+    gatus.settings.endpoints = [
+      {
+        name = "Public Nginx";
+        url = "https://" + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
+      }
+    ];
+
     containers.public-nginx = {
       autoStart = true;
       config = { config, pkgs, lib, ... }: {

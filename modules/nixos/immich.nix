@@ -68,14 +68,34 @@ in
       port = 3456;
     };
 
-    services.gatus.settings.endpoints = [{
-      name = "Immich";
-      url = "https://immich." + nginxCfg.localDomain;
-      interval = "5m";
-      conditions = [
-        "[STATUS] == 200"
-        "[RESPONSE_TIME] < 300"
-      ];
-    }];
+    services.gatus.settings.endpoints = [
+      {
+        name = "Immich";
+        url = "https://immich." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }
+      {
+        name = "Immich Public Proxy";
+        url = "https://immich-pp." + nginxCfg.localDomain;
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }
+      {
+        name = "Immich Public Proxy [Internal Service]";
+        url = "http://localhost:3456";
+        interval = "5m";
+        conditions = [
+          "[STATUS] == 200"
+          "[RESPONSE_TIME] < 300"
+        ];
+      }
+    ];
   };
 }
