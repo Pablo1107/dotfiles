@@ -13,7 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    gatus.settings.endpoints = [
+    services.gatus.settings.endpoints = [
       {
         name = "Minecraft";
         url = "tcp://127.0.0.1:25565";

@@ -107,10 +107,10 @@ in
       ];
     };
 
-    gatus.settings.endpoints = [
+    services.gatus.settings.endpoints = [
       {
         name = "Public Nginx";
-        url = "https://" + nginxCfg.localDomain;
+        url = "https://" + cfg.localDomain;
         interval = "5m";
         conditions = [ "[STATUS] == 200" "[RESPONSE_TIME] < 300" ];
       }

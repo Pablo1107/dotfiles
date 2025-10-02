@@ -20,7 +20,7 @@ in
       port = "8083";
     };
 
-    gatus.settings.endpoints = [
+    services.gatus.settings.endpoints = [
       {
         name = "Steam Headless";
         url = "https://steam." + nginxCfg.localDomain;
