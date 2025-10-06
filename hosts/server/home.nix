@@ -42,6 +42,7 @@ with pkgs;
   personal.daw.enable = true;
   personal.spicetify.enable = true;
   personal.niri.enable = true;
+  personal.flatpak.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

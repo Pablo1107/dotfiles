@@ -71,9 +71,10 @@
     };
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -133,6 +134,7 @@
         nixConfig
         agenix.homeManagerModules.default
         spicetify-nix.homeManagerModules.default
+        nix-flatpak.homeManagerModules.nix-flatpak
         # ./secrets/default.nix
       ] ++ (map (n: "${./modules/home-manager}/${n}") (filter (name: nixpkgs.lib.hasSuffix ".nix" name) (attrNames (readDir ./modules/home-manager))));
       darwinModules = system: [
