@@ -13,13 +13,15 @@ in
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = "Pablo Andres Dealbera";
-      userEmail = "dealberapablo07@gmail.com";
-      aliases = {
-        fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add";
-        llm-commit = "!git commit -e -m \"$(git diff --staged $(git diff --staged --stat | awk '/\\|/ { if ($3 < 15) print $1 }') | llm -m $\{1:-gemma3:27b\} -s \"$(cat ~/.config/llm/git-commit-system-prompt.txt)\")\"";
-      };
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Pablo Andres Dealbera";
+          email = "dealberapablo07@gmail.com";
+        };
+        alias = {
+          fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add";
+          llm-commit = "!git commit -e -m \"$(git diff --staged $(git diff --staged --stat | awk '/\\|/ { if ($3 < 15) print $1 }') | llm -m $\{1:-gemma3:27b\} -s \"$(cat ~/.config/llm/git-commit-system-prompt.txt)\")\"";
+        };
         push.followTags = true; # always push tags when "git push"
         credential = {
           helper = "store";

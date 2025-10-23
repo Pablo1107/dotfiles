@@ -108,7 +108,7 @@ in
       shellAliases = shellAliases;
       autocd = true;
 
-      initExtra = keyBindings + shellFunctions + ''
+      initContent = keyBindings + shellFunctions + ''
         fpath+=${pkgs.pure-prompt}/share/zsh/site-functions
         autoload -U promptinit;
         promptinit

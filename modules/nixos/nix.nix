@@ -21,7 +21,7 @@ in
     };
 
     nix.gc = {
-      automatic = true;
+      automatic = !config.personal.nh.enable;
       randomizedDelaySec = "14m";
       options = "--delete-older-than 14d";
     };

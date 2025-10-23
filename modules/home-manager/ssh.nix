@@ -20,6 +20,11 @@ in
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        identitiesOnly = true;
+        user = "pablo";
+      };
       extraConfig = ''
         Host github.com
         Hostname ssh.github.com
