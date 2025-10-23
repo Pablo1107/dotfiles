@@ -148,6 +148,7 @@ in
       })
 
       super-productivity
+      thunderbird
     ];
   };
 }

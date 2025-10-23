@@ -84,7 +84,6 @@ in
     virtualisation.libvirtd = {
       enable = true;
       qemu = {
-        ovmf.enable = true;
         runAsRoot = true;
       };
       onBoot = "ignore";
