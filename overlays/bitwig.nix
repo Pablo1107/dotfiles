@@ -3,11 +3,11 @@ self: pkgs:
 with pkgs;
 
 {
-  bitwig-studio = pkgs.bitwig-studio.overrideAttrs (
+  bitwig-studio5-unwrapped = pkgs.bitwig-studio5-unwrapped.overrideAttrs (
     oldAttrs: rec {
       version = "5.0.4";
       src = pkgs.fetchurl {
-        url = "https://downloads.bitwig.com/stable/${version}/${oldAttrs.pname}-${version}.deb";
+        url = "https://downloads.bitwig.com/stable/${version}/bitwig-studio-${version}.deb";
         sha256 = "sha256-IkhUkKO+Ay1WceZNekII6aHLOmgcgGfx0hGo5ldFE5Y=";
       };
       buildInputs = with xorg; oldAttrs.buildInputs ++ [ libXrandr libXext dbus.lib ];
