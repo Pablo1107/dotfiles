@@ -80,8 +80,8 @@
       nixpkgsConfig = {
         config = {
           allowUnfree = true;
-          buildPlatform.system = "x86_64-linux";
-          hostPlatform.system = "aarch64-linux";
+          # buildPlatform.system = "x86_64-linux";
+          # hostPlatform.system = "aarch64-linux";
           # HACK: until https://github.com/NixOS/nixpkgs/issues/360592 is resolved
           # needed for sonarr
           permittedInsecurePackages = [
