@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-24_11.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -74,7 +75,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-24_11, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -185,6 +186,11 @@
           overlays = nixpkgsConfig.overlays;
         };
         pkgs-stable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config = nixpkgsConfig.config;
+          overlays = nixpkgsConfig.overlays;
+        };
+        pkgs-24_11 = import nixpkgs-24_11 {
           system = "x86_64-linux";
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
