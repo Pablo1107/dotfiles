@@ -95,7 +95,7 @@
     efiInstallAsRemovable = true;
   };
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   networking.wireless.iwd.enable = true;
   networking.firewall.enable = false;
