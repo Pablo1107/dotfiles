@@ -42,26 +42,26 @@ in
       };
     };
 
-    environment.systemPackages = with pkgs; [ targetcli ];
+    environment.systemPackages = with pkgs; [ targetcli-fb ];
 
     systemd.services.targetclid = {
       description = "iSCSI Target CLI Daemon";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.targetcli}/bin/targetclid";
+        ExecStart = "${pkgs.targetcli-fb}/bin/targetclid";
         Restart = "always";
       };
     };
 
     systemd.services.setup-iscsi-target = {
       description = "Setup iSCSI Target";
-      after = [ "targetclid.service" ];
+      after = [ "targetcli-fbd.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig.Type = "oneshot";
       script = ''
         set -e
-        if ! ${pkgs.targetcli}/bin/targetcli ls /iscsi/${cfg.targetIQN} &>/dev/null; then
+        if ! ${pkgs.targetcli-fb}/bin/targetcli ls /iscsi/${cfg.targetIQN} &>/dev/null; then
           echo "Creating iSCSI backing store"
           mkdir -p $(dirname ${cfg.backingStorePath})
           if [ ! -f ${cfg.backingStorePath} ]; then
@@ -69,7 +69,7 @@ in
           fi
 
           echo "Configuring iSCSI target"
-          ${pkgs.targetcli}/bin/targetcli <<EOF
+          ${pkgs.targetcli-fb}/bin/targetcli <<EOF
 /backstores/fileio create myfile ${cfg.backingStorePath}
 /iscsi create ${cfg.targetIQN}
 /iscsi/${cfg.targetIQN}/tpg1/luns create /backstores/fileio/myfile

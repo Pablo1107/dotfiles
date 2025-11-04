@@ -13,6 +13,7 @@ in {
     services = {
       transmission = {
         enable = true; # Enable transmission daemon
+        package = pkgs.transmission_4;
         user = "arr";
         group = "arr";
         openRPCPort = true; # Open firewall for RPC

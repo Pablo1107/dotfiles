@@ -25,7 +25,7 @@ in
         nixd
         nil
         nixpkgs-fmt
-        sumneko-lua-language-server
+        lua-language-server
         gcc
         rust-analyzer
         clang-tools

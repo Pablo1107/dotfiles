@@ -89,10 +89,10 @@ in
       eog # image viewer
       vlc # video player
       qbittorrent # torrent client
-      transmission_3-gtk # torrent client
+      transmission_4-gtk # torrent client
       libreoffice # office suite
       zathura # pdf viewer
-      tdesktop # telegram
+      telegram-desktop # telegram
       pkgs-stable.discord
       # morgen # calendar
       pavucontrol # pulseaudio volume control
@@ -119,7 +119,7 @@ in
       # Fonts
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       hack-font
       nerd-fonts.hack
       font-awesome
