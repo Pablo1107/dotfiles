@@ -3,7 +3,8 @@ self: pkgs:
 with pkgs;
 
 let
-  name = "moises-desktop";
+  pname = "moises-desktop";
+  version = "1.2.5"; # Idk if this is the version I'm using right now...
   src = fetchurl {
     url = "https://desktop.moises.ai/";
     curlOptsList = [
@@ -12,15 +13,15 @@ let
     ];
     hash = "sha256-sGfOFJaXQ3xfLRCG/CtdrVU7XrJdKWekFhbL4oMZjXs=";
   };
-  appimageContents = appimageTools.extractType2 { inherit name src; };
+  appimageContents = appimageTools.extract { inherit pname src version; };
 in {
   moises-desktop = appimageTools.wrapType2 {
-    inherit name src;
+    inherit pname src version;
     extraPkgs = pkgs: [ ];
     extraInstallCommands = ''
       install -m 444 -D ${appimageContents}/moises-desktop.desktop -t $out/share/applications
       substituteInPlace $out/share/applications/moises-desktop.desktop \
-        --replace 'Exec=AppRun' 'Exec=${name}'
+        --replace 'Exec=AppRun' 'Exec=${pname}'
       cp -r ${appimageContents}/usr/share/icons $out/share
     '';
   };
