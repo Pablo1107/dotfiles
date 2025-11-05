@@ -43,7 +43,7 @@ in
 
     services = {
       fluidsynth = {
-        enable = true;
+        enable = false;
         soundService = "pipewire-pulse";
         extraOptions = [
           "--gain 2" # more volume
