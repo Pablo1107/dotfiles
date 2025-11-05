@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
 
 with lib;
 with myLib;
@@ -25,11 +25,11 @@ in
         enable = true;
         port = 11434;
         host = "0.0.0.0";
-        package = pkgs.ollama-cuda;
+        package = pkgs-patched.ollama-cuda;
         acceleration = "cuda";
       };
       open-webui = {
-        enable = true;
+        enable = false;
         openFirewall = true;
         host = "0.0.0.0";
         port = 7555;

@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, pkgs-patched, ... }:
 
 with lib;
 
@@ -16,7 +16,7 @@ in
         llm
         llm-ollama
       ]))
-      opencode
+      pkgs-patched.opencode
     ];
     # home.sessionVariables = {
     #   LOCAL_AI_API_HOST = "http://t14s.local:8080";
