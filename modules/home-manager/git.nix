@@ -36,6 +36,68 @@ in
       lfs.enable = true;
     };
 
+    programs.zsh.siteFunctions = {
+      "git-checkout-worktree" = ''
+        branch="$1"
+        if [ -z "$branch" ]; then
+          echo "Usage: git-checkout-worktree <branch>"
+          exit 1
+        fi
+
+        if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          echo "Not inside a git repository."
+          exit 1
+        fi
+
+        repo="$(basename "$(pwd)")"
+        target="../$repo-$branch"
+
+        echo "→ Preparing worktree for '$branch' at '$target'"
+
+        # Create local branch if it doesn't exist but remote does
+        if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+          if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+            echo "→ Creating local branch from origin/$branch"
+            git branch "$branch" "origin/$branch"
+          else
+            echo "Error: branch '$branch' not found locally or remotely"
+            exit 1
+          fi
+        fi
+
+        git worktree add "$target" "$branch" || exit 1
+
+        cd "$target" || exit 1
+        echo "→ Now in $target"
+      '';
+
+      "git-remove-worktree" = ''
+        branch="$1"
+        if [ -z "$branch" ]; then
+          echo "Usage: git-remove-other <branch>"
+          exit 1
+        fi
+
+        if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          echo "Not inside a git repository."
+          exit 1
+        fi
+
+        repo="$(basename "$(pwd)")"
+        target="../$repo-$branch"
+
+        echo "→ Removing worktree for branch '$branch' at '$target'"
+
+        if [ ! -d "$target" ]; then
+          echo "Worktree directory not found: $target"
+          exit 1
+        fi
+
+        git worktree remove "$target" --force || return 1
+        echo "→ Worktree removed successfully."
+      '';
+    };
+
     home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
       removePrefixDirectory = true;
       allowOther = true;
