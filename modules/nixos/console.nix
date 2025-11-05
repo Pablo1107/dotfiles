@@ -20,7 +20,7 @@ in
       IP Address: \4{enp5s0}
     '';
     environment.etc."issue.d/ip.issue".text = "\\4\n";
-    networking.dhcpcd.runHook = "${pkgs.utillinux}/bin/agetty --reload";
+    networking.dhcpcd.runHook = "${pkgs.util-linux}/bin/agetty --reload";
 
     # Swap Caps with Escape
     services.xserver.xkb.options = "caps:swapescape";
