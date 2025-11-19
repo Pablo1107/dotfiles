@@ -191,22 +191,22 @@
         inherit nixpkgs;
         rootPath = ./.;
         pkgs-patched = import nixpkgs-patched {
-          system = "x86_64-linux";
+          inherit system;
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
         };
         pkgs-stable = import nixpkgs-stable {
-          system = "x86_64-linux";
+          inherit system;
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
         };
         pkgs-24_11 = import nixpkgs-24_11 {
-          system = "x86_64-linux";
+          inherit system;
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
         };
         pkgs-23_11 = import nixpkgs-23_11 {
-          system = "x86_64-linux";
+          inherit system;
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
         };
