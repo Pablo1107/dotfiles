@@ -18,6 +18,7 @@ in
       keep-derivations = true;
       keep-outputs = true;
       trusted-users = [ "pablo" ];
+      extra-platforms = [ "i686-linux" ];
     };
 
     nix.gc = {
