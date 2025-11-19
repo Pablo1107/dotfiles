@@ -13,7 +13,7 @@ let
     targetPkgs =
       pkgs: with pkgs; [
         hledger
-        inputs.paisa.packages.${pkgs.system}.default
+        inputs.paisa.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
     runScript = "paisa";
   };
