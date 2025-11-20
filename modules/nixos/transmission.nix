@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-stable, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-stable, root-path, ... }:
 
 with lib;
 with myLib;
@@ -198,15 +198,21 @@ in {
       SuccessExitStatus = "0 156";
     };
 
-    systemd.tmpfiles.rules = let
-      Prowlarr-Indexers = pkgs.fetchFromGitHub {
-        owner = "dreulavelle";
-        repo = "Prowlarr-Indexers";
-        rev = "main";
-        sha256 = "sha256-hKCvu/TLDNDf4UyqxHYK6hrvxWtWXTXOoo3+XLDaW9A=";
-      };
-    in [
-      "L /var/lib/prowlarr/Definitions/Custom - - - - ${Prowlarr-Indexers}/Custom"
+    # i have a directory in config/prowlarr/Custom
+    # make sure it gets linked to /var/lib/prowlarr/Definitions/Custom
+    systemd.tmpfiles.rules = [
+      "L /var/lib/prowlarr/Definitions/Custom - - - - ${config.users.users.pablo.home}/dotfiles/config/prowlarr/Custom"
     ];
+
+    # systemd.tmpfiles.rules = let
+    #   Prowlarr-Indexers = pkgs.fetchFromGitHub {
+    #     owner = "dreulavelle";
+    #     repo = "Prowlarr-Indexers";
+    #     rev = "main";
+    #     sha256 = "sha256-hKCvu/TLDNDf4UyqxHYK6hrvxWtWXTXOoo3+XLDaW9A=";
+    #   };
+    # in [
+    #   "L /var/lib/prowlarr/Definitions/Custom - - - - ${Prowlarr-Indexers}/Custom"
+    # ];
   };
 }
