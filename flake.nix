@@ -167,16 +167,16 @@
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/354969.patch";
           #   hash = "sha256-pehGTyLWQ6pxsEvNRIuRc+gtGvF7cUcP9md9G+osw3g=";
           # })
-          (fetchpatch {
-            name = "ollama: 0.12.6 -> 0.12.9";
-            url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/458349.patch";
-            hash = "sha256-ElJI2SY6d19Ulg5UYvwpJOKZNX+3LR/jk8GmrB16IFs=";
-          })
-          (fetchpatch {
-            name = "opencode: 1.0.10 -> 1.0.20";
-            url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/458411.patch";
-            hash = "sha256-vn8I0dWgFd11wqq4v1BqFqU602xw2bJeD0s49WHqk3k=";
-          })
+          # (fetchpatch {
+          #   name = "ollama: 0.12.6 -> 0.12.9";
+          #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/458349.patch";
+          #   hash = "sha256-ElJI2SY6d19Ulg5UYvwpJOKZNX+3LR/jk8GmrB16IFs=";
+          # })
+          # (fetchpatch {
+          #   name = "opencode: 1.0.10 -> 1.0.20";
+          #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/458411.patch";
+          #   hash = "sha256-vn8I0dWgFd11wqq4v1BqFqU602xw2bJeD0s49WHqk3k=";
+          # })
           # (fetchpatch {
           #   name = "vaultwarden: 1.34.1 -> 1.34.3; vaultwarden.webvault: 2025.5.0.0 -> 2025.7.0.0";
           #   url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/429138.patch";
