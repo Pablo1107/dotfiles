@@ -80,3 +80,16 @@ jq '.nodes |= map_values(if .locked.type? == "tarball" then .locked |= del(.last
 
 ## Nix 17 vs Nix 18
 https://github.com/nix-community/home-manager/issues/4692
+
+## SteamVR not launching
+First you have to run this command after installing SteamVR:
+```
+sudo setcap CAP_SYS_NICE+ep ~/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher
+```
+
+Then add this as launch option in SteamVR settings:
+```
+QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /home/pablo/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh %command%QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /home/pablo/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh %command%
+```
+
+Note the additional QT_QPA_PLATFORM=xcb at the beginning, apart from what ALVR recommends.
