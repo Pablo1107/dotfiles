@@ -89,7 +89,15 @@ sudo setcap CAP_SYS_NICE+ep ~/.local/share/Steam/steamapps/common/SteamVR/bin/li
 
 Then add this as launch option in SteamVR settings:
 ```
-QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /home/pablo/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh %command%QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /home/pablo/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh %command%
+QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json /home/pablo/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh %command%
 ```
 
+And this for every VR game you want to launch through Steam:
+```
+QT_QPA_PLATFORM=xcb __GLX_VENDOR_LIBRARY_NAME=nvidia __NV_PRIME_RENDER_OFFLOAD=1 VK_DRIVER_FILES=/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json %command%
+```
+
+
 Note the additional QT_QPA_PLATFORM=xcb at the beginning, apart from what ALVR recommends.
+
+Also note the VK_DRIVER_FILES path may vary depending on the nvidia version you have installed.
