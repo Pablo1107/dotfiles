@@ -59,6 +59,30 @@ with pkgs;
     { name = "nix-community"; sha256 = "0m6kb0a0m3pr6bbzqz54x37h5ri121sraj1idfmsrr6prknc7q3x"; }
   ];
 
+
+  # VR runtimes
+  xdg.configFile."openxr/1/active_runtime.json".source = "${pkgs.wivrn}/share/openxr/1/openxr_wivrn.json";
+
+  xdg.configFile."openvr/openvrpaths.vrpath".text = ''
+  {
+    "config" :
+    [
+      "${config.xdg.dataHome}/Steam/config"
+    ],
+    "external_drivers" : null,
+    "jsonid" : "vrpathreg",
+    "log" :
+    [
+      "${config.xdg.dataHome}/Steam/logs"
+    ],
+    "runtime" :
+    [
+      "${pkgs.opencomposite}/lib/opencomposite"
+    ],
+    "version" : 1
+  }
+'';
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

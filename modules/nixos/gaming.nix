@@ -44,10 +44,12 @@ in
       enable = true;
       package = (pkgs.steam.override {
         extraPkgs = pkgs: with pkgs; [
+          freetype
           libGLU
           # libsForQt5.qt5.qtbase
         ];
         extraLibraries = pkgs: with pkgs; [
+          freetype
           libGLU
           # libsForQt5.qt5.qtbase
         ];
@@ -268,6 +270,43 @@ in
       extraModprobeConfig = ''
         options bluetooth disable_ertm=Y
       '';
+    };
+
+    # vr
+    services.wivrn = {
+      enable = true;
+      openFirewall = true;
+
+      highPriority = true;
+
+      # Write information to /etc/xdg/openxr/1/active_runtime.json, VR applications
+      # will automatically read this and work with WiVRn (Note: This does not currently
+      # apply for games run in Valve's Proton)
+      defaultRuntime = true;
+
+      # Run WiVRn as a systemd service on startup
+      autoStart = true;
+
+      # If you're running this with an nVidia GPU and want to use GPU Encoding (and don't otherwise have CUDA enabled system wide), you need to override the cudaSupport variable.
+      package = (pkgs.wivrn.override { cudaSupport = true; });
+
+      # You should use the default configuration (which is no configuration), as that works the best out of the box.
+      # However, if you need to configure something see https://github.com/WiVRn/WiVRn/blob/master/docs/configuration.md for configuration options and https://mynixos.com/nixpkgs/option/services.wivrn.config.json for an example configuration.
+      config.json = {
+        # scale = 0.5;
+        bitrate = 130000000;
+        encoders = [
+          {
+            encoder = "nvenc";
+            codec = "h264";
+            width = 1.0;
+            height = 1.0;
+            offset_x = 0.0;
+            offset_y = 0.0;
+          }
+        ];
+        application = [ pkgs.wlx-overlay-s ];
+      };
     };
   };
 }
