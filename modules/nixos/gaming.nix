@@ -274,7 +274,7 @@ in
 
     # vr
     services.wivrn = {
-      enable = true;
+      enable = false;
       openFirewall = true;
 
       highPriority = true;
@@ -292,13 +292,15 @@ in
 
       # You should use the default configuration (which is no configuration), as that works the best out of the box.
       # However, if you need to configure something see https://github.com/WiVRn/WiVRn/blob/master/docs/configuration.md for configuration options and https://mynixos.com/nixpkgs/option/services.wivrn.config.json for an example configuration.
+      config.enable = false;
       config.json = {
-        # scale = 0.5;
-        bitrate = 130000000;
+        bitdepth = 8;
+        scale = 0.5;
+        bitrate = 80 * 1000000; # 80 Mbps
         encoders = [
           {
             encoder = "nvenc";
-            codec = "h264";
+            codec = "hevc";
             width = 1.0;
             height = 1.0;
             offset_x = 0.0;
