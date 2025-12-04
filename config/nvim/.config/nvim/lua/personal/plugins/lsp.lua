@@ -125,6 +125,7 @@ return {
 
             lspconfig.jdtls.setup {}
             lspconfig.pyright.setup {}
+            lspconfig.gopls.setup {}
         end
     },
     {

@@ -35,6 +35,7 @@ in
         jdt-language-server # java language server
         pyright # python language server
         vtsls
+        gopls
       ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript
