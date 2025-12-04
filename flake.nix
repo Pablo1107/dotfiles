@@ -2,7 +2,8 @@
   description = "A Home Manager flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-24_11.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -75,7 +76,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-24_11, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, nixpkgs-24_11, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -191,6 +192,11 @@
         inherit nixpkgs;
         rootPath = ./.;
         pkgs-patched = import nixpkgs-patched {
+          inherit system;
+          config = nixpkgsConfig.config;
+          overlays = nixpkgsConfig.overlays;
+        };
+        pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
