@@ -14,7 +14,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (llama-cpp.override { cudaSupport = true; })
+      # (llama-cpp.override { cudaSupport = true; })
       lmstudio
     ];
 
@@ -25,7 +25,7 @@ in
         enable = true;
         port = 11434;
         host = "0.0.0.0";
-        package = pkgs-patched.ollama-cuda;
+        package = pkgs.ollama-cuda;
         acceleration = "cuda";
       };
       open-webui = {
