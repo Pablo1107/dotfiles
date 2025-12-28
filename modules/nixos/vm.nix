@@ -34,7 +34,7 @@ in
       enable = true;
       allowedBridges = [ "${cfg.bridgeInterface}" ];
       qemu = {
-        package = pkgs.qemu_kvm;
+        package = pkgs.qemu-anti-detection;
         swtpm.enable = true;
         vhostUserPackages = [ pkgs.virtiofsd ];
       };
