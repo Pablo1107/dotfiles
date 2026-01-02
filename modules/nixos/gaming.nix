@@ -1,5 +1,8 @@
 { config, options, lib, myLib, pkgs, ... }:
 
+# for running steam remote play together
+# steam -pipewire
+
 with lib;
 with myLib;
 
@@ -19,7 +22,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    boot.kernelModules = [ "nbd" ];
+    boot.kernelModules = [
+      "nbd"
+      "hid-nintendo"
+    ];
 
     environment.systemPackages = with pkgs; [
       (lutris.override {
@@ -264,6 +270,8 @@ in
         FastConnectable = true;
       };
     };
+
+    services.joycond.enable = true;
 
     boot = {
       extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
