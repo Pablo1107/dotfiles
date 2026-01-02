@@ -61,6 +61,7 @@
         "format-icons": [" ", " ", " ", " ", " "]
     },
     "temperature": {
+      "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
       "critical-threshold": 80,
       "format": "{icon} {temperatureC}°C",
       "format-icons": [
@@ -72,6 +73,12 @@
       ],
       "tooltip": true
     },
+//    "custom/gpu-temp": {
+//      "exec": "/home/pablo/.config/waybar/gpu-temp.sh",
+//      "interval": 1,
+//      "format": " {}",
+//      "tooltip": true
+//    },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{icon} {percent}%",
