@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, pkgs-unstable, ... }:
 
 with lib;
 
@@ -19,7 +19,7 @@ in
       wl-clipboard
       xdg-utils
       swaybg
-      xwayland-satellite
+      pkgs-unstable.xwayland-satellite # 0.8 https://github.com/Supreeeme/xwayland-satellite/commit/04816e2a3634087db3de39043fcc9db2afcb0c44
       pwvucontrol
     ];
 
