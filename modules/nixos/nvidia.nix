@@ -99,12 +99,12 @@ in
               case $OPERATION in
                 prepare)
                   # Stop services that might be using the GPU
-                  ${pkgs.systemd}/bin/systemctl stop ollama || true
-                  ${pkgs.systemd}/bin/systemctl stop openrgb || true
-                  ${pkgs.systemd}/bin/systemctl stop podman-steam-headless || true
-                  ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision || true
-                  ${pkgs.systemd}/bin/systemctl stop shared.mount || true
-                  ${pkgs.systemd}/bin/systemctl stop qemu-nbd-connect.service || true
+                  ${pkgs.systemd}/bin/systemctl stop ollama 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl stop openrgb 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl stop podman-steam-headless 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl stop podman-openedai-vision 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl stop shared.mount 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl stop qemu-nbd-connect.service 2>/dev/null || true
 
                   # Avoid race condition
                   sleep 2
@@ -128,12 +128,12 @@ in
                   ${pkgs.kmod}/bin/modprobe nvidia_drm nvidia_modeset nvidia_uvm nvidia
 
                   # Restart services that were using the GPU
-                  ${pkgs.systemd}/bin/systemctl start ollama || true
-                  ${pkgs.systemd}/bin/systemctl start openrgb || true
-                  ${pkgs.systemd}/bin/systemctl start podman-steam-headless || true
-                  ${pkgs.systemd}/bin/systemctl start podman-openedai-vision || true
-                  ${pkgs.systemd}/bin/systemctl start shared.mount || true
-                  ${pkgs.systemd}/bin/systemctl start qemu-nbd-connect.service || true
+                  ${pkgs.systemd}/bin/systemctl start ollama 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl start openrgb 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl start podman-steam-headless 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl start podman-openedai-vision 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl start shared.mount 2>/dev/null || true
+                  ${pkgs.systemd}/bin/systemctl start qemu-nbd-connect.service 2>/dev/null || true
                   ;;
               esac
             '';
