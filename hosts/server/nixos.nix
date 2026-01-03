@@ -1,4 +1,4 @@
-{ modulesPath, config, lib, pkgs, ... }:
+{ modulesPath, config, lib, pkgs, packages, ... }:
 
 {
   imports = [
@@ -139,6 +139,7 @@
         "corefonts"
       ];
     })
+    packages.somewm
   ];
 
   services.xserver.desktopManager.xterm.enable = true;

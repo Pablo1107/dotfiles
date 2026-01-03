@@ -216,6 +216,7 @@
           config = nixpkgsConfig.config;
           overlays = nixpkgsConfig.overlays;
         };
+        packages = self.packages.${system};
       };
 
       # System types to support.
@@ -382,6 +383,8 @@
             inherit pkgs;
             modules = [ ./packages/nvf.nix ];
           }).neovim;
+        } // {
+          somewm = pkgs.callPackage ./packages/somewm.nix { };
         }
       ) // {
         "aarch64-linux" = {
