@@ -102,12 +102,12 @@ input {
     position x=1280 y=0
 }
 
-output "HDMI-A-1" {
-    // off
-    mode "2560x1440@143.856"
-    scale 1
-    position x=0 y=0
-}
+// output "HDMI-A-1" {
+//     off
+//     mode "2560x1440@143.856"
+//     scale 1
+//     position x=0 y=0
+// }
 
 output "HDMI-A-2" {
     off
@@ -116,12 +116,12 @@ output "HDMI-A-2" {
     // position x=0 y=0
 }
 
-output "DP-1" {
-    off
-    mode "2560x1440@169.831"
-    scale 1
-    position x=0 y=0
-}
+// output "DP-1" {
+//     off
+//     mode "2560x1440@169.831"
+//     scale 1
+//     position x=0 y=0
+// }
 
 output "DP-2" {
     // off
@@ -131,12 +131,12 @@ output "DP-2" {
     variable-refresh-rate
 }
 
-output "DP-3" {
-    off
-    mode "2560x1440@169.831"
-    scale 1
-    // position x=0 y=0
-}
+// output "DP-3" {
+//     off
+//     mode "2560x1440@169.831"
+//     scale 1
+//     // position x=0 y=0
+// }
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
