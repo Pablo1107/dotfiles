@@ -18,12 +18,18 @@ in
       type = types.str;
       default = "enp5s0";
     };
+
+    wlanInterface = mkOption {
+      type = types.str;
+      default = "wlan0";
+    };
   };
 
   config = mkIf cfg.enable {
     boot = {
       kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
       kernelParams = [ "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "initcall_blacklist=sysfb_init" "vfio_iommu_type1.allow_unsafe_interrupts=1" "kvm.ignore_msrs=1" ];
+      # kernelParams = [ "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "initcall_blacklist=sysfb_init" "vfio_iommu_type1.allow_unsafe_interrupts=1" "kvm.ignore_msrs=1" "hugepages=16384" ]; hugepages
       # kernelParams = [ "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "initcall_blacklist=sysfb_init" "video=simplefb:off" "video=vesafb:off" "video=efifb:off" "video=vesa:off" "disable_vga=1" "vfio_iommu_type1.allow_unsafe_interrupts=1" "kvm.ignore_msrs=1" "modprobe.blacklist=radeon,nouveau,nvidia,nvidiafb,nvidia-gpu,snd_hda_intel,snd_hda_codec_hdmi,i915" ];
       # extraModprobeConfig = "options vfio-pci ids=8086:a780,8086:7ad0,8086:7a86,8086:7aa3,8086:7aa4";
     };
@@ -34,7 +40,7 @@ in
       enable = true;
       allowedBridges = [ "${cfg.bridgeInterface}" ];
       qemu = {
-        package = pkgs.qemu-anti-detection;
+        # package = pkgs.qemu-anti-detection;
         swtpm.enable = true;
         vhostUserPackages = [ pkgs.virtiofsd ];
       };
@@ -76,9 +82,13 @@ in
     networking.useDHCP = false;
     networking.interfaces."${cfg.ethInterface}".useDHCP = true;
     networking.interfaces."${cfg.bridgeInterface}".useDHCP = true;
+    networking.interfaces."${cfg.wlanInterface}".useDHCP = true;
     networking.bridges = {
       "${cfg.bridgeInterface}" = {
-        interfaces = [ cfg.ethInterface ];
+        interfaces = [
+          cfg.ethInterface
+          cfg.wlanInterface
+        ];
       };
     };
   };
