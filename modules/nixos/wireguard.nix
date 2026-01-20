@@ -72,6 +72,10 @@ in
             publicKey = "IE68MmDZCef9+52PQz0hZbQMD2WAF0j5EE2Lz+03exc=";
             allowedIPs = [ "10.100.0.7/32" ];
           }
+          { # Router
+            publicKey = "xXXezRtXCcxs0Pfg8qy4eaqq6xeHXK9L4KmWUYlIhjo=";
+            allowedIPs = [ "10.100.0.8/32" ];
+          }
         ];
       };
     };
