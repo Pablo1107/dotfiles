@@ -1,0 +1,59 @@
+--- a/arch/x86/kvm/svm/svm.c	2024-01-21 18:15:10.547933507 +0100
++++ b/arch/x86/kvm/svm/svm.c	2024-01-21 18:20:17.163657429 +0100
+@@ -1300,6 +1300,7 @@
+ 	svm_set_intercept(svm, INTERCEPT_XSETBV);
+ 	svm_set_intercept(svm, INTERCEPT_RDPRU);
+ 	svm_set_intercept(svm, INTERCEPT_RSM);
++  svm_set_intercept(svm, INTERCEPT_RDTSC); // This was added
+
+ 	if (!kvm_mwait_in_guest(vcpu->kvm)) {
+ 		svm_set_intercept(svm, INTERCEPT_MONITOR);
+@@ -3253,6 +3254,42 @@
+ 	return kvm_handle_invpcid(vcpu, type, gva);
+ }
+
++static u32 print_once = 1;
++
++static int handle_rdtsc_interception(struct kvm_vcpu *vcpu)
++{
++    static u64 rdtsc_fake = 0;
++	static u64 rdtsc_prev = 0;
++	u64 rdtsc_real = rdtsc();
++
++	if(print_once)
++	{
++		printk("[handle_rdtsc] GOODIX PATCH is working 8) we balling xiaoma GLORY TO THE CCP, NETEZOS PC INITIALIZED, CUSTOM GAMING TURBO LINUX LOADED \n");
++		print_once = 0;
++		rdtsc_fake = rdtsc_real;
++	}
++
++	if(rdtsc_prev != 0)
++	{
++		if(rdtsc_real > rdtsc_prev)
++		{
++			u64 diff = rdtsc_real - rdtsc_prev;
++			u64 fake_diff =  diff / 20; // if you have 3.2Ghz on your vm, change 20 to 16
++			rdtsc_fake += fake_diff;
++		}
++	}
++	if(rdtsc_fake > rdtsc_real)
++	{
++		rdtsc_fake = rdtsc_real;
++	}
++	rdtsc_prev = rdtsc_real;
++
++	vcpu->arch.regs[VCPU_REGS_RAX] = rdtsc_fake & -1u;
++    	vcpu->arch.regs[VCPU_REGS_RDX] = (rdtsc_fake >> 32) & -1u;
++
++    	return svm_skip_emulated_instruction(vcpu);
++}
++
+ static int (*const svm_exit_handlers[])(struct kvm_vcpu *vcpu) = {
+ 	[SVM_EXIT_READ_CR0]			= cr_interception,
+ 	[SVM_EXIT_READ_CR3]			= cr_interception,
+@@ -3376,6 +3377,7 @@
+ #endif
++    [SVM_EXIT_RDTSC]			= handle_rdtsc_interception, // this was added
+ };
+
+ static void dump_vmcb(struct kvm_vcpu *vcpu)
