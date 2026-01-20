@@ -24,7 +24,6 @@ in
   config = mkIf cfg.enable {
     boot.kernelModules = [
       "nbd"
-      "hid-nintendo"
     ];
 
     environment.systemPackages = with pkgs; [
@@ -43,7 +42,7 @@ in
       })
       wineWowPackages.waylandFull
       heroic
-      # yuzu
+      yuzu
       protonup-qt
     ];
     programs.steam = {
@@ -268,6 +267,9 @@ in
         JustWorksRepairing = "always";
         Class = "0x000100";
         FastConnectable = true;
+        ClassicBondedOnly = false;
+        UserspaceHID = false;
+        LEAutoSecurity = false;
       };
     };
 
