@@ -9,7 +9,7 @@ with pkgs;
 
     src = fetchurl {
       url =
-        "https://archive.org/download/citra-qt-and-yuzu-EA/Linux-Yuzu-EA-4176.AppImage";
+        "https://github.com/exverge-0/yuzu-EA4176/releases/download/ea-4176/Linux-Yuzu-EA-4176.AppImage";
       sha256 = "sha256-bUTVL8br2POy5HB1FszlNQNChdRWcwIlG6/RCceXIlg=";
     };
 
