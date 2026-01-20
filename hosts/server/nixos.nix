@@ -45,6 +45,13 @@
   personal.nh.enable = true;
   personal.gatus.enable = true;
 
+  # boot.kernelPatches = [
+  #   {
+  #     name = "rdtsc";
+  #     patch = ../../patches/rdtsc.patch;
+  #   }
+  # ];
+
   boot.extraModprobeConfig = ''
     # fix the F* keys on the Air75
     options hid_apple fnmode=0
@@ -140,6 +147,7 @@
       ];
     })
     packages.somewm
+    shortix
   ];
 
   services.xserver.desktopManager.xterm.enable = true;
