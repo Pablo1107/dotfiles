@@ -51,12 +51,14 @@ in
         extraPkgs = pkgs: with pkgs; [
           freetype
           libGLU
-          # libsForQt5.qt5.qtbase
+          libsForQt5.qt5.qtbase
+          SDL2
         ];
         extraLibraries = pkgs: with pkgs; [
           freetype
           libGLU
-          # libsForQt5.qt5.qtbase
+          libsForQt5.qt5.qtbase
+          SDL2
         ];
       });
       gamescopeSession = {
