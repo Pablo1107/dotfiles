@@ -14,6 +14,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    # changed from 2026-01-03 made this option mandatory
+    # https://github.com/nixos/nixpkgs/issues/478320
+    # https://github.com/NixOS/nixpkgs/pull/475112
+    services.cgit.git.gitHttpBackend.checkExportOkFiles = false;
+
     services.cgit.git = {
       enable = true;
       nginx.virtualHost = domain;
