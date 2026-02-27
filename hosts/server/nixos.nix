@@ -23,7 +23,7 @@
   personal.avahi.enable = true;
   personal.localization.enable = true;
   personal.copySystemConfiguration.enable = true;
-  personal.git-server.enable = true;
+  # personal.git-server.enable = true;
   personal.grocy.enable = true;
   personal.wireguard.enable = true;
   personal.ilv-map.enable = true;
