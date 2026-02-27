@@ -11,6 +11,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    # SteamVR not setting OpenXR runtime
+    xdg.configFile."openxr/1/active_runtime.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.local/share/Steam/steamapps/common/SteamVR/steamxr_linux64.json";
+
     # SteamVR not installing correctly desktop files
     xdg.desktopEntries = {
       valve-URI-steamvr = {
@@ -26,7 +29,7 @@ in
       valve-URI-vrmonitor = {
         name = "URI-vrmonitor";
         comment = "URI handler for vrmonitor://";
-        exec = "\"${config.home.homeDirectory}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/../vrmonitor.sh\" %U";
+        exec = "\"${config.home.homeDirectory}/.local/share/Steam/steamapps/common/SteamVR/bin/vrmonitor.sh\" %U";
         terminal = false;
         type = "Application";
         categories = [ "Game" ];
