@@ -79,17 +79,17 @@ in
       };
     };
 
-    networking.useDHCP = false;
-    networking.interfaces."${cfg.ethInterface}".useDHCP = true;
-    networking.interfaces."${cfg.bridgeInterface}".useDHCP = true;
-    networking.interfaces."${cfg.wlanInterface}".useDHCP = true;
-    networking.bridges = {
-      "${cfg.bridgeInterface}" = {
-        interfaces = [
-          cfg.ethInterface
-          cfg.wlanInterface
-        ];
-      };
-    };
+    # networking.useDHCP = false;
+    # networking.interfaces."${cfg.ethInterface}".useDHCP = true;
+    # networking.interfaces."${cfg.bridgeInterface}".useDHCP = true;
+    # networking.interfaces."${cfg.wlanInterface}".useDHCP = true;
+    # networking.bridges = {
+    #   "${cfg.bridgeInterface}" = {
+    #     interfaces = [
+    #       cfg.ethInterface
+    #       cfg.wlanInterface
+    #     ];
+    #   };
+    # };
   };
 }

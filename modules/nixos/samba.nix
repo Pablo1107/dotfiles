@@ -44,7 +44,7 @@ in
     services.samba-wsdd = {
       enable = true;
       openFirewall = true;
-      interface = "br0";
+      interface = "enp5s0";
     };
 
     services.avahi = {
