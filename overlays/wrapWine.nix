@@ -11,7 +11,7 @@ with pkgs;
       inherit (lib) makeBinPath;
     in
     { is64bits ? false
-    , wine ? if is64bits then pkgs.wineWowPackages.stable else pkgs.wine
+    , wine ? if is64bits then pkgs.wineWowPackages.waylandFull else pkgs.wineWayland
     , wineFlags ? ""
     , executable ? "$1"
     , chdir ? null
