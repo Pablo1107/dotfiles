@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-patched, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-unstable, pkgs-patched, ... }:
 
 with lib;
 
@@ -95,7 +95,7 @@ in
       docker-compose
       pop # email client
       shell-gpt
-      devenv
+      pkgs-unstable.devenv
     ];
     home.sessionVariables = mkMerge [ sessionVariables cfg.envVariables ];
     home.sessionPath = cfg.path;
@@ -153,7 +153,7 @@ in
       nix-direnv.enable = true;
     };
 
-    programs.nix-index.enable = true;
+    programs.nix-index.enable = false; # do not use nix-index as it conflicts with nix-index-database
     programs.nix-index-database = {
       comma.enable = true;
     };
