@@ -20,7 +20,7 @@
     nix-on-droid.url = "github:t184256/nix-on-droid";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence.url = "github:nix-community/impermanence/home-manager-v1";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -152,6 +152,7 @@
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
         nix-minecraft.nixosModules.minecraft-servers
+        # impermanence.nixosModules.impermanence
         (hmModuleConfig system)
         { nixpkgs = nixpkgsConfig; }
         # ./secrets/default.nix
