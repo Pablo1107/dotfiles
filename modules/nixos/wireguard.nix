@@ -73,7 +73,7 @@ in
             allowedIPs = [ "10.100.0.7/32" ];
           }
           { # Router
-            publicKey = "xXXezRtXCcxs0Pfg8qy4eaqq6xeHXK9L4KmWUYlIhjo=";
+            publicKey = "FTuUmk0c8GJskCz6RRtaFz9t9PXiWB7PTxNm2O4gJhI=";
             allowedIPs = [ "10.100.0.8/32" ];
           }
         ];
