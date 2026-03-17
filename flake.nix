@@ -249,6 +249,19 @@
             ./hosts/deck/home.nix
           ] ++ hmModules;
         };
+        darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgsFor.aarch64-darwin;
+          extraSpecialArgs = (commonSpecialArgs "aarch64-darwin");
+          modules = [
+	    ./hosts/darwin/home.nix
+            {
+              home = {
+                username = "pablo.dealbera";
+                homeDirectory = "/Users/pablo.dealbera";
+              };
+            }
+          ] ++ hmModules;
+        };
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
