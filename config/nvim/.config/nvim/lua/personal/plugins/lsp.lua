@@ -37,14 +37,11 @@ return {
             -- map('n', '[d', vim.lsp.diagnostic.goto_prev, { noremap = true, silent = true })
             -- map('n', ']d', vim.lsp.diagnostic.goto_next, { noremap = true, silent = true })
 
-            local lspconfig = require('lspconfig')
-            local util = require('lspconfig/util')
-
             local prettierd = {
                 formatCommand = "prettier_d_slim --stdin --stdin-filepath ${INPUT}",
                 formatStdin = true
             }
-            lspconfig.efm.setup {
+            vim.lsp.config("efm", {
                 init_options = {
                     documentFormatting = true
                 },
@@ -63,9 +60,10 @@ return {
                     "typescriptreact",
                     "javascriptreact",
                 }
-            }
+            })
+            vim.lsp.enable('efm')
 
-            lspconfig.lua_ls.setup {
+            vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
                         runtime = {
@@ -86,12 +84,13 @@ return {
                         },
                     },
                 },
-            }
+            })
+            vim.lsp.enable('lua_ls')
 
             -- lspconfig.ts_ls.setup {}
             -- lspconfig.vtsls.setup{}
             -- lspconfig.rnix.setup {}
-            lspconfig.nixd.setup({
+            vim.lsp.config("nixd", {
                 settings = {
                     nixd = {
                         formatting = {
@@ -100,12 +99,17 @@ return {
                     }
                 }
             })
-            -- lspconfig.nil_ls.setup{}
-            lspconfig.vimls.setup {}
-            lspconfig.clangd.setup {}
+            vim.lsp.enable('nixd')
 
-            -- lspconfig.eslint.setup({
-            --     --- ...
+
+            -- vim.lsp.config("nil_ls",
+            vim.lsp.config("vimls", {})
+            vim.lsp.enable('vimls')
+            vim.lsp.config("clangd", {})
+            vim.lsp.enable('clangd')
+
+            -- vim.lsp.config("eslint",
+            --     --- ...)
             --     on_attach = function(_, bufnr)
             --         vim.api.nvim_create_autocmd("BufWritePre", {
             --             buffer = bufnr,
@@ -113,7 +117,7 @@ return {
             --         })
             --     end,
             -- })
-            lspconfig.rust_analyzer.setup{
+            vim.lsp.config("rust_analyzer", {
               settings = {
                 ['rust-analyzer'] = {
                   diagnostics = {
@@ -121,11 +125,15 @@ return {
                   }
                 }
               }
-            }
+            })
+            vim.lsp.enable('rust_analyzer')
 
-            lspconfig.jdtls.setup {}
-            lspconfig.pyright.setup {}
-            lspconfig.gopls.setup {}
+            vim.lsp.config("jdtls", {})
+            vim.lsp.enable('jdtls')
+            vim.lsp.config("pyright", {})
+            vim.lsp.enable('pyright')
+            vim.lsp.config("gopls", {})
+            vim.lsp.enable('gopls')
         end
     },
     {
@@ -185,14 +193,14 @@ return {
 
             -- Setup lspconfig.
             -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            -- require('lspconfig')['ts_ls'].setup {
+            -- vim.lsp.config("ts_ls", {
             --     capabilities = capabilities
-            -- }
-            -- -- require('lspconfig')['vtsls'].setup {
+            -- })
+            -- -- vim.lsp.config("vtsls", {
             -- --     capabilities = capabilities
-            -- -- }
+            -- -- })
             --
-            -- require('lspconfig').asm_lsp.setup {}
+            -- vim.lsp.config("asm_lsp", {})
         end
     },
     {
