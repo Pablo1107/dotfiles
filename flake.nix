@@ -262,6 +262,19 @@
             }
           ] ++ hmModules;
         };
+        codespace = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgsFor.x86_64-linux;
+          extraSpecialArgs = (commonSpecialArgs "x86_64-linux");
+          modules = [
+	    ./hosts/codespace/home.nix
+            {
+              home = {
+                username = "codespace";
+                homeDirectory = "/home/codespace";
+              };
+            }
+          ] ++ hmModules;
+        };
       };
       darwinConfigurations.FQ3VX4RWV4 = darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
