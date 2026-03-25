@@ -63,7 +63,7 @@ in
       '')
     ];
 
-    home.persistence."${config.home.homeDirectory}/dotfiles/config" = {
+    home.persistence."${config.personal.dotfiles.path}" = {
       removePrefixDirectory = true;
       allowOther = true;
       files = [

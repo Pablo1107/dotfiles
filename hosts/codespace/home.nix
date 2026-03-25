@@ -7,6 +7,8 @@ with pkgs;
   programs.home-manager.enable = true;
 
   # personal modules
+  personal.dotfiles.path = "/workspaces/.codespaces/.persistedshare/dotfiles/config";
+
   personal.fzf.enable = true;
   personal.git.enable = true;
   personal.nix.enable = true;
