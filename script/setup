@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="/workspaces/.codespaces/.persistedshare/dotfiles"
+FLAKE_TARGET="${DOTFILES_DIR}#codespace"
+NIX_INSTALL_SCRIPT="https://raw.githubusercontent.com/devcontainers/features/main/src/nix/install.sh"
+
+# Install Nix if not present
+if ! command -v nix &>/dev/null; then
+  echo "Installing Nix..."
+  curl -sSL "$NIX_INSTALL_SCRIPT" -o /tmp/nix-install.sh
+  sudo VERSION="latest" \
+       MULTIUSER="true" \
+       EXTRANIXCONFIG="experimental-features = nix-command flakes" \
+       bash /tmp/nix-install.sh
+  rm /tmp/nix-install.sh
+
+  # Start daemon and source nix into current shell
+  if [ -e /usr/local/share/nix-entrypoint.sh ]; then
+    # shellcheck disable=SC1091
+    . /usr/local/share/nix-entrypoint.sh
+  elif [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+    # shellcheck disable=SC1091
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  fi
+fi
+
+echo "Running home-manager switch for codespace host..."
+nix run nixpkgs#home-manager -- switch --flake "${FLAKE_TARGET}" --impure -b backup
