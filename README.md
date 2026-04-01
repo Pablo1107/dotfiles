@@ -65,6 +65,14 @@ nix flake init -t ~/dotfiles\#template
 ```
 
 # Some known issues
+## nix flake update GitHub API rate limit
+
+### Solution: use your GitHub token
+
+```bash
+nix flake update --option access-tokens "github.com=<your-token>"
+```
+
 ## unsupported tarball input
 
 ```
