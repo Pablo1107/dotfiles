@@ -1516,11 +1516,11 @@
         "rev": "b61f9cc37b5ac01df89e21e62d61a90b1c1d4bdb",
         "revCount": 8,
         "type": "git",
-        "url": "file:///Users/pablo.dealbera/nix-secrets"
+        "url": "file:///home/pablo/nix-secrets"
       },
       "original": {
         "type": "git",
-        "url": "file:///Users/pablo.dealbera/nix-secrets"
+        "url": "file:///home/pablo/nix-secrets"
       }
     },
     "spicetify-nix": {

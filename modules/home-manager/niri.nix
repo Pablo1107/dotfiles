@@ -28,7 +28,7 @@ in
 
     services.mako.enable = true;
 
-    home.persistence."${config.personal.dotfiles.path}" = {
+    home.persistence."${config.personal.dotfiles.path}/config" = {
       removePrefixDirectory = true;
       allowOther = true;
       files = [

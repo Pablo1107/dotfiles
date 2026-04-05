@@ -37,7 +37,7 @@ in
     };
 
 
-    home.persistence."${config.personal.dotfiles.path}" = mkIf cfg.withAuthorizationKeys {
+    home.persistence."${config.personal.dotfiles.path}/config" = mkIf cfg.withAuthorizationKeys {
       removePrefixDirectory = true;
       allowOther = true;
       files = [

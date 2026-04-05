@@ -52,7 +52,7 @@ in
       paths = (pkgs.vimPlugins.nvim-treesitter.withAllGrammars).dependencies;
     }}/parser";
 
-    home.persistence."${config.personal.dotfiles.path}" = {
+    home.persistence."${config.personal.dotfiles.path}/config" = {
       removePrefixDirectory = true;
       allowOther = true;
       files = [
