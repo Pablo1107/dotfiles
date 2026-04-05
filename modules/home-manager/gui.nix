@@ -92,7 +92,7 @@ in
       transmission_4-gtk # torrent client
       libreoffice # office suite
       zathura # pdf viewer
-      # telegram-desktop # telegram (failling to build)
+      telegram-desktop # telegram
       pkgs-stable.discord
       # morgen # calendar
       pavucontrol # pulseaudio volume control
