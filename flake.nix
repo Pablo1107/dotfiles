@@ -317,16 +317,16 @@
       };
       nixosConfigurations.rpi = nixpkgs.lib.nixosSystem rec {
         system = "aarch64-linux";
+        specialArgs = (commonSpecialArgs system);
         modules = (nixosModules system) ++ [
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./hosts/rpi/nixos.nix
           {
+            # Disable zstd compression
+            sdImage.compressImage = false;
+
             home-manager.users.pablo = { pkgs, ... }: {
               imports = [ ./hosts/rpi/home.nix ];
-            };
-            config = {
-              # Disable zstd compression
-              sdImage.compressImage = false;
             };
           }
         ];
