@@ -63,6 +63,7 @@ in
           gtk-xft-hintstyle="${extraConfig.gtk-xft-hintstyle}"
         '';
         gtk3.extraConfig = extraConfig;
+        gtk4.theme = config.gtk.theme;
       };
   };
 }
