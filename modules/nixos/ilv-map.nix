@@ -52,7 +52,7 @@ in
 
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.nodePackages.serve}/bin/serve -s build -l 4444";
+        ExecStart = "${pkgs.serve}/bin/serve -s build -l 4444";
         Restart = "always";
         RestartSec = 1;
         WorkingDirectory = "/home/pablo/code/ILV-Map";
