@@ -26,7 +26,7 @@ in
         port = 11434;
         host = "0.0.0.0";
         package = pkgs.ollama-cuda;
-        acceleration = "cuda";
+        # acceleration = "cuda"; removed
       };
       open-webui = {
         enable = false;
