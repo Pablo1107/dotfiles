@@ -36,14 +36,16 @@ in
         pyright # python language server
         vtsls
         gopls
-      ]) ++ (with pkgs.nodePackages; [
         nodejs
         typescript
         typescript-language-server
         vim-language-server
-        prettier_d_slim
+        prettier-d-slim
         vscode-langservers-extracted
       ]);
+      withRuby = true; # overrides new defaults
+      withPython3 = true; # overrides new defaults
+      sideloadInitLua = true; # to manage my own init.lua
     };
 
     # stolen from https://discourse.nixos.org/t/conflicts-between-treesitter-withallgrammars-and-builtin-neovim-parsers-lua-c/33536/3
