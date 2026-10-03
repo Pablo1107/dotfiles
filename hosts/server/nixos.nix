@@ -44,7 +44,7 @@
   personal.minecraft-servers.enable = false;
   personal.nh.enable = true;
   personal.gatus.enable = true;
-  personal.ups.enable = true;
+  personal.ups.enable = false;
 
   # boot.kernelPatches = [
   #   {
