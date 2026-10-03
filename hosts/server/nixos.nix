@@ -84,8 +84,10 @@
 
   services.flatpak.enable = true;
 
+  virtualisation.docker.package = pkgs.docker_29;
   virtualisation.docker.rootless = {
     enable = true;
+    package = pkgs.docker_29;
     setSocketVariable = true;
   };
 
