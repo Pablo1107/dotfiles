@@ -73,7 +73,7 @@ in
     virtualisation.oci-containers.containers = {
       # Super-Productivity service
       super-productivity = {
-        image = "johannesjo/super-productivity:v14.0.3";
+        image = "johannesjo/super-productivity:v19.1.0";
         ports = [ "7001:80" ];
         environment = {
           # WebDAV backend served at `/webdav/` subdirectory (Optional)
