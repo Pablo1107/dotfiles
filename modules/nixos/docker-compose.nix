@@ -32,7 +32,7 @@ let
     ${lib.getExe pkgs.yq} -Y '${query}' ${value.directory}/docker-compose.yml > $out/docker-compose.yml
   '');
 
-  runConfig = value: command: "${lib.getExe pkgs.docker} compose --project-directory ${sanitise value} ${command}";
+  runConfig = value: command: "${lib.getExe pkgs.docker_29} compose --project-directory ${sanitise value} ${command}";
 in
 
 {
@@ -135,7 +135,7 @@ in
 
           StateDirectory = mkIf value.stateDirectory.enable value.stateDirectory.name;
         };
-        path = [ pkgs.docker ];
+        path = [ pkgs.docker_29 ];
 
         requires = [ "docker.service" ];
         wantedBy = [ "multi-user.target" ];
