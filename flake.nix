@@ -2,12 +2,13 @@
   description = "A Home Manager flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-25_11.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-24_11.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-23_11.url = "github:nixos/nixpkgs/nixos-23.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -83,13 +84,8 @@
           allowUnfree = true;
           # buildPlatform.system = "x86_64-linux";
           # hostPlatform.system = "aarch64-linux";
-          # HACK: until https://github.com/NixOS/nixpkgs/issues/360592 is resolved
-          # needed for sonarr
           permittedInsecurePackages = [
-            "aspnetcore-runtime-6.0.36"
-            "aspnetcore-runtime-wrapped-6.0.36"
-            "dotnet-sdk-6.0.428"
-            "dotnet-sdk-wrapped-6.0.428"
+            "immich-2.7.5"
           ];
           # self.nixpkgs.lib.optional (self.nixpkgs.obsidian.version == "1.4.16")
         };
@@ -406,10 +402,10 @@
           pkgs = nixpkgsFor.${system};
         in
         {
-          default = (inputs.nvf.lib.neovimConfiguration {
-            inherit pkgs;
-            modules = [ ./packages/nvf.nix ];
-          }).neovim;
+          # default = (inputs.nvf.lib.neovimConfiguration {
+          #   inherit pkgs;
+          #   modules = [ ./packages/nvf.nix ];
+          # }).neovim;
         } // {
           somewm = pkgs.callPackage ./packages/somewm.nix { };
         }
