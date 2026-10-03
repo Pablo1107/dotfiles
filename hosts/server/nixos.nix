@@ -91,6 +91,15 @@
     setSocketVariable = true;
   };
 
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "pablo" ];
+  services.guacamole-server = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 4822;
+  };
+
   services.fwupd.enable = true;
 
   services.gvfs.enable = true;
