@@ -189,7 +189,7 @@ in {
       jellyfin
       jellyfin-web
       jellyfin-ffmpeg
-      # jellyfin-media-player
+      jellyfin-desktop
       # jellyfin-mpv-shim # produces a build if pywebview
     ];
 
