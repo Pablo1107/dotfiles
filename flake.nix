@@ -408,6 +408,7 @@
           # }).neovim;
         } // {
           somewm = pkgs.callPackage ./packages/somewm.nix { };
+          more-of-dots = pkgs.callPackage ./packages/more-of-dots.nix { };
         }
       ) // {
         "aarch64-linux" = {
