@@ -1,4 +1,4 @@
-{ config, options, lib, myLib, pkgs, pkgs-stable, root-path, ... }:
+{ config, options, lib, myLib, pkgs, pkgs-stable, pkgs-unstable, root-path, ... }:
 
 with lib;
 with myLib;
@@ -51,6 +51,7 @@ in {
         openFirewall = true;
         user = "arr";
         group = "arr";
+        package = pkgs-unstable.jellyfin;
       };
       radarr = {
         enable = true;
