@@ -407,6 +407,7 @@
         } // {
           somewm = pkgs.callPackage ./packages/somewm.nix { };
           more-of-dots = pkgs.callPackage ./packages/more-of-dots.nix { };
+          lichii = pkgs.callPackage ./packages/lichii.nix { };
         }
       ) // {
         "aarch64-linux" = {

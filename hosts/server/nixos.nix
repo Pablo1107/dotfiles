@@ -159,6 +159,8 @@
       ];
     })
     packages.somewm
+    packages.more-of-dots
+    packages.lichii
     shortix
   ];
 
