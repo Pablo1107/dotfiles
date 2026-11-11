@@ -45,8 +45,6 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-      inputs.darwin.follows = "home-manager";
     };
     secrets = {
       # https://github.com/NixOS/nix/issues/3991#issuecomment-687897594

@@ -105,7 +105,7 @@ in
       nixgl.nixGLIntel # wrapper GUI apps
       nixgl.nixVulkanIntel # wrapper GUI apps (Vulkan)
       # imv # lightweight image viewer
-      xfce.tumbler
+      tumbler
       gnome-keyring
       wayland-utils
       # poppler-glib

@@ -17,6 +17,7 @@ in
 
     xdg = {
       userDirs = {
+        setSessionVariables = true;
         enable = true;
         desktop = "\$HOME/desktop";
         documents = "\$HOME/docs";

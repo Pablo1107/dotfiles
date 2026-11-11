@@ -11,7 +11,7 @@ with pkgs;
         sha256 = "sha256-cE7Ti4+M8guPuNE/iFEhRpGTtyJH7OBtTJaFhFimFec=";
       };
 
-      wine = pkgs.wineWowPackages.staging;
+      wine = pkgs.wineWow64Packages.staging;
 
       bin = wrapWine {
         inherit wine;

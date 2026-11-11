@@ -29,7 +29,7 @@ in
         gcc
         rust-analyzer
         clang-tools
-        nixfmt-classic # nix formatter
+        nixfmt # nix formatter
         nixpkgs-fmt # nix formatter
         alejandra # nix formatter
         jdt-language-server # java language server

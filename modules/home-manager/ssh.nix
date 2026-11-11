@@ -21,9 +21,9 @@ in
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks."*" = {
-        identitiesOnly = true;
-        user = "pablo";
+      settings."*" = {
+        IdentitiesOnly = "yes";
+        User = "pablo";
       };
       extraConfig = ''
         Host github.com

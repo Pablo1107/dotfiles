@@ -102,6 +102,7 @@ in
 
     programs.zsh = {
       enable = true;
+      dotDir = config.home.homeDirectory;
       autosuggestion.enable = true;
       history.extended = true;
       history.size = 10000000;

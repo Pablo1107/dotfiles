@@ -5,7 +5,7 @@ with pkgs;
 {
   amplitube5 =
     let
-      wine = pkgs.wineWowPackages.stable;
+      wine = pkgs.wineWow64Packages.stable;
       # installer = wrapWine {
       #   name = "amplitube5";
       #   executable = "/var/lib/transmission/Downloads/IK Multimedia - AmpliTube v5.7.0/Setup AmpliTube 5 v5.7.0.exe";
