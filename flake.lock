@@ -1,5 +1,42 @@
 {
   "nodes": {
+    "adventurelog": {
+      "inputs": {
+        "adventurelog-src": "adventurelog-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771594237,
+        "narHash": "sha256-Kg7F2eQCiAD10NiG6Juc5kel4F6IabTXwLdfAn20/KE=",
+        "ref": "refs/heads/main",
+        "rev": "c00cad485f2275d1d020c18ed2b01f123aafc2f4",
+        "revCount": 52,
+        "type": "git",
+        "url": "https://codeberg.org/totoroot/adventurelog-flake"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/totoroot/adventurelog-flake"
+      }
+    },
+    "adventurelog-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768829026,
+        "narHash": "sha256-unHEgS57Xk9PW2oK5TDi3ExZC3DRZ66pVP3xzxBjK9k=",
+        "owner": "seanmorley15",
+        "repo": "AdventureLog",
+        "rev": "c008f0c2647504cfdec54184a20b9b1ae814a911",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seanmorley15",
+        "repo": "AdventureLog",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "nixpkgs": [
@@ -1328,6 +1365,7 @@
     },
     "root": {
       "inputs": {
+        "adventurelog": "adventurelog",
         "agenix": "agenix",
         "chaotic": "chaotic",
         "darwin": "darwin",

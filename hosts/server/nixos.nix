@@ -34,6 +34,7 @@
   personal.hoarder.enable = true;
   personal.gaming.enable = true;
   personal.dawarich.enable = false;
+  personal.adventurelog.enable = true;
   personal.paisa.enable = false;
   personal.samba.enable = true;
   personal.nvidia.enable = true;

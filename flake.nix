@@ -73,9 +73,13 @@
     nix-software-center.url = "github:snowfallorg/nix-software-center";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    adventurelog = {
+      url = "git+https://codeberg.org/totoroot/adventurelog-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, nixpkgs-24_11, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, nixpkgs-24_11, nixpkgs-23_11, home-manager, darwin, nur, emacs-overlay, nixgl, declarative-cachix, nix-on-droid, impermanence, hyprland, nix-index-database, disko, chaotic, agenix, spicetify-nix, mobile-nixos, gnome-mobile, nix-software-center, nix-minecraft, nix-flatpak, adventurelog, ... }@inputs:
     let
       nixpkgsConfig = {
         config = {
@@ -84,6 +88,8 @@
           # hostPlatform.system = "aarch64-linux";
           permittedInsecurePackages = [
             "immich-2.7.5"
+            # needed to build the adventurelog frontend
+            "pnpm-9.15.9"
           ];
           # self.nixpkgs.lib.optional (self.nixpkgs.obsidian.version == "1.4.16")
         };
@@ -146,6 +152,7 @@
         agenix.nixosModules.default
         home-manager.nixosModules.home-manager
         nix-minecraft.nixosModules.minecraft-servers
+        adventurelog.nixosModules.adventurelog
         # impermanence.nixosModules.impermanence
         (hmModuleConfig system)
         { nixpkgs = nixpkgsConfig; }
