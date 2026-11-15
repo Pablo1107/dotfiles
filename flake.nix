@@ -25,6 +25,7 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
+    jail-nix.url = "git+https://git.sr.ht/~alexdavid/jail.nix";
     emacs-copilot = {
       url = "github:copilot-emacs/copilot.el";
       flake = false;
@@ -413,7 +414,33 @@
           # }).neovim;
         } // {
           somewm = pkgs.callPackage ./packages/somewm.nix { };
-          more-of-dots = pkgs.callPackage ./packages/more-of-dots.nix { };
+          # Jailed with jail.nix: only the War of Dots replay folders (read-only)
+          # and ~/videos/wod-replays (read-write, seen as ~/Videos, the default
+          # export dir) are visible. The app finds the replays through the fake
+          # Steam roots set in STEAM_DIR / STEAM_PATH.
+          more-of-dots =
+            let
+              jail = inputs.jail-nix.lib.init pkgs;
+              c = jail.combinators;
+              app = pkgs.callPackage ./packages/more-of-dots.nix { };
+              wod = "steamapps/common/War of Dots/replays";
+              jailed = jail "more-of-dots" app (_: [
+              c.gui
+              c.gpu
+              (c.add-runtime ''${pkgs.coreutils}/bin/mkdir -p ~/.local/share/local.more-of-dots ~/.cache/local.more-of-dots ~/videos/wod-replays'')
+              (c.rw-bind (c.noescape "~/.local/share/local.more-of-dots") (c.noescape "~/.local/share/local.more-of-dots"))
+              (c.rw-bind (c.noescape "~/.cache/local.more-of-dots") (c.noescape "~/.cache/local.more-of-dots"))
+              (c.rw-bind (c.noescape "~/videos/wod-replays") (c.noescape "~/Videos"))
+              (c.ro-bind "/games/SteamLibrary/${wod}" "/steam/0/${wod}")
+              (c.set-env "STEAM_DIR" "/steam/0")
+            ]);
+            in
+            pkgs.symlinkJoin {
+              inherit (app) name meta;
+              # First path wins on conflicts, so the jailed bin/ shadows the
+              # original; the desktop entry and icon come from the app.
+              paths = [ jailed app ];
+            };
           lichii = pkgs.callPackage ./packages/lichii.nix { };
         }
       ) // {

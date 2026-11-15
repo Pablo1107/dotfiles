@@ -5,11 +5,11 @@
 
 let
   pname = "more-of-dots";
-  version = "2.3.0";
+  version = "2.4.1";
 
   src = fetchurl {
     url = "https://github.com/aexer0e/more-of-dots/releases/download/v${version}/More.of.Dots_${version}_amd64.AppImage";
-    hash = "sha256-Kh6OyiyqY8osiaWeXuU9odkhj0b7Xx825NP/zAkvV+o=";
+    hash = "sha256-HMnWPs4pg4F5KDpLvtY+LJ7wf3YoWGzEaSkXApxww6k=";
   };
 
   contents = appimageTools.extractType2 { inherit pname version src; };
