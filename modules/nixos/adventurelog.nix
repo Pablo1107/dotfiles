@@ -44,6 +44,13 @@ in
     # the adventurelog module sets a mkDefault postgresql_16, which clashes with
     # the stateVersion default; keep the major version the existing data uses
     services.postgresql.package = pkgs.postgresql_15;
+    # the adventurelog module also mkForces the extension list to just postgis,
+    # dropping immich's, while its shared_preload_libraries still wants vchord.so.
+    # Same priority, so the lists merge.
+    services.postgresql.extensions = mkIf config.services.immich.enable (mkForce (ps: [
+      ps.pgvector
+      ps.vectorchord
+    ]));
 
     services.nginx.virtualHosts =
       (createVirtualHosts {
