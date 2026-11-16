@@ -69,6 +69,32 @@ in
       adventurelog-backend = {
         after = [ "postgresql-setup.service" "adventurelog-postgis.service" ];
         requires = [ "postgresql-setup.service" ];
+        # The flake never creates the DJANGO_ADMIN_* user, only upstream's docker
+        # entrypoint does. Same as there: create it (with the verified allauth
+        # email) if it doesn't exist yet, after the migrations.
+        preStart = mkAfter ''
+          if [ -n "$DJANGO_ADMIN_USERNAME" ] && [ -n "$DJANGO_ADMIN_PASSWORD" ] && [ -n "$DJANGO_ADMIN_EMAIL" ]; then
+            ${alCfg.backend.package}/bin/adventurelog-manage shell <<'EOF'
+          import os
+          from django.contrib.auth import get_user_model
+          from allauth.account.models import EmailAddress
+
+          User = get_user_model()
+          username = os.environ["DJANGO_ADMIN_USERNAME"]
+          email = os.environ["DJANGO_ADMIN_EMAIL"]
+          if not User.objects.filter(username=username).exists():
+              user = User.objects.create_superuser(
+                  username=username,
+                  email=email,
+                  password=os.environ["DJANGO_ADMIN_PASSWORD"],
+              )
+              EmailAddress.objects.create(user=user, email=email, verified=True, primary=True)
+              print("Created superuser " + username)
+          else:
+              print("Superuser " + username + " already exists")
+          EOF
+          fi
+        '';
       };
     };
 
