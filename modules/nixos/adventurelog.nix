@@ -52,6 +52,26 @@ in
       ps.vectorchord
     ]));
 
+    # ReadWritePaths in the units needs the media dir to exist before the
+    # namespace is set up, which is earlier than the pre-start script
+    systemd.tmpfiles.rules = [
+      "d ${alCfg.dataDir} 0750 ${alCfg.user} ${alCfg.group} - -"
+      "d ${alCfg.dataDir}/media 0750 ${alCfg.user} ${alCfg.group} - -"
+    ];
+
+    # postgresql-setup is what creates the database, the units are only
+    # ordered after postgresql.service
+    systemd.services = {
+      adventurelog-postgis = {
+        after = [ "postgresql-setup.service" ];
+        requires = [ "postgresql-setup.service" ];
+      };
+      adventurelog-backend = {
+        after = [ "postgresql-setup.service" "adventurelog-postgis.service" ];
+        requires = [ "postgresql-setup.service" ];
+      };
+    };
+
     services.nginx.virtualHosts =
       (createVirtualHosts {
         inherit nginxCfg;
